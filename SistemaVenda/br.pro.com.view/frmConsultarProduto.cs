@@ -43,6 +43,8 @@ namespace SistemaVenda.br.pro.com.view
             cp.cbFornecedor.Text = dgProduto.CurrentRow.Cells[11].Value.ToString();
             
             cp.ShowDialog();
+
+            dgProduto.DataSource = new ProdutoDAO().ConsultarProdutos();
         }
         #endregion
 

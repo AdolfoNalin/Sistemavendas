@@ -333,7 +333,7 @@ namespace SistemaVenda.br.pro.com.dao
             try
             {
                 Cliente obj = new Cliente();
-                string sql = "select * from tb_clientes where nome = @nome";
+                string sql = "select * from tb_clientes where nome like @nome";
 
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@nome", nome);

@@ -76,6 +76,8 @@
             // 
             // btnNovo
             // 
+            this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNovo.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnNovo.Location = new System.Drawing.Point(465, 345);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(103, 44);
@@ -86,6 +88,8 @@
             // 
             // btnSalvar
             // 
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnSalvar.Location = new System.Drawing.Point(350, 345);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(103, 44);
@@ -96,6 +100,8 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluir.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnExcluir.Location = new System.Drawing.Point(237, 345);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(103, 44);
@@ -106,6 +112,8 @@
             // 
             // btnEditar
             // 
+            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnEditar.Location = new System.Drawing.Point(118, 345);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(103, 44);
@@ -116,6 +124,7 @@
             // 
             // txtCidade
             // 
+            this.txtCidade.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtCidade.Location = new System.Drawing.Point(79, 282);
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Size = new System.Drawing.Size(159, 20);
@@ -132,6 +141,7 @@
             // 
             // txtBairro
             // 
+            this.txtBairro.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtBairro.Location = new System.Drawing.Point(407, 228);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(144, 20);
@@ -148,6 +158,7 @@
             // 
             // txtComplemento
             // 
+            this.txtComplemento.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtComplemento.Location = new System.Drawing.Point(115, 231);
             this.txtComplemento.Multiline = true;
             this.txtComplemento.Name = "txtComplemento";
@@ -165,6 +176,7 @@
             // 
             // mtbCEP
             // 
+            this.mtbCEP.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbCEP.Location = new System.Drawing.Point(614, 224);
             this.mtbCEP.Mask = "99999-999";
             this.mtbCEP.Name = "mtbCEP";
@@ -183,6 +195,7 @@
             // 
             // cbUF
             // 
+            this.cbUF.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbUF.FormattingEnabled = true;
             this.cbUF.Items.AddRange(new object[] {
             "Casado",
@@ -207,6 +220,7 @@
             // 
             // txtNumero
             // 
+            this.txtNumero.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtNumero.Location = new System.Drawing.Point(477, 181);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(55, 20);
@@ -223,6 +237,7 @@
             // 
             // txtLogradouro
             // 
+            this.txtLogradouro.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtLogradouro.Location = new System.Drawing.Point(100, 181);
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Size = new System.Drawing.Size(286, 20);
@@ -248,6 +263,7 @@
             // 
             // cbEstadoCivil
             // 
+            this.cbEstadoCivil.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbEstadoCivil.FormattingEnabled = true;
             this.cbEstadoCivil.Items.AddRange(new object[] {
             "Casado",
@@ -263,6 +279,7 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtEmail.Location = new System.Drawing.Point(79, 99);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(238, 20);
@@ -279,6 +296,7 @@
             // 
             // mtbCelular
             // 
+            this.mtbCelular.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbCelular.Location = new System.Drawing.Point(509, 68);
             this.mtbCelular.Mask = "(99) 9999-99999";
             this.mtbCelular.Name = "mtbCelular";
@@ -339,6 +357,7 @@
             // 
             // mtbCPF
             // 
+            this.mtbCPF.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbCPF.Location = new System.Drawing.Point(79, 68);
             this.mtbCPF.Mask = "999.999.999-99";
             this.mtbCPF.Name = "mtbCPF";
@@ -347,6 +366,7 @@
             // 
             // txtNome
             // 
+            this.txtNome.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtNome.Location = new System.Drawing.Point(204, 33);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(238, 20);
@@ -372,6 +392,7 @@
             // 
             // cbNivelAcesso
             // 
+            this.cbNivelAcesso.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbNivelAcesso.FormattingEnabled = true;
             this.cbNivelAcesso.Items.AddRange(new object[] {
             "Vendedor",
@@ -400,6 +421,7 @@
             // 
             // txtSenha
             // 
+            this.txtSenha.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtSenha.Location = new System.Drawing.Point(422, 143);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
@@ -419,6 +441,7 @@
             // 
             // cbCargo
             // 
+            this.cbCargo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbCargo.FormattingEnabled = true;
             this.cbCargo.Items.AddRange(new object[] {
             "Vendedor",
@@ -463,6 +486,7 @@
             // 
             // txtApelido
             // 
+            this.txtApelido.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtApelido.Location = new System.Drawing.Point(509, 35);
             this.txtApelido.Name = "txtApelido";
             this.txtApelido.Size = new System.Drawing.Size(238, 20);

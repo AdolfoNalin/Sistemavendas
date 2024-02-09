@@ -19,9 +19,6 @@ namespace SistemaVenda.br.pro.com.view
             InitializeComponent();
         }
 
-        frmConsultarCliente cc = new frmConsultarCliente();
-        
-
         private void btnNovo_Click(object sender, EventArgs e)
         {
             Helpers helpers = new Helpers();
@@ -54,7 +51,7 @@ namespace SistemaVenda.br.pro.com.view
             clienteDao.EditarCliente(cliente);
 
             // Atualizar o dataGrid view
-            cc.dgCliente.DataSource = clienteDao.ConsultarClientes();
+           
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -69,7 +66,7 @@ namespace SistemaVenda.br.pro.com.view
             objDao.ExcluirClientes(obj);
 
             // Atualizar após a deleção
-            cc.dgCliente.DataSource = objDao.ConsultarClientes();
+            //cc.dgCliente.DataSource = objDao.ConsultarClientes();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -120,15 +117,14 @@ namespace SistemaVenda.br.pro.com.view
             {
                 this.Hide();
             }
-
-            cc.dgCliente.DataSource = clienteDao.ConsultarClientes();
         }
 
+        #region Load
         private void frmCadastrarCliente_Load(object sender, EventArgs e)
         {
-            ClienteDAO obj = new ClienteDAO();
-            cc.dgCliente.DataSource = obj.ConsultarClientes();
+            
         }
+        #endregion
 
         private void mtbCEP_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -153,16 +149,6 @@ namespace SistemaVenda.br.pro.com.view
                     MessageBox.Show($"Endereço não encontrado. Por favor digite manualmente!");
                 }
             }
-        }
-
-        private void mtbCPF_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbCEP_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
     }
 }

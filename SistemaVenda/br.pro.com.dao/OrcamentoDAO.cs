@@ -31,7 +31,6 @@ namespace SistemaVenda.br.pro.com.dao
         {
             try
             {
-                MessageBox.Show($"O código do cliente: {obj.CodigoCliente}");
                 string cmdSql = @"insert into tb_orcamento (cliente_id,funcionario_id,desconto_porcentagem,descoto_real,acrescimo_porcentagem,acrescimo_real,
                 subtotal_orcamento,total,alteracoes,data_orcamento,hora_orcamento, quantidade_total,obs)
                 values (@cliente_id,@funcionario_id,@desconto_porcentagem,@desconto_real,@acrescimo_porcentagem,@acrescimo_real, @subtotal_orcamento, @total, @alteracoes,
@@ -228,13 +227,13 @@ namespace SistemaVenda.br.pro.com.dao
             {
                 DataTable tabVendas = new DataTable();
                 string sql = @"select c.id as 'Código',
-                c.data_venda as 'Data da Venda',
+                o.data_orcamento as 'Data da Orçamento',
                 c.nome as 'Cliente',
                 o.total as 'Total',
-                o.observacoes as 'Observações'
+                o.obs as 'Observações'
                 from tb_orcamento as o
-                join tb_clientes as c on (v.cliente_id = c.id)
-                where v.data_orcamento between @datainicio and @datafim";
+                join tb_clientes as c on (o.cliente_id = c.id)
+                where o.data_orcamento between @datainicio and @datafim";
 
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@datainicio", dataInicio);
@@ -280,6 +279,51 @@ namespace SistemaVenda.br.pro.com.dao
                     obj.DescontoPorcentagem = dr.GetDecimal("desconto_porcentagem");
                     obj.DescontoReal = dr.GetDecimal("descoto_real");
                     obj.AcrescimoPorcentagem= dr.GetDecimal("acrescimo_porcentagem");
+                    obj.AcrescimoReal = dr.GetDecimal("acrescimo_real");
+                    obj.SubTotal = dr.GetDecimal("subtotal_orcamento");
+                    obj.Total = dr.GetDecimal("total");
+                    obj.Alteracoes = dr.GetDecimal("alteracoes");
+                    obj.Data = dr.GetDateTime("data_orcamento");
+                    obj.Hora = dr.GetDateTime("hora_orcamento");
+                    obj.QuantidadeTotal = dr.GetInt32("quantidade_total");
+                    obj.Obs = dr.GetString("obs");
+                }
+
+                connection.Close();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Aconteceu um errodo do tipo {ex.Message} com o caminho {ex.StackTrace}");
+                connection.Close();
+                return null;
+            }
+
+        }
+        #endregion
+
+        #region ConsultarOrcamentoIdCliente
+        public Orcamento ConsultarOrcamentoIdCliente(int id)
+        {
+            try
+            {
+                Orcamento obj = new Orcamento();
+                string sql = "select * from tb_orcamento where cliente_id = @cliente_id";
+
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@cliente_id", id);
+                connection.Open();
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    obj.Codigo = dr.GetInt32("id");
+                    obj.CodigoCliente = dr.GetInt32("cliente_id");
+                    obj.CodigoVendedor = dr.GetInt32("funcionario_id");
+                    obj.DescontoPorcentagem = dr.GetDecimal("desconto_porcentagem");
+                    obj.DescontoReal = dr.GetDecimal("descoto_real");
+                    obj.AcrescimoPorcentagem = dr.GetDecimal("acrescimo_porcentagem");
                     obj.AcrescimoReal = dr.GetDecimal("acrescimo_real");
                     obj.SubTotal = dr.GetDecimal("subtotal_orcamento");
                     obj.Total = dr.GetDecimal("total");

@@ -21,8 +21,6 @@ namespace SistemaVenda.br.pro.com.view
         {
             InitializeComponent();
         }
-        
-        frmConsultarFuncionario consultarFun = new frmConsultarFuncionario();
 
         #region Load
         private void frmCadastarFuncionario_Load(object sender, EventArgs e)
@@ -96,8 +94,6 @@ namespace SistemaVenda.br.pro.com.view
             {
                 this.Hide();
             }
-
-            consultarFun.dgFuncionario.DataSource = objDao.ConsultarFuncionario();
         }
         #endregion
 
@@ -114,8 +110,6 @@ namespace SistemaVenda.br.pro.com.view
 
             FuncionarioDAO objDao = new FuncionarioDAO();
             objDao.ExcluirFuncionario(obj);
-
-            consultarFun.dgFuncionario.DataSource = objDao.ConsultarFuncionario();
         }
         #endregion
 
@@ -131,6 +125,7 @@ namespace SistemaVenda.br.pro.com.view
 
             funcionario.Codigo = int.Parse(txtCodigo.Text);
             funcionario.Nome = txtNome.Text;
+            funcionario.Apelido = txtApelido.Text;
             funcionario.RG = mtbRG.Text;
             funcionario.CPF = mtbCPF.Text;
             funcionario.Email = txtEmail.Text;
@@ -149,8 +144,6 @@ namespace SistemaVenda.br.pro.com.view
 
             FuncionarioDAO objDao = new FuncionarioDAO();
             objDao.EditarFuncionario(funcionario);
-
-            consultarFun.dgFuncionario.DataSource = objDao.ConsultarFuncionario();
         }
         #endregion
 

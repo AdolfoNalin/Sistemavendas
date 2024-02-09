@@ -37,6 +37,8 @@
             // 
             // btnPesquisar
             // 
+            this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnPesquisar.Location = new System.Drawing.Point(359, 63);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
@@ -48,13 +50,14 @@
             // 
             this.dgFuncionario.AllowUserToAddRows = false;
             this.dgFuncionario.AllowUserToDeleteRows = false;
+            this.dgFuncionario.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgFuncionario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFuncionario.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.dgFuncionario.Location = new System.Drawing.Point(28, 115);
             this.dgFuncionario.Name = "dgFuncionario";
             this.dgFuncionario.ReadOnly = true;
             this.dgFuncionario.Size = new System.Drawing.Size(744, 273);
             this.dgFuncionario.TabIndex = 6;
-            this.dgFuncionario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFuncionario_CellContentClick);
             this.dgFuncionario.DoubleClick += new System.EventHandler(this.dgFuncionario_DoubleClick);
             // 
             // txtNome
@@ -68,9 +71,10 @@
             // lblPesquisar
             // 
             this.lblPesquisar.AutoSize = true;
+            this.lblPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPesquisar.Location = new System.Drawing.Point(47, 68);
             this.lblPesquisar.Name = "lblPesquisar";
-            this.lblPesquisar.Size = new System.Drawing.Size(56, 13);
+            this.lblPesquisar.Size = new System.Drawing.Size(66, 13);
             this.lblPesquisar.TabIndex = 4;
             this.lblPesquisar.Text = "Pesquisar:";
             // 

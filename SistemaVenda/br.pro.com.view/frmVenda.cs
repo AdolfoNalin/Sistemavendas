@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text.pdf.codec;
 using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Crypto.Digests;
 using SistemaVenda.br.pro.com.dao;
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.view;
@@ -39,7 +40,7 @@ namespace SistemaVenda.br.pro.com.veiw
 
         #region Objs
         Cliente obj = new Cliente();    
-        DataTable carrinho = new DataTable();
+       
         #endregion
 
         #region Load
@@ -52,9 +53,6 @@ namespace SistemaVenda.br.pro.com.veiw
         {
             double num = 0.00;
             
-            mtbTotal.Text = String.Format("{0:0.00}", num);
-            mtbDescontoPorcentagem.Text = String.Format("{0:0.00}", num);
-            mtbDescontoReal.Text = String.Format("{0:0.00}", num);
 
             if (dgCarrinho.Columns.Count == 0)
             {
@@ -63,6 +61,12 @@ namespace SistemaVenda.br.pro.com.veiw
                 dgCarrinho.Columns.Add("quantidade", "Quantidade");
                 dgCarrinho.Columns.Add("preco", "Preço");
                 dgCarrinho.Columns.Add("subtotal", "SubTotal");
+
+                mtbTotal.Text = String.Format("{0:0.00}", num);
+                mtbDescontoPorcentagem.Text = String.Format("{0:0.00}", num);
+                mtbDescontoReal.Text = String.Format("{0:0.00}", num);
+                mtbAgrescimoD.Text = String.Format("{0:0.00}", num);
+                mtbAgrescimoP.Text = String.Format("{0:0.00}", num);
             }
 
             // Configuração da data
@@ -105,26 +109,31 @@ namespace SistemaVenda.br.pro.com.veiw
             txtID.Text = obj.Codigo.ToString();
             txtNome.Text = obj.Nome;
             mtbFone.Text = obj.Celular;
-            txtEndereco.Text = $"{obj.Estado}, {obj.Cidade}, {obj.Logradouro}, {obj.Numero}";
+            txtEndereco.Text = $"{obj.Cidade}, {obj.Bairro},{obj.Logradouro}, {obj.Numero}";
         }
         #endregion
 
         #region PesquisarProdutoKeyPress13
         private void txtCodigoProduto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
-            if (e.KeyChar == 13)
+            try
             {
-                Produto obj = new Produto();
-                ProdutoDAO pDao = new ProdutoDAO();
+                if (e.KeyChar == 13)
+                {
+                    Produto obj = new Produto();
+                    ProdutoDAO pDao = new ProdutoDAO();
 
-                obj = pDao.BuscarProdutoVenda(int.Parse(txtCodigoProduto.Text));
-                txtDescricaoResumida.Text = obj.DescricaoResumida;
-                txtEstoque.Text = pDao.RetornarEstoque(int.Parse(txtCodigoProduto.Text)).ToString();
-                txtPrecoVista.Text = obj.PrecoVista.ToString();
-                txtPrecoPrazo.Text = obj.PrecoPrazo.ToString();
+                    obj = pDao.BuscarProdutoVenda(int.Parse(txtCodigoProduto.Text));
+                    txtDescricaoResumida.Text = obj.DescricaoResumida;
+                    txtEstoque.Text = pDao.RetornarEstoque(int.Parse(txtCodigoProduto.Text)).ToString();
+                    txtPrecoVista.Text = obj.PrecoVista.ToString();
+                    txtPrecoPrazo.Text = obj.PrecoPrazo.ToString();
+                }
             }
-            
+            catch (Exception ex)
+            { 
+                MessageBox.Show("Código do produto não encontrado!");
+            }   
         }
         #endregion
 
@@ -157,42 +166,47 @@ namespace SistemaVenda.br.pro.com.veiw
         /// <param name="e"></param>
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            quantidade = int.Parse(txtQuantidade.Text);
-            precoVista = decimal.Parse(txtPrecoVista.Text);
-            precoPrazo = decimal.Parse(txtPrecoPrazo.Text);
-            descontoPorcentagem = decimal.Parse(mtbDescontoPorcentagem.Text);
-            descontoReal = decimal.Parse(mtbDescontoReal.Text);
 
-            subtotalProduto = precoVista * quantidade;
-            quantidadeTotal += quantidade;
-            lblQuantidadePrutudoQ.Text = quantidadeTotal.ToString();
+            if (rbtnPrazo.Checked == false && rbtnVista.Checked == false)
+            {
+                MessageBox.Show("Por favor, marque a forma de pagamento!", "ATENÇÃO", MessageBoxButtons.OK);
+            }
 
-            dgCarrinho.Rows.Add(Convert.ToInt16(txtCodigoProduto.Text), txtDescricaoResumida.Text, quantidade, precoVista, subtotalProduto);
+            try
+            {
+                quantidade = int.Parse(txtQuantidade.Text);
+                precoVista = decimal.Parse(txtPrecoVista.Text);
+                precoPrazo = decimal.Parse(txtPrecoPrazo.Text);
+                descontoPorcentagem = decimal.Parse(mtbDescontoPorcentagem.Text);
+                descontoReal = decimal.Parse(mtbDescontoReal.Text);
+
+                subtotalProduto = precoVista * quantidade;
+                quantidadeTotal += quantidade;
+                lblQuantidadePrutudoQ.Text = quantidadeTotal.ToString();
+
+
+                subtotal = precoVista * quantidade;
+
+                total += subtotal;
+
+                mtbTotal.Text = total.ToString();
+                
+                dgCarrinho.Rows.Add(Convert.ToInt16(txtCodigoProduto.Text), txtDescricaoResumida.Text, quantidade, precoVista, subtotalProduto);
+
+                txtCodigoProduto.Clear();
+                txtDescricaoResumida.Clear();
+                txtEstoque.Clear();
+                txtQuantidade.Clear();
+                txtPrecoPrazo.Clear();
+                txtPrecoVista.Clear();
+
+                txtCodigoProduto.Focus();
+            }
+            catch (FormatException fe)
+            {
+                MessageBox.Show("Por favor, certifique-se que todos os campos então preenchidos");
+            }
             
-            subtotal = precoVista * quantidade;
-
-            total += subtotal;
-            
-            mtbTotal.Text = total.ToString();
-
-            int estoque = Convert.ToInt16(txtEstoque.Text);
-            int retirada = estoque - quantidade;
-
-            Produto obj = new Produto();
-            obj.Codigo = int.Parse(txtCodigoProduto.Text);
-            obj.Quantidade = retirada;
-
-            ProdutoDAO dao = new ProdutoDAO();
-            dao.ControlarEstoque(obj.Codigo, obj.Quantidade);
-
-            txtCodigoProduto.Clear();
-            txtDescricaoResumida.Clear();
-            txtEstoque.Clear();
-            txtQuantidade.Clear();
-            txtPrecoPrazo.Clear();
-            txtPrecoVista.Clear();
-
-            txtCodigoProduto.Focus();
         }
         #endregion
 
@@ -227,20 +241,107 @@ namespace SistemaVenda.br.pro.com.veiw
             int indici = dgCarrinho.CurrentRow.Index;
             total -= subProduto;
             mtbTotal.Text = total.ToString();
-
-            carrinho.Rows.RemoveAt(indici);
+            dgCarrinho.Rows.RemoveAt(indici);
         }
         #endregion
 
         #region btnPagar
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            frmPagamento pg = new frmPagamento(obj,carrinho,dgCarrinho,cbVendedor.Text);
+            frmPagamento pg = new frmPagamento(obj,dgCarrinho,cbVendedor.Text);
             pg.mtbTotal.Text = mtbTotal.Text;
             this.Hide();
             pg.ShowDialog();
         }
         #endregion
 
+        #region AgrescimoProcentagem
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mtbAgrescimoP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == 13)
+                {
+                    decimal convert = Convert.ToDecimal(mtbAgrescimoP.Text);
+                    decimal setResult = (convert * total) / 100;
+                    total += setResult;
+                    mtbTotal.Text = total.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+            }
+        }
+        #endregion
+
+        #region AgrescimoDinheiro
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mtbAgrescimoD_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == 13)
+                {
+                    if (e.KeyChar == 13)
+                    {
+                        total += Convert.ToDecimal(mtbAgrescimoD.Text);
+                        mtbTotal.Text = total.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Aconteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+            }
+        }
+        #endregion
+
+        #region rbtnVistaCheck
+        private void rbtnVista_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbtnVista.Checked && dgCarrinho.Rows.Count > 0)
+            {
+                decimal subtotal = 0;
+                foreach(DataGridViewRow linha in dgCarrinho.Rows)
+                {
+                    int quantidade = int.Parse(linha.Cells[2].Value.ToString());
+                    decimal valorVista = Decimal.Parse(linha.Cells[3].Value.ToString());
+
+                    linha.Cells[4].Value = quantidade * valorVista;
+                    subtotal += Decimal.Parse(linha.Cells[4].Value.ToString());
+                }
+                total = subtotal;
+                mtbTotal.Text = total.ToString();
+            }
+        }
+        #endregion
+
+        #region rbtnPrazoCheck
+        private void rbtnPrazo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnPrazo.Checked && dgCarrinho.Rows.Count > 0)
+            {
+                decimal sobtotal = 0;
+                foreach(DataGridViewRow linha in dgCarrinho.Rows)
+                {
+                    decimal valorPrazo = Decimal.Parse(linha.Cells[3].Value.ToString());
+                    int quantidade = int.Parse(linha.Cells[2].Value.ToString());
+
+                    linha.Cells[4].Value = quantidade * valorPrazo;
+                    subtotal += Decimal.Parse(linha.Cells[4].Value.ToString());
+                }
+            }
+        }
+        #endregion
     }
 }

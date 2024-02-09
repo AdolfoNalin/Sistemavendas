@@ -34,13 +34,13 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAvancar = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNome
             // 
             this.lblNome.AutoSize = true;
             this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNome.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblNome.Location = new System.Drawing.Point(27, 42);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(72, 24);
@@ -68,6 +68,7 @@
             // 
             this.lblSenha.AutoSize = true;
             this.lblSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSenha.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblSenha.Location = new System.Drawing.Point(27, 81);
             this.lblSenha.Name = "lblSenha";
             this.lblSenha.Size = new System.Drawing.Size(76, 24);
@@ -94,27 +95,18 @@
             this.btnAvancar.UseVisualStyleBackColor = true;
             this.btnAvancar.Click += new System.EventHandler(this.btnAvancar_Click);
             // 
-            // btnHelp
-            // 
-            this.btnHelp.Location = new System.Drawing.Point(328, 41);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(26, 25);
-            this.btnHelp.TabIndex = 6;
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 183);
-            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnAvancar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblNome);
+            this.ForeColor = System.Drawing.SystemColors.Highlight;
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tela Login";
@@ -131,6 +123,5 @@
         private System.Windows.Forms.Label lblSenha;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAvancar;
-        private System.Windows.Forms.Button btnHelp;
     }
 }

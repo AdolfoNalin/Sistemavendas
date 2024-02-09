@@ -33,7 +33,6 @@
             this.lblPix = new System.Windows.Forms.Label();
             this.lblCrediario = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.mtbCartao = new System.Windows.Forms.MaskedTextBox();
             this.mtbDinheiro = new System.Windows.Forms.MaskedTextBox();
             this.mtbPix = new System.Windows.Forms.MaskedTextBox();
             this.mtbCrediario = new System.Windows.Forms.MaskedTextBox();
@@ -44,64 +43,62 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtTroco = new System.Windows.Forms.MaskedTextBox();
             this.lblTroco = new System.Windows.Forms.Label();
+            this.mtbCartao = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // lblDinheiro
             // 
             this.lblDinheiro.AutoSize = true;
-            this.lblDinheiro.Location = new System.Drawing.Point(37, 95);
+            this.lblDinheiro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDinheiro.Location = new System.Drawing.Point(32, 98);
             this.lblDinheiro.Name = "lblDinheiro";
-            this.lblDinheiro.Size = new System.Drawing.Size(49, 13);
+            this.lblDinheiro.Size = new System.Drawing.Size(58, 13);
             this.lblDinheiro.TabIndex = 0;
             this.lblDinheiro.Text = "Dinheiro:";
             // 
             // lblCartao
             // 
             this.lblCartao.AutoSize = true;
-            this.lblCartao.Location = new System.Drawing.Point(45, 128);
+            this.lblCartao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCartao.Location = new System.Drawing.Point(40, 128);
             this.lblCartao.Name = "lblCartao";
-            this.lblCartao.Size = new System.Drawing.Size(41, 13);
+            this.lblCartao.Size = new System.Drawing.Size(48, 13);
             this.lblCartao.TabIndex = 1;
             this.lblCartao.Text = "Cartão:";
             // 
             // lblPix
             // 
             this.lblPix.AutoSize = true;
-            this.lblPix.Location = new System.Drawing.Point(62, 155);
+            this.lblPix.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPix.Location = new System.Drawing.Point(57, 155);
             this.lblPix.Name = "lblPix";
-            this.lblPix.Size = new System.Drawing.Size(24, 13);
+            this.lblPix.Size = new System.Drawing.Size(28, 13);
             this.lblPix.TabIndex = 2;
             this.lblPix.Text = "Pix:";
             // 
             // lblCrediario
             // 
             this.lblCrediario.AutoSize = true;
-            this.lblCrediario.Location = new System.Drawing.Point(37, 178);
+            this.lblCrediario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCrediario.Location = new System.Drawing.Point(32, 178);
             this.lblCrediario.Name = "lblCrediario";
-            this.lblCrediario.Size = new System.Drawing.Size(51, 13);
+            this.lblCrediario.Size = new System.Drawing.Size(61, 13);
             this.lblCrediario.TabIndex = 3;
             this.lblCrediario.Text = "Crediário:";
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(52, 274);
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(47, 274);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(34, 13);
+            this.lblTotal.Size = new System.Drawing.Size(40, 13);
             this.lblTotal.TabIndex = 4;
             this.lblTotal.Text = "Total:";
             // 
-            // mtbCartao
-            // 
-            this.mtbCartao.Location = new System.Drawing.Point(88, 125);
-            this.mtbCartao.Name = "mtbCartao";
-            this.mtbCartao.Size = new System.Drawing.Size(100, 20);
-            this.mtbCartao.TabIndex = 6;
-            this.mtbCartao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbCartao_KeyPress);
-            // 
             // mtbDinheiro
             // 
-            this.mtbDinheiro.Location = new System.Drawing.Point(88, 92);
+            this.mtbDinheiro.Location = new System.Drawing.Point(88, 95);
             this.mtbDinheiro.Name = "mtbDinheiro";
             this.mtbDinheiro.Size = new System.Drawing.Size(100, 20);
             this.mtbDinheiro.TabIndex = 7;
@@ -140,14 +137,17 @@
             // lblObservacao
             // 
             this.lblObservacao.AutoSize = true;
+            this.lblObservacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblObservacao.Location = new System.Drawing.Point(310, 72);
             this.lblObservacao.Name = "lblObservacao";
-            this.lblObservacao.Size = new System.Drawing.Size(68, 13);
+            this.lblObservacao.Size = new System.Drawing.Size(79, 13);
             this.lblObservacao.TabIndex = 13;
             this.lblObservacao.Text = "Observação:";
             // 
             // btnFinalizar
             // 
+            this.btnFinalizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinalizar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnFinalizar.Location = new System.Drawing.Point(511, 396);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(98, 42);
@@ -158,6 +158,8 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnCancelar.Location = new System.Drawing.Point(213, 396);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(98, 42);
@@ -175,17 +177,26 @@
             // lblTroco
             // 
             this.lblTroco.AutoSize = true;
-            this.lblTroco.Location = new System.Drawing.Point(47, 244);
+            this.lblTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTroco.Location = new System.Drawing.Point(42, 244);
             this.lblTroco.Name = "lblTroco";
-            this.lblTroco.Size = new System.Drawing.Size(38, 13);
+            this.lblTroco.Size = new System.Drawing.Size(44, 13);
             this.lblTroco.TabIndex = 16;
             this.lblTroco.Text = "Troco:";
+            // 
+            // mtbCartao
+            // 
+            this.mtbCartao.Location = new System.Drawing.Point(88, 125);
+            this.mtbCartao.Name = "mtbCartao";
+            this.mtbCartao.Size = new System.Drawing.Size(100, 20);
+            this.mtbCartao.TabIndex = 18;
             // 
             // frmPagamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.mtbCartao);
             this.Controls.Add(this.txtTroco);
             this.Controls.Add(this.lblTroco);
             this.Controls.Add(this.btnCancelar);
@@ -196,7 +207,6 @@
             this.Controls.Add(this.mtbCrediario);
             this.Controls.Add(this.mtbPix);
             this.Controls.Add(this.mtbDinheiro);
-            this.Controls.Add(this.mtbCartao);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblCrediario);
             this.Controls.Add(this.lblPix);
@@ -204,7 +214,6 @@
             this.Controls.Add(this.lblDinheiro);
             this.Name = "frmPagamento";
             this.Text = "Pagamento";
-            this.Load += new System.EventHandler(this.frmPagamento_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,7 +226,6 @@
         private System.Windows.Forms.Label lblPix;
         private System.Windows.Forms.Label lblCrediario;
         private System.Windows.Forms.Label lblTotal;
-        private System.Windows.Forms.MaskedTextBox mtbCartao;
         private System.Windows.Forms.MaskedTextBox mtbDinheiro;
         private System.Windows.Forms.MaskedTextBox mtbPix;
         private System.Windows.Forms.MaskedTextBox mtbCrediario;
@@ -228,5 +236,6 @@
         public System.Windows.Forms.MaskedTextBox mtbTotal;
         public System.Windows.Forms.MaskedTextBox txtTroco;
         private System.Windows.Forms.Label lblTroco;
+        private System.Windows.Forms.MaskedTextBox mtbCartao;
     }
 }

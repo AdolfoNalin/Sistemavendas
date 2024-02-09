@@ -20,9 +20,8 @@ namespace SistemaVenda.br.pro.com.view
         }
 
         frmCadastrarOrcamento tela = new frmCadastrarOrcamento();
-        Orcamento obj = new Orcamento();
         int id = 0;
-
+       
         #region Load
         private void frmDetalhesOrcamento_Load(object sender, EventArgs e)
         {
@@ -51,28 +50,13 @@ namespace SistemaVenda.br.pro.com.view
             tela.mtbAteracoes.Text = dgHistoricoOrcamento.CurrentRow.Cells[9].Value.ToString();
             tela.mtbData.Text = data.ToString();
             tela.mtbHora.Text = hora.ToString();
-            tela.label7.Text = dgHistoricoOrcamento.CurrentRow.Cells[12].Value.ToString();
             tela.txtObs.Text = dgHistoricoOrcamento.CurrentRow.Cells[13].Value.ToString();
 
             ItemOrcamentoDAO orcamentoDAO = new ItemOrcamentoDAO();
             tela.dgOrcamento.Columns.Clear();
             tela.dgOrcamento.DataSource = orcamentoDAO.ListarItemOrcamento(id);
-
             this.Hide();
             tela.ShowDialog();
-        }
-        #endregion
-
-        #region btnPesquisar
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            DateTime dataInicio, dataFim;
-
-            dataInicio = Convert.ToDateTime(dtpDataInicio.Value.ToString("yyyy-M-d"));
-            dataFim = Convert.ToDateTime(dtpDataFim.Value.ToString("yyyy-M-d"));
-
-            OrcamentoDAO objDao = new OrcamentoDAO();
-            dgHistoricoOrcamento.DataSource = objDao.ListarHistoricoOrcamento(dataInicio, dataFim);
         }
         #endregion
     }

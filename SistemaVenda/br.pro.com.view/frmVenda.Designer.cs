@@ -74,10 +74,12 @@
             this.lblQuantidadePrutudoQ = new System.Windows.Forms.Label();
             this.cbVendedor = new System.Windows.Forms.ComboBox();
             this.lblVendedor = new System.Windows.Forms.Label();
-            this.mtbAlteracaoR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbAgrescimoD = new System.Windows.Forms.MaskedTextBox();
             this.lblAteracaoReal = new System.Windows.Forms.Label();
-            this.mtbAlteracaoP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbAgrescimoP = new System.Windows.Forms.MaskedTextBox();
             this.lblAteracoes = new System.Windows.Forms.Label();
+            this.rbtnVista = new System.Windows.Forms.RadioButton();
+            this.rbtnPrazo = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgCarrinho)).BeginInit();
             this.gbConsumidor.SuspendLayout();
             this.gbProduto.SuspendLayout();
@@ -87,6 +89,7 @@
             // 
             this.dgCarrinho.AllowUserToAddRows = false;
             this.dgCarrinho.AllowUserToDeleteRows = false;
+            this.dgCarrinho.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgCarrinho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCarrinho.Location = new System.Drawing.Point(429, 85);
             this.dgCarrinho.Name = "dgCarrinho";
@@ -96,6 +99,8 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnCancelar.Location = new System.Drawing.Point(26, 467);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(112, 43);
@@ -105,6 +110,8 @@
             // 
             // btnPagar
             // 
+            this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnPagar.Location = new System.Drawing.Point(791, 467);
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(112, 43);
@@ -127,9 +134,10 @@
             this.gbConsumidor.Controls.Add(this.mtbCPF);
             this.gbConsumidor.Controls.Add(this.lblCPF);
             this.gbConsumidor.Controls.Add(this.lblID);
-            this.gbConsumidor.Location = new System.Drawing.Point(26, 66);
+            this.gbConsumidor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbConsumidor.Location = new System.Drawing.Point(36, 16);
             this.gbConsumidor.Name = "gbConsumidor";
-            this.gbConsumidor.Size = new System.Drawing.Size(372, 152);
+            this.gbConsumidor.Size = new System.Drawing.Size(372, 182);
             this.gbConsumidor.TabIndex = 10;
             this.gbConsumidor.TabStop = false;
             this.gbConsumidor.Text = "Consumidor";
@@ -139,7 +147,7 @@
             this.mtbFone.Location = new System.Drawing.Point(242, 45);
             this.mtbFone.Mask = "(99) 99999-9999";
             this.mtbFone.Name = "mtbFone";
-            this.mtbFone.Size = new System.Drawing.Size(100, 20);
+            this.mtbFone.Size = new System.Drawing.Size(98, 20);
             this.mtbFone.TabIndex = 25;
             // 
             // txtID
@@ -152,7 +160,7 @@
             // btnPesquisarCliente
             // 
             this.btnPesquisarCliente.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
-            this.btnPesquisarCliente.Location = new System.Drawing.Point(160, 41);
+            this.btnPesquisarCliente.Location = new System.Drawing.Point(170, 41);
             this.btnPesquisarCliente.Name = "btnPesquisarCliente";
             this.btnPesquisarCliente.Size = new System.Drawing.Size(26, 26);
             this.btnPesquisarCliente.TabIndex = 21;
@@ -172,9 +180,11 @@
             // lblFone
             // 
             this.lblFone.AutoSize = true;
+            this.lblFone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFone.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblFone.Location = new System.Drawing.Point(209, 48);
             this.lblFone.Name = "lblFone";
-            this.lblFone.Size = new System.Drawing.Size(34, 13);
+            this.lblFone.Size = new System.Drawing.Size(39, 13);
             this.lblFone.TabIndex = 18;
             this.lblFone.Text = "Fone:";
             // 
@@ -183,16 +193,18 @@
             this.txtEndereco.Location = new System.Drawing.Point(69, 97);
             this.txtEndereco.Multiline = true;
             this.txtEndereco.Name = "txtEndereco";
-            this.txtEndereco.Size = new System.Drawing.Size(268, 37);
+            this.txtEndereco.Size = new System.Drawing.Size(268, 56);
             this.txtEndereco.TabIndex = 17;
             this.txtEndereco.UseSystemPasswordChar = true;
             // 
             // lblEndereco
             // 
             this.lblEndereco.AutoSize = true;
+            this.lblEndereco.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEndereco.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblEndereco.Location = new System.Drawing.Point(13, 100);
             this.lblEndereco.Name = "lblEndereco";
-            this.lblEndereco.Size = new System.Drawing.Size(56, 13);
+            this.lblEndereco.Size = new System.Drawing.Size(65, 13);
             this.lblEndereco.TabIndex = 16;
             this.lblEndereco.Text = "Endereço:";
             // 
@@ -206,9 +218,11 @@
             // lblNomeCon
             // 
             this.lblNomeCon.AutoSize = true;
+            this.lblNomeCon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomeCon.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblNomeCon.Location = new System.Drawing.Point(22, 74);
             this.lblNomeCon.Name = "lblNomeCon";
-            this.lblNomeCon.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeCon.Size = new System.Drawing.Size(43, 13);
             this.lblNomeCon.TabIndex = 14;
             this.lblNomeCon.Text = "Nome:";
             // 
@@ -217,25 +231,29 @@
             this.mtbCPF.Location = new System.Drawing.Point(67, 45);
             this.mtbCPF.Mask = "000.000.000-00";
             this.mtbCPF.Name = "mtbCPF";
-            this.mtbCPF.Size = new System.Drawing.Size(87, 20);
+            this.mtbCPF.Size = new System.Drawing.Size(97, 20);
             this.mtbCPF.TabIndex = 13;
             this.mtbCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbCPF_KeyPress);
             // 
             // lblCPF
             // 
             this.lblCPF.AutoSize = true;
+            this.lblCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCPF.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblCPF.Location = new System.Drawing.Point(31, 48);
             this.lblCPF.Name = "lblCPF";
-            this.lblCPF.Size = new System.Drawing.Size(30, 13);
+            this.lblCPF.Size = new System.Drawing.Size(34, 13);
             this.lblCPF.TabIndex = 12;
             this.lblCPF.Text = "CPF:";
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
+            this.lblID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblID.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblID.Location = new System.Drawing.Point(23, 22);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(43, 13);
+            this.lblID.Size = new System.Drawing.Size(50, 13);
             this.lblID.TabIndex = 10;
             this.lblID.Text = "Código:";
             // 
@@ -256,6 +274,7 @@
             this.gbProduto.Controls.Add(this.lblQuantidade);
             this.gbProduto.Controls.Add(this.lblDescriçãoResumida);
             this.gbProduto.Controls.Add(this.lblCodigoProduto);
+            this.gbProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbProduto.Location = new System.Drawing.Point(26, 236);
             this.gbProduto.Name = "gbProduto";
             this.gbProduto.Size = new System.Drawing.Size(372, 157);
@@ -265,7 +284,7 @@
             // 
             // txtPrecoVista
             // 
-            this.txtPrecoVista.Location = new System.Drawing.Point(82, 70);
+            this.txtPrecoVista.Location = new System.Drawing.Point(100, 70);
             this.txtPrecoVista.Name = "txtPrecoVista";
             this.txtPrecoVista.Size = new System.Drawing.Size(50, 20);
             this.txtPrecoVista.TabIndex = 38;
@@ -273,15 +292,17 @@
             // lblPrecoVista
             // 
             this.lblPrecoVista.AutoSize = true;
+            this.lblPrecoVista.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecoVista.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblPrecoVista.Location = new System.Drawing.Point(13, 73);
             this.lblPrecoVista.Name = "lblPrecoVista";
-            this.lblPrecoVista.Size = new System.Drawing.Size(72, 13);
+            this.lblPrecoVista.Size = new System.Drawing.Size(86, 13);
             this.lblPrecoVista.TabIndex = 37;
             this.lblPrecoVista.Text = "Preço á vista:";
             // 
             // txtPrecoPrazo
             // 
-            this.txtPrecoPrazo.Location = new System.Drawing.Point(243, 68);
+            this.txtPrecoPrazo.Location = new System.Drawing.Point(258, 68);
             this.txtPrecoPrazo.Name = "txtPrecoPrazo";
             this.txtPrecoPrazo.Size = new System.Drawing.Size(50, 20);
             this.txtPrecoPrazo.TabIndex = 36;
@@ -289,22 +310,24 @@
             // lblPrecoPrazo
             // 
             this.lblPrecoPrazo.AutoSize = true;
+            this.lblPrecoPrazo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecoPrazo.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblPrecoPrazo.Location = new System.Drawing.Point(170, 71);
             this.lblPrecoPrazo.Name = "lblPrecoPrazo";
-            this.lblPrecoPrazo.Size = new System.Drawing.Size(76, 13);
+            this.lblPrecoPrazo.Size = new System.Drawing.Size(90, 13);
             this.lblPrecoPrazo.TabIndex = 35;
             this.lblPrecoPrazo.Text = "Preço á prazo:";
             // 
             // txtQuantidade
             // 
-            this.txtQuantidade.Location = new System.Drawing.Point(290, 14);
+            this.txtQuantidade.Location = new System.Drawing.Point(297, 14);
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(50, 20);
             this.txtQuantidade.TabIndex = 34;
             // 
             // txtDescricaoResumida
             // 
-            this.txtDescricaoResumida.Location = new System.Drawing.Point(49, 44);
+            this.txtDescricaoResumida.Location = new System.Drawing.Point(49, 43);
             this.txtDescricaoResumida.Name = "txtDescricaoResumida";
             this.txtDescricaoResumida.Size = new System.Drawing.Size(240, 20);
             this.txtDescricaoResumida.TabIndex = 33;
@@ -336,6 +359,8 @@
             // 
             // btnAdicionar
             // 
+            this.btnAdicionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdicionar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnAdicionar.Location = new System.Drawing.Point(220, 98);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(112, 43);
@@ -347,14 +372,18 @@
             // lblEstoque
             // 
             this.lblEstoque.AutoSize = true;
+            this.lblEstoque.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstoque.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblEstoque.Location = new System.Drawing.Point(116, 18);
             this.lblEstoque.Name = "lblEstoque";
-            this.lblEstoque.Size = new System.Drawing.Size(49, 13);
+            this.lblEstoque.Size = new System.Drawing.Size(57, 13);
             this.lblEstoque.TabIndex = 28;
             this.lblEstoque.Text = "Estoque:";
             // 
             // btnRemover
             // 
+            this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemover.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnRemover.Location = new System.Drawing.Point(42, 98);
             this.btnRemover.Name = "btnRemover";
             this.btnRemover.Size = new System.Drawing.Size(112, 43);
@@ -366,42 +395,50 @@
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
+            this.lblQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuantidade.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblQuantidade.Location = new System.Drawing.Point(224, 18);
             this.lblQuantidade.Name = "lblQuantidade";
-            this.lblQuantidade.Size = new System.Drawing.Size(65, 13);
+            this.lblQuantidade.Size = new System.Drawing.Size(76, 13);
             this.lblQuantidade.TabIndex = 26;
             this.lblQuantidade.Text = "Qauntidade:";
             // 
             // lblDescriçãoResumida
             // 
             this.lblDescriçãoResumida.AutoSize = true;
+            this.lblDescriçãoResumida.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescriçãoResumida.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblDescriçãoResumida.Location = new System.Drawing.Point(7, 45);
             this.lblDescriçãoResumida.Name = "lblDescriçãoResumida";
-            this.lblDescriçãoResumida.Size = new System.Drawing.Size(38, 13);
+            this.lblDescriçãoResumida.Size = new System.Drawing.Size(43, 13);
             this.lblDescriçãoResumida.TabIndex = 24;
             this.lblDescriçãoResumida.Text = "Nome:";
             // 
             // lblCodigoProduto
             // 
             this.lblCodigoProduto.AutoSize = true;
+            this.lblCodigoProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigoProduto.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblCodigoProduto.Location = new System.Drawing.Point(11, 18);
             this.lblCodigoProduto.Name = "lblCodigoProduto";
-            this.lblCodigoProduto.Size = new System.Drawing.Size(43, 13);
+            this.lblCodigoProduto.Size = new System.Drawing.Size(50, 13);
             this.lblCodigoProduto.TabIndex = 22;
             this.lblCodigoProduto.Text = "Código:";
             // 
             // lblHora
             // 
             this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(589, 43);
+            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHora.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblHora.Location = new System.Drawing.Point(811, 13);
             this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(33, 13);
+            this.lblHora.Size = new System.Drawing.Size(38, 13);
             this.lblHora.TabIndex = 12;
             this.lblHora.Text = "Hora:";
             // 
             // mtbHora
             // 
-            this.mtbHora.Location = new System.Drawing.Point(625, 39);
+            this.mtbHora.Location = new System.Drawing.Point(847, 9);
             this.mtbHora.Mask = "90:00";
             this.mtbHora.Name = "mtbHora";
             this.mtbHora.Size = new System.Drawing.Size(38, 20);
@@ -410,7 +447,7 @@
             // 
             // mtbData
             // 
-            this.mtbData.Location = new System.Drawing.Point(748, 38);
+            this.mtbData.Location = new System.Drawing.Point(847, 35);
             this.mtbData.Mask = "99/99/9999";
             this.mtbData.Name = "mtbData";
             this.mtbData.Size = new System.Drawing.Size(67, 20);
@@ -420,18 +457,22 @@
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(712, 42);
+            this.lblData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblData.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblData.Location = new System.Drawing.Point(811, 39);
             this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(33, 13);
+            this.lblData.Size = new System.Drawing.Size(38, 13);
             this.lblData.TabIndex = 15;
             this.lblData.Text = "Data:";
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblTotal.Location = new System.Drawing.Point(471, 448);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(34, 13);
+            this.lblTotal.Size = new System.Drawing.Size(40, 13);
             this.lblTotal.TabIndex = 19;
             this.lblTotal.Text = "Total:";
             // 
@@ -455,9 +496,11 @@
             // lblDescontoReal
             // 
             this.lblDescontoReal.AutoSize = true;
-            this.lblDescontoReal.Location = new System.Drawing.Point(442, 421);
+            this.lblDescontoReal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescontoReal.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblDescontoReal.Location = new System.Drawing.Point(427, 421);
             this.lblDescontoReal.Name = "lblDescontoReal";
-            this.lblDescontoReal.Size = new System.Drawing.Size(73, 13);
+            this.lblDescontoReal.Size = new System.Drawing.Size(85, 13);
             this.lblDescontoReal.TabIndex = 23;
             this.lblDescontoReal.Text = "Desconto R$:";
             // 
@@ -473,34 +516,40 @@
             // lblDescontoPor100
             // 
             this.lblDescontoPor100.AutoSize = true;
-            this.lblDescontoPor100.Location = new System.Drawing.Point(440, 395);
+            this.lblDescontoPor100.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescontoPor100.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblDescontoPor100.Location = new System.Drawing.Point(427, 395);
             this.lblDescontoPor100.Name = "lblDescontoPor100";
-            this.lblDescontoPor100.Size = new System.Drawing.Size(67, 13);
+            this.lblDescontoPor100.Size = new System.Drawing.Size(78, 13);
             this.lblDescontoPor100.TabIndex = 21;
             this.lblDescontoPor100.Text = "Desconto %:";
             // 
             // lbTotalPodutos
             // 
             this.lbTotalPodutos.AutoSize = true;
-            this.lbTotalPodutos.Location = new System.Drawing.Point(788, 63);
+            this.lbTotalPodutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalPodutos.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbTotalPodutos.Location = new System.Drawing.Point(749, 63);
             this.lbTotalPodutos.Name = "lbTotalPodutos";
-            this.lbTotalPodutos.Size = new System.Drawing.Size(79, 13);
+            this.lbTotalPodutos.Size = new System.Drawing.Size(94, 13);
             this.lbTotalPodutos.TabIndex = 25;
             this.lbTotalPodutos.Text = "Total Produtos:";
             // 
             // lblQuantidadePrutudoQ
             // 
             this.lblQuantidadePrutudoQ.AutoSize = true;
-            this.lblQuantidadePrutudoQ.Location = new System.Drawing.Point(863, 63);
+            this.lblQuantidadePrutudoQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuantidadePrutudoQ.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblQuantidadePrutudoQ.Location = new System.Drawing.Point(844, 63);
             this.lblQuantidadePrutudoQ.Name = "lblQuantidadePrutudoQ";
-            this.lblQuantidadePrutudoQ.Size = new System.Drawing.Size(69, 13);
+            this.lblQuantidadePrutudoQ.Size = new System.Drawing.Size(80, 13);
             this.lblQuantidadePrutudoQ.TabIndex = 26;
             this.lblQuantidadePrutudoQ.Text = "QuantidadeP";
             // 
             // cbVendedor
             // 
             this.cbVendedor.FormattingEnabled = true;
-            this.cbVendedor.Location = new System.Drawing.Point(95, 24);
+            this.cbVendedor.Location = new System.Drawing.Point(492, 16);
             this.cbVendedor.Name = "cbVendedor";
             this.cbVendedor.Size = new System.Drawing.Size(121, 21);
             this.cbVendedor.TabIndex = 27;
@@ -508,54 +557,87 @@
             // lblVendedor
             // 
             this.lblVendedor.AutoSize = true;
-            this.lblVendedor.Location = new System.Drawing.Point(39, 28);
+            this.lblVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVendedor.Location = new System.Drawing.Point(427, 19);
             this.lblVendedor.Name = "lblVendedor";
-            this.lblVendedor.Size = new System.Drawing.Size(56, 13);
+            this.lblVendedor.Size = new System.Drawing.Size(65, 13);
             this.lblVendedor.TabIndex = 28;
             this.lblVendedor.Text = "Vendedor:";
             // 
-            // mtbAlteracaoR
+            // mtbAgrescimoD
             // 
-            this.mtbAlteracaoR.Location = new System.Drawing.Point(656, 419);
-            this.mtbAlteracaoR.Name = "mtbAlteracaoR";
-            this.mtbAlteracaoR.Size = new System.Drawing.Size(67, 20);
-            this.mtbAlteracaoR.TabIndex = 32;
-            this.mtbAlteracaoR.ValidatingType = typeof(System.DateTime);
+            this.mtbAgrescimoD.Location = new System.Drawing.Point(674, 419);
+            this.mtbAgrescimoD.Name = "mtbAgrescimoD";
+            this.mtbAgrescimoD.Size = new System.Drawing.Size(67, 20);
+            this.mtbAgrescimoD.TabIndex = 32;
+            this.mtbAgrescimoD.ValidatingType = typeof(System.DateTime);
+            this.mtbAgrescimoD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbAgrescimoD_KeyPress);
             // 
             // lblAteracaoReal
             // 
             this.lblAteracaoReal.AutoSize = true;
-            this.lblAteracaoReal.Location = new System.Drawing.Point(590, 422);
+            this.lblAteracaoReal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAteracaoReal.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblAteracaoReal.Location = new System.Drawing.Point(587, 422);
             this.lblAteracaoReal.Name = "lblAteracaoReal";
-            this.lblAteracaoReal.Size = new System.Drawing.Size(72, 13);
+            this.lblAteracaoReal.Size = new System.Drawing.Size(89, 13);
             this.lblAteracaoReal.TabIndex = 31;
-            this.lblAteracaoReal.Text = "Alteração R$:";
+            this.lblAteracaoReal.Text = "Agrescimo R$:";
             // 
-            // mtbAlteracaoP
+            // mtbAgrescimoP
             // 
-            this.mtbAlteracaoP.Location = new System.Drawing.Point(656, 393);
-            this.mtbAlteracaoP.Name = "mtbAlteracaoP";
-            this.mtbAlteracaoP.Size = new System.Drawing.Size(67, 20);
-            this.mtbAlteracaoP.TabIndex = 30;
-            this.mtbAlteracaoP.ValidatingType = typeof(System.DateTime);
+            this.mtbAgrescimoP.Location = new System.Drawing.Point(674, 393);
+            this.mtbAgrescimoP.Name = "mtbAgrescimoP";
+            this.mtbAgrescimoP.Size = new System.Drawing.Size(67, 20);
+            this.mtbAgrescimoP.TabIndex = 30;
+            this.mtbAgrescimoP.ValidatingType = typeof(System.DateTime);
+            this.mtbAgrescimoP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbAgrescimoP_KeyPress);
             // 
             // lblAteracoes
             // 
             this.lblAteracoes.AutoSize = true;
+            this.lblAteracoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAteracoes.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblAteracoes.Location = new System.Drawing.Point(588, 396);
             this.lblAteracoes.Name = "lblAteracoes";
-            this.lblAteracoes.Size = new System.Drawing.Size(66, 13);
+            this.lblAteracoes.Size = new System.Drawing.Size(82, 13);
             this.lblAteracoes.TabIndex = 29;
-            this.lblAteracoes.Text = "Alteração %:";
+            this.lblAteracoes.Text = "Agrescimo %:";
+            // 
+            // rbtnVista
+            // 
+            this.rbtnVista.AutoSize = true;
+            this.rbtnVista.Location = new System.Drawing.Point(630, 16);
+            this.rbtnVista.Name = "rbtnVista";
+            this.rbtnVista.Size = new System.Drawing.Size(57, 17);
+            this.rbtnVista.TabIndex = 33;
+            this.rbtnVista.TabStop = true;
+            this.rbtnVista.Text = "Á vista";
+            this.rbtnVista.UseVisualStyleBackColor = true;
+            this.rbtnVista.CheckedChanged += new System.EventHandler(this.rbtnVista_CheckedChanged);
+            // 
+            // rbtnPrazo
+            // 
+            this.rbtnPrazo.AutoSize = true;
+            this.rbtnPrazo.Location = new System.Drawing.Point(630, 39);
+            this.rbtnPrazo.Name = "rbtnPrazo";
+            this.rbtnPrazo.Size = new System.Drawing.Size(61, 17);
+            this.rbtnPrazo.TabIndex = 34;
+            this.rbtnPrazo.TabStop = true;
+            this.rbtnPrazo.Text = "Á prazo";
+            this.rbtnPrazo.UseVisualStyleBackColor = true;
+            this.rbtnPrazo.CheckedChanged += new System.EventHandler(this.rbtnPrazo_CheckedChanged);
             // 
             // frmVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 533);
-            this.Controls.Add(this.mtbAlteracaoR);
+            this.Controls.Add(this.rbtnPrazo);
+            this.Controls.Add(this.rbtnVista);
+            this.Controls.Add(this.mtbAgrescimoD);
             this.Controls.Add(this.lblAteracaoReal);
-            this.Controls.Add(this.mtbAlteracaoP);
+            this.Controls.Add(this.mtbAgrescimoP);
             this.Controls.Add(this.lblAteracoes);
             this.Controls.Add(this.lblVendedor);
             this.Controls.Add(this.cbVendedor);
@@ -637,9 +719,11 @@
         public System.Windows.Forms.MaskedTextBox mtbDescontoPorcentagem;
         private System.Windows.Forms.ComboBox cbVendedor;
         private System.Windows.Forms.Label lblVendedor;
-        public System.Windows.Forms.MaskedTextBox mtbAlteracaoR;
-        private System.Windows.Forms.Label lblAteracaoReal;
-        public System.Windows.Forms.MaskedTextBox mtbAlteracaoP;
-        private System.Windows.Forms.Label lblAteracoes;
+        public System.Windows.Forms.MaskedTextBox mtbAgrescimoD;
+        public System.Windows.Forms.MaskedTextBox mtbAgrescimoP;
+        public System.Windows.Forms.Label lblAteracaoReal;
+        public System.Windows.Forms.Label lblAteracoes;
+        private System.Windows.Forms.RadioButton rbtnVista;
+        private System.Windows.Forms.RadioButton rbtnPrazo;
     }
 }

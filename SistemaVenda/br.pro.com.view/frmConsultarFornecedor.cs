@@ -46,6 +46,8 @@ namespace SistemaVenda.br.pro.com.view
             cf.cbUF.Text = dgFornecedor.CurrentRow.Cells[13].Value.ToString();
 
             cf.ShowDialog();
+
+            dgFornecedor.DataSource = new FornecedorDAO().ConsultarFornecedores();
         }
         #endregion
 

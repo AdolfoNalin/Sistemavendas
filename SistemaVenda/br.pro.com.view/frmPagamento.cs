@@ -19,34 +19,19 @@ namespace SistemaVenda.br.pro.com.view
     public partial class frmPagamento : Form
     {
         #region Objetos
-        DataTable Carrinho = new DataTable();
         DataGridView DGCarrinho = new DataGridView();
         Cliente Cliente = new Cliente();
         string fun = "";
         #endregion
 
         #region Construtor
-        public frmPagamento(Cliente cliente, DataTable carrinho, DataGridView dgCarrinho,String funcionario)
+        public frmPagamento(Cliente cliente, DataGridView dgCarrinho,String funcionario)
         {
             this.Cliente = cliente;
-            this.Carrinho = carrinho;
             this.DGCarrinho = dgCarrinho;
             fun = funcionario;
 
             InitializeComponent();
-        }
-        #endregion
-
-        #region Load
-        private void frmPagamento_Load(object sender, EventArgs e)
-        {
-            double num = 0.00;
-            mtbDinheiro.Text = String.Format("{0:0.00}", num);
-            mtbCartao.Text = String.Format("{0:0.00}", num);
-            mtbPix.Text = String.Format("{0:0.00}", num);
-            mtbCrediario.Text = String.Format("{0:0.00}", num);
-
-            mtbDinheiro.Focus();
         }
         #endregion
 
@@ -71,7 +56,7 @@ namespace SistemaVenda.br.pro.com.view
                     nomeArquivo = $"{filePath}_Venda.pdf";
                 }
 
-                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"D:\repos\SistemaVenda\Logo.jpeg");
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"C:\Program Files (x86)\Sistema de Vendas\Logo.jpeg");
                 logo.ScaleToFit(150, 300);
                 logo.SetAbsolutePosition(430f, 650f);
 
@@ -81,17 +66,21 @@ namespace SistemaVenda.br.pro.com.view
 
                 string dado = " ";
 
+                Paragraph vendaCabecario = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
+                vendaCabecario.Alignment = Element.ALIGN_CENTER;
+                vendaCabecario.Add("Venda");
+
                 Paragraph cabecario = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
 
                 //Dados da empresa
                 cabecario.Alignment = Element.ALIGN_LEFT;
-                cabecario.Add("Venda\nMaster Blocos e Lajes\nLuciane Pela Feijão: 46.594.384/0001-19\nEndereço: Rod SP 261 - Km 46,5\r\nBairro Jacutinga - zona rural \r\nÁguas de Santa Barbara\nContato: 14 99147 7975\nEmail: Luciani.pela@gmail.com");
+                cabecario.Add($"Master Blocos e Lajes\nLuciane Pela Feijão: 46.594.384/0001-19\nEndereço: Rod SP 261 - Km 46,5\r\nBairro Jacutinga - zona rural \r\nÁguas de Santa Barbara\nContato: 14 99147 7975\nEmail: Luciani.pela@gmail.com");
 
                 //Data e Hora
                 Paragraph dataHora = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 18, (int)System.Drawing.FontStyle.Bold));
                 dataHora.Font = new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular);
                 dataHora.Alignment = Element.ALIGN_RIGHT;
-                dataHora.Add($"\nData: {DateTime.Now.ToShortDateString()} Hora: {DateTime.Now.ToShortTimeString()}\n");
+                dataHora.Add($"\nData: {DateTime.Now.ToShortDateString()} Hora: {DateTime.Now.ToShortTimeString()}\n\n");
 
                 Paragraph dadosCliente = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)FontStyle.Bold));
                 dadosCliente.Alignment = Element.ALIGN_LEFT;
@@ -107,7 +96,6 @@ namespace SistemaVenda.br.pro.com.view
                 produtos.Alignment = Element.ALIGN_RIGHT;
 
                 PdfPTable tabela = new PdfPTable(5);
-                tabela.DefaultCell.FixedHeight = 20;
 
                 tabela.AddCell("Código");
                 tabela.AddCell("Produto");
@@ -117,15 +105,15 @@ namespace SistemaVenda.br.pro.com.view
 
                 int quantidade = 0;
 
-                for (int i = 0; i < Carrinho.Rows.Count; i++)
+                foreach (DataGridViewRow linha in DGCarrinho.Rows)
                 {
                     Produto obj = new Produto();
 
-                    obj.Codigo = int.Parse(DGCarrinho.CurrentRow.Cells[0].Value.ToString());
-                    obj.DescricaoResumida = DGCarrinho.CurrentRow.Cells[1].Value.ToString();
-                    obj.Quantidade = int.Parse(DGCarrinho.CurrentRow.Cells[2].Value.ToString());
-                    obj.PrecoVista = Decimal.Parse(DGCarrinho.CurrentRow.Cells[3].Value.ToString());
-                    obj.ValorTotal = Decimal.Parse(DGCarrinho.CurrentRow.Cells[4].Value.ToString());
+                    obj.Codigo = int.Parse(linha.Cells[0].Value.ToString());
+                    obj.DescricaoResumida = linha.Cells[1].Value.ToString();
+                    obj.Quantidade = int.Parse(linha.Cells[2].Value.ToString());
+                    obj.PrecoVista = Decimal.Parse(linha.Cells[3].Value.ToString());
+                    obj.ValorTotal = Decimal.Parse(linha.Cells[4].Value.ToString());
 
                     tabela.AddCell(obj.Codigo.ToString());
                     tabela.AddCell(obj.DescricaoResumida);
@@ -145,7 +133,7 @@ namespace SistemaVenda.br.pro.com.view
                 //Dados finais do orçamento
                 Paragraph dadosFinais = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
                 dadosFinais.Alignment = Element.ALIGN_LEFT;
-                dadosFinais.Add($"Desconto: {venda.mtbDescontoReal.Text}    Total: {mtbTotal.Text}");
+                dadosFinais.Add($"SubTotal: {venda.mtbTotal.Text}    Desconto: {venda.mtbDescontoReal.Text}     Agréscimo: {venda.mtbAgrescimoD.Text}      Total: {mtbTotal.Text}");
 
                 //Obs
                 Paragraph obs = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
@@ -153,6 +141,7 @@ namespace SistemaVenda.br.pro.com.view
                 obs.Add($"Obeservação: \n{txtObs.Text}");
 
                 doc.Open();
+                doc.Add(vendaCabecario);
                 doc.Add(logo);
                 doc.Add(cabecario);
                 doc.Add(dataHora);
@@ -212,17 +201,30 @@ namespace SistemaVenda.br.pro.com.view
                     VendaDAO dao = new VendaDAO();
                     dao.CadastrarVenda(obj);
 
-                    foreach (DataRow linha in Carrinho.Rows)
+                    foreach(DataGridViewRow linha in DGCarrinho.Rows)
                     {
                         ItemVenda item = new ItemVenda();
+                        ProdutoDAO ProdutoDao = new ProdutoDAO();
+                        ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+                        Produto produto = new Produto();
+
+                        int retirada = 0;
+                        int quantidade = 0;
 
                         item.CodigoVenda = dao.UltimaVenda();
-                        item.CodigoProduto = int.Parse(linha["Código"].ToString());
-                        item.Quantidade = int.Parse(linha["Quantidade"].ToString());
-                        item.Subtotal = Decimal.Parse(linha["Total"].ToString());
+                        item.CodigoProduto = int.Parse(linha.Cells[0].Value.ToString());
+                        item.Quantidade = int.Parse(linha.Cells[2].Value.ToString());
+                        item.Subtotal = Decimal.Parse(linha.Cells[4].Value.ToString());
                         
-                        ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
                         itemVendaDAO.CadastrarItemVenda(item);
+
+                        produto = ProdutoDao.BuscarProdutoVenda(item.CodigoProduto);
+
+                        int estoque = produto.Quantidade;
+                        quantidade = item.Quantidade;
+                        retirada = estoque - quantidade;
+
+                        ProdutoDao.ControlarEstoque(produto.Codigo,retirada);
                     }
 
                     MessageBox.Show($"Venda realizada com sucesso!");

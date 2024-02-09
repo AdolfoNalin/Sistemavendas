@@ -71,7 +71,8 @@
             // 
             // txtDescricaoCompleta
             // 
-            this.txtDescricaoCompleta.Location = new System.Drawing.Point(142, 89);
+            this.txtDescricaoCompleta.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtDescricaoCompleta.Location = new System.Drawing.Point(145, 89);
             this.txtDescricaoCompleta.Multiline = true;
             this.txtDescricaoCompleta.Name = "txtDescricaoCompleta";
             this.txtDescricaoCompleta.Size = new System.Drawing.Size(256, 42);
@@ -79,6 +80,7 @@
             // 
             // mtbData
             // 
+            this.mtbData.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbData.Location = new System.Drawing.Point(640, 89);
             this.mtbData.Mask = "00/00/0000";
             this.mtbData.Name = "mtbData";
@@ -106,6 +108,7 @@
             // 
             // txtDescricaoResumida
             // 
+            this.txtDescricaoResumida.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtDescricaoResumida.Location = new System.Drawing.Point(147, 154);
             this.txtDescricaoResumida.Name = "txtDescricaoResumida";
             this.txtDescricaoResumida.Size = new System.Drawing.Size(256, 20);
@@ -113,6 +116,7 @@
             // 
             // mtbHora
             // 
+            this.mtbHora.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbHora.Location = new System.Drawing.Point(640, 115);
             this.mtbHora.Name = "mtbHora";
             this.mtbHora.Size = new System.Drawing.Size(49, 20);
@@ -148,11 +152,13 @@
             // 
             // txtPrecoVista
             // 
+            this.txtPrecoVista.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtPrecoVista.Location = new System.Drawing.Point(142, 195);
             this.txtPrecoVista.Name = "txtPrecoVista";
             this.txtPrecoVista.Size = new System.Drawing.Size(64, 20);
             this.txtPrecoVista.TabIndex = 9;
             this.txtPrecoVista.ValidatingType = typeof(System.DateTime);
+            this.txtPrecoVista.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecoVista_KeyPress);
             // 
             // lblPrecoPrazo
             // 
@@ -165,7 +171,8 @@
             // 
             // txtPrecoPrazo
             // 
-            this.txtPrecoPrazo.Location = new System.Drawing.Point(294, 195);
+            this.txtPrecoPrazo.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtPrecoPrazo.Location = new System.Drawing.Point(300, 195);
             this.txtPrecoPrazo.Name = "txtPrecoPrazo";
             this.txtPrecoPrazo.Size = new System.Drawing.Size(64, 20);
             this.txtPrecoPrazo.TabIndex = 11;
@@ -182,6 +189,7 @@
             // 
             // txtValorTotal
             // 
+            this.txtValorTotal.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtValorTotal.Location = new System.Drawing.Point(590, 195);
             this.txtValorTotal.Name = "txtValorTotal";
             this.txtValorTotal.Size = new System.Drawing.Size(64, 20);
@@ -199,6 +207,7 @@
             // 
             // txtValorEntrada
             // 
+            this.txtValorEntrada.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtValorEntrada.Location = new System.Drawing.Point(449, 195);
             this.txtValorEntrada.Name = "txtValorEntrada";
             this.txtValorEntrada.Size = new System.Drawing.Size(64, 20);
@@ -207,6 +216,7 @@
             // 
             // cbUniMedida
             // 
+            this.cbUniMedida.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbUniMedida.FormattingEnabled = true;
             this.cbUniMedida.Items.AddRange(new object[] {
             "Metro Linear",
@@ -238,15 +248,17 @@
             // 
             // cbFornecedor
             // 
+            this.cbFornecedor.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbFornecedor.FormattingEnabled = true;
             this.cbFornecedor.Location = new System.Drawing.Point(488, 90);
             this.cbFornecedor.Name = "cbFornecedor";
             this.cbFornecedor.Size = new System.Drawing.Size(93, 21);
             this.cbFornecedor.TabIndex = 19;
-            this.cbFornecedor.SelectedIndexChanged += new System.EventHandler(this.cbFornecedor_SelectedIndexChanged);
             // 
             // btnSalvar
             // 
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnSalvar.Location = new System.Drawing.Point(118, 309);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(99, 40);
@@ -257,6 +269,8 @@
             // 
             // btnEditar
             // 
+            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnEditar.Location = new System.Drawing.Point(223, 309);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(99, 40);
@@ -267,6 +281,8 @@
             // 
             // btnNovo
             // 
+            this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNovo.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnNovo.Location = new System.Drawing.Point(328, 309);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(99, 40);
@@ -277,6 +293,8 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluir.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnExcluir.Location = new System.Drawing.Point(433, 309);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(99, 40);
@@ -296,7 +314,8 @@
             // 
             // txtQuantidade
             // 
-            this.txtQuantidade.Location = new System.Drawing.Point(488, 117);
+            this.txtQuantidade.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtQuantidade.Location = new System.Drawing.Point(493, 117);
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(64, 20);
             this.txtQuantidade.TabIndex = 25;
@@ -313,7 +332,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(142, 50);
+            this.txtCodigo.Location = new System.Drawing.Point(146, 50);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(64, 20);
             this.txtCodigo.TabIndex = 27;

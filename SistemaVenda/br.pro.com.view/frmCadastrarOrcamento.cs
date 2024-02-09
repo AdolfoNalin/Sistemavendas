@@ -28,6 +28,8 @@ namespace SistemaVenda.br.pro.com.view
         public Funcionario Funcionario { get; set; }
         public Produto Produto { get; set; }
         Orcamento obj = new Orcamento();
+        DataTable minhaTabela = new DataTable();
+        
 
         int idOrcamento;
 
@@ -75,8 +77,8 @@ namespace SistemaVenda.br.pro.com.view
         int quantidadeTotal = 0;
         decimal precoVista = 0;
         decimal precoPrazo = 0;
-        decimal subtotalProduto = 0;
-        decimal subtotalP = 0;
+        decimal subtotalProdutoVista = 0;
+        decimal subtotalProdutoPrazo = 0;
         decimal descontoPorcentagem = 0;
         decimal descontoReal = 0;
         decimal total = 0;
@@ -88,17 +90,6 @@ namespace SistemaVenda.br.pro.com.view
             new Helpers().LimparTela(this);
 
             decimal num = 0;
-            
-            mtbTotal.Text = String.Format("{0:0.00}", num);
-            mtbSubTotal.Text = String.Format("{0:0.00}", num);
-            mtbDD.Text = String.Format("{0:0.00}", num);
-            mtbDP.Text = String.Format("{0:0.00}", num);
-            mtbAteracoes.Text = String.Format("{0:0.00}", num);
-            mtbAP.Text = String.Format("{0:0.00}", num);
-            mtbAD.Text = String.Format("{0:0.00}", num);
-
-            mtbData.Text = DateTime.Now.ToShortDateString();
-            mtbHora.Text = DateTime.Now.ToShortTimeString();
 
             FuncionarioDAO dao = new FuncionarioDAO();
             ClienteDAO daoC = new ClienteDAO();
@@ -108,6 +99,17 @@ namespace SistemaVenda.br.pro.com.view
 
                 cbVendedor.DataSource = dao.ConsultarFuncionario();
                 cbCliente.DataSource = daoC.ConsultarClientes();
+
+                mtbTotal.Text = String.Format("{0:0.00}", num);
+                mtbSubTotal.Text = String.Format("{0:0.00}", num);
+                mtbDD.Text = String.Format("{0:0.00}", num);
+                mtbDP.Text = String.Format("{0:0.00}", num);
+                mtbAteracoes.Text = String.Format("{0:0.00}", num);
+                mtbAP.Text = String.Format("{0:0.00}", num);
+                mtbAD.Text = String.Format("{0:0.00}", num);
+
+                mtbData.Text = DateTime.Now.ToShortDateString();
+                mtbHora.Text = DateTime.Now.ToShortTimeString();
 
             }
 
@@ -126,60 +128,61 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region Gravar
-        public void Gravar()
-        {
-            try
-            {
-                ClienteDAO clienteDao = new ClienteDAO();
-                FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+        //public void Gravar()
+        //{
+        //    try
+        //    {
+        //        DataRow novaLinha = minhaTabela.NewRow();
+        //        ClienteDAO clienteDao = new ClienteDAO();
+        //        FuncionarioDAO funcionarioDao = new FuncionarioDAO();
 
-                Cliente = clienteDao.ListarNome(cbCliente.Text);
-                Funcionario = funcionarioDao.ListarNome(cbVendedor.Text);
+        //        Cliente = clienteDao.ListarNome(cbCliente.Text);
+        //        Funcionario = funcionarioDao.ListarNome(cbVendedor.Text);
 
-                quantidadeP = int.Parse(dgOrcamento.CurrentRow.Cells[2].Value.ToString());
-                int quantidadeTotal = 0;
+        //        quantidadeP = int.Parse(dgOrcamento.CurrentRow.Cells[2].Value.ToString());
+        //        int quantidadeTotal = 0;
 
-                quantidadeTotal += quantidadeP;
+        //        quantidadeTotal += quantidadeP;
 
-                Orcamento orcamento = new Orcamento();
+        //        Orcamento orcamento = new Orcamento();
 
-                orcamento.CodigoCliente = Cliente.Codigo;
-                orcamento.CodigoVendedor = Funcionario.Codigo;
+        //        orcamento.CodigoCliente = Cliente.Codigo;
+        //        orcamento.CodigoVendedor = Funcionario.Codigo;
 
-                orcamento.DescontoPorcentagem = Decimal.Parse(mtbDP.Text);
-                orcamento.DescontoReal = Decimal.Parse(mtbDD.Text);
-                orcamento.AcrescimoPorcentagem = Decimal.Parse(mtbAP.Text);
-                orcamento.AcrescimoReal = Decimal.Parse(mtbAP.Text);
-                orcamento.SubTotal = Decimal.Parse(mtbSubTotal.Text);
-                orcamento.Total = Decimal.Parse(mtbTotal.Text);
-                orcamento.Alteracoes = Decimal.Parse(mtbAteracoes.Text);
-                orcamento.Obs = txtObs.Text;
-                orcamento.Data = DateTime.Parse(mtbData.Text);
-                orcamento.Hora = DateTime.Parse(mtbHora.Text);
-                orcamento.QuantidadeTotal = quantidadeTotal;
+        //        orcamento.DescontoPorcentagem = Decimal.Parse(mtbDP.Text);
+        //        orcamento.DescontoReal = Decimal.Parse(mtbDD.Text);
+        //        orcamento.AcrescimoPorcentagem = Decimal.Parse(mtbAP.Text);
+        //        orcamento.AcrescimoReal = Decimal.Parse(mtbAP.Text);
+        //        orcamento.SubTotal = Decimal.Parse(mtbSubTotal.Text);
+        //        orcamento.Total = Decimal.Parse(mtbTotal.Text);
+        //        orcamento.Alteracoes = Decimal.Parse(mtbAteracoes.Text);
+        //        orcamento.Obs = txtObs.Text;
+        //        orcamento.Data = DateTime.Parse(mtbData.Text);
+        //        orcamento.Hora = DateTime.Parse(mtbHora.Text);
+        //        orcamento.QuantidadeTotal = quantidadeTotal;
 
-                OrcamentoDAO dao = new OrcamentoDAO();
-                dao.CadastrarOrcamento(orcamento);
+        //        OrcamentoDAO dao = new OrcamentoDAO();
+        //        dao.CadastrarOrcamento(orcamento);
 
-                for (int i = 1; i <= dgOrcamento.Rows.Count; i++)
-                {
-                    ItemOrcamento item = new ItemOrcamento();
+        //        foreach (DataGridViewRow linha in dgOrcamento.Rows)
+        //        {
+        //            ItemOrcamento item = new ItemOrcamento();
+        //            item.CodigoOrcamento = dao.UltimoOrcamento();
+        //            item.CodigoProduto = int.Parse(linha.Cells[0].Value.ToString());
+        //            item.Quantidade = int.Parse(linha.Cells[2].Value.ToString());
+        //            item.Subtotal = Decimal.Parse(linha.Cells[5].Value.ToString());
 
-                    item.CodigoOrcamento = dao.UltimoOrcamento();
-                    item.CodigoProduto = int.Parse(dgOrcamento.CurrentRow.Cells[0].Value.ToString());
-                    item.Quantidade = int.Parse(dgOrcamento.CurrentRow.Cells[2].Value.ToString());
-                    item.Subtotal = Decimal.Parse(dgOrcamento.CurrentRow.Cells[4].Value.ToString());
+        //            ItemOrcamentoDAO itemDao = new ItemOrcamentoDAO();
+        //            itemDao.CadastrarItemOrcamento(item);
+        //        }
 
-                    ItemOrcamentoDAO itemDao = new ItemOrcamentoDAO();
-                    itemDao.CadastrarItemOrcamento(item);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Aconteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}");
-            }
-        }
+        //        txtCodigo.Text = dao.UltimoOrcamento().ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Aconteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}");
+        //    }
+        //}
         #endregion
 
         #region btnGravar
@@ -190,62 +193,153 @@ namespace SistemaVenda.br.pro.com.view
         /// <param name="e"></param>
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            Gravar();
+            Orcamento orcamento = new Orcamento();
+
+            new Helpers().Gravar(dgOrcamento,cbVendedor.Text,cbCliente.Text, orcamento);
         }
         #endregion
 
         #region btnAdicionar
         private void btnAdicionar_Click(object sender, EventArgs e)
-        { 
-            ProdutoDAO dao = new ProdutoDAO();
-            int idProduto = int.Parse(cbDescricao.SelectedValue.ToString());
-            Produto obj = dao.ConsultarProdutoNome(idProduto);
-            
-            quantidadeP = int.Parse(txtQuantidade.Text);
-            descontoPorcentagem = decimal.Parse(mtbDP.Text);
-            descontoReal = decimal.Parse(mtbDD.Text);
-            precoVista = obj.PrecoVista;
-            precoPrazo = obj.PrecoPrazo;
+        {
+            if(rbtnVista.Checked == false && rbtnPrazo.Checked == false)
+            {
+                MessageBox.Show("Por favor, antes de adicionar coloque a forma de pagamnto", "ATENÇÃO", MessageBoxButtons.OK);
+            }
+            else if(rbtnVista.Checked)
+            {
+                ProdutoDAO dao = new ProdutoDAO();
+                int idProduto = int.Parse(cbDescricao.SelectedValue.ToString());
+                Produto obj = dao.ConsultarProdutoNome(idProduto);
+                quantidadeP = int.Parse(txtQuantidade.Text);
+                descontoPorcentagem = decimal.Parse(mtbDP.Text);
+                descontoReal = decimal.Parse(mtbDD.Text);
+                precoVista = obj.PrecoVista;
+                precoPrazo = obj.PrecoPrazo;
 
-            subtotalProduto = precoVista * quantidadeP;
-            quantidadeTotal += quantidadeP;
-            
-            subtotalP = precoPrazo * quantidadeP;
-            total += subtotalProduto;
+                subtotalProdutoVista = precoVista * quantidadeP;
+                quantidadeTotal += quantidadeP;
+                try
+                {
+                    if (txtCodigo.Text == String.Empty)
+                    {
 
-            dgOrcamento.Rows.Add(obj.Codigo, cbDescricao.Text, quantidadeP, precoVista,precoPrazo, subtotalProduto);
+                        dgOrcamento.Rows.Add(obj.Codigo, cbDescricao.Text, quantidadeP, precoVista, precoPrazo, subtotalProdutoVista);
+                        total += subtotalProdutoVista;
+
+                    }
+                    else if (txtCodigo.Text != String.Empty)
+                    {
+                        minhaTabela = (DataTable)dgOrcamento.DataSource;
+                        DataRow novaLinha = minhaTabela.NewRow();
+                        novaLinha["´Código"] = obj.Codigo;
+                        novaLinha["Descrição"] = cbDescricao.Text;
+                        novaLinha["Quantidade"] = quantidadeP;
+                        novaLinha["Preço á Vista"] = precoVista;
+                        novaLinha["Preço á Prazo"] = precoPrazo;
+                        novaLinha["SubTotal"] = subtotalProdutoVista;
+                        minhaTabela.Rows.Add(novaLinha);
+
+                        subtotalProdutoVista = Decimal.Parse(mtbSubTotal.Text);
+
+                        subtotalProdutoVista += Decimal.Parse(novaLinha["SubTotal"].ToString());
+                        total = subtotalProdutoVista;
+                    }
+                    txtQuantidade.Clear();
+                }
+                catch (NullReferenceException NRF)
+                {
+                    DialogResult resp = MessageBox.Show("Por favor, digite a quantidade do produto!", "Atenção", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        txtQuantidade.Focus();
+                    }
+                }
+            }
+            else
+            {
+                ProdutoDAO dao = new ProdutoDAO();
+                int idProduto = int.Parse(cbDescricao.SelectedValue.ToString());
+                Produto obj = dao.ConsultarProdutoNome(idProduto);
+                quantidadeP = int.Parse(txtQuantidade.Text);
+                descontoPorcentagem = decimal.Parse(mtbDP.Text);
+                descontoReal = decimal.Parse(mtbDD.Text);
+                precoPrazo = obj.PrecoPrazo;
+                precoVista = obj.PrecoVista;
+                subtotalProdutoPrazo = precoPrazo * quantidadeP;
+                quantidadeTotal += quantidadeP;
+                try
+                {
+                    if (txtCodigo.Text == String.Empty)
+                    {
+
+                        dgOrcamento.Rows.Add(obj.Codigo, cbDescricao.Text, quantidadeP, precoVista, precoPrazo, subtotalProdutoPrazo);
+                        total += subtotalProdutoPrazo;
+
+                    }
+                    else if (txtCodigo.Text != String.Empty)
+                    {
+                        minhaTabela = (DataTable)dgOrcamento.DataSource;
+                        DataRow novaLinha = minhaTabela.NewRow();
+                        novaLinha["´Código"] = obj.Codigo;
+                        novaLinha["Descrição"] = cbDescricao.Text;
+                        novaLinha["Quantidade"] = quantidadeP;
+                        novaLinha["Preço á Vista"] = precoVista;
+                        novaLinha["Preço á Prazo"] = precoPrazo;
+                        novaLinha["SubTotal"] = subtotalProdutoPrazo;
+                        minhaTabela.Rows.Add(novaLinha);
+
+                        subtotalProdutoPrazo = Decimal.Parse(mtbSubTotal.Text);
+
+                        subtotalProdutoPrazo += Decimal.Parse(novaLinha["SubTotal"].ToString());
+                        total = subtotalProdutoPrazo;
+                    }
+                    txtQuantidade.Clear();
+                }
+                catch (Exception ex)
+                {
+
+                    DialogResult resp = MessageBox.Show("Por favor, digite a quantidade do produto!", "Atenção", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        txtQuantidade.Focus();
+                    }
+                }
+            }
 
             mtbSubTotal.Text = total.ToString();
             mtbTotal.Text = total.ToString();
-
-            cbDescricao.Text = String.Empty;
-            txtQuantidade.Clear();
-
-            cbDescricao.Focus();
+            
         }
         #endregion
 
         #region btnRemover
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            decimal subProduto = decimal.Parse(dgOrcamento.CurrentRow.Cells[4].Value.ToString());
-            int indici = dgOrcamento.CurrentRow.Index;
-            total -= subProduto;
-            mtbTotal.Text = total.ToString();
-
-            dgOrcamento.Rows.RemoveAt(indici);
-            MessageBox.Show(Convert.ToString(dgOrcamento.Rows.Count));
-
-            if (dgOrcamento.Rows.Count == 0)
+            try
             {
-                mtbDD.Clear();
-                mtbDP.Clear();
-                mtbAD.Clear();
-                mtbAP.Clear();
-                mtbSubTotal.Clear();
-                mtbAteracoes.Clear();
-                mtbTotal.Clear();
+                decimal subProduto = decimal.Parse(dgOrcamento.CurrentRow.Cells[5].Value.ToString());
+                int indici = dgOrcamento.CurrentRow.Index;
+                total -= subProduto;
+
+                dgOrcamento.Rows.RemoveAt(indici);
+
+                if (dgOrcamento.DataSource != null)
+                {
+                    total = 0;
+                    mtbSubTotal.Text = total.ToString();
+                    mtbTotal.Text = total.ToString();
+                }
+                else 
+                {
+                    mtbSubTotal.Text = total.ToString();
+                    mtbTotal.Text = total.ToString();
+                }
+            }catch(Exception ex)
+            {
+
             }
+            
         }
         #endregion
 
@@ -266,8 +360,18 @@ namespace SistemaVenda.br.pro.com.view
                     string filePath = saveFileDialog.FileName;
                     nomeArquivo = $"{filePath}_Orçamento.pdf";
                 }
+                else if(nomeArquivo == String.Empty)
+                {
+                    DialogResult resp = MessageBox.Show("Não deseja salvar o orçamento?", "ATENÇÃO",MessageBoxButtons.YesNo);
+                    if(resp == DialogResult.Yes)
+                    {
+                        saveFileDialog.Filter = "Text files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                        saveFileDialog.DefaultExt = "pdf";
+                        saveFileDialog.AddExtension = false;
+                    }
+                }
 
-                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"D:\repos\SistemaVenda\Logo.jpeg");
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"C:\Program Files (x86)\Sistema de Vendas\Logo.jpeg");
                 logo.ScaleToFit(150, 300);
                 logo.SetAbsolutePosition(430f, 650f);
 
@@ -277,11 +381,15 @@ namespace SistemaVenda.br.pro.com.view
 
                 string dado = " ";
 
+                Paragraph orcamentoCabecario = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
+                orcamentoCabecario.Alignment = Element.ALIGN_CENTER;
+                orcamentoCabecario.Add("Orçamento");
+
                 Paragraph cabecario = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 16, (int)System.Drawing.FontStyle.Bold));
 
                 //Dados da empresa
                 cabecario.Alignment = Element.ALIGN_LEFT;
-                cabecario.Add("Orçamento\nMaster Blocos e Lajes\nLuciane Pela Feijão: 46.594.384/0001-19\nEndereço: Rod SP 261 - Km 46,5\r\nBairro Jacutinga - zona rural \r\nÁguas de Santa Barbara\nContato: 14 99147 7975\nEmail: Luciani.pela@gmail.com");
+                cabecario.Add("Master Blocos e Lajes\nLuciane Pela Feijão: 46.594.384/0001-19\nEndereço: Rod SP 261 - Km 46,5\r\nBairro Jacutinga - zona rural \r\nÁguas de Santa Barbara\nContato: 14 99147 7975\nEmail: Luciani.pela@gmail.com\n");
 
                 //Data e Hora
                 Paragraph dataHora = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 18, (int)System.Drawing.FontStyle.Bold));
@@ -292,14 +400,13 @@ namespace SistemaVenda.br.pro.com.view
                 //Dados do Orçamento
                 Paragraph dadosOrcamento = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
                 dadosOrcamento.Alignment = Element.ALIGN_LEFT;
-                dadosOrcamento.Add($"Vendedor: {cbVendedor.Text} Cliente: {cbCliente.Text}");
+                dadosOrcamento.Add($"Vendedor: {cbVendedor.Text} \nCliente: {cbCliente.Text}");
 
                 //Produtos
                 Paragraph produtos = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
                 produtos.Alignment = Element.ALIGN_RIGHT;
 
                 PdfPTable tabela = new PdfPTable(5);
-                tabela.DefaultCell.FixedHeight = 20;
 
                 tabela.AddCell("Código");
                 tabela.AddCell("Produto");
@@ -308,25 +415,26 @@ namespace SistemaVenda.br.pro.com.view
                 tabela.AddCell("SubTotal");
 
                 int quantidade = 0;
-                     
-                for (int i = 0; i < dgOrcamento.Rows.Count; i++)
+
+                foreach (DataGridViewRow linha in dgOrcamento.Rows)
                 {
                     Produto obj = new Produto();
-
-                    obj.Codigo = int.Parse(dgOrcamento.CurrentRow.Cells[0].Value.ToString());
-                    obj.DescricaoResumida = dgOrcamento.CurrentRow.Cells[1].Value.ToString();
-                    obj.Quantidade = int.Parse(dgOrcamento.CurrentRow.Cells[2].Value.ToString());
-                    obj.PrecoVista = Decimal.Parse(dgOrcamento.CurrentRow.Cells[3].Value.ToString());
-                    obj.Subtotal = Decimal.Parse(dgOrcamento.CurrentRow.Cells[5].Value.ToString());
+                    
+                    obj.Codigo = int.Parse(linha.Cells[0].Value.ToString());
+                    obj.DescricaoResumida = linha.Cells[1].Value.ToString();
+                    obj.Quantidade = int.Parse(linha.Cells[2].Value.ToString());
+                    obj.PrecoVista = Decimal.Parse(linha.Cells[3].Value.ToString());
+                    obj.Subtotal = Decimal.Parse(linha.Cells[5].Value.ToString());
 
                     tabela.AddCell(obj.Codigo.ToString());
-                    tabela.AddCell(obj.DescricaoResumida);
+                    tabela.AddCell(obj.DescricaoResumida.ToString());
                     tabela.AddCell(obj.Quantidade.ToString());
                     tabela.AddCell(obj.PrecoVista.ToString());
                     tabela.AddCell(obj.Subtotal.ToString());
 
                     quantidade += obj.Quantidade;
                 }
+
 
                 tabela.HorizontalAlignment = Element.ALIGN_LEFT;
 
@@ -336,17 +444,18 @@ namespace SistemaVenda.br.pro.com.view
 
                 //Dados finais do orçamento
                 Paragraph dadosFinais = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
-                dadosFinais.Alignment = Element.ALIGN_RIGHT;
-                dadosFinais.Add($"SubTotal: {mtbSubTotal.Text}    Desconto: {mtbDD.Text}     Agréscimo: {mtbAD.Text}      Total: {mtbTotal.Text}");
+                dadosFinais.Alignment = Element.ALIGN_LEFT;
+                dadosFinais.Add($"\nSubTotal: {mtbSubTotal.Text}  \nDesconto: {mtbDD.Text}     \nAgréscimo: {mtbAD.Text}      \nTotal: {mtbTotal.Text}");
 
                 //Obs
                 Paragraph obs = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
                 obs.Alignment = Element.ALIGN_LEFT;
-                obs.Add($"Obeservação: \n{txtObs.Text}");
+                obs.Add($"\nObeservação: \n{txtObs.Text}");
 
                 //iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("caminho");
 
                 doc.Open();
+                doc.Add(orcamentoCabecario);
                 doc.Add(logo);
                 doc.Add(cabecario);
                 doc.Add(dataHora);
@@ -356,8 +465,11 @@ namespace SistemaVenda.br.pro.com.view
                 doc.Add(obs);
                 doc.Close();
 
-                Gravar();
+                Orcamento orcamento = new Orcamento();
+                OrcamentoDAO dao = new OrcamentoDAO();
+                txtCodigo.Text = dao.UltimoOrcamento().ToString();
                 new Helpers().LimparTela(this);
+                new Helpers().Gravar(dgOrcamento, cbVendedor.Text, cbCliente.Text, orcamento);
             }
             catch (Exception ex)
             {
@@ -522,7 +634,8 @@ namespace SistemaVenda.br.pro.com.view
 
                 if (txtCodigo.Text == String.Empty)
                 {
-                    Gravar();
+                    Orcamento orcamento = new Orcamento();
+                    new Helpers().Gravar(dgOrcamento, cbVendedor.Text, cbCliente.Text, orcamento);
                 }
 
                 Cliente cliente = new Cliente();
@@ -539,10 +652,11 @@ namespace SistemaVenda.br.pro.com.view
                 venda.mtbCPF.Text = cliente.CPF;
                 venda.mtbFone.Text = cliente.Celular;
                 venda.txtEndereco.Text = $"{cliente.Cidade}, {cliente.Bairro}, {cliente.Logradouro}, {cliente.Numero}, {cliente.Complemento}";
-                venda.mtbAlteracaoP.Text = mtbAP.Text;
-                venda.mtbAlteracaoR.Text = mtbAD.Text;
+                venda.mtbAgrescimoP.Text = mtbAP.Text;
+                venda.mtbAgrescimoD.Text = mtbAD.Text;
                 venda.mtbDescontoPorcentagem.Text = mtbDP.Text;
                 venda.mtbDescontoReal.Text = mtbDD.Text;
+                venda.mtbTotal.Text = mtbTotal.Text;
                
                 venda.ShowDialog();
                 
@@ -552,8 +666,70 @@ namespace SistemaVenda.br.pro.com.view
                 MessageBox.Show($"Aconteceu um erro {ex.Message} com o caminho {ex.StackTrace}");
             }
         }
+
         #endregion
 
- 
+        #region ClickrbtnVistaCheck
+        private void rbtnVista_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnVista.Checked && dgOrcamento.Rows.Count > 0)
+            {
+                try
+                {
+                    subtotalProdutoVista = 0;
+                    foreach (DataGridViewRow linha in dgOrcamento.Rows)
+                    {
+                        decimal valorVista = Decimal.Parse(linha.Cells[3].Value.ToString());
+                        int quantidade = int.Parse(linha.Cells[2].Value.ToString());
+
+                        linha.Cells[5].Value = quantidade * valorVista;
+                        subtotalProdutoVista += Decimal.Parse(linha.Cells[5].Value.ToString());
+                    }
+
+                    total = subtotalProdutoVista;
+
+                    mtbTotal.Text = total.ToString();
+                    mtbSubTotal.Text = total.ToString();
+                    subtotalProdutoVista = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Conteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+                }
+            }
+        }
+           
+        #endregion
+
+        #region ClickrbtnPrazocheck
+        private void rbtnPrazo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnPrazo.Checked && dgOrcamento.Rows.Count > 0)
+            {
+                try
+                {
+                    subtotalProdutoPrazo = 0;
+                    foreach (DataGridViewRow linha in dgOrcamento.Rows)
+                    {
+                        decimal valorPrazo = Decimal.Parse(linha.Cells[4].Value.ToString());
+                        int quantidade = int.Parse(linha.Cells[2].Value.ToString());
+
+                        linha.Cells[5].Value = quantidade * valorPrazo;
+                        subtotalProdutoPrazo += Decimal.Parse(linha.Cells[5].Value.ToString());
+                    }
+
+                    total = subtotalProdutoPrazo;
+
+                    mtbTotal.Text = total.ToString();
+                    mtbSubTotal.Text = total.ToString();
+                    subtotalProdutoPrazo = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Conteceu um erro do tipo {ex.Message} com o caminho para {ex.StackTrace}");
+                }
+            }
+        }
+        #endregion
     }
 }

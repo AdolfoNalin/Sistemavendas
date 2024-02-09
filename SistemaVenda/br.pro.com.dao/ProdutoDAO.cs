@@ -307,7 +307,6 @@ namespace SistemaVenda.br.pro.com.dao
                 {
                     obj.Codigo = dr.GetInt32("id");
                     obj.DescricaoResumida = dr.GetString("descricao_resumida");
-                    //obj.PrecoVista = dr.GetDecimal("preco_vista");
                     obj.Quantidade = dr.GetInt32("quantidade");
                     obj.UniMedida = dr.GetString("unid_medida");
                     obj.PrecoVista = dr.GetDecimal("preco_vista");

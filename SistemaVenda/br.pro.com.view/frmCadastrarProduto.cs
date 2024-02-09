@@ -136,9 +136,18 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
-        private void cbFornecedor_SelectedIndexChanged(object sender, EventArgs e)
+        #region txtPrecoAvista_KeyPress
+        private void txtPrecoVista_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == 13)
+            {
+                decimal valorVista = Decimal.Parse(txtPrecoVista.Text);
+                int quantidade = int.Parse(txtQuantidade.Text);
 
+                decimal result = valorVista * quantidade;
+                txtValorTotal.Text = result.ToString();
+            }
         }
+        #endregion
     }
 }

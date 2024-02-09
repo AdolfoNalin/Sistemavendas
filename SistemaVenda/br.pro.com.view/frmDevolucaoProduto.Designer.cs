@@ -55,6 +55,7 @@
             // 
             this.dgDevolucao.AllowUserToAddRows = false;
             this.dgDevolucao.AllowUserToDeleteRows = false;
+            this.dgDevolucao.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgDevolucao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDevolucao.Location = new System.Drawing.Point(20, 96);
             this.dgDevolucao.Name = "dgDevolucao";
@@ -65,15 +66,16 @@
             // lblCliente
             // 
             this.lblCliente.AutoSize = true;
-            this.lblCliente.Location = new System.Drawing.Point(164, 18);
+            this.lblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCliente.Location = new System.Drawing.Point(171, 19);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(42, 13);
+            this.lblCliente.Size = new System.Drawing.Size(50, 13);
             this.lblCliente.TabIndex = 1;
             this.lblCliente.Text = "Cliente:";
             // 
             // txtCodigoVenda
             // 
-            this.txtCodigoVenda.Location = new System.Drawing.Point(97, 15);
+            this.txtCodigoVenda.Location = new System.Drawing.Point(104, 16);
             this.txtCodigoVenda.Name = "txtCodigoVenda";
             this.txtCodigoVenda.Size = new System.Drawing.Size(61, 20);
             this.txtCodigoVenda.TabIndex = 4;
@@ -82,15 +84,16 @@
             // lblCodigoVenda
             // 
             this.lblCodigoVenda.AutoSize = true;
+            this.lblCodigoVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigoVenda.Location = new System.Drawing.Point(17, 19);
             this.lblCodigoVenda.Name = "lblCodigoVenda";
-            this.lblCodigoVenda.Size = new System.Drawing.Size(77, 13);
+            this.lblCodigoVenda.Size = new System.Drawing.Size(90, 13);
             this.lblCodigoVenda.TabIndex = 3;
             this.lblCodigoVenda.Text = "Código Venda:";
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(658, 321);
+            this.txtTotal.Location = new System.Drawing.Point(659, 320);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(89, 20);
             this.txtTotal.TabIndex = 6;
@@ -98,15 +101,16 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Location = new System.Drawing.Point(621, 324);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(34, 13);
+            this.lblTotal.Size = new System.Drawing.Size(40, 13);
             this.lblTotal.TabIndex = 7;
             this.lblTotal.Text = "Total:";
             // 
             // txtMotivo
             // 
-            this.txtMotivo.Location = new System.Drawing.Point(228, 317);
+            this.txtMotivo.Location = new System.Drawing.Point(234, 317);
             this.txtMotivo.Name = "txtMotivo";
             this.txtMotivo.Size = new System.Drawing.Size(365, 20);
             this.txtMotivo.TabIndex = 9;
@@ -114,15 +118,16 @@
             // lblMotivo
             // 
             this.lblMotivo.AutoSize = true;
-            this.lblMotivo.Location = new System.Drawing.Point(190, 320);
+            this.lblMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMotivo.Location = new System.Drawing.Point(186, 321);
             this.lblMotivo.Name = "lblMotivo";
-            this.lblMotivo.Size = new System.Drawing.Size(42, 13);
+            this.lblMotivo.Size = new System.Drawing.Size(49, 13);
             this.lblMotivo.TabIndex = 8;
             this.lblMotivo.Text = "Motivo:";
             // 
             // txtObs
             // 
-            this.txtObs.Location = new System.Drawing.Point(228, 343);
+            this.txtObs.Location = new System.Drawing.Point(233, 343);
             this.txtObs.Multiline = true;
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(365, 77);
@@ -131,15 +136,16 @@
             // lblObs
             // 
             this.lblObs.AutoSize = true;
-            this.lblObs.Location = new System.Drawing.Point(201, 346);
+            this.lblObs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblObs.Location = new System.Drawing.Point(197, 347);
             this.lblObs.Name = "lblObs";
-            this.lblObs.Size = new System.Drawing.Size(29, 13);
+            this.lblObs.Size = new System.Drawing.Size(33, 13);
             this.lblObs.TabIndex = 10;
             this.lblObs.Text = "Obs:";
             // 
             // txtPoduto
             // 
-            this.txtPoduto.Location = new System.Drawing.Point(71, 70);
+            this.txtPoduto.Location = new System.Drawing.Point(78, 70);
             this.txtPoduto.Name = "txtPoduto";
             this.txtPoduto.Size = new System.Drawing.Size(251, 20);
             this.txtPoduto.TabIndex = 13;
@@ -147,16 +153,17 @@
             // lblProduto
             // 
             this.lblProduto.AutoSize = true;
+            this.lblProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProduto.Location = new System.Drawing.Point(25, 73);
             this.lblProduto.Name = "lblProduto";
-            this.lblProduto.Size = new System.Drawing.Size(47, 13);
+            this.lblProduto.Size = new System.Drawing.Size(55, 13);
             this.lblProduto.TabIndex = 12;
             this.lblProduto.Text = "Protudo:";
             // 
             // btnProduto
             // 
             this.btnProduto.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
-            this.btnProduto.Location = new System.Drawing.Point(328, 68);
+            this.btnProduto.Location = new System.Drawing.Point(332, 69);
             this.btnProduto.Name = "btnProduto";
             this.btnProduto.Size = new System.Drawing.Size(26, 23);
             this.btnProduto.TabIndex = 14;
@@ -164,7 +171,7 @@
             // 
             // txtQuantidade
             // 
-            this.txtQuantidade.Location = new System.Drawing.Point(431, 70);
+            this.txtQuantidade.Location = new System.Drawing.Point(441, 70);
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(81, 20);
             this.txtQuantidade.TabIndex = 16;
@@ -172,14 +179,17 @@
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
+            this.lblQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuantidade.Location = new System.Drawing.Point(366, 73);
             this.lblQuantidade.Name = "lblQuantidade";
-            this.lblQuantidade.Size = new System.Drawing.Size(65, 13);
+            this.lblQuantidade.Size = new System.Drawing.Size(76, 13);
             this.lblQuantidade.TabIndex = 15;
             this.lblQuantidade.Text = "Quantidade:";
             // 
             // btnSair
             // 
+            this.btnSair.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSair.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnSair.Location = new System.Drawing.Point(41, 408);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(75, 23);
@@ -189,6 +199,8 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluir.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnExcluir.Location = new System.Drawing.Point(41, 379);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
@@ -198,6 +210,8 @@
             // 
             // btnEditar
             // 
+            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnEditar.Location = new System.Drawing.Point(41, 350);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
@@ -207,6 +221,8 @@
             // 
             // btnSalvar
             // 
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnSalvar.Location = new System.Drawing.Point(41, 321);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
@@ -218,7 +234,7 @@
             // cbCliente
             // 
             this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(207, 14);
+            this.cbCliente.Location = new System.Drawing.Point(214, 15);
             this.cbCliente.Name = "cbCliente";
             this.cbCliente.Size = new System.Drawing.Size(254, 21);
             this.cbCliente.TabIndex = 21;

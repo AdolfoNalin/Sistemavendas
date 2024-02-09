@@ -37,6 +37,8 @@
             // 
             // btnPesquisar
             // 
+            this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisar.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnPesquisar.Location = new System.Drawing.Point(359, 63);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
@@ -49,6 +51,7 @@
             // 
             this.dgProduto.AllowUserToAddRows = false;
             this.dgProduto.AllowUserToDeleteRows = false;
+            this.dgProduto.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProduto.Location = new System.Drawing.Point(25, 129);
             this.dgProduto.Name = "dgProduto";
@@ -68,9 +71,10 @@
             // lblPesquisar
             // 
             this.lblPesquisar.AutoSize = true;
+            this.lblPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPesquisar.Location = new System.Drawing.Point(47, 68);
             this.lblPesquisar.Name = "lblPesquisar";
-            this.lblPesquisar.Size = new System.Drawing.Size(56, 13);
+            this.lblPesquisar.Size = new System.Drawing.Size(66, 13);
             this.lblPesquisar.TabIndex = 8;
             this.lblPesquisar.Text = "Pesquisar:";
             // 

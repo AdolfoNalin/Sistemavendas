@@ -47,6 +47,8 @@ namespace SistemaVenda.br.pro.com.view
             cf.cbUF.Text = dgFuncionario.CurrentRow.Cells[17].Value.ToString();
 
             cf.ShowDialog();
+
+            dgFuncionario.DataSource = new FuncionarioDAO().ConsultarFuncionario();
         }
         #endregion
 
@@ -62,13 +64,12 @@ namespace SistemaVenda.br.pro.com.view
 
             FuncionarioDAO dao = new FuncionarioDAO();
 
-            dgFuncionario.DataSource = dao.BuscarFuncionarioNome(nome);
+            dgFuncionario.DataSource = dao.ListarFuncionariosNome(nome);
 
             if (dgFuncionario.Rows.Count == 0 || txtNome.Text == String.Empty)
             {
-                MessageBox.Show("Funcionário não encontrado! Certifique-se se o nome do Funcionário está cadastrado ou se está escrito corretamente!");
                 dgFuncionario.DataSource = dao.ConsultarFuncionario();
-                }
+            }
         }
         #endregion
 
