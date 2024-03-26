@@ -64,7 +64,7 @@
             this.dgCliente.ReadOnly = true;
             this.dgCliente.Size = new System.Drawing.Size(744, 273);
             this.dgCliente.TabIndex = 2;
-            this.dgCliente.DoubleClick += new System.EventHandler(this.dgCliente_DoubleClick);
+            this.dgCliente.Click += new System.EventHandler(this.dgCliente_Click);
             // 
             // btnPesquisar
             // 

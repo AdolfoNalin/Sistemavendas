@@ -83,5 +83,16 @@ namespace SistemaVenda.br.pro.com.view
             dgProduto.DataSource = dao.BuscarProduto(txtNome.Text);
         }
         #endregion
+
+
+        private void dgProduto_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void dgProduto_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

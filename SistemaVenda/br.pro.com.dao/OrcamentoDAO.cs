@@ -226,13 +226,23 @@ namespace SistemaVenda.br.pro.com.dao
             try
             {
                 DataTable tabVendas = new DataTable();
-                string sql = @"select c.id as 'Código',
-                o.data_orcamento as 'Data da Orçamento',
+                string sql = @"select o.id as 'Código',
                 c.nome as 'Cliente',
+                f.nome as 'Vendedor',
+                o.desconto_porcentagem as 'Desconto Porcentagem',
+                o.descoto_real as 'Desconto Real',
+                o.acrescimo_porcentagem as 'Acrescimo Porcentagem',
+                o.acrescimo_real as 'Acrescimo Real',
+                o.subtotal_orcamento as 'Subtotal',
                 o.total as 'Total',
+                o.alteracoes as 'Alterações',
+                o.data_orcamento as 'Data da Orçamento',
+                o.hora_orcamento as 'Hora da Orçamento',
+                o.quantidade_total as 'Quantidade de Itens',
                 o.obs as 'Observações'
                 from tb_orcamento as o
                 join tb_clientes as c on (o.cliente_id = c.id)
+                join tb_funcionarios as f on (o.funcionario_id= f.id)
                 where o.data_orcamento between @datainicio and @datafim";
 
                 MySqlCommand cmd = new MySqlCommand(sql, connection);

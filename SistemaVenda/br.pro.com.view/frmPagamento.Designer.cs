@@ -214,6 +214,7 @@
             this.Controls.Add(this.lblDinheiro);
             this.Name = "frmPagamento";
             this.Text = "Pagamento";
+            this.Load += new System.EventHandler(this.frmPagamento_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

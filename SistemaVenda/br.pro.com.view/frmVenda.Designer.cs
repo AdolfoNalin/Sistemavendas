@@ -691,7 +691,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblDescontoReal;
         private System.Windows.Forms.Label lblDescontoPor100;
-        private System.Windows.Forms.Button btnPesquisarNome;
         private System.Windows.Forms.Button btnPesquisarProduto;
         private System.Windows.Forms.Button btnPesquisarCliente;
         private System.Windows.Forms.Label lblEstoque;
@@ -717,7 +716,6 @@
         public System.Windows.Forms.DataGridView dgCarrinho;
         public System.Windows.Forms.MaskedTextBox mtbDescontoReal;
         public System.Windows.Forms.MaskedTextBox mtbDescontoPorcentagem;
-        private System.Windows.Forms.ComboBox cbVendedor;
         private System.Windows.Forms.Label lblVendedor;
         public System.Windows.Forms.MaskedTextBox mtbAgrescimoD;
         public System.Windows.Forms.MaskedTextBox mtbAgrescimoP;
@@ -725,5 +723,7 @@
         public System.Windows.Forms.Label lblAteracoes;
         private System.Windows.Forms.RadioButton rbtnVista;
         private System.Windows.Forms.RadioButton rbtnPrazo;
+        public System.Windows.Forms.Button btnPesquisarNome;
+        public System.Windows.Forms.ComboBox cbVendedor;
     }
 }

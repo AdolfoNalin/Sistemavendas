@@ -373,6 +373,55 @@ namespace SistemaVenda.br.pro.com.dao
             }
         }
         #endregion
+
+        #region BuscarClienteVendas
+        /// <summary>
+        /// Função que trás os dados do cliente para o load venda
+        /// </summary>
+        /// <param name="cpf">Parametro de busca CPF</param>
+        /// <returns></returns>
+        public Cliente BuscarClienteId(int id)
+        {
+            try
+            {
+                Cliente obj = new Cliente();
+                string sql = "select * from tb_clientes where id = @id";
+
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                connection.Open();
+
+                MySqlDataReader rs = cmd.ExecuteReader();
+                if (rs.Read())
+                {
+                    obj.Codigo = rs.GetInt32("id");
+                    obj.Nome = rs.GetString("nome");
+                    obj.CPF = rs.GetString("cpf");
+                    obj.Cidade = rs.GetString("cidade");
+                    obj.Logradouro = rs.GetString("logradouro");
+                    obj.Numero = rs.GetInt32("numero");
+                    obj.Bairro = rs.GetString("bairro");
+                    obj.Complemento = rs.GetString("complemento");
+                    obj.Celular = rs.GetString("celular");
+
+                    connection.Close();
+                    return obj;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"O ID corespondente não foi aprovado");
+                connection.Close();
+                return null;
+            }
+        }
+        #endregion
     }
 }
 

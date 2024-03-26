@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Protobuf.WellKnownTypes;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -172,7 +173,7 @@ namespace SistemaVenda.br.pro.com.view
         #region btnFinalizarVenda
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            try
+                try
             {
                 decimal dinheiro = decimal.Parse(mtbDinheiro.Text);
                 decimal cartao = decimal.Parse(mtbCartao.Text);
@@ -288,5 +289,15 @@ namespace SistemaVenda.br.pro.com.view
 
         }
         #endregion
+
+        private void frmPagamento_Load(object sender, EventArgs e)
+        {
+            decimal num = 0;
+   
+            mtbDinheiro.Text = String.Format("{0:0.00}", num);
+            mtbCartao.Text = String.Format("{0:0.00}", num);
+            mtbPix.Text = String.Format("{0:0.00}", num);
+            mtbCrediario.Text = String.Format("{0:0.00}", num);
+        }
     }
 }

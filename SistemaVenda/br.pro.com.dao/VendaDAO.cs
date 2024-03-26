@@ -39,8 +39,8 @@ namespace SistemaVenda.br.pro.com.dao
         {
             try
             {
-                string sql = @"insert into tb_vendas (cliente_id,forma_pagamento,sub_total,desconto_procentagem,desconto_real, total_venda, observacoes,subtotal)
-                               values (@cliente_id,forma_pagamento,@sub_total,@desconto_porcentagem,@desconto_real, @total_vendas, @observacoes,@subtotal)";
+                string sql = @"insert into tb_vendas (cliente_id,forma_pagamento,sub_total,desconto_procentagem,desconto_real, total_venda, observacoes,subtotal,data_venda,hora_venda)
+                               values (@cliente_id,forma_pagamento,@sub_total,@desconto_porcentagem,@desconto_real, @total_vendas, @observacoes,@subtotal,@data_venda,@hora_venda)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@cliente_id", obj.CodigoCliente);
@@ -51,8 +51,8 @@ namespace SistemaVenda.br.pro.com.dao
                 cmd.Parameters.AddWithValue("@total_vendas", obj.TotalVenda);
                 cmd.Parameters.AddWithValue("@observacoes", obj.Observacao);
                 cmd.Parameters.AddWithValue("@subtotal", obj.SubTotalProduto);
-                //cmd.Parameters.AddWithValue("@data_venda", obj.Data);
-                //cmd.Parameters.AddWithValue("@hora_venda", obj.Hora);
+                cmd.Parameters.AddWithValue("@data_venda", obj.Data);
+                cmd.Parameters.AddWithValue("@hora_venda", obj.Hora);
 
                 connection.Open();
                 cmd.ExecuteNonQuery();

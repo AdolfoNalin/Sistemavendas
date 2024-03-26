@@ -71,7 +71,7 @@ values (@orcamento_id, @produto_id, @qtd, @subtotal_produto)";
                 from tb_itensorcamento as i join 
                 tb_produtos as p on (i.produto_id = p.id) join
                 tb_orcamento as o on(i.orcamento_id = o.id)
-                where orcamento_id = @orcamento_id";
+                where i.orcamento_id = @orcamento_id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@orcamento_id", id);

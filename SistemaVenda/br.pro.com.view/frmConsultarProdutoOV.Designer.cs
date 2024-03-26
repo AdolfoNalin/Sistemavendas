@@ -1,6 +1,6 @@
 ﻿namespace SistemaVenda.br.pro.com.view
 {
-    partial class frmConsultarClienteOrcmento
+    partial class frmConsultarProdutoOV
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.btnPesquisar = new System.Windows.Forms.Button();
-            this.dgCOC = new System.Windows.Forms.DataGridView();
+            this.dgCPOV = new System.Windows.Forms.DataGridView();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblPesquisar = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCOC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCPOV)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPesquisar
@@ -40,30 +40,31 @@
             this.btnPesquisar.Location = new System.Drawing.Point(362, 56);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btnPesquisar.TabIndex = 15;
+            this.btnPesquisar.TabIndex = 19;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
-            // dgCOC
+            // dgCPOV
             // 
-            this.dgCOC.AllowUserToAddRows = false;
-            this.dgCOC.AllowUserToDeleteRows = false;
-            this.dgCOC.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgCOC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCOC.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dgCOC.Location = new System.Drawing.Point(28, 122);
-            this.dgCOC.Name = "dgCOC";
-            this.dgCOC.ReadOnly = true;
-            this.dgCOC.Size = new System.Drawing.Size(744, 273);
-            this.dgCOC.TabIndex = 14;
-            this.dgCOC.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCOC_CellClick);
+            this.dgCPOV.AllowUserToAddRows = false;
+            this.dgCPOV.AllowUserToDeleteRows = false;
+            this.dgCPOV.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgCPOV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCPOV.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.dgCPOV.Location = new System.Drawing.Point(28, 122);
+            this.dgCPOV.Name = "dgCPOV";
+            this.dgCPOV.ReadOnly = true;
+            this.dgCPOV.Size = new System.Drawing.Size(744, 273);
+            this.dgCPOV.TabIndex = 18;
+            this.dgCPOV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCPOV_CellClick);
             // 
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(112, 58);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(229, 20);
-            this.txtNome.TabIndex = 13;
+            this.txtNome.TabIndex = 17;
             this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // lblPesquisar
@@ -72,31 +73,31 @@
             this.lblPesquisar.Location = new System.Drawing.Point(50, 61);
             this.lblPesquisar.Name = "lblPesquisar";
             this.lblPesquisar.Size = new System.Drawing.Size(56, 13);
-            this.lblPesquisar.TabIndex = 12;
+            this.lblPesquisar.TabIndex = 16;
             this.lblPesquisar.Text = "Pesquisar:";
             // 
-            // frmConsultarClienteOrcmento
+            // frmConsultarProdutoOV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnPesquisar);
-            this.Controls.Add(this.dgCOC);
+            this.Controls.Add(this.dgCPOV);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblPesquisar);
-            this.Name = "frmConsultarClienteOrcmento";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Consultar Cliente Orçamento";
-            this.Load += new System.EventHandler(this.frmConsultarClienteOrcmento_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgCOC)).EndInit();
+            this.Name = "frmConsultarProdutoOV";
+            this.Text = "Consultar Produto";
+            this.Load += new System.EventHandler(this.frmConsultarProdutoOV_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCPOV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        public System.Windows.Forms.DataGridView dgCOC;
+
         public System.Windows.Forms.Button btnPesquisar;
+        public System.Windows.Forms.DataGridView dgCPOV;
         public System.Windows.Forms.TextBox txtNome;
         public System.Windows.Forms.Label lblPesquisar;
     }

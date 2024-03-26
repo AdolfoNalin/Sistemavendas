@@ -35,28 +35,28 @@
             this.lblObservacao = new System.Windows.Forms.Label();
             this.txtCodigoVenda = new System.Windows.Forms.TextBox();
             this.lblCodigoVenda = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.lblHora = new System.Windows.Forms.Label();
             this.mtbData = new System.Windows.Forms.MaskedTextBox();
             this.lblData = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.dgVenda = new System.Windows.Forms.DataGridView();
+            this.mtbHora = new System.Windows.Forms.MaskedTextBox();
+            this.lblPagamento = new System.Windows.Forms.Label();
             this.gbDetalheVenda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgVenda)).BeginInit();
             this.SuspendLayout();
             // 
             // gbDetalheVenda
             // 
+            this.gbDetalheVenda.Controls.Add(this.mtbHora);
+            this.gbDetalheVenda.Controls.Add(this.lblPagamento);
             this.gbDetalheVenda.Controls.Add(this.txtValorTotal);
             this.gbDetalheVenda.Controls.Add(this.lblValorTotal);
             this.gbDetalheVenda.Controls.Add(this.txtObs);
             this.gbDetalheVenda.Controls.Add(this.lblObservacao);
             this.gbDetalheVenda.Controls.Add(this.txtCodigoVenda);
             this.gbDetalheVenda.Controls.Add(this.lblCodigoVenda);
-            this.gbDetalheVenda.Controls.Add(this.maskedTextBox1);
-            this.gbDetalheVenda.Controls.Add(this.lblHora);
             this.gbDetalheVenda.Controls.Add(this.mtbData);
             this.gbDetalheVenda.Controls.Add(this.lblData);
             this.gbDetalheVenda.Controls.Add(this.txtNome);
@@ -128,34 +128,12 @@
             this.lblCodigoVenda.TabIndex = 6;
             this.lblCodigoVenda.Text = "Código Venda:";
             // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(654, 13);
-            this.maskedTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.maskedTextBox1.Mask = "00:00";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(47, 20);
-            this.maskedTextBox1.TabIndex = 5;
-            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
-            // 
-            // lblHora
-            // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHora.Location = new System.Drawing.Point(615, 16);
-            this.lblHora.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(38, 13);
-            this.lblHora.TabIndex = 4;
-            this.lblHora.Text = "Hora:";
-            // 
             // mtbData
             // 
             this.mtbData.Location = new System.Drawing.Point(510, 13);
             this.mtbData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.mtbData.Mask = "00/00/0000";
             this.mtbData.Name = "mtbData";
-            this.mtbData.Size = new System.Drawing.Size(78, 20);
+            this.mtbData.Size = new System.Drawing.Size(136, 20);
             this.mtbData.TabIndex = 3;
             this.mtbData.ValidatingType = typeof(System.DateTime);
             // 
@@ -202,6 +180,26 @@
             this.dgVenda.Size = new System.Drawing.Size(905, 232);
             this.dgVenda.TabIndex = 1;
             // 
+            // mtbHora
+            // 
+            this.mtbHora.Location = new System.Drawing.Point(783, 63);
+            this.mtbHora.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mtbHora.Name = "mtbHora";
+            this.mtbHora.Size = new System.Drawing.Size(75, 20);
+            this.mtbHora.TabIndex = 13;
+            this.mtbHora.ValidatingType = typeof(System.DateTime);
+            // 
+            // lblPagamento
+            // 
+            this.lblPagamento.AutoSize = true;
+            this.lblPagamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagamento.Location = new System.Drawing.Point(727, 47);
+            this.lblPagamento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPagamento.Name = "lblPagamento";
+            this.lblPagamento.Size = new System.Drawing.Size(131, 13);
+            this.lblPagamento.TabIndex = 12;
+            this.lblPagamento.Text = "Forma De pagamento:";
+            // 
             // frmDetalhesVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -228,15 +226,15 @@
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Label lblObservacao;
         private System.Windows.Forms.Label lblCodigoVenda;
-        private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.Label lblValorTotal;
         public System.Windows.Forms.DataGridView dgVenda;
         public System.Windows.Forms.TextBox txtNome;
         public System.Windows.Forms.TextBox txtObs;
         public System.Windows.Forms.TextBox txtCodigoVenda;
-        public System.Windows.Forms.MaskedTextBox maskedTextBox1;
         public System.Windows.Forms.MaskedTextBox mtbData;
         public System.Windows.Forms.TextBox txtValorTotal;
+        public System.Windows.Forms.MaskedTextBox mtbHora;
+        private System.Windows.Forms.Label lblPagamento;
     }
 }

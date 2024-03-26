@@ -58,7 +58,9 @@
             this.dgProduto.ReadOnly = true;
             this.dgProduto.Size = new System.Drawing.Size(744, 273);
             this.dgProduto.TabIndex = 10;
+            this.dgProduto.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduto_CellContentClick);
             this.dgProduto.DoubleClick += new System.EventHandler(this.dgProduto_DoubleClick);
+            this.dgProduto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgProduto_MouseClick);
             // 
             // txtNome
             // 

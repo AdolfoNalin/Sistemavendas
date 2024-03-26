@@ -35,5 +35,12 @@ namespace SistemaVenda.br.pro.com.view
             ClienteDAO dao = new ClienteDAO();
             dgCOC.DataSource = dao.ConsultarClientes();
         }
+
+        #region dgCOC_CellClick
+        private void dgCOC_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.Hide();
+        }
+        #endregion
     }
 }

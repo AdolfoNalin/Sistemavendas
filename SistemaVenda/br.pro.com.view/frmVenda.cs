@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,7 +33,8 @@ namespace SistemaVenda.br.pro.com.veiw
         decimal precoVista = 0;
         decimal precoPrazo = 0;
         decimal subtotalProduto = 0;
-        decimal subtotal = 0;
+        decimal subtotalVista = 0;
+        decimal subtotalPrazo= 0;
         decimal descontoPorcentagem = 0;
         decimal descontoReal = 0;
         decimal total = 0;
@@ -85,16 +87,40 @@ namespace SistemaVenda.br.pro.com.veiw
         #region ConsultaCliente
         private void button1_Click(object sender, EventArgs e)
         {
-            frmConsultarCliente cc = new frmConsultarCliente();
-            cc.ShowDialog();
+            frmConsultarClienteOrcmento tela = new frmConsultarClienteOrcmento();
+            tela.ShowDialog();
+
+            int idCliente = int.Parse(tela.dgCOC.CurrentRow.Cells[0].Value.ToString());
+
+            ClienteDAO dao = new ClienteDAO();
+
+            obj = dao.BuscarClienteId(idCliente);
+            txtNome.Text = obj.Nome;
+            mtbCPF.Text = obj.CPF;
+            mtbFone.Text = obj.Celular;
+            txtEndereco.Text = $"{obj.Cidade}, {obj.Bairro}, {obj.Logradouro}, {obj.Numero}, {obj.Complemento}";
+            txtID.Text = obj.Codigo.ToString();
         }
         #endregion
 
         #region ConsultaProduto
         private void button2_Click(object sender, EventArgs e)
         {
-            frmConsultarProduto cp = new frmConsultarProduto();
+            frmConsultarProdutoOV cp = new frmConsultarProdutoOV();
             cp.ShowDialog();
+
+            int idProduto = int.Parse(cp.dgCPOV.CurrentRow.Cells[0].Value.ToString());
+
+            Produto produto = new Produto();
+            ProdutoDAO dao = new ProdutoDAO();
+            produto = dao.BuscarProdutoVenda(idProduto);
+
+            txtCodigoProduto.Text = produto.Codigo.ToString();
+            txtDescricaoResumida.Text = produto.DescricaoResumida;
+            txtEstoque.Text = dao.RetornarEstoque(idProduto).ToString();
+            txtPrecoVista.Text = produto.PrecoVista.ToString();
+            txtPrecoPrazo.Text = produto.PrecoPrazo.ToString();
+            txtQuantidade.Focus();
         }
         #endregion
 
@@ -113,7 +139,7 @@ namespace SistemaVenda.br.pro.com.veiw
         }
         #endregion
 
-        #region PesquisarProdutoKeyPress13
+        #region PesquisarProduto
         private void txtCodigoProduto_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
@@ -171,40 +197,75 @@ namespace SistemaVenda.br.pro.com.veiw
             {
                 MessageBox.Show("Por favor, marque a forma de pagamento!", "ATENÇÃO", MessageBoxButtons.OK);
             }
-
-            try
+            else if(rbtnVista.Checked)
             {
-                quantidade = int.Parse(txtQuantidade.Text);
-                precoVista = decimal.Parse(txtPrecoVista.Text);
-                precoPrazo = decimal.Parse(txtPrecoPrazo.Text);
-                descontoPorcentagem = decimal.Parse(mtbDescontoPorcentagem.Text);
-                descontoReal = decimal.Parse(mtbDescontoReal.Text);
+                try
+                {
+                    quantidade = int.Parse(txtQuantidade.Text);
+                    precoVista = decimal.Parse(txtPrecoVista.Text);
+                    descontoPorcentagem = decimal.Parse(mtbDescontoPorcentagem.Text);
+                    descontoReal = decimal.Parse(mtbDescontoReal.Text);
 
-                subtotalProduto = precoVista * quantidade;
-                quantidadeTotal += quantidade;
-                lblQuantidadePrutudoQ.Text = quantidadeTotal.ToString();
+                    quantidadeTotal += quantidade;
+                    lblQuantidadePrutudoQ.Text = quantidadeTotal.ToString();
 
 
-                subtotal = precoVista * quantidade;
+                    subtotalVista = precoVista * quantidade;
 
-                total += subtotal;
+                    total += subtotalVista;
 
-                mtbTotal.Text = total.ToString();
-                
-                dgCarrinho.Rows.Add(Convert.ToInt16(txtCodigoProduto.Text), txtDescricaoResumida.Text, quantidade, precoVista, subtotalProduto);
+                    mtbTotal.Text = total.ToString();
 
-                txtCodigoProduto.Clear();
-                txtDescricaoResumida.Clear();
-                txtEstoque.Clear();
-                txtQuantidade.Clear();
-                txtPrecoPrazo.Clear();
-                txtPrecoVista.Clear();
+                    dgCarrinho.Rows.Add(Convert.ToInt16(txtCodigoProduto.Text), txtDescricaoResumida.Text, quantidade, precoVista, subtotalVista);
 
-                txtCodigoProduto.Focus();
+                    txtCodigoProduto.Clear();
+                    txtDescricaoResumida.Clear();
+                    txtEstoque.Clear();
+                    txtQuantidade.Clear();
+                    txtPrecoPrazo.Clear();
+                    txtPrecoVista.Clear();
+
+                    txtCodigoProduto.Focus();
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Por favor, certifique-se que todos os campos então preenchidos");
+                    throw;
+                }
             }
-            catch (FormatException fe)
+            else
             {
-                MessageBox.Show("Por favor, certifique-se que todos os campos então preenchidos");
+                try
+                {
+                    quantidade = int.Parse(txtQuantidade.Text);
+                    precoPrazo = decimal.Parse(txtPrecoPrazo.Text);
+                    descontoPorcentagem = decimal.Parse(mtbDescontoPorcentagem.Text);
+                    descontoReal = decimal.Parse(mtbDescontoReal.Text);
+
+                    quantidadeTotal += quantidade;
+                    lblQuantidadePrutudoQ.Text = quantidadeTotal.ToString();
+
+
+                    subtotalPrazo = precoPrazo* quantidade;
+
+                    dgCarrinho.Rows.Add(Convert.ToInt16(txtCodigoProduto.Text), txtDescricaoResumida.Text, quantidade, precoPrazo, subtotalPrazo);
+
+                    total += subtotalPrazo;
+                    mtbTotal.Text = total.ToString();
+                    txtCodigoProduto.Clear();
+                    txtDescricaoResumida.Clear();
+                    txtEstoque.Clear();
+                    txtQuantidade.Clear();
+                    txtPrecoPrazo.Clear();
+                    txtPrecoVista.Clear();
+
+                    txtCodigoProduto.Focus();
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Por favor, certifique-se que todos os campos então preenchidos");
+                    throw;
+                }
             }
             
         }
@@ -250,7 +311,7 @@ namespace SistemaVenda.br.pro.com.veiw
         {
             frmPagamento pg = new frmPagamento(obj,dgCarrinho,cbVendedor.Text);
             pg.mtbTotal.Text = mtbTotal.Text;
-            this.Hide();
+           
             pg.ShowDialog();
         }
         #endregion
@@ -311,16 +372,18 @@ namespace SistemaVenda.br.pro.com.veiw
         {
             if(rbtnVista.Checked && dgCarrinho.Rows.Count > 0)
             {
-                decimal subtotal = 0;
+                subtotalVista = 0;
                 foreach(DataGridViewRow linha in dgCarrinho.Rows)
                 {
+                    Produto produto = new ProdutoDAO().ConsultarProdutoNome(int.Parse(linha.Cells[0].Value.ToString())); 
                     int quantidade = int.Parse(linha.Cells[2].Value.ToString());
-                    decimal valorVista = Decimal.Parse(linha.Cells[3].Value.ToString());
+                    decimal valorVista = produto.PrecoVista;
 
                     linha.Cells[4].Value = quantidade * valorVista;
-                    subtotal += Decimal.Parse(linha.Cells[4].Value.ToString());
+                    linha.Cells[3].Value = valorVista;
+                    subtotalVista += Decimal.Parse(linha.Cells[4].Value.ToString());
                 }
-                total = subtotal;
+                total = subtotalVista;
                 mtbTotal.Text = total.ToString();
             }
         }
@@ -329,19 +392,24 @@ namespace SistemaVenda.br.pro.com.veiw
         #region rbtnPrazoCheck
         private void rbtnPrazo_CheckedChanged(object sender, EventArgs e)
         {
+            subtotalPrazo = 0;  
             if (rbtnPrazo.Checked && dgCarrinho.Rows.Count > 0)
             {
-                decimal sobtotal = 0;
                 foreach(DataGridViewRow linha in dgCarrinho.Rows)
                 {
-                    decimal valorPrazo = Decimal.Parse(linha.Cells[3].Value.ToString());
+                    Produto produto = new ProdutoDAO().ConsultarProdutoNome(int.Parse(linha.Cells[0].Value.ToString()));
+                    decimal valorPrazo = produto.PrecoPrazo;
                     int quantidade = int.Parse(linha.Cells[2].Value.ToString());
 
                     linha.Cells[4].Value = quantidade * valorPrazo;
-                    subtotal += Decimal.Parse(linha.Cells[4].Value.ToString());
+                    linha.Cells[3].Value = valorPrazo;
+                    subtotalPrazo += Decimal.Parse(linha.Cells[4].Value.ToString());
                 }
+                total = subtotalPrazo;
+                mtbTotal.Text = total.ToString();
             }
         }
         #endregion
+
     }
 }

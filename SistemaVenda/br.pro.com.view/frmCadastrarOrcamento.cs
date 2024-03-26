@@ -17,6 +17,7 @@ using System.IO;
 using System.Security.Permissions;
 using SistemaVenda.br.pro.com.veiw;
 using iTextSharp.text.pdf.codec;
+using MySqlX.XDevAPI;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -110,7 +111,6 @@ namespace SistemaVenda.br.pro.com.view
 
                 mtbData.Text = DateTime.Now.ToShortDateString();
                 mtbHora.Text = DateTime.Now.ToShortTimeString();
-
             }
 
             cbVendedor.DisplayMember = "nome";
@@ -194,6 +194,20 @@ namespace SistemaVenda.br.pro.com.view
         private void btnGravar_Click(object sender, EventArgs e)
         {
             Orcamento orcamento = new Orcamento();
+
+            orcamento.CodigoCliente = int.Parse(cbCliente.SelectedValue.ToString());
+            orcamento.CodigoVendedor = int.Parse(cbVendedor.SelectedValue.ToString());
+
+            orcamento.DescontoReal = Decimal.Parse(mtbDD.Text.ToString());
+            orcamento.AcrescimoPorcentagem = Decimal.Parse(mtbAP.Text);
+            orcamento.AcrescimoReal = Decimal.Parse(mtbAP.Text);
+            orcamento.SubTotal = Decimal.Parse(mtbSubTotal.Text);
+            orcamento.Total = Decimal.Parse(mtbTotal.Text);
+            orcamento.Alteracoes = Decimal.Parse(mtbAteracoes.Text);
+            orcamento.Obs = txtObs.Text;
+            orcamento.Data = DateTime.Parse(mtbData.Text);
+            orcamento.Hora = DateTime.Parse(mtbHora.Text);
+            orcamento.QuantidadeTotal = quantidadeTotal;
 
             new Helpers().Gravar(dgOrcamento,cbVendedor.Text,cbCliente.Text, orcamento);
         }
@@ -445,7 +459,7 @@ namespace SistemaVenda.br.pro.com.view
                 //Dados finais do orçamento
                 Paragraph dadosFinais = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
                 dadosFinais.Alignment = Element.ALIGN_LEFT;
-                dadosFinais.Add($"\nSubTotal: {mtbSubTotal.Text}  \nDesconto: {mtbDD.Text}     \nAgréscimo: {mtbAD.Text}      \nTotal: {mtbTotal.Text}");
+                dadosFinais.Add($"\nSubTotal: {mtbSubTotal.Text}  \nDesconto: {mtbDD.Text}     \nFrete: {mtbAD.Text}      \nTotal: R${mtbTotal.Text}");
 
                 //Obs
                 Paragraph obs = new Paragraph(dado, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));

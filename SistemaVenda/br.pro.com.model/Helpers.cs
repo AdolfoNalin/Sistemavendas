@@ -13,7 +13,7 @@ namespace SistemaVenda.br.pro.com.model
 {
     public class Helpers
     {
-        frmCadastrarOrcamento tela = new frmCadastrarOrcamento();
+        
 
         #region Limpar
         /// <summary>
@@ -49,10 +49,11 @@ namespace SistemaVenda.br.pro.com.model
         }
         #endregion
 
-        public void Gravar(DataGridView dataTable, string nomeFuncionario, string nomeCliente, Orcamento orcamento)
+        public void Gravar(DataGridView dataGirdView, string nomeFuncionario, string nomeCliente, Orcamento orcamento)
         {
             try
             {
+                frmCadastrarOrcamento tela = new frmCadastrarOrcamento();
                 Funcionario funcionario = new Funcionario();
                 Cliente cliente = new Cliente();
                 
@@ -62,29 +63,15 @@ namespace SistemaVenda.br.pro.com.model
                 cliente = clienteDao.ListarNome(nomeCliente);
                 funcionario = funcionarioDao.ListarNome(nomeFuncionario);
 
-                int quantidade = int.Parse(dataTable.CurrentRow.Cells[2].Value.ToString());
+                int quantidade = int.Parse(dataGirdView.CurrentRow.Cells[2].Value.ToString());
                 int quantidadeTotal = 0;
 
                 quantidadeTotal += quantidade;
 
-                orcamento.CodigoCliente = cliente.Codigo;
-                orcamento.CodigoVendedor = funcionario.Codigo;
-
-                orcamento.DescontoPorcentagem = Decimal.Parse(tela.mtbDP.Text);
-                orcamento.DescontoReal = Decimal.Parse(tela.mtbDD.Text);
-                orcamento.AcrescimoPorcentagem = Decimal.Parse(tela.mtbAP.Text);
-                orcamento.AcrescimoReal = Decimal.Parse(tela.mtbAP.Text);
-                orcamento.SubTotal = Decimal.Parse(tela.mtbSubTotal.Text);
-                orcamento.Total = Decimal.Parse(tela.mtbTotal.Text);
-                orcamento.Alteracoes = Decimal.Parse(tela.mtbAteracoes.Text);
-                orcamento.Obs = tela.txtObs.Text;
-                orcamento.Data = DateTime.Parse(tela.mtbData.Text);
-                orcamento.Hora = DateTime.Parse(tela.mtbHora.Text);
-                orcamento.QuantidadeTotal = quantidadeTotal;
-
                 OrcamentoDAO dao = new OrcamentoDAO();
+                dao.CadastrarOrcamento(orcamento);               
 
-                foreach (DataGridViewRow linha in tela.dgOrcamento.Rows)
+                foreach (DataGridViewRow linha in dataGirdView.Rows)
                 {
                     ItemOrcamento item = new ItemOrcamento();
                     item.CodigoOrcamento = dao.UltimoOrcamento();

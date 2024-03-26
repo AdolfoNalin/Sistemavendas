@@ -61,11 +61,11 @@ namespace SistemaVenda.br.pro.com.view
             int idVenda = int.Parse(dgHistorico.CurrentRow.Cells[0].Value.ToString());
             frmDetalhesVenda tela = new frmDetalhesVenda(idVenda);
 
-            //DateTime dataVenda = Convert.ToDateTime(dgHistorico.CurrentRow.Cells[1].Value.ToString());
+            DateTime dataVenda = Convert.ToDateTime(dgHistorico.CurrentRow.Cells[1].Value.ToString());
 
             tela.txtCodigoVenda.Text = dgHistorico.CurrentRow.Cells[0].Value.ToString();
             tela.txtNome.Text = dgHistorico.CurrentRow.Cells[2].Value.ToString();
-            //tela.mtbData.Text = dataVenda.ToString();
+            tela.mtbData.Text = dataVenda.ToString();
             tela.txtValorTotal.Text = dgHistorico.CurrentRow.Cells[3].Value.ToString();
             tela.txtObs.Text = dgHistorico.CurrentRow.Cells[4].Value.ToString();
 
