@@ -302,11 +302,11 @@
             // 
             this.lblAgressimo.AutoSize = true;
             this.lblAgressimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgressimo.Location = new System.Drawing.Point(5, 52);
+            this.lblAgressimo.Location = new System.Drawing.Point(18, 52);
             this.lblAgressimo.Name = "lblAgressimo";
-            this.lblAgressimo.Size = new System.Drawing.Size(68, 13);
+            this.lblAgressimo.Size = new System.Drawing.Size(40, 13);
             this.lblAgressimo.TabIndex = 14;
-            this.lblAgressimo.Text = "Agressimo:";
+            this.lblAgressimo.Text = "Frete:";
             // 
             // mtbAD
             // 
