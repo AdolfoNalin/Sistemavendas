@@ -1,5 +1,6 @@
 ﻿using SistemaVenda.br.pro.com.dao;
 using SistemaVenda.br.pro.com.model;
+using SistemaVenda.br.pro.com.model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,13 +50,15 @@ namespace SistemaVenda.br.pro.com.view
         /// <param name="e"></param>
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            string password = model.Helpers.GeradorSenha.GerarSenha(txtSenha.Text);
+
             Funcionario funcionario = new Funcionario();
 
             funcionario.Nome = txtNome.Text;
             funcionario.RG = mtbRG.Text;
             funcionario.CPF = mtbCPF.Text;
             funcionario.Email = txtEmail.Text;
-            funcionario.Senha = txtSenha.Text;
+            funcionario.Senha = password;
             funcionario.Cargo = cbCargo.Text;
             funcionario.NivelAcesso = cbNivelAcesso.Text;
             funcionario.Telefone = mtbTelefone.Text;
