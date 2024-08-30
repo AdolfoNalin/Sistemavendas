@@ -98,7 +98,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -187,6 +190,7 @@
     <Compile Include="br.pro.com.model\Fornecedor.cs" />
     <Compile Include="br.pro.com.model\Funcionario.cs" />
     <Compile Include="br.pro.com.model\Helpers.cs" />
+    <Compile Include="br.pro.com.model\Helpers\GeradorSenha.cs" />
     <Compile Include="br.pro.com.model\ItemOrcamento.cs" />
     <Compile Include="br.pro.com.model\ItemVenda.cs" />
     <Compile Include="br.pro.com.model\Orcamento.cs" />
