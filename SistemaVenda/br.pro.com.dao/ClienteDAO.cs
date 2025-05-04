@@ -1,21 +1,16 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using SistemaVenda.br.pro.com.connection;
+using SistemaVenda.br.pro.com.model;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using SistemaVenda.br.pro.com.model;
-using SistemaVenda.br.pro.com.connection;
-using System.Data.SqlTypes;
 
 namespace SistemaVenda.br.pro.com.dao
 {
-    /// <summary>
-    /// Classe que tem conexão com a tabela Cliente no banco de dados
-    /// </summary>
     public class ClienteDAO
     {
         #region connetion
@@ -93,7 +88,7 @@ namespace SistemaVenda.br.pro.com.dao
             {
                 // 1 passo - Cirar oDataTable e o comando SQL
                 DataTable tabelaCliente = new DataTable();
-                
+
 
                 string sql = "select * from tb_clientes";
 
@@ -149,7 +144,7 @@ namespace SistemaVenda.br.pro.com.dao
                 sqlCmd.Parameters.AddWithValue("@cidade", obj.Cidade);
                 sqlCmd.Parameters.AddWithValue("@estado", obj.Estado);
                 sqlCmd.Parameters.AddWithValue("@id", obj.Codigo);
-               
+
                 connection.Open();
                 sqlCmd.ExecuteNonQuery();
 
@@ -424,4 +419,3 @@ namespace SistemaVenda.br.pro.com.dao
         #endregion
     }
 }
-
