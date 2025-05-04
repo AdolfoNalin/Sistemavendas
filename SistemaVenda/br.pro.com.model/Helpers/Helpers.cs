@@ -20,7 +20,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         /// Calsse deticata a realziar a limpeza de tela, podendo ser usada com qualquer tela form
         /// </summary>
         /// <param name="tela">Tela que vai ser limpa</param>
-        public void LimparTela(Form tela)
+        public static void LimparTela(Form tela)
         {
             foreach (Control ctrPai in tela.Controls)
             {
@@ -49,6 +49,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         }
         #endregion
 
+        #region Gravar
         public void Gravar(DataGridView dataGirdView, string nomeFuncionario, string nomeCliente, Orcamento orcamento)
         {
             try
@@ -90,5 +91,6 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                 MessageBox.Show($"Acoteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}");
             }
         }
+        #endregion
     }
 }
