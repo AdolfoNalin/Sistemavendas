@@ -26,6 +26,7 @@ namespace SistemaVenda.br.pro.com.view
         private void UpdateData()
         {
             dgEmployee.DataSource = new FuncionarioDAO().ConsultarFuncionario();
+            tabEmployee.SelectedTab = tpConsult;
         }
         #endregion
 
@@ -83,6 +84,103 @@ namespace SistemaVenda.br.pro.com.view
             btnNew_Click(sender, e);
             _update = true;
             tabEmployee.SelectedTab = tpDetails;
+        }
+        #endregion
+
+        #region btnSave_click
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Funcionario employee = new Funcionario()
+                {
+                    Codigo = int.Parse(txtCodigo.Text ?? throw new ArgumentNullException("Código é nulo, verifique o Funcionário")),
+                    Nome = txtNome.Text,
+                    Senha = txtPassword.Text,
+                    Cargo = cbCargo.Text,
+                    Apelido = txtApelido.Text,
+                    Email = txtEmail.Text,
+                    CPF = mtbCEP.Text,
+                    RG = mtbRG.Text,
+                    Telefone = mtbTelefone.Text,
+                    Celular = mtbCelular.Text,
+                    CEP = mtbCEP.Text,
+                    Logradouro = txtLogradouro.Text,
+                    Numero = int.Parse(txtNumero.Text),
+                    Complemento = txtComplemento.Text,
+                    Bairro = txtBairro.Text,
+                    Cidade = txtCidade.Text,
+                    Estado = cbUF.Text,
+                };
+
+                if (employee is null)
+                {
+                    throw new ArgumentException("Funcionário é nulo");
+                }
+
+                FuncionarioDAO dao = new FuncionarioDAO();
+
+                if (_update)
+                {
+                    dao.EditarFuncionario(employee);
+                }
+                else
+                {
+                    dao.CadastrarFuncionario(employee);
+                }
+
+                UpdateData();
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch(ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+        #endregion
+
+        #region btnSearch_Click
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dgEmployee.DataSource = dao.BuscarFuncionarioNome(txtSearch.Text);
+        }
+        #endregion
+
+        #region txtSearch_KeyDown
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) { 
+                btnSearch_Click(sender, e);
+            }
+            else
+            {
+                FuncionarioDAO dao = new FuncionarioDAO();
+                dgEmployee.DataSource = dao.ListarFuncionariosNome(txtSearch.Text);
+            }
+        }
+        #endregion
+
+        #region btnExit_click
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+        #endregion
+
+        #region btnCancel_Click
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            tabEmployee.SelectedTab = tpConsult;
+            UpdateData();
         }
         #endregion
     }
