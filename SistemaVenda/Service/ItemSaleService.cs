@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SistemaVenda.Service
 {
-    public class ItemSale
+    public class ItemSaleService
     {
         #region Get
         public async Task<List<ItemBudget>> Get(Guid idSale)
@@ -44,7 +44,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async void Post(ItemSale item)
+        public async void Post(ItemSaleService item)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Put
-        public async void Put(ItemSale item)
+        public async void Put(ItemSaleService item)
         {
             try
             {
