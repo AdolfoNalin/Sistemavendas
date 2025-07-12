@@ -97,7 +97,7 @@ namespace SistemaVenda.Service
 		#endregion
 
 		#region GetSmart
-		public static async Task<List<Client>> Get(string value) 
+		public static async Task<List<Client>> Get(string value)
 		{
 			try
 			{
@@ -132,10 +132,9 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-		public static async Task<bool> Post(Client client)
+		public static async void Post(Client client)
 		{
 			string message = "";
-			bool result = false;
 
 			try		
 			{
@@ -146,29 +145,23 @@ namespace SistemaVenda.Service
 				if (response.IsSuccessStatusCode)
 				{
 					message = await response.Content.ReadAsStringAsync();
-					result = true;
 				}
 				else
 				{
 					message = await response.Content.ReadAsStringAsync();
 				}
-
-				return result;
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-				return false;
 			}
 		}
 		#endregion
 
 		#region Put
-		public static async Task<bool> Put(Client client)
+		public static async void Put(Client client)
 		{
 			string message = "";
-			bool value = false;
-
 			try
 			{
 				HttpClient httpClient = ConnectionFactory.ConnectionLocalhost();
@@ -178,25 +171,21 @@ namespace SistemaVenda.Service
 				if (response.IsSuccessStatusCode)
 				{
 					message = await response.Content.ReadAsStringAsync();
-					value = true;
 				}
 				else
 				{
 					message += await response.Content.ReadAsStringAsync();
 				}
-
-				return value;
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-				return false;
 			}
 		}
 		#endregion
 
 		#region Delete
-		public static async Task<bool> Delete(Guid id)
+		public static async void Delete(Guid id)
 		{
 			string message = "";
 			bool result = false;
@@ -215,13 +204,10 @@ namespace SistemaVenda.Service
 				{
 					message = await response.Content.ReadAsStringAsync();
 				}
-
-				return result;
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-				return false;
 			}
 		}
         #endregion
