@@ -1,4 +1,4 @@
-﻿using SistemaVenda.br.pro.com.dao;
+﻿using SistemaVenda.Service;
 using SistemaVenda.br.pro.com.view;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaVenda.Model;
 
 namespace SistemaVenda.br.pro.com.model.Helpers
 {
@@ -50,41 +51,47 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         #endregion
 
         #region Gravar
-        public void Gravar(DataGridView dataGirdView, string nomeFuncionario, string nomeCliente, Budget orcamento)
+        public async void Gravar(DataGridView dataGirdView, string nameEmp, string nameClient, Budget budget)
         {
             try
             {
-                frmCadastrarOrcamento tela = new frmCadastrarOrcamento();
-                Employee funcionario = new Employee();
-                Cliente cliente = new Cliente();
-                
-                ClienteDAO clienteDao = new ClienteDAO();
-                FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+                frmBudget screen = new frmBudget();
+                List<Employee> listEmp = null;
+                List<Client> listClient = null;
+               
+                listClient = await ClientService.Get(nameClient);
+                Client client = listClient.FirstOrDefault() ?? throw new ArgumentNullException("Nome do Cliente não é válido");
 
-                cliente = clienteDao.ListarNome(nomeCliente);
-                funcionario = funcionarioDao.ListarNome(nomeFuncionario);
+                listEmp = await EmployeeService.Get(nameEmp);
+                Employee emp = listEmp.FirstOrDefault() ?? throw new ArgumentNullException("Nome do Funcionário não é válido");
 
-                int quantidade = int.Parse(dataGirdView.CurrentRow.Cells[2].Value.ToString());
-                int quantidadeTotal = 0;
+                int amount = int.Parse(dataGirdView.CurrentRow.Cells[2].Value.ToString());
+                int amountTotal = 0;
 
-                quantidadeTotal += quantidade;
+                amountTotal += amount;
 
-                OrcamentoDAO dao = new OrcamentoDAO();
-                dao.CadastrarOrcamento(orcamento);               
+                bool isSucesso = await BudgetService.Post(budget);
 
-                foreach (DataGridViewRow linha in dataGirdView.Rows)
+                if (isSucesso)
                 {
-                    ItemBudget item = new ItemBudget();
-                    item.CodigoOrcamento = dao.UltimoOrcamento();
-                    item.CodigoProduto = int.Parse(linha.Cells[0].Value.ToString());
-                    item.Quantidade = int.Parse(linha.Cells[2].Value.ToString());
-                    item.Subtotal = Decimal.Parse(linha.Cells[5].Value.ToString());
+                    foreach (DataGridViewRow linha in dataGirdView.Rows)
+                    {
+                        
+                        ItemBudget item = new ItemBudget();
+                        item.BudgetId = await BudgetService.GetLastBudget();
+                        item.ProductId = Guid.Parse(linha.Cells[0].Value.ToString());
+                        item.Amount = int.Parse(linha.Cells[2].Value.ToString());
+                        item.Subtotal = Decimal.Parse(linha.Cells[5].Value.ToString());
 
-                    ItemOrcamentoDAO itemDao = new ItemOrcamentoDAO();
-                    itemDao.CadastrarItemOrcamento(item);
+                        ItemBudgetService.Post(item);
+                    }
                 }
 
-                tela.txtCodigo.Text = dao.UltimoOrcamento().ToString();
+                screen.txtCodigo.Text = BudgetService.GetLastBudget().ToString();
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
             }
             catch (Exception ex)
             {
