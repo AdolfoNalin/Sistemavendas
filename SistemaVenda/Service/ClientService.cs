@@ -1,22 +1,14 @@
 ﻿using Newtonsoft.Json;
 using SistemaVenda.Model;
-using SistemaVenda.br.pro.com.model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using SistemaVenda.br.pro.com.connection;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net.Http.Json;
-using System.Security.Principal;
+using System.Net.Http;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
-using SistemaVenda.br.pro.com.connection;
-
+using System.Net.Http.Json;
 
 namespace SistemaVenda.Service
 {
@@ -62,54 +54,52 @@ namespace SistemaVenda.Service
 		#endregion
 
 		#region GetId
-		public static async Task<List<Client>> Get(Guid id)
+		public static async Task<Client> Get(Guid id)
 		{
 			try
 			{
-				List<Client> list = null;
+				Client client = null;
 
-				HttpClient client = ConnectionFactory.ConnectionLocalhost();
+				HttpClient clientHttp = ConnectionFactory.ConnectionLocalhost();
 
-				HttpResponseMessage response = await client.GetAsync($"Client/Search/{id}");
+				HttpResponseMessage response = await clientHttp.GetAsync($"Client/search/{id}");
 
 				if (response.IsSuccessStatusCode)
 				{
-					list = JsonConvert.DeserializeObject<List<Client>>(await response.Content.ReadAsStringAsync())
+					client = JsonConvert.DeserializeObject<Client>(await response.Content.ReadAsStringAsync())
 					?? throw new ArgumentNullException("Nenhum resulta encontrado");
 				}
 				else
 				{
 					MessageBox.Show(await response.Content.ReadAsStringAsync(), "Aconteceu um erro");
 				}
-				return list;
+				return client;
 			}
 			catch (ArgumentException ae)
 			{
 				MessageBox.Show(ae.Message);
 				return null;
 			}
-			catch (Exception ex)
+			catch (System.Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
 				return null;
 			}
 		}
-		#endregion
+        #endregion
 
-		#region GetSmart
+        #region GetSmart
 		public static async Task<List<Client>> Get(string value)
 		{
+			List<Client> list = new List<Client>();
 			try
 			{
-				List<Client> list = null;
-
 				HttpClient client = ConnectionFactory.ConnectionLocalhost();
 				HttpResponseMessage response = await client.GetAsync($"Client/Smart/{value}");
 
 				if (response.IsSuccessStatusCode)
 				{
-					list = JsonConvert.DeserializeObject<List<Client>>(await response.Content.ReadAsStringAsync())
-						?? throw new ArgumentNullException("Nunhum cliente encontrado!");
+					list = JsonConvert.DeserializeObject<List<Client>>(await response.Content.ReadAsStringAsync());
 				}
 				else
 				{
@@ -117,11 +107,6 @@ namespace SistemaVenda.Service
 				}
 
 				return list;
-			}
-			catch(ArgumentException ae)
-			{
-				MessageBox.Show(ae.Message);
-				return null;
 			}
 			catch (Exception ex)
 			{
@@ -134,13 +119,12 @@ namespace SistemaVenda.Service
         #region Post
 		public static async void Post(Client client)
 		{
-			string message = "";
-
-			try		
+			try
 			{
-				HttpClient httpClient = ConnectionFactory.ConnectionLocalhost();
+				string message = "";
 
-				HttpResponseMessage response = await httpClient.PostAsJsonAsync("Client", client);
+				HttpClient clientHttp = ConnectionFactory.ConnectionLocalhost();
+				HttpResponseMessage response = await clientHttp.PostAsJsonAsync("Client", client);
 
 				if (response.IsSuccessStatusCode)
 				{
@@ -150,23 +134,24 @@ namespace SistemaVenda.Service
 				{
 					message = await response.Content.ReadAsStringAsync();
 				}
+
+				MessageBox.Show(message);
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
 			}
 		}
-		#endregion
+        #endregion
 
-		#region Put
+        #region Put
 		public static async void Put(Client client)
 		{
-			string message = "";
 			try
 			{
-				HttpClient httpClient = ConnectionFactory.ConnectionLocalhost();
-
-				HttpResponseMessage response = await httpClient.PutAsJsonAsync("Client",client);
+				string message = "";
+				HttpClient clientHttp = ConnectionFactory.ConnectionLocalhost();
+				HttpResponseMessage response = await clientHttp.PutAsJsonAsync("Client", client);
 
 				if (response.IsSuccessStatusCode)
 				{
@@ -174,8 +159,10 @@ namespace SistemaVenda.Service
 				}
 				else
 				{
-					message += await response.Content.ReadAsStringAsync();
+					message = await response.Content.ReadAsStringAsync();
 				}
+
+				MessageBox.Show(message);
 			}
 			catch (Exception ex)
 			{
@@ -187,23 +174,22 @@ namespace SistemaVenda.Service
 		#region Delete
 		public static async void Delete(Guid id)
 		{
-			string message = "";
-			bool result = false;
-
 			try
 			{
+				string message = "";
 				HttpClient httpClient = ConnectionFactory.ConnectionLocalhost();
-
 				HttpResponseMessage response = await httpClient.DeleteAsync($"Client/{id}");
 
 				if (response.IsSuccessStatusCode)
 				{
-					message = await response.Content.ReadAsStringAsync();
+					message += await response.Content.ReadAsStringAsync();
 				}
 				else
 				{
 					message = await response.Content.ReadAsStringAsync();
 				}
+
+				MessageBox.Show(message);
 			}
 			catch (Exception ex)
 			{
