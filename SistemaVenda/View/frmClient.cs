@@ -295,19 +295,34 @@ namespace SistemaVenda.br.pro.com.view
         #region mtbCEP_KeyPress
         private void mtbCEP_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
+            try
             {
-                City city = SearchCEP.SearchCity(mtbCEP.Text);
-
-                if (city != null)
+                if (e.KeyChar == 13)
                 {
-                    txtCidade.Text = city.Name;
-                    txtLogradouro.Text = city.Street;
-                    txtBairro.Text = city.Neighborhood;
-                    cbUF.Text = city.UF;
-                    txtComplemento.Text = city.Complement;
-                    //mtbCEP.Text = city.CEP;
+                    City city = SearchCEP.SearchCity(mtbCEP.Text);
+
+                    if (city is null)
+                    {
+                        throw new ArgumentNullException("Cidade não encontrada!!");
+                    }
+                    else
+                    {
+                        txtCidade.Text = city.Name;
+                        txtLogradouro.Text = city.Street;
+                        txtBairro.Text = city.Neighborhood;
+                        cbUF.Text = city.UF;
+                        txtComplemento.Text = city.Complement;
+                        mtbCEP.Text = city.CEP;
+                    }
                 }
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion
