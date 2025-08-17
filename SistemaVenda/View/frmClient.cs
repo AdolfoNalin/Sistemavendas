@@ -53,7 +53,7 @@ namespace SistemaVenda.br.pro.com.view
             try
             {
                 Client client = null;
-                if (dgClient.Rows.Count > 0)
+                if (dgClient.SelectedRows.Count > 0)
                 {
                     client = (Client)dgClient.SelectedRows[0].DataBoundItem ?? 
                         throw new ArgumentNullException("Cliente não foi selecionado");
@@ -175,53 +175,16 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region btnDelete_Click
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Client obj = new Client()
-                {
-                    Id = Guid.Parse(txtId.Text ?? throw new ArgumentNullException("Código é nulo, verifique o cleinte")),
-                    Name = txtNome.Text,
-                    ShortName = txtApelido.Text,
-                    Email = txtEmail.Text,
-                    CPF = mtbCEP.Text,
-                    RG = mtbRG.Text,
-                    TelephoneNumber = mtbTelefone.Text,
-                    PhoneNumber = mtbCelular.Text,
-                    CEP = mtbCEP.Text,
-                    Street = txtLogradouro.Text,
-                    Number = int.Parse(txtNumero.Text),
-                    Complement = txtComplemento.Text,
-                    Neighborhoods = txtBairro.Text,
-                    City = txtCidade.Text,
-                    State = cbUF.Text,
-                };
+            //uid.TryParse(txtId.Text, out Guid id);
 
-                if (obj == null )
-                {
-                    throw new NullReferenceException("Cliente é nulo, impossivel deletar!");
-                }
-    
-                ClientService.Delete(obj.Id);
-            }
-            catch (ArgumentNullException ae)
-            {
-                MessageBox.Show(ae.Message);
-            }
-            catch(NullReferenceException ne)
-            {
-                MessageBox.Show(ne.Message);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-           finally
-            {
-                UpdateData();
-            }
+            Client client = dgClient.SelectedRows[0].DataBoundItem as Client;
+            ClientService.Delete(client.Id);
 
+            await Task.Delay(1500);
+            UpdateData();
+            tabClient.SelectedTab = tpConsult;
         }
         #endregion
 
