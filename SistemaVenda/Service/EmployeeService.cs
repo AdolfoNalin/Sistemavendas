@@ -16,7 +16,7 @@ namespace SistemaVenda.Service
     public class EmployeeService
     {
         #region Get
-        public async Task<List<Employee>> Get()
+        public static async Task<List<Employee>> Get()
         {
             try
             {
@@ -45,25 +45,25 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetId
-        public async Task<List<Employee>> Get(Guid id)
+        public static async Task<Employee> Get(Guid id)
         {
             try
             {
-                List<Employee> list = null;
+                Employee employee = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.GetAsync($"Employee/{id}");
+                HttpResponseMessage response = await client.GetAsync($"Employee/Search/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<Employee>>(await response.Content.ReadAsStringAsync());
+                    employee = JsonConvert.DeserializeObject<Employee>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
                     MessageBox.Show(await response.Content.ReadAsStringAsync());
                 }
 
-                return list;
+                return employee;
             }
             catch (Exception ex)
             {
@@ -74,25 +74,25 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetSmart
-        public async Task<List<Employee>> Get(string value)
+        public static async Task<List<Employee>> Get(string value)
         {
             try
             {
-                List<Employee> list = null;
+                List<Employee> employees = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.GetAsync($"Employee/{value}");
+                HttpResponseMessage response = await client.GetAsync($"Employee/Smart/{value}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<Employee>>(await response.Content.ReadAsStringAsync());
+                    employees = JsonConvert.DeserializeObject<List<Employee>>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
                     MessageBox.Show(await response.Content.ReadAsStringAsync());
                 }
 
-                return list;
+                return employees;
             }
             catch(Exception ex)
             {
@@ -103,12 +103,11 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async Task<bool> Post(Employee emp)
+        public static async void Post(Employee emp)
         {
             try
             {
                 string message = "";
-                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PostAsJsonAsync("Employee", emp);
@@ -116,30 +115,27 @@ namespace SistemaVenda.Service
                 if (response.IsSuccessStatusCode)
                 {
                     message = await response.Content.ReadAsStringAsync();
-                    value = true;
                 }
                 else
                 {
                     message = await response.Content.ReadAsStringAsync();
                 }
 
-                return value;
+                MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
 
         #region Put
-        public async Task<bool> Put(Employee emp)
+        public static async void Put(Employee emp)
         {
             try
             {
                 string message = "";
-                bool valeu = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PutAsJsonAsync("Employee", emp);
@@ -147,51 +143,45 @@ namespace SistemaVenda.Service
                 if (response.IsSuccessStatusCode)
                 {
                     message += await response.Content.ReadAsStringAsync();
-                    valeu = true;
                 }
                 else
                 {
                     message += await response.Content.ReadAsStringAsync();
                 }
 
-                return valeu;
+                MessageBox.Show(message);
             } 
             catch(Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
 
         #region Delete
-        public async Task<bool> Delete(Guid id)
+        public static async void Delete(Guid id)
         {
             try
             {
                 string message = "";
-                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.DeleteAsync($"Employee/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    value = true;
                     message = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show(message);
                 }
                 else
                 {
                     message += await response.Content.ReadAsStringAsync();
-                    MessageBox.Show(message);
                 }
-                return value;
+                
+                MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
