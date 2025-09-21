@@ -10,6 +10,5 @@ namespace SistemaVenda.br.pro.com.model
     public class Employee : Client
     {
         public string Function { get; set; }
-        public List<String> Authorizations { get; set; }
     }
 }
