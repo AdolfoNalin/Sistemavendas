@@ -124,7 +124,6 @@ namespace SistemaVenda.br.pro.com.view
                     Number = int.Parse(txtNumber.Text ?? throw new ArgumentNullException("Numero não pode ser vazio", "Atenção")),
                     Complement = txtComplement.Text,
                     Function = txtFunction.Text ?? throw new ArgumentNullException("Função não pode ser vazio", "Atenção"),
-                    Authorizations = frmScreenAuthorization.checkBoxes.Select(X => X.Text).ToList() ?? throw new ArgumentNullException("Lista de Autorização")
                 }; 
 
                 if (employee is null)

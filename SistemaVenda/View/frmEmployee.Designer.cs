@@ -34,7 +34,6 @@
             this.dgEmployee = new System.Windows.Forms.DataGridView();
             this.tpDetails = new System.Windows.Forms.TabPage();
             this.txtFunction = new System.Windows.Forms.TextBox();
-            this.btnAuthorization = new System.Windows.Forms.Button();
             this.lblCargo = new System.Windows.Forms.Label();
             this.txtComplement = new System.Windows.Forms.TextBox();
             this.lblComplemento = new System.Windows.Forms.Label();
@@ -133,7 +132,6 @@
             // tpDetails
             // 
             this.tpDetails.Controls.Add(this.txtFunction);
-            this.tpDetails.Controls.Add(this.btnAuthorization);
             this.tpDetails.Controls.Add(this.lblCargo);
             this.tpDetails.Controls.Add(this.txtComplement);
             this.tpDetails.Controls.Add(this.lblComplemento);
@@ -183,22 +181,6 @@
             this.txtFunction.Name = "txtFunction";
             this.txtFunction.Size = new System.Drawing.Size(107, 20);
             this.txtFunction.TabIndex = 110;
-            // 
-            // btnAuthorization
-            // 
-            this.btnAuthorization.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAuthorization.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAuthorization.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnAuthorization.Image = ((System.Drawing.Image)(resources.GetObject("btnAuthorization.Image")));
-            this.btnAuthorization.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAuthorization.Location = new System.Drawing.Point(791, 258);
-            this.btnAuthorization.Name = "btnAuthorization";
-            this.btnAuthorization.Size = new System.Drawing.Size(121, 34);
-            this.btnAuthorization.TabIndex = 109;
-            this.btnAuthorization.Text = "Autorização";
-            this.btnAuthorization.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAuthorization.UseVisualStyleBackColor = true;
-            this.btnAuthorization.Click += new System.EventHandler(this.btnAuthorization_Click);
             // 
             // lblCargo
             // 
@@ -810,7 +792,6 @@
         private System.Windows.Forms.Label lblCPF;
         private System.Windows.Forms.Label lblNome;
         public System.Windows.Forms.DataGridView dgEmployee;
-        private System.Windows.Forms.Button btnAuthorization;
         public System.Windows.Forms.TextBox txtFunction;
     }
 }
