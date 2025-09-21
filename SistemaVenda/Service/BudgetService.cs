@@ -15,7 +15,7 @@ namespace SistemaVenda.Service
     public class BudgetService
     {
         #region Get
-        public async Task<List<Budget>> Get()
+        public static async Task<List<Budget>> Get()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetId
-        public async Task<List<Budget>> Get(Guid id)
+        public static async Task<List<Budget>> Get(Guid id)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetSmart
-        public async Task<List<Budget>> Get(string value)
+        public static async Task<List<Budget>> Get(string value)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async Task<bool> Post(Budget budget)
+        public static async Task<bool> Post(Budget budget)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Put
-        public async Task<bool> Put(Budget budget)
+        public static async Task<bool> Put(Budget budget)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Delete
-        public async Task<bool> Delete(Guid id)
+        public static async Task<bool> Delete(Guid id)
         {
             try
             {
@@ -188,6 +188,29 @@ namespace SistemaVenda.Service
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
                 return false;
+            }
+        }
+        #endregion
+
+        #region EndBudget
+        public static async Task<Guid> GetLastBudget()
+        {
+            try
+            {
+                List<Budget> budgets = await BudgetService.Get();
+                Budget budget = budgets.LastOrDefault() ?? throw new ArgumentException("Não existe orçamento no banco de dados");
+
+                return budget.Id;
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+                return Guid.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return Guid.Empty;
             }
         }
         #endregion
