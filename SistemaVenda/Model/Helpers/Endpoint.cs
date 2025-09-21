@@ -18,9 +18,14 @@ namespace SistemaVenda.Model.Helpers
 
                 return endpoint;
             }
-            catch(ArgumentNullException ane)
+            catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message, "Algo deu errado!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 return null;
             }
         }
