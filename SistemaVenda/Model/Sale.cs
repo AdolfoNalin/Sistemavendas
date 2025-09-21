@@ -22,8 +22,6 @@ namespace SistemaVenda.br.pro.com.model
         public decimal AdditionPorcentage{ get; set; }
         public decimal AdditionCash{ get; set; }
         public decimal Total{ get; set; }
-        public decimal SubTotal { get; set; }
-        public decimal Changes { get; set; }
         public string Observation { get; set; }
         #endregion
     }
