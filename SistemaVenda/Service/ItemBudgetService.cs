@@ -15,7 +15,7 @@ namespace SistemaVenda.Service
     public class ItemBudgetService
     {
         #region Get
-        public async Task<List<ItemBudget>> Get(Guid idBudget)
+        public static async Task<List<ItemBudget>> Get(Guid idBudget)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async void Post(ItemBudget item)
+        public static async void Post(ItemBudget item)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Put
-        public async void Put(ItemBudget item)
+        public static async void Put(ItemBudget item)
         {
             try
             {
