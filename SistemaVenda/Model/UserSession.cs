@@ -13,7 +13,7 @@ namespace SistemaVenda.Model
         public static string Login  { get; set; }
         public static string Name { get; set; }
         public static string Password { get; set; }
-        public static string Function { get; set; }
+        public static Guid EmployeeId { get; set; }
         public static string Token { get; set; }
     }
 }
