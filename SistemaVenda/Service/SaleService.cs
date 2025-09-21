@@ -2,7 +2,9 @@
 using SistemaVenda.br.pro.com.connection;
 using SistemaVenda.br.pro.com.model;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -15,18 +17,18 @@ namespace SistemaVenda.Service
     public class SaleService
     {
         #region Get
-        public async Task<List<Sale>> Get()
+        public async static Task<BindingList<Sale>> Get()
         {
             try
             {
-                List<ItemReturn> list = null;
+                BindingList<Sale> list = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.GetAsync("Sale");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<ItemReturn>>(await response.Content.ReadAsStringAsync());
+                    list = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
@@ -43,20 +45,54 @@ namespace SistemaVenda.Service
         }
         #endregion
 
+        #region LastSale
+        public static async Task<Sale> LastSale()
+        {
+            Sale sale = null;
+            try
+            {
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync("Sale/Last");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    sale = JsonConvert.DeserializeObject<Sale>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
+
+                return sale;
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+
+        #endregion
+
         #region GetId
-        public async Task<List<ItemReturn>> Get(Guid id)
+        public static async Task<BindingList<Sale>> Get(Guid id)
         {
             try
             {
 
-                List<ItemReturn> list = null;
+                BindingList<Sale> list = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.GetAsync($"Sale/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<ItemReturn>>(await response.Content.ReadAsStringAsync());
+                    list = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
@@ -74,18 +110,18 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetSmart
-        public async Task<List<Sale>> Get(string value)
+        public static async Task<BindingList<Sale>> Get(string value)
         {
             try
             {
-                List<ItemReturn> list = null;
+                BindingList<Sale> list = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.GetAsync($"Sale/{value}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<ItemReturn>>(await response.Content.ReadAsStringAsync());
+                    list = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
@@ -103,63 +139,65 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async void Post(Sale sale)
+        public static async Task<bool> Post(Sale sale)
         {
             try
             {
-                string message = "";
+                bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PostAsJsonAsync("Sale", sale);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    result = Boolean.Parse(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                    result = false;
                 }
 
-                MessageBox.Show(message);
+                return result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;   
             }
         }
         #endregion
 
         #region Put
-        public async void Put(Sale sale)
+        public static async Task<bool> Put(Sale sale)
         {
             try
             {
-                string message = "";
+                bool result = false;   
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PutAsJsonAsync("Sale", sale);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    result = Boolean.Parse(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
                 }
-
-                MessageBox.Show(message);
+                return result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
 
         #region Delete
-        public async void Delete(Guid id)
+        public static async void Delete(Guid id)
         {
             try
             {
