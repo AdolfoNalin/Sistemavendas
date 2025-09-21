@@ -124,12 +124,11 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async Task<bool> Post(Supplier supplier)
+        public static async void Post(Supplier supplier)
         {
             try
             {
                 string message = "";
-                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PostAsJsonAsync("Supplier", supplier);
@@ -137,7 +136,6 @@ namespace SistemaVenda.Service
                 if (response.IsSuccessStatusCode)
                 {
                     message = await response.Content.ReadAsStringAsync();
-                    value = true;
                 }
                 else
                 {
@@ -145,36 +143,31 @@ namespace SistemaVenda.Service
                 }
 
                 MessageBox.Show(message);
-                return value;
             }
             catch(ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message);
-                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
 
         #region Put
-        public async Task<bool> Put(Supplier supplier)
+        public static async void Put(Supplier supplier)
         {
             try
             {
                 string message = "";
-                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PutAsJsonAsync("Supplier", supplier);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message = await response.Content.ReadAsStringAsync();
-                    value = true;
+                    message = await response.Content.ReadAsStringAsync();;
                 }
                 else
                 {
@@ -182,23 +175,20 @@ namespace SistemaVenda.Service
                 }
 
                 MessageBox.Show(message);
-                return value;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
 
         #region Delete
-        public async Task<bool> Delete(Guid id) 
+        public static async void Delete(Guid id) 
         {
             try
             {
                 string message = "";
-                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.DeleteAsync($"Supplier/{id}");
@@ -206,7 +196,6 @@ namespace SistemaVenda.Service
                 if(response.IsSuccessStatusCode)
                 {
                     message += await response.Content.ReadAsStringAsync();
-                    value = true;
                 }
                 else
                 {
@@ -214,12 +203,10 @@ namespace SistemaVenda.Service
                 }
 
                 MessageBox.Show(message);
-                return value;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }       
         }
         #endregion
