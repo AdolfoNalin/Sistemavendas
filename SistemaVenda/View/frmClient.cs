@@ -90,7 +90,7 @@ namespace SistemaVenda.br.pro.com.view
         #region Load
         private void frmClient_Load(object sender, EventArgs e)
         {
-
+           
         }
         #endregion
 
@@ -195,11 +195,14 @@ namespace SistemaVenda.br.pro.com.view
             {
                 Client obj = new Client();
 
+                DateTime.TryParse(mtbDueDate.Text, out DateTime dt);
+
                 obj.Name = txtNome.Text ?? throw new ArgumentNullException("Verifique se o nome não é nulo");
                 obj.ShortName = txtApelido?.Text;
-                obj.Email = txtEmail?.Text;
                 obj.CPF = mtbCPF.Text ?? throw new ArgumentNullException("Verifique se o CPF não é nulo");
                 obj.RG = mtbRG?.Text.Count() == 11 ? null : mtbRG.Text ;
+                obj.DueDate = dt.ToUniversalTime();
+                obj.Email = txtEmail?.Text;
                 obj.MaritalStatus = cbEstadoCivil.Text ?? throw new ArgumentNullException("Verifique se o Estado civil é nulo");
                 obj.PhoneNumber = mtbCelular.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo");
                 obj.TelephoneNumber = mtbTelefone?.Text.Count() == 10 ? null : mtbTelefone.Text;
@@ -275,7 +278,6 @@ namespace SistemaVenda.br.pro.com.view
                         txtBairro.Text = city.Neighborhood;
                         cbUF.Text = city.UF;
                         txtComplemento.Text = city.Complement;
-                        mtbCEP.Text = city.CEP;
                     }
                 }
             }

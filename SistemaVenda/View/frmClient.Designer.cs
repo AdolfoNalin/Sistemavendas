@@ -78,6 +78,8 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblCPF = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
+            this.mtbDueDate = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -291,6 +293,8 @@
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.mtbDueDate);
+            this.tpDetails.Controls.Add(this.label1);
             this.tpDetails.Controls.Add(this.txtComplemento);
             this.tpDetails.Controls.Add(this.lblComplemento);
             this.tpDetails.Controls.Add(this.txtApelido);
@@ -689,6 +693,28 @@
             this.lblNome.TabIndex = 39;
             this.lblNome.Text = "Nome:";
             // 
+            // mtbDueDate
+            // 
+            this.mtbDueDate.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mtbDueDate.Location = new System.Drawing.Point(500, 107);
+            this.mtbDueDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mtbDueDate.Mask = "00/00/0000";
+            this.mtbDueDate.Name = "mtbDueDate";
+            this.mtbDueDate.Size = new System.Drawing.Size(74, 20);
+            this.mtbDueDate.TabIndex = 72;
+            this.mtbDueDate.ValidatingType = typeof(System.DateTime);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(432, 110);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 71;
+            this.label1.Text = "Data Nasc:";
+            // 
             // frmClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -767,5 +793,7 @@
         public System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label lblComplemento;
         public System.Windows.Forms.DataGridView dgClient;
+        public System.Windows.Forms.MaskedTextBox mtbDueDate;
+        private System.Windows.Forms.Label label1;
     }
 }
