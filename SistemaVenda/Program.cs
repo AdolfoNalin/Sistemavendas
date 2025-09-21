@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SistemaVenda.br.pro.com.veiw;
+using SistemaVenda.View;
 using SistemaVenda.br.pro.com.view;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using SistemaVenda.View;
 
 namespace SistemaVenda
 {
@@ -22,7 +23,7 @@ namespace SistemaVenda
         [STAThread]
         static void Main()
         {
-            var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             configuration = builder.Build();
 
             Application.EnableVisualStyles();
