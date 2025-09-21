@@ -21,7 +21,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         /// Calsse deticata a realziar a limpeza de tela, podendo ser usada com qualquer tela form
         /// </summary>
         /// <param name="tela">Tela que vai ser limpa</param>
-        public static void LimparTela(Form tela)
+        public static void ClearScreen(Form tela)
         {
             foreach (Control ctrPai in tela.Controls)
             {
@@ -51,19 +51,15 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         #endregion
 
         #region Gravar
-        public async void Gravar(DataGridView dataGirdView, string nameEmp, string nameClient, Budget budget)
+        public async void Gravar(DataGridView dataGirdView, string nameEmp, Guid clientId, Budget budget)
         {
             try
             {
                 frmBudget screen = new frmBudget();
-                List<Employee> listEmp = null;
-                List<Client> listClient = null;
-               
-                listClient = await ClientService.Get(nameClient);
-                Client client = listClient.FirstOrDefault() ?? throw new ArgumentNullException("Nome do Cliente não é válido");
+                
+                Client client = await ClientService.Get(clientId) ?? throw new ArgumentNullException("Nome do Cliente não é válido");
 
-                listEmp = await EmployeeService.Get(nameEmp);
-                Employee emp = listEmp.FirstOrDefault() ?? throw new ArgumentNullException("Nome do Funcionário não é válido");
+                List<Employee> employees = await EmployeeService.Get(nameEmp);
 
                 int amount = int.Parse(dataGirdView.CurrentRow.Cells[2].Value.ToString());
                 int amountTotal = 0;
@@ -97,6 +93,14 @@ namespace SistemaVenda.br.pro.com.model.Helpers
             {
                 MessageBox.Show($"Acoteceu um erro do tipo {ex.Message} com o caminho {ex.StackTrace}");
             }
+        }
+        #endregion
+
+        #region Address
+        public static string Address(Client client)
+        {
+            string result = $"{client.State}, {client.City}, {client.Neighborhoods}, {client.Street}, {client.Number}, {client.Complement}"; 
+            return result ;
         }
         #endregion
     }
