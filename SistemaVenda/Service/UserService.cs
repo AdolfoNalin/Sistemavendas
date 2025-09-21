@@ -2,9 +2,11 @@
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Tls;
 using SistemaVenda.br.pro.com.connection;
+using SistemaVenda.br.pro.com.model;
 using SistemaVenda.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -17,39 +19,38 @@ namespace SistemaVenda.Service
     public class UserService
     {
         #region Login
-        public async Task<bool> Login(User user)
+        public static async Task<UserResponse> Login(UserResquest user)
         {
 			try
 			{
 				string message = "";
-				bool result = false;
+				UserResponse userResponse = null;
 				
-				HttpClient client = ConnectionFactory.ConnectionLocalhost();
+				HttpClient client = ConnectionFactory.ConnectionLocalhostUser();
 				HttpResponseMessage response = await client.PostAsJsonAsync("User/Login",user);
 
 				if (response.IsSuccessStatusCode)
 				{
-					message = await response.Content.ReadAsStringAsync();
-					result = true;
+					userResponse = JsonConvert.DeserializeObject<UserResponse>(await response.Content.ReadAsStringAsync());
 				}
 				else
 				{
 					message = await response.Content.ReadAsStringAsync();
+					MessageBox.Show(message);
 				}
 
-				MessageBox.Show(message);
-				return result;
+				return userResponse;
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-				return false;
+				return null;
 			}
         }
         #endregion
 
         #region Get
-		public async Task<List<User>> Get()
+		public static async Task<List<User>> Get()
 		{
 			try
 			{ 
@@ -77,17 +78,17 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetId
-		public async Task<List<User>> Get(Guid id)
+		public static async Task<BindingList<User>> Get(Guid id)
 		{
 			try
 			{
-				List<User> list = null;
+				BindingList<User> list = null;
 				HttpClient client = ConnectionFactory.ConnectionLocalhost();
 				HttpResponseMessage response = await client.GetAsync($"User/{id}");
 
 				if (response.IsSuccessStatusCode)
 				{
-					list = JsonConvert.DeserializeObject<List<User>>(await response.Content?.ReadAsStringAsync());
+					list = JsonConvert.DeserializeObject<BindingList<User>>(await response.Content?.ReadAsStringAsync());
 				}
 				else
 				{
@@ -103,8 +104,35 @@ namespace SistemaVenda.Service
 		}
         #endregion
 
+        #region GetEmployeeId
+        public static async Task<User> GetEmployee(Guid employeeId)
+        {
+            try
+            {
+                User user = null;
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync($"User/Employee/{employeeId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    user = JsonConvert.DeserializeObject<User>(await response.Content?.ReadAsStringAsync());
+                }
+                else
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
+                return user;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
         #region GetSmart
-        public async Task<List<User>> Get(string value)
+        public static async Task<List<User>> Get(string value)
 		{
 			try
 			{
@@ -132,94 +160,85 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-		public async Task<bool> Post(User user)
+		public static async void Post(User user)
 		{
 			try
 			{
 				string message = "";
-				bool result = false;
 
 				HttpClient client = ConnectionFactory.ConnectionLocalhost();
-				HttpResponseMessage response = await client.PostAsJsonAsync("Usser", user);
+				HttpResponseMessage response = await client.PostAsJsonAsync("User", user);
 
 				if (response.IsSuccessStatusCode)
 				{
 					message = await response.Content.ReadAsStringAsync();
-					result = true;
 				}
 				else
 				{
 					message = await response.Content.ReadAsStringAsync();
 				}
 
-				return result;
+				MessageBox.Show(message);
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-				return false;
 			}
 		}
         #endregion
 
         #region Put
-        public async Task<bool> Put(User user)
+        public static async void Put(User user)
         {
             try
             {
                 string message = "";
-                bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.PutAsJsonAsync("Usser", user);
+                HttpResponseMessage response = await client.PutAsJsonAsync("User", user);
 
                 if (response.IsSuccessStatusCode)
                 {
                     message = await response.Content.ReadAsStringAsync();
-                    result = true;
                 }
                 else
                 {
                     message = await response.Content.ReadAsStringAsync();
                 }
-
-                return result;
+				
+				MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
 
         #region Delete
-        public async Task<bool> Delete(Guid id)
+        public static async void Delete(Guid id)
         {
             try
             {
                 string message = "";
-                bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.DeleteAsync($"Usser/{id}");
+                HttpResponseMessage response = await client.DeleteAsync($"User/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     message = await response.Content.ReadAsStringAsync();
-                    result = true;
                 }
                 else
                 {
                     message = await response.Content.ReadAsStringAsync();
                 }
 
-                return result;
+				MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
