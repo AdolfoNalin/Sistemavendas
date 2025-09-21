@@ -175,223 +175,162 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="br.pro.com.connection\ConnectionFactory.cs" />
-    <Compile Include="br.pro.com.dao\ClienteDAO.cs" />
-    <Compile Include="br.pro.com.dao\DevolucaoDAO.cs" />
-    <Compile Include="br.pro.com.dao\FornecedorDAO.cs" />
-    <Compile Include="br.pro.com.dao\FuncionarioDAO.cs" />
-    <Compile Include="br.pro.com.dao\ItemOrcamentoDAO.cs" />
-    <Compile Include="br.pro.com.dao\ItemVendaDAO.cs" />
-    <Compile Include="br.pro.com.dao\OrcamentoDAO.cs" />
-    <Compile Include="br.pro.com.dao\ProdutoDAO.cs" />
-    <Compile Include="br.pro.com.dao\VendaDAO.cs" />
-    <Compile Include="br.pro.com.model\Cliente.cs" />
-    <Compile Include="br.pro.com.model\Devolucao.cs" />
-    <Compile Include="br.pro.com.model\Fornecedor.cs" />
-    <Compile Include="br.pro.com.model\Funcionario.cs" />
-    <Compile Include="br.pro.com.model\Helpers.cs" />
-    <Compile Include="br.pro.com.model\Helpers\GeradorSenha.cs" />
-    <Compile Include="br.pro.com.model\ItemOrcamento.cs" />
-    <Compile Include="br.pro.com.model\ItemVenda.cs" />
-    <Compile Include="br.pro.com.model\Orcamento.cs" />
-    <Compile Include="br.pro.com.model\Produto.cs" />
-    <Compile Include="br.pro.com.model\Venda.cs" />
-    <Compile Include="br.pro.com.view\ConsultarClienteOrcmento.cs">
+    <PackageReference Include="ConfigurationInitializer.ServiceFabric">
+      <Version>0.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConnectionFactory\ConnectionFactory.cs" />
+    <Compile Include="Model\AItem.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Helpers\Calculator.cs" />
+    <Compile Include="Model\ItemReturn.cs" />
+    <Compile Include="Model\Persona.cs" />
+    <Compile Include="Model\ProductShoppingCar.cs" />
+    <Compile Include="Model\Supplier.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Helpers\Endpoint.cs" />
+    <Compile Include="Model\Helpers\Helpers.cs" />
+    <Compile Include="Model\Helpers\PasswordGenerator.cs" />
+    <Compile Include="Model\Helpers\SearchCEP.cs" />
+    <Compile Include="Model\ItemBudget.cs" />
+    <Compile Include="Model\ItemSale.cs" />
+    <Compile Include="Model\Budget.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserResponse.cs" />
+    <Compile Include="Model\Sale.cs" />
+    <Compile Include="Model\UserResquest.cs" />
+    <Compile Include="Model\UserSession.cs" />
+    <Compile Include="Service\BudgetService.cs" />
+    <Compile Include="Service\ClientService.cs" />
+    <Compile Include="Service\EmployeeService.cs" />
+    <Compile Include="Service\ItemBudgetService.cs" />
+    <Compile Include="Service\ItemReturnService.cs" />
+    <Compile Include="Service\ItemSaleService.cs" />
+    <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\SaleService.cs" />
+    <Compile Include="Service\SupplierService.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="View\frmBudget.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\ConsultarClienteOrcmento.Designer.cs">
-      <DependentUpon>ConsultarClienteOrcmento.cs</DependentUpon>
+    <Compile Include="View\frmBudget.Designer.cs">
+      <DependentUpon>frmBudget.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarFornecedor.cs">
+    <Compile Include="View\frmClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarFornecedor.Designer.cs">
-      <DependentUpon>frmCadastrarFornecedor.cs</DependentUpon>
+    <Compile Include="View\frmClient.Designer.cs">
+      <DependentUpon>frmClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarFuncionario.cs">
+    <Compile Include="View\frmEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarFuncionario.Designer.cs">
-      <DependentUpon>frmCadastrarFuncionario.cs</DependentUpon>
+    <Compile Include="View\frmEmployee.Designer.cs">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarCliente.cs">
+    <Compile Include="View\frmItemReturn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarCliente.Designer.cs">
-      <DependentUpon>frmCadastrarCliente.cs</DependentUpon>
+    <Compile Include="View\frmItemReturn.Designer.cs">
+      <DependentUpon>frmItemReturn.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarOrcamento.cs">
+    <Compile Include="View\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarOrcamento.Designer.cs">
-      <DependentUpon>frmCadastrarOrcamento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarProduto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmCadastrarProduto.Designer.cs">
-      <DependentUpon>frmCadastrarProduto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarCliente.Designer.cs">
-      <DependentUpon>frmConsultarCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarOrcamento.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarOrcamento.Designer.cs">
-      <DependentUpon>frmConsultarOrcamento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarProdutoOV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarProdutoOV.Designer.cs">
-      <DependentUpon>frmConsultarProdutoOV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmHistoricoDevolucao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmHistoricoDevolucao.Designer.cs">
-      <DependentUpon>frmHistoricoDevolucao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarFornecedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarFornecedor.Designer.cs">
-      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarFuncionario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarFuncionario.Designer.cs">
-      <DependentUpon>frmConsultarFuncionario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarProduto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmConsultarProduto.Designer.cs">
-      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmDetalhesVenda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmDetalhesVenda.Designer.cs">
-      <DependentUpon>frmDetalhesVenda.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmDevolucaoProduto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmDevolucaoProduto.Designer.cs">
-      <DependentUpon>frmDevolucaoProduto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="br.pro.com.view\frmLogin.Designer.cs">
+    <Compile Include="View\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmMenu.cs">
+    <Compile Include="View\frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmMenu.Designer.cs">
+    <Compile Include="View\frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmPagamento.cs">
+    <Compile Include="View\frmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmPagamento.Designer.cs">
-      <DependentUpon>frmPagamento.cs</DependentUpon>
+    <Compile Include="View\frmPassword.Designer.cs">
+      <DependentUpon>frmPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmPrimeiroLogin.cs">
+    <Compile Include="View\frmPayment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmPrimeiroLogin.Designer.cs">
-      <DependentUpon>frmPrimeiroLogin.cs</DependentUpon>
+    <Compile Include="View\frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmVenda.cs">
+    <Compile Include="View\frmProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmVenda.Designer.cs">
-      <DependentUpon>frmVenda.cs</DependentUpon>
+    <Compile Include="View\frmProduct.Designer.cs">
+      <DependentUpon>frmProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="br.pro.com.view\frmHistoricoVenda.cs">
+    <Compile Include="View\frmSale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="br.pro.com.view\frmHistoricoVenda.Designer.cs">
-      <DependentUpon>frmHistoricoVenda.cs</DependentUpon>
+    <Compile Include="View\frmSale.Designer.cs">
+      <DependentUpon>frmSale.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="View\frmScreenAuthorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="View\frmScreenAuthorization.Designer.cs">
+      <DependentUpon>frmScreenAuthorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmSupplier.Designer.cs">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="br.pro.com.view\ConsultarClienteOrcmento.resx">
-      <DependentUpon>ConsultarClienteOrcmento.cs</DependentUpon>
+    <Compile Include="View\frmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\frmBudget.resx">
+      <DependentUpon>frmBudget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmCadastrarFornecedor.resx">
-      <DependentUpon>frmCadastrarFornecedor.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmClient.resx">
+      <DependentUpon>frmClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmCadastrarFuncionario.resx">
-      <DependentUpon>frmCadastrarFuncionario.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmEmployee.resx">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmCadastrarCliente.resx">
-      <DependentUpon>frmCadastrarCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmCadastrarOrcamento.resx">
-      <DependentUpon>frmCadastrarOrcamento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmCadastrarProduto.resx">
-      <DependentUpon>frmCadastrarProduto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarCliente.resx">
-      <DependentUpon>frmConsultarCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarOrcamento.resx">
-      <DependentUpon>frmConsultarOrcamento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarProdutoOV.resx">
-      <DependentUpon>frmConsultarProdutoOV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmHistoricoDevolucao.resx">
-      <DependentUpon>frmHistoricoDevolucao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarFornecedor.resx">
-      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarFuncionario.resx">
-      <DependentUpon>frmConsultarFuncionario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmConsultarProduto.resx">
-      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmDetalhesVenda.resx">
-      <DependentUpon>frmDetalhesVenda.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmDevolucaoProduto.resx">
-      <DependentUpon>frmDevolucaoProduto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmLogin.resx">
+    <EmbeddedResource Include="View\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmMenu.resx">
+    <EmbeddedResource Include="View\frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmPagamento.resx">
-      <DependentUpon>frmPagamento.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmPassword.resx">
+      <DependentUpon>frmPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmPrimeiroLogin.resx">
-      <DependentUpon>frmPrimeiroLogin.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmPayment.resx">
+      <DependentUpon>frmPayment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmVenda.resx">
-      <DependentUpon>frmVenda.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmProduct.resx">
+      <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="br.pro.com.view\frmHistoricoVenda.resx">
-      <DependentUpon>frmHistoricoVenda.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmSale.resx">
+      <DependentUpon>frmSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmScreenAuthorization.resx">
+      <DependentUpon>frmScreenAuthorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmSupplier.resx">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -403,6 +342,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -463,7 +408,29 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dump20240106.sql" />
+    <Content Include="Resources\Cancelar32X32.png" />
+    <Content Include="Resources\Cidade32X32.png" />
+    <Content Include="Resources\Confirmar32X32.png" />
+    <Content Include="Resources\Conta32X32.png" />
+    <Content Include="Resources\Editar32X32.png" />
+    <Content Include="Resources\Estado32X32.png" />
+    <Content Include="Resources\Excluir32X32.png" />
+    <Content Include="Resources\Financeiro.png" />
+    <Content Include="Resources\Lupa32X32.png" />
+    <Content Include="Resources\Novo32X32.png" />
+    <Content Include="Resources\Pessoa32X32.png" />
+    <Content Include="Resources\Sair32X32.png" />
+    <Content Include="Resources\Sair32X321.png" />
+    <Content Include="Resources\Salvar32X32.png" />
+    <Content Include="Resources\SetaAnterior32X32.png" />
+    <Content Include="Resources\SetaPrimeira32X32.png" />
+    <Content Include="Resources\SetaProxima.png" />
+    <Content Include="Resources\SetaProxima1.png" />
+    <Content Include="Resources\Setaproxima32X32.png" />
+    <Content Include="Resources\SetaUltima32X32.png" />
+    <Content Include="Resources\UserAvatar.png" />
+    <Content Include="Resources\Usuario.png" />
+    <Content Include="Resources\Usuario32X32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
