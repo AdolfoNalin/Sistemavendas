@@ -361,9 +361,7 @@ namespace SistemaVenda.br.pro.com.view
             mtbPix.Text = String.Format("{0:0.00}", num);
             mtbCredit.Text = String.Format("{0:0.00}", num);
 
-            BindingList<ProductShoppingCar> proShCar = _proShoCar;
-
-            txtTotal.Text = proShCar.Sum(p => p.TotalPrice).ToString();
+            txtTotal.Text = _sale.Total.ToString();
         }
         #endregion
 
