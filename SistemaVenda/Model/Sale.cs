@@ -17,7 +17,7 @@ namespace SistemaVenda.br.pro.com.model
         public Guid EmployeeId { get; set; }
         public DateTime Date { get; set; }
         public string PaymentMethod{ get; set; }
-        public decimal PorcentageDiscount{ get; set; }
+        public decimal PercentageDiscount{ get; set; }
         public decimal CashDiscount{ get; set; }
         public decimal AdditionPorcentage{ get; set; }
         public decimal AdditionCash{ get; set; }
