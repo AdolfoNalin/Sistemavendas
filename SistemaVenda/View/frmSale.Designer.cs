@@ -47,7 +47,7 @@
             this.lbTotalPodutos = new System.Windows.Forms.Label();
             this.mtbCashDiscount = new System.Windows.Forms.MaskedTextBox();
             this.lblDescontoReal = new System.Windows.Forms.Label();
-            this.mtbPorcentageDiscount = new System.Windows.Forms.MaskedTextBox();
+            this.mtbPercentageDiscount = new System.Windows.Forms.MaskedTextBox();
             this.lblDescontoPor100 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.MaskedTextBox();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -164,7 +164,7 @@
             this.tpDetails.Controls.Add(this.lbTotalPodutos);
             this.tpDetails.Controls.Add(this.mtbCashDiscount);
             this.tpDetails.Controls.Add(this.lblDescontoReal);
-            this.tpDetails.Controls.Add(this.mtbPorcentageDiscount);
+            this.tpDetails.Controls.Add(this.mtbPercentageDiscount);
             this.tpDetails.Controls.Add(this.lblDescontoPor100);
             this.tpDetails.Controls.Add(this.txtTotal);
             this.tpDetails.Controls.Add(this.lblTotal);
@@ -323,14 +323,14 @@
             this.lblDescontoReal.TabIndex = 48;
             this.lblDescontoReal.Text = "Desconto R$:";
             // 
-            // mtbPorcentageDiscount
+            // mtbPercentageDiscount
             // 
-            this.mtbPorcentageDiscount.Location = new System.Drawing.Point(588, 374);
-            this.mtbPorcentageDiscount.Name = "mtbPorcentageDiscount";
-            this.mtbPorcentageDiscount.Size = new System.Drawing.Size(67, 20);
-            this.mtbPorcentageDiscount.TabIndex = 47;
-            this.mtbPorcentageDiscount.ValidatingType = typeof(System.DateTime);
-            this.mtbPorcentageDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbPorcentageDiscount_KeyDown);
+            this.mtbPercentageDiscount.Location = new System.Drawing.Point(588, 374);
+            this.mtbPercentageDiscount.Name = "mtbPercentageDiscount";
+            this.mtbPercentageDiscount.Size = new System.Drawing.Size(67, 20);
+            this.mtbPercentageDiscount.TabIndex = 47;
+            this.mtbPercentageDiscount.ValidatingType = typeof(System.DateTime);
+            this.mtbPercentageDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbPorcentageDiscount_KeyDown);
             // 
             // lblDescontoPor100
             // 
@@ -922,7 +922,7 @@
         private System.Windows.Forms.Label lbTotalPodutos;
         public System.Windows.Forms.MaskedTextBox mtbCashDiscount;
         private System.Windows.Forms.Label lblDescontoReal;
-        public System.Windows.Forms.MaskedTextBox mtbPorcentageDiscount;
+        public System.Windows.Forms.MaskedTextBox mtbPercentageDiscount;
         private System.Windows.Forms.Label lblDescontoPor100;
         public System.Windows.Forms.MaskedTextBox txtTotal;
         private System.Windows.Forms.Label lblTotal;
