@@ -53,7 +53,8 @@ namespace SistemaVenda.View
                     mtbAdditionCash.Text = sale.AdditionCash.ToString();
                     mtbAdditionPorcentage.Text = sale.AdditionPorcentage.ToString();
                     mtbCashDiscount.Text = sale.CashDiscount.ToString();
-                    mtbPorcentageDiscount.Text = sale.CashDiscount.ToString();
+                    mtbPorcentageDiscount.Text = sale.PercentageDiscount.ToString();
+                    txtTotal.Text = sale.Total.ToString();
 
                     cbUsers.Text = user.Login;
 
@@ -440,6 +441,7 @@ namespace SistemaVenda.View
                     }
                     else
                     {
+                        _total = Convert.ToDecimal(txtTotal.Text);
                         Decimal.TryParse(mtbPorcentageDiscount.Text, out decimal value);
                         decimal result = Calculator.Porcentage(total: _total, value: value);
                         mtbCashDiscount.Text = result.ToString();
@@ -471,6 +473,7 @@ namespace SistemaVenda.View
                     }
                     else
                     {
+                        _total = Convert.ToDecimal(txtTotal.Text);
                         Decimal.TryParse(mtbAdditionPorcentage.Text, out decimal value);
                         decimal result = Calculator.Porcentage(total: _total, value: value);
                         mtbAdditionCash.Text = result.ToString();
@@ -591,7 +594,7 @@ namespace SistemaVenda.View
                     ClientId = Guid.Parse(txtClientId.Text),
                     EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
                     Date = DateTime.UtcNow,
-                    PorcentageDiscount = Decimal.Parse(mtbPorcentageDiscount.Text),
+                    PercentageDiscount = Decimal.Parse(mtbPorcentageDiscount.Text),
                     CashDiscount = Decimal.Parse(mtbCashDiscount.Text),
                     AdditionCash = Decimal.Parse(mtbAdditionCash.Text),
                     AdditionPorcentage = Decimal.Parse(mtbAdditionPorcentage.Text),
