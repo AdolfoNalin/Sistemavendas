@@ -247,10 +247,6 @@ namespace SistemaVenda.br.pro.com.view
 
                         this.Dispose();
                     }
-
-                    frmSale screem = new frmSale();
-                    screem.ShowDialog();
-
                 }
                 else if (_update)
                 {
@@ -290,6 +286,8 @@ namespace SistemaVenda.br.pro.com.view
                         this.Dispose();
                     }
                 }
+
+                new frmSale().ShowDialog();
             }
             catch(ArgumentNullException ane)
             {
