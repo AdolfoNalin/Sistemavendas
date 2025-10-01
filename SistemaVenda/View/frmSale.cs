@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaVenda.View
@@ -34,7 +35,7 @@ namespace SistemaVenda.View
             {
                 if (dgSale.SelectedRows.Count > 0)
                 {
-                    Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
+                    Sale sale = dgSale.SelectedRows[0].DataBoundItem as Sale;
 
                     Client client = await ClientService.Get(sale.ClientId);
 
@@ -52,8 +53,8 @@ namespace SistemaVenda.View
                     mtbPhone.Text = client.PhoneNumber;
                     mtbAdditionCash.Text = sale.AdditionCash.ToString();
                     mtbAdditionPorcentage.Text = sale.AdditionPorcentage.ToString();
-                    mtbCashDiscount.Text = sale.CashDiscount.ToString();
-                    mtbPorcentageDiscount.Text = sale.PercentageDiscount.ToString();
+                    mtbCashDiscount.Text = Convert.ToString(sale.CashDiscount);
+                    mtbPercentageDiscount.Text = sale.PercentageDiscount.ToString();
                     txtTotal.Text = sale.Total.ToString();
 
                     cbUsers.Text = user.Login;
@@ -86,8 +87,8 @@ namespace SistemaVenda.View
         #region DataUpdate
         private async void DataUpdate()
         {
-
-            dgSale.DataSource = await SaleService.Get();
+            BindingList<Sale> sales = await SaleService.Get();
+            dgSale.DataSource = sales;
         }
         #endregion
 
@@ -127,7 +128,6 @@ namespace SistemaVenda.View
             cbUsers.DataSource = await UserService.Get();
             cbUsers.ValueMember = "employeeid";
             cbUsers.DisplayMember = "Name";
-
 
             dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -182,7 +182,7 @@ namespace SistemaVenda.View
             mtbAdditionCash.Text = "0.00";
             mtbAdditionPorcentage.Text = "0.00";
             mtbCashDiscount.Text = "0.00";
-            mtbPorcentageDiscount.Text = "0.00";
+            mtbPercentageDiscount.Text = "0.00";
             tabSale.SelectedTab = tpDetails;
             txtAddress.Clear();
         }
@@ -270,6 +270,11 @@ namespace SistemaVenda.View
                         TermPrice = Decimal.Parse(txtTermPrice.Text),
                     };
 
+                    if (product is null)
+                    {
+                        throw new ArgumentNullException("Selecione o produto para ser adicionado ao carrinho!");
+                    }
+
                     product.TotalPrice = rbtnSport.Checked ? product.CashPrice * Decimal.Parse(product.Amount.ToString()) : product.TermPrice * Decimal.Parse(product.Amount.ToString());
 
                     _proCarSh.Add(product);
@@ -293,7 +298,7 @@ namespace SistemaVenda.View
             }
             catch (ArgumentNullException ane)
             {
-                MessageBox.Show(ane.Message);
+                MessageBox.Show(ane.ParamName);
             }
             catch (Exception ex)
             {
@@ -307,7 +312,7 @@ namespace SistemaVenda.View
         {
             try
             {
-                if (dgShoppingCar.RowCount > 0)
+                if (dgShoppingCar.SelectedRows.Count > 0)
                 {
                     ProductShoppingCar product = (ProductShoppingCar)dgShoppingCar.SelectedRows[0].DataBoundItem;
 
@@ -320,8 +325,12 @@ namespace SistemaVenda.View
                 }
                 else
                 {
-                    MessageBox.Show("Carrinho está vazio.");
+                    throw new ArgumentNullException("Nenhum item foi selecionado.");
                 }
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.ParamName);
             }
             catch (Exception ex)
             {
@@ -331,10 +340,11 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnDelete_Click
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
             Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
             SaleService.Delete(sale.Id);
+            await Task.Delay(800);
             DataUpdate();
         }
         #endregion
@@ -345,7 +355,7 @@ namespace SistemaVenda.View
             try
             {
                 _proCarSh.Clear();
-                //_proCarSh = (BindingList<ProductShoppingCar>)dgShoppingCar.DataSource;
+               
                 _update = true;
                 DataDetails();
                 tabSale.SelectedTab = tpDetails;
@@ -432,9 +442,10 @@ namespace SistemaVenda.View
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if (mtbPorcentageDiscount.Text.Equals("0") || mtbPorcentageDiscount.Text == String.Empty)
+
+                    if (mtbPercentageDiscount.Text.Equals("0") || mtbPercentageDiscount.Text == String.Empty)
                     {
-                        _total = _proCarSh.Sum(p => p.TotalPrice);
+                        _total =_proCarSh.Sum(c => c.TotalPrice);
                         txtTotal.Clear();
                         txtTotal.Text = _total.ToString();
                         mtbCashDiscount.Text = "0.00";
@@ -442,7 +453,8 @@ namespace SistemaVenda.View
                     else
                     {
                         _total = Convert.ToDecimal(txtTotal.Text);
-                        Decimal.TryParse(mtbPorcentageDiscount.Text, out decimal value);
+
+                        Decimal.TryParse(mtbPercentageDiscount.Text, out decimal value);
                         decimal result = Calculator.Porcentage(total: _total, value: value);
                         mtbCashDiscount.Text = result.ToString();
                         _total -= result;
@@ -502,13 +514,13 @@ namespace SistemaVenda.View
                         _total = _proCarSh.Sum(p => p.TotalPrice);
                         txtTotal.Clear();
                         txtTotal.Text = _total.ToString();
-                        mtbPorcentageDiscount.Text = "0.00";
+                        mtbPercentageDiscount.Text = "0.00";
                     }
                     else
                     {
                         Decimal.TryParse(mtbCashDiscount.Text, out decimal value);
                         decimal result = Calculator.Cash(total: _total, value: value);
-                        mtbPorcentageDiscount.Text = result.ToString();
+                        mtbPercentageDiscount.Text = result.ToString();
                         _total -= value;
                         txtTotal.Text = _total.ToString();
                     }
@@ -594,11 +606,11 @@ namespace SistemaVenda.View
                     ClientId = Guid.Parse(txtClientId.Text),
                     EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
                     Date = DateTime.UtcNow,
-                    PercentageDiscount = Decimal.Parse(mtbPorcentageDiscount.Text),
-                    CashDiscount = Decimal.Parse(mtbCashDiscount.Text),
-                    AdditionCash = Decimal.Parse(mtbAdditionCash.Text),
-                    AdditionPorcentage = Decimal.Parse(mtbAdditionPorcentage.Text),
-                    Total = Decimal.Parse(txtTotal.Text),
+                    PercentageDiscount = Convert.ToDecimal(mtbPercentageDiscount.Text),
+                    CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
+                    AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
+                    AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
+                    Total = Convert.ToDecimal(txtTotal.Text)
                 };
 
                 if (_update)
