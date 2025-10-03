@@ -93,7 +93,7 @@ namespace SistemaVenda.Service
 
             return products;
         }
-        #endregion
+        #endregion  
 
         #region Post
         public static async void Post(Product product)
@@ -150,14 +150,14 @@ namespace SistemaVenda.Service
         #endregion
 
         #region StockManager
-        public static async Task<bool> StockManager(Guid productId, double withdrawal)
+        public static async Task<bool> StockManager(Guid productId, decimal withdrawal)
         {
             try
             {
                 bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.PutAsync($"Product/StockManage?productId={productId}&withdrawal={withdrawal}", null);
+                HttpResponseMessage response = await client.PutAsync($"Product/StockManager?productId={productId}&withdrawal={withdrawal}", null);
 
                 if (response.IsSuccessStatusCode)
                 {
