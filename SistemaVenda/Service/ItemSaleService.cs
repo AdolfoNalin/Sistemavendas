@@ -76,14 +76,14 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public static async Task<bool> Post(ItemSale item)
+        public static async Task<bool> Post(List<ItemSale> itens)
         {
             try
             {
                 bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.PostAsJsonAsync("ItemSale", item);
+                HttpResponseMessage response = await client.PostAsJsonAsync("ItemSale", itens);
 
                 if (response.IsSuccessStatusCode)
                 {
