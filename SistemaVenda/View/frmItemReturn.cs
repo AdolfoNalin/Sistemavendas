@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SistemaVenda.br.pro.com.model;
+using SistemaVenda.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +18,15 @@ namespace SistemaVenda.View
         {
             InitializeComponent();
         }
+
+        #region UpdateData
+        private async void UpdateData()
+        {
+            dgItemReturn.DataSource = await ItemReturnService.Get();
+        }
+        #endregion
+
+        #region UpdateDetails
+        #endregion
     }
 }
