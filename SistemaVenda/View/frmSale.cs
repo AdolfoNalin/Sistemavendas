@@ -175,6 +175,7 @@ namespace SistemaVenda.View
         #region btnNew
         private void btnNew_Click(object sender, EventArgs e)
         {
+            _update = false;
             dgShoppingCar.Rows.Clear();
             Helpers.ClearScreen(this);
             mtbCPF.Text = "000.000.000-00";
@@ -342,10 +343,17 @@ namespace SistemaVenda.View
         #region btnDelete_Click
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
-            SaleService.Delete(sale.Id);
-            await Task.Delay(800);
-            DataUpdate();
+            if(dgSale.SelectedRows.Count > 0)
+            {
+                Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
+                SaleService.Delete(sale.Id);
+                await Task.Delay(800);
+                DataUpdate();
+            }
+            else
+            {
+                MessageBox.Show("Selecione a venda na tabela");
+            }
         }
         #endregion
 
@@ -624,7 +632,7 @@ namespace SistemaVenda.View
                 Employee emp = await EmployeeService.Get(employeeId)
                     ?? throw new ArgumentNullException("Verifique se há um usuário selecionado para realizar a venda");
                 frmPayment screen = new frmPayment(client, _proCarSh, emp, sale, _update);
-
+                this.Hide();
                 screen.ShowDialog();
                 btnCancelar_Click(sender, e);
             }
