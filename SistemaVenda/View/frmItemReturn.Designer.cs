@@ -62,6 +62,7 @@
             this.txtShortDescription = new System.Windows.Forms.TextBox();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtProductId = new System.Windows.Forms.TextBox();
+            this.btnSearchProduct = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblEstoque = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -71,6 +72,8 @@
             this.gbClient = new System.Windows.Forms.GroupBox();
             this.mtbPhone = new System.Windows.Forms.MaskedTextBox();
             this.txtClientId = new System.Windows.Forms.TextBox();
+            this.btnPesquisarCliente = new System.Windows.Forms.Button();
+            this.btnSearchName = new System.Windows.Forms.Button();
             this.lblFone = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.lblEndereco = new System.Windows.Forms.Label();
@@ -79,23 +82,22 @@
             this.mtbCPF = new System.Windows.Forms.MaskedTextBox();
             this.lblCPF = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
-            this.btnPagar = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.dgShoppingCar = new System.Windows.Forms.DataGridView();
+            this.tabReturn = new System.Windows.Forms.TabPage();
+            this.dgSale = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearchProduct = new System.Windows.Forms.Button();
-            this.btnPesquisarCliente = new System.Windows.Forms.Button();
-            this.btnSearchName = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.tabSale.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItemReturn)).BeginInit();
@@ -103,6 +105,8 @@
             this.gbProduto.SuspendLayout();
             this.gbClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgShoppingCar)).BeginInit();
+            this.tabReturn.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSale)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -115,12 +119,13 @@
             this.tabSale.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabSale.Controls.Add(this.tpConsult);
             this.tabSale.Controls.Add(this.tpDetails);
+            this.tabSale.Controls.Add(this.tabReturn);
             this.tabSale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabSale.Location = new System.Drawing.Point(0, 100);
             this.tabSale.Multiline = true;
             this.tabSale.Name = "tabSale";
             this.tabSale.SelectedIndex = 0;
-            this.tabSale.Size = new System.Drawing.Size(1120, 347);
+            this.tabSale.Size = new System.Drawing.Size(1195, 474);
             this.tabSale.TabIndex = 8;
             // 
             // tpConsult
@@ -129,7 +134,7 @@
             this.tpConsult.Location = new System.Drawing.Point(23, 4);
             this.tpConsult.Name = "tpConsult";
             this.tpConsult.Padding = new System.Windows.Forms.Padding(3);
-            this.tpConsult.Size = new System.Drawing.Size(1093, 339);
+            this.tpConsult.Size = new System.Drawing.Size(1168, 466);
             this.tpConsult.TabIndex = 0;
             this.tpConsult.Text = "Consulta";
             this.tpConsult.UseVisualStyleBackColor = true;
@@ -144,8 +149,9 @@
             this.dgItemReturn.Location = new System.Drawing.Point(3, 3);
             this.dgItemReturn.Name = "dgItemReturn";
             this.dgItemReturn.ReadOnly = true;
-            this.dgItemReturn.Size = new System.Drawing.Size(1087, 333);
+            this.dgItemReturn.Size = new System.Drawing.Size(1162, 460);
             this.dgItemReturn.TabIndex = 0;
+            this.dgItemReturn.SelectionChanged += new System.EventHandler(this.dgItemReturn_SelectionChanged);
             // 
             // tpDetails
             // 
@@ -171,12 +177,12 @@
             this.tpDetails.Controls.Add(this.lblData);
             this.tpDetails.Controls.Add(this.gbProduto);
             this.tpDetails.Controls.Add(this.gbClient);
-            this.tpDetails.Controls.Add(this.btnPagar);
+            this.tpDetails.Controls.Add(this.btnReturn);
             this.tpDetails.Controls.Add(this.dgShoppingCar);
             this.tpDetails.Location = new System.Drawing.Point(23, 4);
             this.tpDetails.Name = "tpDetails";
             this.tpDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDetails.Size = new System.Drawing.Size(773, 242);
+            this.tpDetails.Size = new System.Drawing.Size(1168, 466);
             this.tpDetails.TabIndex = 1;
             this.tpDetails.Text = "Detalhes";
             this.tpDetails.UseVisualStyleBackColor = true;
@@ -465,6 +471,15 @@
             this.txtProductId.Size = new System.Drawing.Size(50, 20);
             this.txtProductId.TabIndex = 31;
             // 
+            // btnSearchProduct
+            // 
+            this.btnSearchProduct.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
+            this.btnSearchProduct.Location = new System.Drawing.Point(292, 40);
+            this.btnSearchProduct.Name = "btnSearchProduct";
+            this.btnSearchProduct.Size = new System.Drawing.Size(26, 26);
+            this.btnSearchProduct.TabIndex = 30;
+            this.btnSearchProduct.UseVisualStyleBackColor = true;
+            // 
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -568,6 +583,24 @@
             this.txtClientId.Size = new System.Drawing.Size(50, 20);
             this.txtClientId.TabIndex = 22;
             // 
+            // btnPesquisarCliente
+            // 
+            this.btnPesquisarCliente.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
+            this.btnPesquisarCliente.Location = new System.Drawing.Point(170, 41);
+            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
+            this.btnPesquisarCliente.Size = new System.Drawing.Size(26, 26);
+            this.btnPesquisarCliente.TabIndex = 21;
+            this.btnPesquisarCliente.UseVisualStyleBackColor = true;
+            // 
+            // btnSearchName
+            // 
+            this.btnSearchName.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
+            this.btnSearchName.Location = new System.Drawing.Point(341, 67);
+            this.btnSearchName.Name = "btnSearchName";
+            this.btnSearchName.Size = new System.Drawing.Size(26, 26);
+            this.btnSearchName.TabIndex = 20;
+            this.btnSearchName.UseVisualStyleBackColor = true;
+            // 
             // lblFone
             // 
             this.lblFone.AutoSize = true;
@@ -647,16 +680,16 @@
             this.lblID.TabIndex = 10;
             this.lblID.Text = "Código:";
             // 
-            // btnPagar
+            // btnReturn
             // 
-            this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagar.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPagar.Location = new System.Drawing.Point(899, 401);
-            this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(136, 43);
-            this.btnPagar.TabIndex = 37;
-            this.btnPagar.Text = "Pagar";
-            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturn.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnReturn.Location = new System.Drawing.Point(899, 401);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(136, 43);
+            this.btnReturn.TabIndex = 37;
+            this.btnReturn.Text = "Pagar";
+            this.btnReturn.UseVisualStyleBackColor = true;
             // 
             // dgShoppingCar
             // 
@@ -670,94 +703,53 @@
             this.dgShoppingCar.Size = new System.Drawing.Size(526, 305);
             this.dgShoppingCar.TabIndex = 35;
             // 
+            // tabReturn
+            // 
+            this.tabReturn.Controls.Add(this.dgSale);
+            this.tabReturn.Location = new System.Drawing.Point(23, 4);
+            this.tabReturn.Name = "tabReturn";
+            this.tabReturn.Padding = new System.Windows.Forms.Padding(3);
+            this.tabReturn.Size = new System.Drawing.Size(1168, 466);
+            this.tabReturn.TabIndex = 2;
+            this.tabReturn.Text = "Devolução";
+            this.tabReturn.UseVisualStyleBackColor = true;
+            // 
+            // dgSale
+            // 
+            this.dgSale.AllowUserToAddRows = false;
+            this.dgSale.AllowUserToDeleteRows = false;
+            this.dgSale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgSale.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dgSale.BackgroundColor = System.Drawing.SystemColors.ScrollBar;
+            this.dgSale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSale.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dgSale.Location = new System.Drawing.Point(3, 3);
+            this.dgSale.Name = "dgSale";
+            this.dgSale.ReadOnly = true;
+            this.dgSale.Size = new System.Drawing.Size(1162, 460);
+            this.dgSale.TabIndex = 0;
+            this.dgSale.SelectionChanged += new System.EventHandler(this.dgSale_SelectionChanged);
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 447);
+            this.panel2.Location = new System.Drawing.Point(0, 574);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1120, 100);
+            this.panel2.Size = new System.Drawing.Size(1195, 100);
             this.panel2.TabIndex = 7;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.btnCancel);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(761, 0);
+            this.panel5.Location = new System.Drawing.Point(836, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(359, 100);
             this.panel5.TabIndex = 4;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel4.Controls.Add(this.btnUpdate);
-            this.panel4.Controls.Add(this.btnDelete);
-            this.panel4.Controls.Add(this.btnNew);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(389, 100);
-            this.panel4.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1120, 100);
-            this.panel1.TabIndex = 6;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.btnSearch);
-            this.panel3.Controls.Add(this.txtSearch);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(-1, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1121, 100);
-            this.panel3.TabIndex = 4;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(222, 42);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(356, 21);
-            this.txtSearch.TabIndex = 0;
-            // 
-            // btnSearchProduct
-            // 
-            this.btnSearchProduct.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
-            this.btnSearchProduct.Location = new System.Drawing.Point(292, 40);
-            this.btnSearchProduct.Name = "btnSearchProduct";
-            this.btnSearchProduct.Size = new System.Drawing.Size(26, 26);
-            this.btnSearchProduct.TabIndex = 30;
-            this.btnSearchProduct.UseVisualStyleBackColor = true;
-            // 
-            // btnPesquisarCliente
-            // 
-            this.btnPesquisarCliente.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
-            this.btnPesquisarCliente.Location = new System.Drawing.Point(170, 41);
-            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
-            this.btnPesquisarCliente.Size = new System.Drawing.Size(26, 26);
-            this.btnPesquisarCliente.TabIndex = 21;
-            this.btnPesquisarCliente.UseVisualStyleBackColor = true;
-            // 
-            // btnSearchName
-            // 
-            this.btnSearchName.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
-            this.btnSearchName.Location = new System.Drawing.Point(341, 67);
-            this.btnSearchName.Name = "btnSearchName";
-            this.btnSearchName.Size = new System.Drawing.Size(26, 26);
-            this.btnSearchName.TabIndex = 20;
-            this.btnSearchName.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -772,6 +764,18 @@
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel4.Controls.Add(this.btnUpdate);
+            this.panel4.Controls.Add(this.btnDelete);
+            this.panel4.Controls.Add(this.btnNew);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(389, 100);
+            this.panel4.TabIndex = 0;
             // 
             // btnUpdate
             // 
@@ -812,6 +816,17 @@
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1195, 100);
+            this.panel1.TabIndex = 6;
+            // 
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
@@ -824,6 +839,16 @@
             this.btnExit.Text = "Sair";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnSearch);
+            this.panel3.Controls.Add(this.txtSearch);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(74, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1121, 100);
+            this.panel3.TabIndex = 4;
             // 
             // btnSearch
             // 
@@ -838,11 +863,20 @@
             this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSearch.UseVisualStyleBackColor = true;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(222, 42);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(356, 21);
+            this.txtSearch.TabIndex = 0;
+            // 
             // frmItemReturn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 547);
+            this.ClientSize = new System.Drawing.Size(1195, 674);
             this.Controls.Add(this.tabSale);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -858,6 +892,8 @@
             this.gbClient.ResumeLayout(false);
             this.gbClient.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgShoppingCar)).EndInit();
+            this.tabReturn.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgSale)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -923,7 +959,7 @@
         public System.Windows.Forms.MaskedTextBox mtbCPF;
         private System.Windows.Forms.Label lblCPF;
         private System.Windows.Forms.Label lblID;
-        public System.Windows.Forms.Button btnPagar;
+        public System.Windows.Forms.Button btnReturn;
         public System.Windows.Forms.DataGridView dgShoppingCar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
@@ -937,5 +973,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.TabPage tabReturn;
+        private System.Windows.Forms.DataGridView dgSale;
     }
 }
