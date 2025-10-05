@@ -17,6 +17,9 @@ using Google.Protobuf.WellKnownTypes;
 using SistemaVenda.Model;
 using ZstdSharp.Unsafe;
 using System.Management;
+using MySqlX.XDevAPI.Common;
+using Microsoft.Extensions.Logging;
+using iTextSharp.text.pdf.parser;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -208,40 +211,43 @@ namespace SistemaVenda.br.pro.com.view
                         Sale sale = await SaleService.LastSale() ??
                             throw new ArgumentNullException("Venda não foi identificada");
 
-                        foreach (var line in _proShoCar)
+                        List<ItemSale> itens = new List<ItemSale>();
+                        foreach(var i in _proShoCar)
                         {
                             ItemSale item = new ItemSale();
-
-                            List<Product> products = await ProductService.Get(line.ShortDescription);
+                            List<Product> products = await ProductService.Get(i.ShortDescription);
                             Product product = products.FirstOrDefault() ??
                                 throw new ArgumentNullException("");
 
-                            double withdrawal = 0;
-                            double amount = 0;
-
                             item.SaleId = sale.Id;
                             item.ProductId = product.Id;
-                            item.Amount = line.Amount;
-                            item.Subtotal = line.TotalPrice;
+                            item.Amount = i.Amount;
+                            item.Subtotal = i.TotalPrice;
 
-                            if (await ItemSaleService.Post(item))
-                            {
-                                double stock = product.Amount;
-                                amount += item.Amount;
-                                withdrawal = stock - amount;
-
-                                if (await ProductService.StockManager(item.ProductId, withdrawal))
-                                {
-
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("");
-                            }
+                            itens.Add(item);
                         }
 
-                        MessageBox.Show($"Venda realizada com sucesso!");
+                        bool result = false;
+                        if (await ItemSaleService.Post(itens))
+                        {
+                            foreach(var i in itens)
+                            {
+                                Product product = await ProductService.Get(i.ProductId);
+                                decimal withdrawal = Convert.ToDecimal(product.Amount - i.Amount);
+
+                                result = await ProductService.StockManager(productId: product.Id, withdrawal: withdrawal);
+
+                                if (result == false)
+                                {
+                                    throw new Exception("Algo deu errado!");
+                                }
+                            }
+
+                            if(result)
+                            {
+                                MessageBox.Show($"Venda realizada com sucesso!");
+                            }
+                        }
 
                         //ImprimirPDF();
 
@@ -260,28 +266,45 @@ namespace SistemaVenda.br.pro.com.view
                     bool value = await SaleService.Put(_sale);
                     if (value)
                     {
-                        foreach (var line in _proShoCar)
+                        foreach(var i in _proShoCar)
                         {
                             ItemSale item = new ItemSale();
-                            List<Product> products = await ProductService.Get(line.ShortDescription);
+                            List<Product> products = await ProductService.Get(i.ShortDescription);
                             Product product = products.FirstOrDefault() ??
                                 throw new ArgumentNullException("");
 
-                            //item.Id = await ItemSaleService.GetItemSale(_sale.Id);
                             item.SaleId = _sale.Id;
                             item.ProductId = product.Id;
-                            item.Amount = line.Amount;
-                            item.Subtotal = line.TotalPrice;
+                            item.Amount = i.Amount;
+                            item.Subtotal = i.TotalPrice;
 
                             itens.Add(item);
                         }
 
                         if(await ItemSaleService.Put(itens))
                         {
-                            MessageBox.Show($"Venda Atualizada com sucesso!");
-                        }
+                            bool result = false;
+                            foreach(var i in itens)
+                            {
+                                Product product = await ProductService.Get(i.ProductId);
+                                decimal withdrawall = Convert.ToDecimal(product.Amount - i.Amount);
+                                result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
 
-                        //ImprimirPDF();
+                                if (!result)
+                                {
+                                    throw new Exception("Algo deu errado");
+                                }
+                            }
+
+                            if(result)
+                            {
+                                MessageBox.Show($"Venda Atualizada com sucesso!");
+                            }
+                            else
+                            {
+                                throw new Exception("Algo de errado!");
+                            }
+                        }
 
                         this.Dispose();
                     }
