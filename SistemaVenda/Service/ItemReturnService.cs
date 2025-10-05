@@ -16,7 +16,7 @@ namespace SistemaVenda.Service
     public class ItemReturnService
     {
         #region Get
-        public async Task<List<ItemReturn>> Get()
+        public static async Task<List<ItemReturn>> Get()
         {
 			try
 			{
@@ -45,7 +45,7 @@ namespace SistemaVenda.Service
 		#endregion
 
 		#region GetId
-		public async Task<List<ItemReturn>> Get(Guid id)
+		public static async Task<List<ItemReturn>> Get(Guid id)
 		{
 			try
 			{
@@ -75,7 +75,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetSmart
-        public async Task<List<ItemReturn>> Get(string value)
+        public static async Task<List<ItemReturn>> Get(string value)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async void Post(ItemReturn item)
+        public static async void Post(ItemReturn item)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Put
-        public async void Put(ItemReturn item)
+        public static async void Put(ItemReturn item)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Delete
-        public async void Delete (Guid id)
+        public static async void Delete (Guid id)
         {
             try
             {
