@@ -308,6 +308,9 @@
     <EmbeddedResource Include="View\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\frmItemReturn.resx">
+      <DependentUpon>frmItemReturn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
