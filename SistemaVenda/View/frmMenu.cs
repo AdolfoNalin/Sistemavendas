@@ -69,7 +69,7 @@ namespace SistemaVenda.br.pro.com.view
 
         private void devoluçãoDeItensToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmItemReturn screen= new frmItemReturn();
+            frmReturn screen= new frmReturn();
             screen.ShowDialog();
         }
 
