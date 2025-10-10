@@ -79,6 +79,12 @@ namespace SistemaVenda.br.pro.com.view
             tabSupplier.SelectedTab = tpDetails;
             Helpers.ClearScreen(this);
             _update = false;
+
+            if(!_update)
+            {
+                mtbCNPJ.Enabled = true;
+                mtbIE.Enabled = true;
+            }
         }
         #endregion
 
