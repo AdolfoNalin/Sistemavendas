@@ -194,6 +194,7 @@
     <Compile Include="Model\ItemReturn.cs" />
     <Compile Include="Model\Persona.cs" />
     <Compile Include="Model\ProductShoppingCar.cs" />
+    <Compile Include="Model\Return.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Helpers\Endpoint.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Service\ItemReturnService.cs" />
     <Compile Include="Service\ItemSaleService.cs" />
     <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\ReturnService.cs" />
     <Compile Include="Service\SaleService.cs" />
     <Compile Include="Service\SupplierService.cs" />
     <Compile Include="Service\UserService.cs" />
@@ -237,11 +239,11 @@
     <Compile Include="View\frmEmployee.Designer.cs">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\frmItemReturn.cs">
+    <Compile Include="View\frmReturn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\frmItemReturn.Designer.cs">
-      <DependentUpon>frmItemReturn.cs</DependentUpon>
+    <Compile Include="View\frmReturn.Designer.cs">
+      <DependentUpon>frmReturn.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmLogin.cs">
       <SubType>Form</SubType>
@@ -308,8 +310,8 @@
     <EmbeddedResource Include="View\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\frmItemReturn.resx">
-      <DependentUpon>frmItemReturn.cs</DependentUpon>
+    <EmbeddedResource Include="View\frmReturn.resx">
+      <DependentUpon>frmReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
