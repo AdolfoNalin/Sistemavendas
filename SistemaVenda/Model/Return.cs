@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace SistemaVenda.Model
 {
-    public class Return : Sale
+    public class Return
     {
+        public Guid Id { get; set; }
+        public Guid SaleId { get; set; }
+        public Guid ClientId { get; set; }
+        public Guid EmployeeId { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Total { get; set; }
     }
 }
