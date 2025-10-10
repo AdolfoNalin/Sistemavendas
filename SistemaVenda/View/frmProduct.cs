@@ -69,11 +69,11 @@ namespace SistemaVenda.View
         #region Load
         private async void frmProduct_Load(object sender, EventArgs e)
         {
-            mtbDate.Text = DateTime.Now.ToString("dd/mm/yyyy");
+            mtbDate.Text = DateTime.Now.ToString();
 
             cbSuppliers.DataSource = await SupplierService.Get();
             cbSuppliers.ValueMember = "id";
-            cbSuppliers.DisplayMember = "name";
+            cbSuppliers.DisplayMember = "CompanyName";
         }
         #endregion
 
