@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SistemaVenda.br.pro.com.connection;
 using SistemaVenda.br.pro.com.model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -103,58 +105,84 @@ namespace SistemaVenda.Service
         }
         #endregion
 
-        #region Post
-        public static async void Post(ItemReturn item)
+        #region GetIdReturn
+        public static async Task<Guid> GetIdReturn(Guid returnId)
         {
             try
             {
-                string message = "";
-
+                Guid id = Guid.Empty;
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.PostAsJsonAsync("ItemReturn", item);
+                HttpResponseMessage response = await client.GetAsync($"ItemReturn/returnId/{returnId}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    id = JsonConvert.DeserializeObject<Guid>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
-                    message += await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
                 }
 
-                MessageBox.Show(message);
+                return id;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return Guid.Empty;
+            }
+        }
+        #endregion
+
+        #region Post
+        public static async Task<bool> Post(BindingList<ItemReturn> itens)
+        {
+            try
+            {
+                bool value = false;
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.PostAsJsonAsync("ItemReturn", itens);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    value = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
+
+                return value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
 
         #region Put
-        public static async void Put(ItemReturn item)
+        public static async Task<bool> Put(BindingList<ItemReturn> itens)
         {
             try
             {
-                string message = "";
+                bool value = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.PutAsJsonAsync("ItemReturn", item);
+                HttpResponseMessage response = await client.PutAsJsonAsync("ItemReturn", itens);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message += await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                    message += await response.Content.ReadAsStringAsync();
+                    value = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
                 }
 
-                MessageBox.Show(message);
+                return value;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
