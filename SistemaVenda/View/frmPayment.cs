@@ -296,14 +296,7 @@ namespace SistemaVenda.br.pro.com.view
                                 }
                             }
 
-                            if(result)
-                            {
-                                MessageBox.Show($"Venda Atualizada com sucesso!");
-                            }
-                            else
-                            {
-                                throw new Exception("Algo de errado!");
-                            }
+                            MessageBox.Show("Venda foi atualizada com sucesso!");
                         }
 
                         this.Dispose();
