@@ -111,14 +111,106 @@ namespace SistemaVenda.View
         #region Load
         private async void frmItemReturn_Load(object sender, EventArgs e)
         {
-            UpdateDataReturn();
-            UpdateDataSale();
+            
 
             mtbDate.Text = DateTime.Now.ToString();
 
             cbUsers.DataSource = await UserService.Get();
             cbUsers.ValueMember = "EmployeeId";
             cbUsers.DisplayMember = "name";
+
+            dgItemReturn.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgItemReturn.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "SaleId",
+                HeaderText = "Venda"
+            });
+
+            dgItemReturn.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "EmployeeId",
+                HeaderText = "Funcionário"
+            });
+
+            dgItemReturn.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Date",
+                HeaderText = "Data"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ClientId",
+                HeaderText = "Cliente"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Date",
+                HeaderText = "Data"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "EmployeeId",
+                HeaderText = "Funcionário"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PaymentMethod",
+                HeaderText = "Forma de Pagamento"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PercentageDiscount",
+                HeaderText = "Desconto Porcentagem"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CashDiscount",
+                HeaderText = "Desconto Dinheiro"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionPorcentage",
+                HeaderText = "Adicionar Porcentagem"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionCash",
+                HeaderText = "Adicionar Dinheiro"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Total",
+                HeaderText = "Total"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Observation",
+                HeaderText = "Observação"
+            });
+
+            UpdateDataReturn();
+            UpdateDataSale();
         }
         #endregion
 
