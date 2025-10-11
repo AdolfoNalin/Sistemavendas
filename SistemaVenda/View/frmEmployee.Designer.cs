@@ -725,6 +725,7 @@
             this.Name = "frmEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Forncedor";
+            this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.tabEmployee.ResumeLayout(false);
             this.tpConsult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgEmployee)).EndInit();
