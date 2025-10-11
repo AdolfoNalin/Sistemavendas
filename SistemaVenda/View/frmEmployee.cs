@@ -295,109 +295,109 @@ namespace SistemaVenda.br.pro.com.view
         #region Load
         private void frmEmployee_Load(object sender, EventArgs e)
         {
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Id",
                 HeaderText = "Código"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Name",
                 HeaderText = "Nome"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "ShortName",
                 HeaderText = "Apelido"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "CPF",
                 HeaderText = "CPF"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "RG",
                 HeaderText = "RG"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "MaritalStatus",
                 HeaderText = "Estado Civil"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Function",
                 HeaderText = "Função"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "DueDate",
                 HeaderText = "Data de Nascimento"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "PhoneNumber",
                 HeaderText = "Celular"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "TelephoneNumber",
                 HeaderText = "Telefone"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Email",
                 HeaderText = "Email"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "CEP",
                 HeaderText = "CEP"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "State",
                 HeaderText = "Estado"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "City",
                 HeaderText = "Cidade"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Neighborhoods",
                 HeaderText = "Bairro"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Street",
                 HeaderText = "Rua"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Number",
                 HeaderText = "Número"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewColumn()
+            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Complement",
                 HeaderText = "Complemento"
