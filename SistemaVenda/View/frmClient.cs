@@ -90,7 +90,107 @@ namespace SistemaVenda.br.pro.com.view
         #region Load
         private void frmClient_Load(object sender, EventArgs e)
         {
-           
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Name",
+                HeaderText = "Nome"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ShortName",
+                HeaderText = "Apelido"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CPF",
+                HeaderText = "CPF"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "RG",
+                HeaderText = "RG"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "MaritalStatus",
+                HeaderText = "Estado Civil"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "DueDate",
+                HeaderText = "Data de Nascimento"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PhoneNumber",
+                HeaderText = "Celular"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "TelephoneNumber",
+                HeaderText = "Telefone"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Email",
+                HeaderText = "Email"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CEP",
+                HeaderText = "CEP"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "State",
+                HeaderText = "Estado"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "City",
+                HeaderText = "Cidade"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Neighborhoods",
+                HeaderText = "Bairro"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Street",
+                HeaderText = "Rua"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Number",
+                HeaderText = "Número"
+            });
+
+            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Complement",
+                HeaderText = "Complemento"
+            });
         }
         #endregion
 
