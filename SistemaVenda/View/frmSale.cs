@@ -19,7 +19,6 @@ namespace SistemaVenda.View
         public frmSale()
         {
             InitializeComponent();
-            DataUpdate();
         }
 
         private BindingList<ProductShoppingCar> _proCarSh = new BindingList<ProductShoppingCar>();
@@ -120,8 +119,6 @@ namespace SistemaVenda.View
         #region Laod
         private async void frmSale_Load(object sender, EventArgs e)
         {
-            //await Task.Delay(1000);
-            DataUpdate();
             mtbDate.Text = DateTime.Now.ToString();
             txtClientId.Enabled = false;
             txtProductId.Enabled = false;
@@ -158,6 +155,74 @@ namespace SistemaVenda.View
                 DataPropertyName = "TotalPrice",
                 HeaderText = "Subtotal"
             });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ClientId",
+                HeaderText = "Cliente"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Date",
+                HeaderText = "Data"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "EmployeeId",
+                HeaderText = "Funcionário"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PaymentMethod",
+                HeaderText = "Forma de Pagamento"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PercentageDiscount",
+                HeaderText = "Desconto Porcentagem"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CashDiscount",
+                HeaderText = "Desconto Dinheiro"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionPorcentage",
+                HeaderText = "Adicionar Porcentagem"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionCash",
+                HeaderText = "Adicionar Dinheiro"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Total",
+                HeaderText = "Total"
+            });
+
+            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Observation",
+                HeaderText = "Observação"
+            });
+
+            DataUpdate();
 
             rbtnSport.Checked = true;
 
