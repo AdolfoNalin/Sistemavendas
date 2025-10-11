@@ -22,7 +22,7 @@ namespace SistemaVenda.View
         public frmProduct()
         {
             InitializeComponent();
-            UpdateData();
+            //UpdateData();
         }
 
         #region UpdateData
@@ -30,7 +30,7 @@ namespace SistemaVenda.View
         {
             try
             {
-                List<Product> products = await ProductService.Get();
+                BindingList<Product> products = await ProductService.Get();
                 dgProduct.DataSource = products;
             }
             catch(ArgumentNullException ane)
@@ -74,6 +74,68 @@ namespace SistemaVenda.View
             cbSuppliers.DataSource = await SupplierService.Get();
             cbSuppliers.ValueMember = "id";
             cbSuppliers.DisplayMember = "CompanyName";
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "SupplierId",
+                HeaderText = "Fornecedor"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ShortDescription",
+                HeaderText = "Descrição Resumida"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "FullDescription",
+                HeaderText = "Descrição Completa"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Date",
+                HeaderText = "Data"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "UniMeasure",
+                HeaderText = "Unidade Medida"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Amount",
+                HeaderText = "Quantidade"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CashPrice",
+                HeaderText = "Preço á Vista"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "TermPrice",
+                HeaderText = "Preço á Prazo"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "TotalPrice",
+                HeaderText = "Total"
+            });
+
+            UpdateData();
         }
         #endregion
 
