@@ -19,7 +19,6 @@ namespace SistemaVenda.View
         public frmUser()
         {
             InitializeComponent();
-            UpdateData();
         }
 
         private List<String> authorizations = null;
@@ -57,6 +56,30 @@ namespace SistemaVenda.View
             cbEmployees.DataSource = await EmployeeService.Get();
             cbEmployees.ValueMember = "id";
             cbEmployees.DisplayMember = "name";
+
+            dgUser.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "Código"
+            });
+
+            dgUser.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "EmployeeId",
+                HeaderText = "Funcionário"
+            });
+
+            dgUser.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Name",
+                HeaderText = "Nome"
+            });
+
+            dgUser.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Authorizations",
+                HeaderText = "Autorizações"
+            });
         }
         #endregion
 
