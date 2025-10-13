@@ -19,7 +19,7 @@ namespace SistemaVenda.Service
     public class CashDesckService
     {
         #region Get
-        public async Task<BindingList<CashDesck>> Get()
+        public static async Task<BindingList<CashDesck>> Get()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetDate
-        public async Task<BindingList<CashDesck>> Get(DateTime startDate, DateTime endDate)
+        public static async Task<BindingList<CashDesck>> Get(DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetEmployee
-        public async Task<BindingList<CashDesck>> GetEmployee(string value)
+        public static async Task<BindingList<CashDesck>> GetEmployee(string value)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public async void Post(CashDesck cash)
+        public static async void Post(CashDesck cash)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Put
-        public async void Put(CashDesck cash)
+        public static async void Put(CashDesck cash)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Delete
-        public async void Delete(Guid id)
+        public static async void Delete(Guid id)
         {
             try
             {
