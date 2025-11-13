@@ -1,4 +1,5 @@
-﻿using SistemaVenda.Service;
+﻿using SistemaVenda.Model;
+using SistemaVenda.Service;
 using SistemaVenda.View;
 using System;
 using System.Collections.Generic;
@@ -57,16 +58,6 @@ namespace SistemaVenda.br.pro.com.view
             screen.ShowDialog();
         }
 
-        private void caixaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void configuraçõesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void devoluçãoDeItensToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmReturn screen= new frmReturn();
@@ -76,6 +67,47 @@ namespace SistemaVenda.br.pro.com.view
         private void usuárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmUser screen = new frmUser();
+            screen.ShowDialog();
+        }
+
+        private void trocaDeUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPassword screem = new frmPassword();
+            screem.ShowDialog();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(CashDesck.Status == IsCashSession.Close)
+            {
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
+
+                if(screen.user.User != null)
+                {
+                    DialogResult result = MessageBox.Show("Deseja mesmo sair do Sistema", "Atenção", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        Application.Exit();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Para continuar com o desligamento do serviços. É necessário o fechamento do caixa");
+            }
+        }
+
+        private void caixaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCashSession screen = new frmCashSession();
+            screen.ShowDialog();
+        }
+
+        private void btnBudget_Click(object sender, EventArgs e)
+        {
+            frmBudget screen = new frmBudget();
             screen.ShowDialog();
         }
     }

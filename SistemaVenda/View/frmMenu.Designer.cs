@@ -37,6 +37,8 @@
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caixaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.movimentaçToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devoluçãoDeItensToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trocaDeUsuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,8 +47,7 @@
             this.lblNome = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDatasistema = new System.Windows.Forms.Label();
-            this.btnConsultarOrcamento = new System.Windows.Forms.Button();
-            this.btnCadastrarOrcamento = new System.Windows.Forms.Button();
+            this.btnBudget = new System.Windows.Forms.Button();
             this.mcCalentarioMenu = new System.Windows.Forms.MonthCalendar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -129,19 +130,34 @@
             this.vendasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
             this.vendasToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Venda;
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
-            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(101, 44);
-            this.vendasToolStripMenuItem.Text = "Vendas";
+            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(95, 44);
+            this.vendasToolStripMenuItem.Text = "Venda";
             this.vendasToolStripMenuItem.Click += new System.EventHandler(this.vendasToolStripMenuItem_Click);
             // 
             // caixaToolStripMenuItem
             // 
+            this.caixaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.caixaToolStripMenuItem1,
+            this.movimentaçToolStripMenuItem});
             this.caixaToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.caixaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
             this.caixaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("caixaToolStripMenuItem.Image")));
             this.caixaToolStripMenuItem.Name = "caixaToolStripMenuItem";
             this.caixaToolStripMenuItem.Size = new System.Drawing.Size(90, 44);
             this.caixaToolStripMenuItem.Text = "Caixa";
-            this.caixaToolStripMenuItem.Click += new System.EventHandler(this.caixaToolStripMenuItem_Click);
+            // 
+            // caixaToolStripMenuItem1
+            // 
+            this.caixaToolStripMenuItem1.Name = "caixaToolStripMenuItem1";
+            this.caixaToolStripMenuItem1.Size = new System.Drawing.Size(214, 22);
+            this.caixaToolStripMenuItem1.Text = "Caixa";
+            this.caixaToolStripMenuItem1.Click += new System.EventHandler(this.caixaToolStripMenuItem1_Click);
+            // 
+            // movimentaçToolStripMenuItem
+            // 
+            this.movimentaçToolStripMenuItem.Name = "movimentaçToolStripMenuItem";
+            this.movimentaçToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.movimentaçToolStripMenuItem.Text = "Movimentações do caixa";
             // 
             // devoluçãoDeItensToolStripMenuItem1
             // 
@@ -164,19 +180,20 @@
             this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
             this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(140, 44);
             this.configuraçõesToolStripMenuItem.Text = "Configurações";
-            this.configuraçõesToolStripMenuItem.Click += new System.EventHandler(this.configuraçõesToolStripMenuItem_Click);
             // 
             // trocaDeUsuárioToolStripMenuItem
             // 
             this.trocaDeUsuárioToolStripMenuItem.Name = "trocaDeUsuárioToolStripMenuItem";
             this.trocaDeUsuárioToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.trocaDeUsuárioToolStripMenuItem.Text = "Troca de Usuário";
+            this.trocaDeUsuárioToolStripMenuItem.Click += new System.EventHandler(this.trocaDeUsuárioToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -222,29 +239,18 @@
             this.lblDatasistema.TabIndex = 4;
             this.lblDatasistema.Text = "data";
             // 
-            // btnConsultarOrcamento
+            // btnBudget
             // 
-            this.btnConsultarOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultarOrcamento.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnConsultarOrcamento.Location = new System.Drawing.Point(14, 113);
-            this.btnConsultarOrcamento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnConsultarOrcamento.Name = "btnConsultarOrcamento";
-            this.btnConsultarOrcamento.Size = new System.Drawing.Size(181, 23);
-            this.btnConsultarOrcamento.TabIndex = 5;
-            this.btnConsultarOrcamento.Text = "Consultar Orçamento";
-            this.btnConsultarOrcamento.UseVisualStyleBackColor = true;
-            // 
-            // btnCadastrarOrcamento
-            // 
-            this.btnCadastrarOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCadastrarOrcamento.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCadastrarOrcamento.Location = new System.Drawing.Point(14, 87);
-            this.btnCadastrarOrcamento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCadastrarOrcamento.Name = "btnCadastrarOrcamento";
-            this.btnCadastrarOrcamento.Size = new System.Drawing.Size(181, 23);
-            this.btnCadastrarOrcamento.TabIndex = 6;
-            this.btnCadastrarOrcamento.Text = "Cadastrar Orçamento";
-            this.btnCadastrarOrcamento.UseVisualStyleBackColor = true;
+            this.btnBudget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBudget.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBudget.Location = new System.Drawing.Point(17, 72);
+            this.btnBudget.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnBudget.Name = "btnBudget";
+            this.btnBudget.Size = new System.Drawing.Size(99, 23);
+            this.btnBudget.TabIndex = 6;
+            this.btnBudget.Text = "Orçamento";
+            this.btnBudget.UseVisualStyleBackColor = true;
+            this.btnBudget.Click += new System.EventHandler(this.btnBudget_Click);
             // 
             // mcCalentarioMenu
             // 
@@ -264,8 +270,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1215, 450);
             this.Controls.Add(this.mcCalentarioMenu);
-            this.Controls.Add(this.btnCadastrarOrcamento);
-            this.Controls.Add(this.btnConsultarOrcamento);
+            this.Controls.Add(this.btnBudget);
             this.Controls.Add(this.lblDatasistema);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblNome);
@@ -303,11 +308,12 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label lblNome;
         public System.Windows.Forms.Label lblDatasistema;
-        private System.Windows.Forms.Button btnConsultarOrcamento;
-        private System.Windows.Forms.Button btnCadastrarOrcamento;
+        private System.Windows.Forms.Button btnBudget;
         private System.Windows.Forms.MonthCalendar mcCalentarioMenu;
         private System.Windows.Forms.ToolStripMenuItem devoluçãoDeItensToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem vendasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuárioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem caixaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem movimentaçToolStripMenuItem;
     }
 }
