@@ -109,6 +109,36 @@ namespace SistemaVenda.Service
         }
         #endregion
 
+        #region GetCash
+        public static async Task<BindingList<Sale>> GetCash(Guid cashId)
+        {
+            try
+            {
+
+                BindingList<Sale> list = null;
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync($"Sale/CashSession/{cashId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    list = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync(), "Aconteceu um erro");
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
         #region GetSmart
         public static async Task<BindingList<Sale>> Get(string value)
         {
