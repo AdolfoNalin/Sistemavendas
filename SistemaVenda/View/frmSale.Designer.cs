@@ -830,9 +830,9 @@
             this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.txtSearch);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(22, 0);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1121, 100);
+            this.panel3.Size = new System.Drawing.Size(1143, 100);
             this.panel3.TabIndex = 4;
             // 
             // btnSearch

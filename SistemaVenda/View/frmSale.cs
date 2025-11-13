@@ -408,16 +408,22 @@ namespace SistemaVenda.View
         #region btnDelete_Click
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgSale.SelectedRows.Count > 0)
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
+
+            if(screen.user.User != null)
             {
-                Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
-                SaleService.Delete(sale.Id);
-                await Task.Delay(800);
-                DataUpdate();
-            }
-            else
-            {
-                MessageBox.Show("Selecione a venda na tabela");
+                if (dgSale.SelectedRows.Count > 0)
+                {
+                    Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
+                    SaleService.Delete(sale.Id);
+                    await Task.Delay(800);
+                    DataUpdate();
+                }
+                else
+                {
+                    MessageBox.Show("Selecione a venda na tabela");
+                }
             }
         }
         #endregion
@@ -427,11 +433,17 @@ namespace SistemaVenda.View
         {
             try
             {
-                _proCarSh.Clear();
-               
-                _update = true;
-                DataDetails();
-                tabSale.SelectedTab = tpDetails;
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
+
+                if (screen.user.User != null)
+                {
+                    _proCarSh.Clear();
+
+                    _update = true;
+                    DataDetails();
+                    tabSale.SelectedTab = tpDetails;
+                }
             }
             catch (Exception ex)
             {
@@ -674,32 +686,42 @@ namespace SistemaVenda.View
         {
             try
             {
-                Sale sale = new Sale()
+                if(CashDesck.Status == IsCashSession.Open)
                 {
-                    ClientId = Guid.Parse(txtClientId.Text),
-                    EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
-                    Date = DateTime.UtcNow,
-                    PercentageDiscount = Convert.ToDecimal(mtbPercentageDiscount.Text),
-                    CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
-                    AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
-                    AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
-                    Total = Convert.ToDecimal(txtTotal.Text)
-                };
+                    Sale sale = new Sale()
+                    {
+                        CashId = CashDesck.Id,
+                        ClientId = Guid.Parse(txtClientId.Text),
+                        EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
+                        Date = DateTime.UtcNow,
+                        PercentageDiscount = Convert.ToDecimal(mtbPercentageDiscount.Text),
+                        CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
+                        AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
+                        AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
+                        Total = Convert.ToDecimal(txtTotal.Text)
+                    };
 
-                if (_update)
-                {
-                   sale.Id = Guid.Parse(txtId.Text);
+                    if (_update)
+                    {
+                        sale.Id = Guid.Parse(txtId.Text);
+                    }
+
+                    Guid.TryParse(cbUsers.SelectedValue.ToString(), out Guid employeeId);
+                    Guid.TryParse(txtClientId.Text, out Guid clientId);
+                    Client client = await ClientService.Get(clientId);
+                    Employee emp = await EmployeeService.Get(employeeId)
+                        ?? throw new ArgumentNullException("Verifique se há um usuário selecionado para realizar a venda");
+
+                    frmPayment screen = new frmPayment(client, _proCarSh, emp, sale, _update);
+                    this.Hide();
+                    screen.ShowDialog();
+                    btnCancelar_Click(sender, e);
                 }
-
-                Guid.TryParse(cbUsers.SelectedValue.ToString(), out Guid employeeId);
-                Guid.TryParse(txtClientId.Text, out Guid clientId);
-                Client client = await ClientService.Get(clientId);
-                Employee emp = await EmployeeService.Get(employeeId)
-                    ?? throw new ArgumentNullException("Verifique se há um usuário selecionado para realizar a venda");
-                frmPayment screen = new frmPayment(client, _proCarSh, emp, sale, _update);
-                this.Hide();
-                screen.ShowDialog();
-                btnCancelar_Click(sender, e);
+                else
+                {
+                    MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
+                }
+               
             }
             catch (Exception ex)
             {
