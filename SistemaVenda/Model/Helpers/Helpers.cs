@@ -83,7 +83,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                     }
                 }
 
-                screen.txtCodigo.Text = BudgetService.GetLastBudget().ToString();
+                screen.txtClientId.Text = BudgetService.GetLastBudget().ToString();
             }
             catch(ArgumentNullException ane)
             {
