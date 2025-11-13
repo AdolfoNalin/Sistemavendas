@@ -87,7 +87,11 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtPassword);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPassword";
+            this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Senha";
             this.ResumeLayout(false);
             this.PerformLayout();

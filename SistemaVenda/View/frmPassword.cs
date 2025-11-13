@@ -1,5 +1,9 @@
-﻿using SistemaVenda.br.pro.com.model.Helpers;
+﻿using Org.BouncyCastle.Asn1.Ocsp;
+using SistemaVenda.br.pro.com.model;
+using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.Model;
+using SistemaVenda.Model.Helpers;
+using SistemaVenda.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +23,8 @@ namespace SistemaVenda.View
             InitializeComponent();
         }
 
+        public UserResponse user = new UserResponse();
+
         #region btnCancel_Click
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -27,11 +33,13 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnNext_click
-        private void btnNext_Click(object sender, EventArgs e)
+        private async void btnNext_Click(object sender, EventArgs e)
         {
-            string hash = PasswordGenerator.Generator(txtPassword.Text);
-            
-            
+            user = await VerificationPassword.Verification(txtPassword.Text);
+            if (user != null) 
+            { 
+                Hide();
+            }
         }
         #endregion
     }
