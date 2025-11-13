@@ -159,8 +159,37 @@ namespace SistemaVenda.Service
 		}
         #endregion
 
+        #region GetPassword
+		public static async Task<UserResponse> GetPassword(string password)
+		{
+			try
+			{
+				UserResponse user = new UserResponse();
+
+				HttpClient client = ConnectionFactory.ConnectionLocalhost();
+				HttpResponseMessage response = await client.GetAsync($"User/Password?password={password}");
+
+				if(response.IsSuccessStatusCode)
+				{
+					user = JsonConvert.DeserializeObject<UserResponse>(await response.Content.ReadAsStringAsync());
+				}
+				else
+				{
+					MessageBox.Show(await response.Content.ReadAsStringAsync());
+				}
+
+				return user;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+				return null;
+			}
+		}
+        #endregion
+
         #region Post
-		public static async void Post(User user)
+        public static async void Post(User user)
 		{
 			try
 			{
