@@ -112,45 +112,51 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                Employee employee = new Employee()
-                {
-                    Name = txtName.Text ?? throw new ArgumentNullException("Nome do Funcionário não pode ser vázio", "Atenção"),
-                    ShortName = txtShortName.Text,
-                    CPF = mtbCPF.Text ?? throw new ArgumentNullException("CPF não pode ser vázio", "Atenção"),
-                    RG = mtbRG.Text.Count() == 10 ? null : mtbRG.Text,
-                    TelephoneNumber = mtbTelephoneNumber.Text.Count() == 11 ? null : mtbTelephoneNumber.Text,
-                    MaritalStatus = cbMaritalStatus.Text ?? throw new ArgumentNullException("Estado Civil não pode ser vazio", "Atenção"),
-                    PhoneNumber = mtbPhoneNumber.Text ?? throw new ArgumentNullException("Número de celular não pode ser vázio"),
-                    Email = txtEmail.Text,
-                    CEP = mtbCEP.Text ?? throw new ArgumentNullException("CEP não pode ser vazio!", "Atenção"),
-                    State = cbUF.Text ?? throw new ArgumentNullException("Estado não pode ser vazio", "Atenção"),
-                    City = txtCity.Text ?? throw new ArgumentNullException("Cidade não pode ser vazio", "Atenção"),
-                    Street = txtStreet.Text ?? throw new ArgumentNullException("Logradouro não pode ser vazio", "Atenção"),
-                    Neighborhoods = txtNeighborhood.Text ?? throw new ArgumentNullException("Bairro não pode ser vazio", "Atenção"),
-                    Number = int.Parse(txtNumber.Text ?? throw new ArgumentNullException("Numero não pode ser vazio", "Atenção")),
-                    Complement = txtComplement.Text,
-                    Function = txtFunction.Text ?? throw new ArgumentNullException("Função não pode ser vazio", "Atenção"),
-                }; 
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                if (employee is null)
+                if (screen.user.User != null)
                 {
-                    throw new ArgumentException("Funcionário é nulo");
-                }
+                    Employee employee = new Employee()
+                    {
+                        Name = txtName.Text ?? throw new ArgumentNullException("Nome do Funcionário não pode ser vázio", "Atenção"),
+                        ShortName = txtShortName.Text,
+                        CPF = mtbCPF.Text ?? throw new ArgumentNullException("CPF não pode ser vázio", "Atenção"),
+                        RG = mtbRG.Text.Count() == 10 ? null : mtbRG.Text,
+                        TelephoneNumber = mtbTelephoneNumber.Text.Count() == 11 ? null : mtbTelephoneNumber.Text,
+                        MaritalStatus = cbMaritalStatus.Text ?? throw new ArgumentNullException("Estado Civil não pode ser vazio", "Atenção"),
+                        PhoneNumber = mtbPhoneNumber.Text ?? throw new ArgumentNullException("Número de celular não pode ser vázio"),
+                        Email = txtEmail.Text,
+                        CEP = mtbCEP.Text ?? throw new ArgumentNullException("CEP não pode ser vazio!", "Atenção"),
+                        State = cbUF.Text ?? throw new ArgumentNullException("Estado não pode ser vazio", "Atenção"),
+                        City = txtCity.Text ?? throw new ArgumentNullException("Cidade não pode ser vazio", "Atenção"),
+                        Street = txtStreet.Text ?? throw new ArgumentNullException("Logradouro não pode ser vazio", "Atenção"),
+                        Neighborhoods = txtNeighborhood.Text ?? throw new ArgumentNullException("Bairro não pode ser vazio", "Atenção"),
+                        Number = int.Parse(txtNumber.Text ?? throw new ArgumentNullException("Numero não pode ser vazio", "Atenção")),
+                        Complement = txtComplement.Text,
+                        Function = txtFunction.Text ?? throw new ArgumentNullException("Função não pode ser vazio", "Atenção"),
+                    };
 
-                if (_update)
-                {
-                    employee.Id = Guid.Parse(txtId.Text ?? throw new ArgumentNullException("Código é nulo, verifique o Funcionário"));
-                    EmployeeService.Put(employee);
-                }
-                else
-                {
-                    EmployeeService.Post(employee);
-                }
+                    if (employee is null)
+                    {
+                        throw new ArgumentException("Funcionário é nulo");
+                    }
 
-                await Task.Delay(1500);
-                UpdateData();
-                
-                tabEmployee.SelectedTab = tpConsult;
+                    if (_update)
+                    {
+                        employee.Id = Guid.Parse(txtId.Text ?? throw new ArgumentNullException("Código é nulo, verifique o Funcionário"));
+                        EmployeeService.Put(employee);
+                    }
+                    else
+                    {
+                        EmployeeService.Post(employee);
+                    }
+
+                    await Task.Delay(1500);
+                    UpdateData();
+
+                    tabEmployee.SelectedTab = tpConsult;
+                }
             }
             catch(ArgumentNullException ane)
             {
@@ -283,12 +289,18 @@ namespace SistemaVenda.br.pro.com.view
         #region btnDelete_Click
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            Guid.TryParse(txtId.Text, out Guid id);
-            EmployeeService.Delete(id);
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
 
-            await Task.Delay(1500);
-            UpdateData();
-            tabEmployee.SelectedTab = tpConsult;
+            if(screen.user.User != null)
+            {
+                Guid.TryParse(txtId.Text, out Guid id);
+                EmployeeService.Delete(id);
+
+                await Task.Delay(1500);
+                UpdateData();
+                tabEmployee.SelectedTab = tpConsult;
+            }
         }
         #endregion
 
