@@ -32,8 +32,6 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                //string hashPassword = PasswordGenerator.Generator(txtPassword.Text);
-
                 UserResquest user = new UserResquest()
                 {
                     Login = txtName.Text,
