@@ -17,18 +17,18 @@ namespace SistemaVenda.Service
     public class ProductService
     {
         #region Get
-        public static async Task<List<Product>> Get()
+        public static async Task<BindingList<Product>> Get()
         {
             try
             {
-                List<Product> products = null;
+                BindingList<Product> products = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.GetAsync("Product");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    products = JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync());
+                    products = JsonConvert.DeserializeObject<BindingList<Product>>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
