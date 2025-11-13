@@ -234,22 +234,10 @@ namespace SistemaVenda.br.pro.com.view
         private void btnNew_Click(object sender, EventArgs e)
         {
             _update = false;
-            txtId.Text = String.Empty;
-            txtNome.Text = String.Empty;
-            txtApelido.Text = String.Empty;
-            txtEmail.Text = String.Empty;
-            mtbRG.Text = String.Empty;
-            mtbCPF.Text = String.Empty;
-            mtbTelefone.Text = String.Empty;
-            mtbCelular.Text = String.Empty;
-            mtbCEP.Text = String.Empty;
-            txtLogradouro.Text = String.Empty;
-            txtNumero.Text = String.Empty; 
-            txtComplemento.Text = String.Empty;
-            txtBairro.Text = String.Empty;
-            txtCidade.Text = String.Empty;
-            cbUF.Text = String.Empty;
 
+            Helpers.ClearScreen(this);
+
+            mtbCPF.Enabled = true;
             tabClient.SelectedTab = tpDetails;
         }
         #endregion
@@ -279,12 +267,18 @@ namespace SistemaVenda.br.pro.com.view
         {
             //uid.TryParse(txtId.Text, out Guid id);
 
-            Client client = dgClient.SelectedRows[0].DataBoundItem as Client;
-            ClientService.Delete(client.Id);
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
 
-            await Task.Delay(1500);
-            UpdateData();
-            tabClient.SelectedTab = tpConsult;
+            if(screen.user.User !=  null)
+            {
+                Client client = dgClient.SelectedRows[0].DataBoundItem as Client;
+                ClientService.Delete(client.Id);
+
+                await Task.Delay(1500);
+                UpdateData();
+                tabClient.SelectedTab = tpConsult;
+            }
         }
         #endregion
 
@@ -293,47 +287,53 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                Client obj = new Client();
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                DateTime.TryParse(mtbDueDate.Text, out DateTime dt);
-
-                obj.Name = txtNome.Text ?? throw new ArgumentNullException("Verifique se o nome não é nulo");
-                obj.ShortName = txtApelido?.Text;
-                obj.CPF = mtbCPF.Text ?? throw new ArgumentNullException("Verifique se o CPF não é nulo");
-                obj.RG = mtbRG?.Text.Count() == 11 ? null : mtbRG.Text ;
-                obj.DueDate = dt.ToUniversalTime();
-                obj.Email = txtEmail?.Text;
-                obj.MaritalStatus = cbEstadoCivil.Text ?? throw new ArgumentNullException("Verifique se o Estado civil é nulo");
-                obj.PhoneNumber = mtbCelular.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo");
-                obj.TelephoneNumber = mtbTelefone?.Text.Count() == 10 ? null : mtbTelefone.Text;
-                obj.CEP = mtbCEP.Text ?? throw new ArgumentNullException("Verifique se o CEP não é nulo");
-                obj.Street = txtLogradouro.Text ?? throw new ArgumentNullException("Verifique se Logradouro não é nulo");
-                obj.Number = int.Parse(txtNumero.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo"));
-                obj.Complement = txtComplemento?.Text;
-                obj.Neighborhoods = txtBairro.Text ?? throw new ArgumentNullException("Verifique se o Bairro não é nulo");
-                obj.City = txtCidade.Text ?? throw new ArgumentNullException("Verifique se a Cidade não é nulo");
-                obj.State = cbUF.Text ?? throw new ArgumentNullException("Verifique se as Siglas não são nulas");
-                
-
-                if (obj is null)
+                if(screen.user.User != null)
                 {
-                    throw new NullReferenceException("Clinte está nulo, impossivel salvar");
-                }
+                    Client obj = new Client();
 
-                if(_update)
-                {
-                    obj.Id = Guid.Parse(txtId.Text ?? throw new ArgumentNullException("Código é nulo, verifique o cliente"));
-                    ClientService.Put(obj);
-                    await Task.Delay(3000);
-                    UpdateData();
-                    tabClient.SelectedTab = tpConsult;
-                }
-                else
-                {
-                    ClientService.Post(obj);
-                    await Task.Delay(3000);
-                    UpdateData();
-                    tabClient.SelectedTab = tpConsult;
+                    DateTime.TryParse(mtbDueDate.Text, out DateTime dt);
+
+                    obj.Name = txtNome.Text ?? throw new ArgumentNullException("Verifique se o nome não é nulo");
+                    obj.ShortName = txtApelido?.Text;
+                    obj.CPF = mtbCPF.Text ?? throw new ArgumentNullException("Verifique se o CPF não é nulo");
+                    obj.RG = mtbRG?.Text.Count() == 11 ? null : mtbRG.Text;
+                    obj.DueDate = dt.ToUniversalTime();
+                    obj.Email = txtEmail?.Text;
+                    obj.MaritalStatus = cbEstadoCivil.Text ?? throw new ArgumentNullException("Verifique se o Estado civil é nulo");
+                    obj.PhoneNumber = mtbCelular.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo");
+                    obj.TelephoneNumber = mtbTelefone?.Text.Count() == 10 ? null : mtbTelefone.Text;
+                    obj.CEP = mtbCEP.Text ?? throw new ArgumentNullException("Verifique se o CEP não é nulo");
+                    obj.Street = txtLogradouro.Text ?? throw new ArgumentNullException("Verifique se Logradouro não é nulo");
+                    obj.Number = int.Parse(txtNumero.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo"));
+                    obj.Complement = txtComplemento?.Text;
+                    obj.Neighborhoods = txtBairro.Text ?? throw new ArgumentNullException("Verifique se o Bairro não é nulo");
+                    obj.City = txtCidade.Text ?? throw new ArgumentNullException("Verifique se a Cidade não é nulo");
+                    obj.State = cbUF.Text ?? throw new ArgumentNullException("Verifique se as Siglas não são nulas");
+
+
+                    if (obj is null)
+                    {
+                        throw new NullReferenceException("Clinte está nulo, impossivel salvar");
+                    }
+
+                    if (_update)
+                    {
+                        obj.Id = Guid.Parse(txtId.Text ?? throw new ArgumentNullException("Código é nulo, verifique o cliente"));
+                        ClientService.Put(obj);
+                        await Task.Delay(3000);
+                        UpdateData();
+                        tabClient.SelectedTab = tpConsult;
+                    }
+                    else
+                    {
+                        ClientService.Post(obj);
+                        await Task.Delay(3000);
+                        UpdateData();
+                        tabClient.SelectedTab = tpConsult;
+                    }
                 }
             }
             catch(NullReferenceException ne)
