@@ -2,6 +2,7 @@
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.Service;
+using SistemaVenda.View;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -199,41 +200,48 @@ namespace SistemaVenda.br.pro.com.view
         #region btnSave_Click
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            Supplier supplier = new Supplier() {
-                Name = txtNome.Text,
-                CompanyName = txtApelido.Text,
-                Email = txtEmail.Text,
-                CNPJ = mtbCNPJ.Text,
-                IE = mtbIE.Text,
-                PhoneNumber = mtbCelular.Text,
-                TelephoneNumber = mtbTelefone.Text,
-                CEP = mtbCEP.Text,
-                State = cbUF.Text,
-                City = txtCidade.Text,
-                Street = txtLogradouro.Text,
-                Neighborhoods = txtBairro.Text,
-                Number = int.Parse(txtNumero.Text),
-                Complement = txtComplemento.Text,
-            };
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
 
-            if (supplier == null)
+            if(screen.user.User != null)
             {
-                throw new NullReferenceException("O fornecedor é nulo");
-            }
+                Supplier supplier = new Supplier()
+                {
+                    Name = txtNome.Text,
+                    CompanyName = txtApelido.Text,
+                    Email = txtEmail.Text,
+                    CNPJ = mtbCNPJ.Text,
+                    IE = mtbIE.Text,
+                    PhoneNumber = mtbCelular.Text,
+                    TelephoneNumber = mtbTelefone.Text,
+                    CEP = mtbCEP.Text,
+                    State = cbUF.Text,
+                    City = txtCidade.Text,
+                    Street = txtLogradouro.Text,
+                    Neighborhoods = txtBairro.Text,
+                    Number = int.Parse(txtNumero.Text),
+                    Complement = txtComplemento.Text,
+                };
 
-            if(_update)
-            {
-                supplier.Id = Guid.Parse(txtCodigo.Text ?? throw new ArgumentNullException("Código é nulo, verifique o fornecedor"));
-                SupplierService.Put(supplier);
-            }
-            else
-            {
-                SupplierService.Post(supplier);
-            }
+                if (supplier == null)
+                {
+                    throw new NullReferenceException("O fornecedor é nulo");
+                }
 
-            await Task.Delay(1500);
-            UpdateData();
-            tabSupplier.SelectedTab = tpConsult;
+                if (_update)
+                {
+                    supplier.Id = Guid.Parse(txtCodigo.Text ?? throw new ArgumentNullException("Código é nulo, verifique o fornecedor"));
+                    SupplierService.Put(supplier);
+                }
+                else
+                {
+                    SupplierService.Post(supplier);
+                }
+
+                await Task.Delay(1500);
+                UpdateData();
+                tabSupplier.SelectedTab = tpConsult;
+            }
         }
         #endregion
 
@@ -258,15 +266,21 @@ namespace SistemaVenda.br.pro.com.view
         {
             Supplier supplier = new Supplier();
 
-            if(dgSupplier.SelectedRows.Count > 0)
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
+
+            if(screen.user.User != null)
             {
-                supplier = (Supplier)dgSupplier.SelectedRows[0].DataBoundItem;
+                if (dgSupplier.SelectedRows.Count > 0)
+                {
+                    supplier = (Supplier)dgSupplier.SelectedRows[0].DataBoundItem;
 
-                SupplierService.Delete(supplier.Id);
+                    SupplierService.Delete(supplier.Id);
 
-                await Task.Delay(1500);
-                UpdateData();
-                tabSupplier.SelectedTab = tpConsult;
+                    await Task.Delay(1500);
+                    UpdateData();
+                    tabSupplier.SelectedTab = tpConsult;
+                }
             }
         }
         #endregion
