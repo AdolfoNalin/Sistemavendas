@@ -13,6 +13,7 @@ namespace SistemaVenda.br.pro.com.model
         /// Campos da calsse
         /// </summary>
         public Guid Id { get; set; }
+        public Guid CashId { get; set; }
         public Guid ClientId { get; set; }
         public Guid EmployeeId { get; set; }
         public DateTime Date { get; set; }
