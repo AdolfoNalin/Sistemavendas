@@ -29,48 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBudget));
-            this.tabEmployee = new System.Windows.Forms.TabControl();
+            this.tabBudget = new System.Windows.Forms.TabControl();
             this.tpConsult = new System.Windows.Forms.TabPage();
             this.dgBudget = new System.Windows.Forms.DataGridView();
             this.tpDetails = new System.Windows.Forms.TabPage();
-            this.rbtnPrazo = new System.Windows.Forms.RadioButton();
-            this.rbtnVista = new System.Windows.Forms.RadioButton();
+            this.txtProduct = new System.Windows.Forms.TextBox();
+            this.btnConsultProduct = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnConsultClient = new System.Windows.Forms.Button();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.rbTerm = new System.Windows.Forms.RadioButton();
+            this.rbCash = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.btnAdicionar = new System.Windows.Forms.Button();
-            this.btnRemover = new System.Windows.Forms.Button();
+            this.txtClientId = new System.Windows.Forms.TextBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.lblQuantidade = new System.Windows.Forms.Label();
-            this.txtQuantidade = new System.Windows.Forms.TextBox();
-            this.cbDescricao = new System.Windows.Forms.ComboBox();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.lblDescricao = new System.Windows.Forms.Label();
-            this.lblHora = new System.Windows.Forms.Label();
-            this.mtbHora = new System.Windows.Forms.MaskedTextBox();
             this.lblData = new System.Windows.Forms.Label();
-            this.mtbData = new System.Windows.Forms.MaskedTextBox();
+            this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.gbDetalhesPagamento = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.mtbTotal = new System.Windows.Forms.MaskedTextBox();
-            this.lblAlteracao = new System.Windows.Forms.Label();
-            this.mtbAteracoes = new System.Windows.Forms.MaskedTextBox();
-            this.lblSubTotal = new System.Windows.Forms.Label();
-            this.mtbSubTotal = new System.Windows.Forms.MaskedTextBox();
-            this.mtbAP = new System.Windows.Forms.MaskedTextBox();
+            this.txtTotal = new System.Windows.Forms.MaskedTextBox();
+            this.mtbAdditionPorcentage = new System.Windows.Forms.MaskedTextBox();
             this.lblAgressimo = new System.Windows.Forms.Label();
-            this.mtbAD = new System.Windows.Forms.MaskedTextBox();
-            this.mtbDP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbAdditionCash = new System.Windows.Forms.MaskedTextBox();
+            this.mtbPercentageDiscount = new System.Windows.Forms.MaskedTextBox();
             this.lblDesconto = new System.Windows.Forms.Label();
-            this.mtbDD = new System.Windows.Forms.MaskedTextBox();
-            this.dgOrcamento = new System.Windows.Forms.DataGridView();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valorPrazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valorVista = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mtbCashDiscount = new System.Windows.Forms.MaskedTextBox();
+            this.dgShCar = new System.Windows.Forms.DataGridView();
             this.txtObs = new System.Windows.Forms.TextBox();
             this.lblObs = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -87,14 +80,12 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.btnConsultClient = new System.Windows.Forms.Button();
-            this.tabEmployee.SuspendLayout();
+            this.tabBudget.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).BeginInit();
             this.tpDetails.SuspendLayout();
             this.gbDetalhesPagamento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgOrcamento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgShCar)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -102,18 +93,18 @@
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabEmployee
+            // tabBudget
             // 
-            this.tabEmployee.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabEmployee.Controls.Add(this.tpConsult);
-            this.tabEmployee.Controls.Add(this.tpDetails);
-            this.tabEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabEmployee.Location = new System.Drawing.Point(0, 100);
-            this.tabEmployee.Multiline = true;
-            this.tabEmployee.Name = "tabEmployee";
-            this.tabEmployee.SelectedIndex = 0;
-            this.tabEmployee.Size = new System.Drawing.Size(943, 480);
-            this.tabEmployee.TabIndex = 8;
+            this.tabBudget.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabBudget.Controls.Add(this.tpConsult);
+            this.tabBudget.Controls.Add(this.tpDetails);
+            this.tabBudget.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabBudget.Location = new System.Drawing.Point(0, 100);
+            this.tabBudget.Multiline = true;
+            this.tabBudget.Name = "tabBudget";
+            this.tabBudget.SelectedIndex = 0;
+            this.tabBudget.Size = new System.Drawing.Size(1170, 480);
+            this.tabBudget.TabIndex = 8;
             // 
             // tpConsult
             // 
@@ -121,7 +112,7 @@
             this.tpConsult.Location = new System.Drawing.Point(23, 4);
             this.tpConsult.Name = "tpConsult";
             this.tpConsult.Padding = new System.Windows.Forms.Padding(3);
-            this.tpConsult.Size = new System.Drawing.Size(916, 472);
+            this.tpConsult.Size = new System.Drawing.Size(1143, 472);
             this.tpConsult.TabIndex = 0;
             this.tpConsult.Text = "Consulta";
             this.tpConsult.UseVisualStyleBackColor = true;
@@ -133,173 +124,208 @@
             this.dgBudget.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgBudget.Location = new System.Drawing.Point(3, 3);
             this.dgBudget.Name = "dgBudget";
-            this.dgBudget.Size = new System.Drawing.Size(910, 466);
+            this.dgBudget.Size = new System.Drawing.Size(1137, 466);
             this.dgBudget.TabIndex = 0;
+            this.dgBudget.SelectionChanged += new System.EventHandler(this.dgBudget_SelectionChanged);
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.txtProduct);
+            this.tpDetails.Controls.Add(this.btnConsultProduct);
+            this.tpDetails.Controls.Add(this.label5);
+            this.tpDetails.Controls.Add(this.txtId);
             this.tpDetails.Controls.Add(this.btnConsultClient);
-            this.tpDetails.Controls.Add(this.txtNome);
-            this.tpDetails.Controls.Add(this.rbtnPrazo);
-            this.tpDetails.Controls.Add(this.rbtnVista);
+            this.tpDetails.Controls.Add(this.txtName);
+            this.tpDetails.Controls.Add(this.rbTerm);
+            this.tpDetails.Controls.Add(this.rbCash);
             this.tpDetails.Controls.Add(this.label9);
-            this.tpDetails.Controls.Add(this.txtCodigo);
-            this.tpDetails.Controls.Add(this.btnAdicionar);
-            this.tpDetails.Controls.Add(this.btnRemover);
+            this.tpDetails.Controls.Add(this.txtClientId);
+            this.tpDetails.Controls.Add(this.btnAdd);
+            this.tpDetails.Controls.Add(this.btnRemove);
             this.tpDetails.Controls.Add(this.lblQuantidade);
-            this.tpDetails.Controls.Add(this.txtQuantidade);
-            this.tpDetails.Controls.Add(this.cbDescricao);
+            this.tpDetails.Controls.Add(this.txtAmount);
             this.tpDetails.Controls.Add(this.lblDescricao);
-            this.tpDetails.Controls.Add(this.lblHora);
-            this.tpDetails.Controls.Add(this.mtbHora);
             this.tpDetails.Controls.Add(this.lblData);
-            this.tpDetails.Controls.Add(this.mtbData);
+            this.tpDetails.Controls.Add(this.mtbDate);
             this.tpDetails.Controls.Add(this.gbDetalhesPagamento);
-            this.tpDetails.Controls.Add(this.dgOrcamento);
+            this.tpDetails.Controls.Add(this.dgShCar);
             this.tpDetails.Controls.Add(this.txtObs);
             this.tpDetails.Controls.Add(this.lblObs);
             this.tpDetails.Controls.Add(this.lblCliente);
             this.tpDetails.Location = new System.Drawing.Point(23, 4);
             this.tpDetails.Name = "tpDetails";
             this.tpDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDetails.Size = new System.Drawing.Size(916, 472);
+            this.tpDetails.Size = new System.Drawing.Size(1143, 472);
             this.tpDetails.TabIndex = 1;
             this.tpDetails.Text = "Detalhes";
             this.tpDetails.UseVisualStyleBackColor = true;
             // 
-            // rbtnPrazo
+            // txtProduct
             // 
-            this.rbtnPrazo.AutoSize = true;
-            this.rbtnPrazo.Location = new System.Drawing.Point(557, 35);
-            this.rbtnPrazo.Name = "rbtnPrazo";
-            this.rbtnPrazo.Size = new System.Drawing.Size(61, 17);
-            this.rbtnPrazo.TabIndex = 70;
-            this.rbtnPrazo.TabStop = true;
-            this.rbtnPrazo.Text = "Á prazo";
-            this.rbtnPrazo.UseVisualStyleBackColor = true;
+            this.txtProduct.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtProduct.Location = new System.Drawing.Point(163, 107);
+            this.txtProduct.Name = "txtProduct";
+            this.txtProduct.Size = new System.Drawing.Size(124, 20);
+            this.txtProduct.TabIndex = 75;
             // 
-            // rbtnVista
+            // btnConsultProduct
             // 
-            this.rbtnVista.AutoSize = true;
-            this.rbtnVista.Location = new System.Drawing.Point(557, 10);
-            this.rbtnVista.Name = "rbtnVista";
-            this.rbtnVista.Size = new System.Drawing.Size(57, 17);
-            this.rbtnVista.TabIndex = 69;
-            this.rbtnVista.TabStop = true;
-            this.rbtnVista.Text = "Á vista";
-            this.rbtnVista.UseVisualStyleBackColor = true;
+            this.btnConsultProduct.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnConsultProduct.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultProduct.Image")));
+            this.btnConsultProduct.Location = new System.Drawing.Point(301, 100);
+            this.btnConsultProduct.Name = "btnConsultProduct";
+            this.btnConsultProduct.Size = new System.Drawing.Size(36, 32);
+            this.btnConsultProduct.TabIndex = 74;
+            this.btnConsultProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConsultProduct.UseVisualStyleBackColor = true;
+            this.btnConsultProduct.Click += new System.EventHandler(this.btnConsultProduct_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(26, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 73;
+            this.label5.Text = "Código:";
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(78, 17);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(47, 20);
+            this.txtId.TabIndex = 72;
+            // 
+            // btnConsultClient
+            // 
+            this.btnConsultClient.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnConsultClient.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultClient.Image")));
+            this.btnConsultClient.Location = new System.Drawing.Point(467, 16);
+            this.btnConsultClient.Name = "btnConsultClient";
+            this.btnConsultClient.Size = new System.Drawing.Size(36, 32);
+            this.btnConsultClient.TabIndex = 6;
+            this.btnConsultClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConsultClient.UseVisualStyleBackColor = true;
+            this.btnConsultClient.Click += new System.EventHandler(this.btnConsultClient_Click);
+            // 
+            // txtName
+            // 
+            this.txtName.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtName.Location = new System.Drawing.Point(230, 22);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(231, 20);
+            this.txtName.TabIndex = 71;
+            // 
+            // rbTerm
+            // 
+            this.rbTerm.AutoSize = true;
+            this.rbTerm.Location = new System.Drawing.Point(768, 46);
+            this.rbTerm.Name = "rbTerm";
+            this.rbTerm.Size = new System.Drawing.Size(61, 17);
+            this.rbTerm.TabIndex = 70;
+            this.rbTerm.TabStop = true;
+            this.rbTerm.Text = "Á prazo";
+            this.rbTerm.UseVisualStyleBackColor = true;
+            // 
+            // rbCash
+            // 
+            this.rbCash.AutoSize = true;
+            this.rbCash.Location = new System.Drawing.Point(768, 21);
+            this.rbCash.Name = "rbCash";
+            this.rbCash.Size = new System.Drawing.Size(57, 17);
+            this.rbCash.TabIndex = 69;
+            this.rbCash.TabStop = true;
+            this.rbCash.Text = "Á vista";
+            this.rbCash.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(436, 9);
+            this.label9.Location = new System.Drawing.Point(541, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(50, 13);
             this.label9.TabIndex = 68;
             this.label9.Text = "Código:";
             // 
-            // txtCodigo
+            // txtClientId
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(488, 7);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(47, 20);
-            this.txtCodigo.TabIndex = 67;
+            this.txtClientId.Location = new System.Drawing.Point(593, 20);
+            this.txtClientId.Name = "txtClientId";
+            this.txtClientId.Size = new System.Drawing.Size(47, 20);
+            this.txtClientId.TabIndex = 67;
             // 
-            // btnAdicionar
+            // btnAdd
             // 
-            this.btnAdicionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionar.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnAdicionar.Location = new System.Drawing.Point(163, 179);
-            this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(75, 23);
-            this.btnAdicionar.TabIndex = 66;
-            this.btnAdicionar.Text = "Adicionar";
-            this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnAdd.Location = new System.Drawing.Point(268, 192);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 66;
+            this.btnAdd.Text = "Adicionar";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnRemover
+            // btnRemove
             // 
-            this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemover.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnRemover.Location = new System.Drawing.Point(69, 179);
-            this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(75, 23);
-            this.btnRemover.TabIndex = 65;
-            this.btnRemover.Text = "Remover";
-            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnRemove.Location = new System.Drawing.Point(174, 192);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 65;
+            this.btnRemove.Text = "Remover";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
             this.lblQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantidade.Location = new System.Drawing.Point(51, 124);
+            this.lblQuantidade.Location = new System.Drawing.Point(87, 137);
             this.lblQuantidade.Name = "lblQuantidade";
             this.lblQuantidade.Size = new System.Drawing.Size(76, 13);
             this.lblQuantidade.TabIndex = 64;
             this.lblQuantidade.Text = "Quantidade:";
             // 
-            // txtQuantidade
+            // txtAmount
             // 
-            this.txtQuantidade.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.txtQuantidade.Location = new System.Drawing.Point(127, 120);
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(70, 20);
-            this.txtQuantidade.TabIndex = 63;
-            // 
-            // cbDescricao
-            // 
-            this.cbDescricao.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cbDescricao.FormattingEnabled = true;
-            this.cbDescricao.Location = new System.Drawing.Point(125, 93);
-            this.cbDescricao.Name = "cbDescricao";
-            this.cbDescricao.Size = new System.Drawing.Size(134, 21);
-            this.cbDescricao.TabIndex = 62;
+            this.txtAmount.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtAmount.Location = new System.Drawing.Point(163, 133);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(70, 20);
+            this.txtAmount.TabIndex = 63;
+            this.txtAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyDown);
             // 
             // lblDescricao
             // 
             this.lblDescricao.AutoSize = true;
             this.lblDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescricao.Location = new System.Drawing.Point(57, 98);
+            this.lblDescricao.Location = new System.Drawing.Point(93, 111);
             this.lblDescricao.Name = "lblDescricao";
             this.lblDescricao.Size = new System.Drawing.Size(68, 13);
             this.lblDescricao.TabIndex = 61;
             this.lblDescricao.Text = "Descrição:";
             // 
-            // lblHora
-            // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(776, 47);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(33, 13);
-            this.lblHora.TabIndex = 59;
-            this.lblHora.Text = "Hora:";
-            // 
-            // mtbHora
-            // 
-            this.mtbHora.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mtbHora.Location = new System.Drawing.Point(812, 44);
-            this.mtbHora.Mask = "99:99";
-            this.mtbHora.Name = "mtbHora";
-            this.mtbHora.Size = new System.Drawing.Size(36, 20);
-            this.mtbHora.TabIndex = 58;
-            // 
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(747, 22);
+            this.lblData.Location = new System.Drawing.Point(879, 27);
             this.lblData.Name = "lblData";
             this.lblData.Size = new System.Drawing.Size(33, 13);
             this.lblData.TabIndex = 57;
             this.lblData.Text = "Data:";
             // 
-            // mtbData
+            // mtbDate
             // 
-            this.mtbData.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mtbData.Location = new System.Drawing.Point(779, 18);
-            this.mtbData.Mask = "99/99/9999";
-            this.mtbData.Name = "mtbData";
-            this.mtbData.Size = new System.Drawing.Size(69, 20);
-            this.mtbData.TabIndex = 56;
+            this.mtbDate.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mtbDate.Location = new System.Drawing.Point(911, 23);
+            this.mtbDate.Mask = "99/99/9999";
+            this.mtbDate.Name = "mtbDate";
+            this.mtbDate.Size = new System.Drawing.Size(69, 20);
+            this.mtbDate.TabIndex = 56;
             // 
             // gbDetalhesPagamento
             // 
@@ -308,21 +334,17 @@
             this.gbDetalhesPagamento.Controls.Add(this.label2);
             this.gbDetalhesPagamento.Controls.Add(this.label1);
             this.gbDetalhesPagamento.Controls.Add(this.lblTotal);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbTotal);
-            this.gbDetalhesPagamento.Controls.Add(this.lblAlteracao);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbAteracoes);
-            this.gbDetalhesPagamento.Controls.Add(this.lblSubTotal);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbSubTotal);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbAP);
+            this.gbDetalhesPagamento.Controls.Add(this.txtTotal);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbAdditionPorcentage);
             this.gbDetalhesPagamento.Controls.Add(this.lblAgressimo);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbAD);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbDP);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbAdditionCash);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbPercentageDiscount);
             this.gbDetalhesPagamento.Controls.Add(this.lblDesconto);
-            this.gbDetalhesPagamento.Controls.Add(this.mtbDD);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbCashDiscount);
             this.gbDetalhesPagamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbDetalhesPagamento.Location = new System.Drawing.Point(57, 340);
+            this.gbDetalhesPagamento.Location = new System.Drawing.Point(230, 327);
             this.gbDetalhesPagamento.Name = "gbDetalhesPagamento";
-            this.gbDetalhesPagamento.Size = new System.Drawing.Size(363, 95);
+            this.gbDetalhesPagamento.Size = new System.Drawing.Size(208, 124);
             this.gbDetalhesPagamento.TabIndex = 50;
             this.gbDetalhesPagamento.TabStop = false;
             this.gbDetalhesPagamento.Text = "Detalhes Pagamento";
@@ -371,59 +393,26 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(253, 71);
+            this.lblTotal.Location = new System.Drawing.Point(92, 89);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(40, 13);
             this.lblTotal.TabIndex = 21;
             this.lblTotal.Text = "Total:";
             // 
-            // mtbTotal
+            // txtTotal
             // 
-            this.mtbTotal.Location = new System.Drawing.Point(294, 68);
-            this.mtbTotal.Name = "mtbTotal";
-            this.mtbTotal.Size = new System.Drawing.Size(57, 20);
-            this.mtbTotal.TabIndex = 20;
+            this.txtTotal.Location = new System.Drawing.Point(133, 86);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(57, 20);
+            this.txtTotal.TabIndex = 20;
             // 
-            // lblAlteracao
+            // mtbAdditionPorcentage
             // 
-            this.lblAlteracao.AutoSize = true;
-            this.lblAlteracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlteracao.Location = new System.Drawing.Point(229, 45);
-            this.lblAlteracao.Name = "lblAlteracao";
-            this.lblAlteracao.Size = new System.Drawing.Size(65, 13);
-            this.lblAlteracao.TabIndex = 19;
-            this.lblAlteracao.Text = "Alteração:";
-            // 
-            // mtbAteracoes
-            // 
-            this.mtbAteracoes.Location = new System.Drawing.Point(294, 42);
-            this.mtbAteracoes.Name = "mtbAteracoes";
-            this.mtbAteracoes.Size = new System.Drawing.Size(57, 20);
-            this.mtbAteracoes.TabIndex = 18;
-            // 
-            // lblSubTotal
-            // 
-            this.lblSubTotal.AutoSize = true;
-            this.lblSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTotal.Location = new System.Drawing.Point(224, 19);
-            this.lblSubTotal.Name = "lblSubTotal";
-            this.lblSubTotal.Size = new System.Drawing.Size(70, 13);
-            this.lblSubTotal.TabIndex = 17;
-            this.lblSubTotal.Text = "Sub. Total:";
-            // 
-            // mtbSubTotal
-            // 
-            this.mtbSubTotal.Location = new System.Drawing.Point(294, 16);
-            this.mtbSubTotal.Name = "mtbSubTotal";
-            this.mtbSubTotal.Size = new System.Drawing.Size(57, 20);
-            this.mtbSubTotal.TabIndex = 16;
-            // 
-            // mtbAP
-            // 
-            this.mtbAP.Location = new System.Drawing.Point(150, 49);
-            this.mtbAP.Name = "mtbAP";
-            this.mtbAP.Size = new System.Drawing.Size(40, 20);
-            this.mtbAP.TabIndex = 15;
+            this.mtbAdditionPorcentage.Location = new System.Drawing.Point(150, 49);
+            this.mtbAdditionPorcentage.Name = "mtbAdditionPorcentage";
+            this.mtbAdditionPorcentage.Size = new System.Drawing.Size(40, 20);
+            this.mtbAdditionPorcentage.TabIndex = 15;
+            this.mtbAdditionPorcentage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbAP_KeyDown);
             // 
             // lblAgressimo
             // 
@@ -435,19 +424,21 @@
             this.lblAgressimo.TabIndex = 14;
             this.lblAgressimo.Text = "Frete:";
             // 
-            // mtbAD
+            // mtbAdditionCash
             // 
-            this.mtbAD.Location = new System.Drawing.Point(86, 49);
-            this.mtbAD.Name = "mtbAD";
-            this.mtbAD.Size = new System.Drawing.Size(40, 20);
-            this.mtbAD.TabIndex = 13;
+            this.mtbAdditionCash.Location = new System.Drawing.Point(86, 49);
+            this.mtbAdditionCash.Name = "mtbAdditionCash";
+            this.mtbAdditionCash.Size = new System.Drawing.Size(40, 20);
+            this.mtbAdditionCash.TabIndex = 13;
+            this.mtbAdditionCash.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbAD_KeyDown);
             // 
-            // mtbDP
+            // mtbPercentageDiscount
             // 
-            this.mtbDP.Location = new System.Drawing.Point(150, 20);
-            this.mtbDP.Name = "mtbDP";
-            this.mtbDP.Size = new System.Drawing.Size(40, 20);
-            this.mtbDP.TabIndex = 12;
+            this.mtbPercentageDiscount.Location = new System.Drawing.Point(150, 20);
+            this.mtbPercentageDiscount.Name = "mtbPercentageDiscount";
+            this.mtbPercentageDiscount.Size = new System.Drawing.Size(40, 20);
+            this.mtbPercentageDiscount.TabIndex = 12;
+            this.mtbPercentageDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbDP_KeyDown);
             // 
             // lblDesconto
             // 
@@ -459,81 +450,39 @@
             this.lblDesconto.TabIndex = 11;
             this.lblDesconto.Text = "Desconto:";
             // 
-            // mtbDD
+            // mtbCashDiscount
             // 
-            this.mtbDD.Location = new System.Drawing.Point(86, 19);
-            this.mtbDD.Name = "mtbDD";
-            this.mtbDD.Size = new System.Drawing.Size(40, 20);
-            this.mtbDD.TabIndex = 0;
+            this.mtbCashDiscount.Location = new System.Drawing.Point(86, 19);
+            this.mtbCashDiscount.Name = "mtbCashDiscount";
+            this.mtbCashDiscount.Size = new System.Drawing.Size(40, 20);
+            this.mtbCashDiscount.TabIndex = 0;
+            this.mtbCashDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbDD_KeyDown);
             // 
-            // dgOrcamento
+            // dgShCar
             // 
-            this.dgOrcamento.AllowUserToAddRows = false;
-            this.dgOrcamento.AllowUserToDeleteRows = false;
-            this.dgOrcamento.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgOrcamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgOrcamento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigo,
-            this.descricao,
-            this.quantidade,
-            this.valorPrazo,
-            this.valorVista,
-            this.subtotal});
-            this.dgOrcamento.Location = new System.Drawing.Point(266, 93);
-            this.dgOrcamento.Name = "dgOrcamento";
-            this.dgOrcamento.ReadOnly = true;
-            this.dgOrcamento.Size = new System.Drawing.Size(609, 195);
-            this.dgOrcamento.TabIndex = 49;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // descricao
-            // 
-            this.descricao.HeaderText = "Descrição";
-            this.descricao.Name = "descricao";
-            this.descricao.ReadOnly = true;
-            // 
-            // quantidade
-            // 
-            this.quantidade.HeaderText = "Quantidade";
-            this.quantidade.Name = "quantidade";
-            this.quantidade.ReadOnly = true;
-            // 
-            // valorPrazo
-            // 
-            this.valorPrazo.HeaderText = "Valor á Vista";
-            this.valorPrazo.Name = "valorPrazo";
-            this.valorPrazo.ReadOnly = true;
-            // 
-            // valorVista
-            // 
-            this.valorVista.HeaderText = "Valor á Prazo";
-            this.valorVista.Name = "valorVista";
-            this.valorVista.ReadOnly = true;
-            // 
-            // subtotal
-            // 
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
+            this.dgShCar.AllowUserToAddRows = false;
+            this.dgShCar.AllowUserToDeleteRows = false;
+            this.dgShCar.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgShCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgShCar.Location = new System.Drawing.Point(371, 106);
+            this.dgShCar.Name = "dgShCar";
+            this.dgShCar.ReadOnly = true;
+            this.dgShCar.Size = new System.Drawing.Size(609, 195);
+            this.dgShCar.TabIndex = 49;
             // 
             // txtObs
             // 
-            this.txtObs.Location = new System.Drawing.Point(487, 340);
+            this.txtObs.Location = new System.Drawing.Point(619, 342);
             this.txtObs.Multiline = true;
             this.txtObs.Name = "txtObs";
-            this.txtObs.Size = new System.Drawing.Size(361, 40);
+            this.txtObs.Size = new System.Drawing.Size(361, 88);
             this.txtObs.TabIndex = 48;
             // 
             // lblObs
             // 
             this.lblObs.AutoSize = true;
             this.lblObs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblObs.Location = new System.Drawing.Point(455, 340);
+            this.lblObs.Location = new System.Drawing.Point(587, 342);
             this.lblObs.Name = "lblObs";
             this.lblObs.Size = new System.Drawing.Size(33, 13);
             this.lblObs.TabIndex = 47;
@@ -543,7 +492,7 @@
             // 
             this.lblCliente.AutoSize = true;
             this.lblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCliente.Location = new System.Drawing.Point(76, 10);
+            this.lblCliente.Location = new System.Drawing.Point(181, 23);
             this.lblCliente.Name = "lblCliente";
             this.lblCliente.Size = new System.Drawing.Size(50, 13);
             this.lblCliente.TabIndex = 45;
@@ -557,7 +506,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 580);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(943, 100);
+            this.panel2.Size = new System.Drawing.Size(1170, 100);
             this.panel2.TabIndex = 7;
             // 
             // panel5
@@ -565,7 +514,7 @@
             this.panel5.Controls.Add(this.btnCancel);
             this.panel5.Controls.Add(this.btnSave);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(584, 0);
+            this.panel5.Location = new System.Drawing.Point(811, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(359, 100);
             this.panel5.TabIndex = 4;
@@ -583,6 +532,7 @@
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -596,6 +546,7 @@
             this.btnSave.Text = "Salvar";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // panel4
             // 
@@ -621,19 +572,21 @@
             this.btnUpdate.Text = "Editar";
             this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDelete.Location = new System.Drawing.Point(136, 24);
+            this.btnDelete.Location = new System.Drawing.Point(135, 22);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Excluir";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNew
             // 
@@ -647,6 +600,7 @@
             this.btnNew.Text = "Novo";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // panel1
             // 
@@ -655,7 +609,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(943, 100);
+            this.panel1.Size = new System.Drawing.Size(1170, 100);
             this.panel1.TabIndex = 6;
             // 
             // panel3
@@ -664,7 +618,7 @@
             this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.txtSearch);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(-178, 0);
+            this.panel3.Location = new System.Drawing.Point(49, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1121, 100);
             this.panel3.TabIndex = 4;
@@ -681,6 +635,7 @@
             this.btnExit.Text = "Sair";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnSearch
             // 
@@ -694,6 +649,7 @@
             this.btnSearch.Text = "Pesquisar";
             this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -703,46 +659,28 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(356, 21);
             this.txtSearch.TabIndex = 0;
-            // 
-            // txtNome
-            // 
-            this.txtNome.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.txtNome.Location = new System.Drawing.Point(125, 9);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(231, 20);
-            this.txtNome.TabIndex = 71;
-            // 
-            // btnConsultClient
-            // 
-            this.btnConsultClient.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnConsultClient.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultClient.Image")));
-            this.btnConsultClient.Location = new System.Drawing.Point(362, 3);
-            this.btnConsultClient.Name = "btnConsultClient";
-            this.btnConsultClient.Size = new System.Drawing.Size(36, 32);
-            this.btnConsultClient.TabIndex = 6;
-            this.btnConsultClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConsultClient.UseVisualStyleBackColor = true;
-            this.btnConsultClient.Click += new System.EventHandler(this.btnConsultClient_Click);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // frmBudget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 680);
-            this.Controls.Add(this.tabEmployee);
+            this.ClientSize = new System.Drawing.Size(1170, 680);
+            this.Controls.Add(this.tabBudget);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmBudget";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Orçamento";
             this.Load += new System.EventHandler(this.frmBudget_Load);
-            this.tabEmployee.ResumeLayout(false);
+            this.tabBudget.ResumeLayout(false);
             this.tpConsult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).EndInit();
             this.tpDetails.ResumeLayout(false);
             this.tpDetails.PerformLayout();
             this.gbDetalhesPagamento.ResumeLayout(false);
             this.gbDetalhesPagamento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgOrcamento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgShCar)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -755,7 +693,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabEmployee;
+        private System.Windows.Forms.TabControl tabBudget;
         private System.Windows.Forms.TabPage tpConsult;
         private System.Windows.Forms.DataGridView dgBudget;
         private System.Windows.Forms.TabPage tpDetails;
@@ -772,48 +710,39 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.RadioButton rbtnPrazo;
-        private System.Windows.Forms.RadioButton rbtnVista;
+        private System.Windows.Forms.RadioButton rbTerm;
+        private System.Windows.Forms.RadioButton rbCash;
         private System.Windows.Forms.Label label9;
-        public System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Button btnAdicionar;
-        private System.Windows.Forms.Button btnRemover;
+        public System.Windows.Forms.TextBox txtClientId;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Label lblQuantidade;
-        public System.Windows.Forms.TextBox txtQuantidade;
-        public System.Windows.Forms.ComboBox cbDescricao;
+        public System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Label lblDescricao;
-        private System.Windows.Forms.Label lblHora;
-        public System.Windows.Forms.MaskedTextBox mtbHora;
         private System.Windows.Forms.Label lblData;
-        public System.Windows.Forms.MaskedTextBox mtbData;
+        public System.Windows.Forms.MaskedTextBox mtbDate;
         public System.Windows.Forms.GroupBox gbDetalhesPagamento;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotal;
-        public System.Windows.Forms.MaskedTextBox mtbTotal;
-        private System.Windows.Forms.Label lblAlteracao;
-        public System.Windows.Forms.MaskedTextBox mtbAteracoes;
-        private System.Windows.Forms.Label lblSubTotal;
-        public System.Windows.Forms.MaskedTextBox mtbSubTotal;
-        public System.Windows.Forms.MaskedTextBox mtbAP;
+        public System.Windows.Forms.MaskedTextBox txtTotal;
+        public System.Windows.Forms.MaskedTextBox mtbAdditionPorcentage;
         private System.Windows.Forms.Label lblAgressimo;
-        public System.Windows.Forms.MaskedTextBox mtbAD;
-        public System.Windows.Forms.MaskedTextBox mtbDP;
+        public System.Windows.Forms.MaskedTextBox mtbAdditionCash;
+        public System.Windows.Forms.MaskedTextBox mtbPercentageDiscount;
         private System.Windows.Forms.Label lblDesconto;
-        public System.Windows.Forms.MaskedTextBox mtbDD;
-        public System.Windows.Forms.DataGridView dgOrcamento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descricao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valorPrazo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valorVista;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
+        public System.Windows.Forms.MaskedTextBox mtbCashDiscount;
+        public System.Windows.Forms.DataGridView dgShCar;
         public System.Windows.Forms.TextBox txtObs;
         private System.Windows.Forms.Label lblObs;
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Button btnConsultClient;
-        public System.Windows.Forms.TextBox txtNome;
+        public System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox txtId;
+        public System.Windows.Forms.TextBox txtProduct;
+        private System.Windows.Forms.Button btnConsultProduct;
     }
 }
