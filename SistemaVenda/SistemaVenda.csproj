@@ -188,9 +188,13 @@
   <ItemGroup>
     <Compile Include="ConnectionFactory\ConnectionFactory.cs" />
     <Compile Include="Model\AItem.cs" />
+    <Compile Include="Model\CashDesck.cs" />
+    <Compile Include="Model\CashMovement.cs" />
+    <Compile Include="Model\CashSession.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Helpers\Calculator.cs" />
+    <Compile Include="Model\Helpers\VerificationPassword.cs" />
     <Compile Include="Model\ItemReturn.cs" />
     <Compile Include="Model\Persona.cs" />
     <Compile Include="Model\ProductShoppingCar.cs" />
@@ -211,6 +215,8 @@
     <Compile Include="Model\UserResquest.cs" />
     <Compile Include="Model\UserSession.cs" />
     <Compile Include="Service\BudgetService.cs" />
+    <Compile Include="Service\CashSessionService.cs" />
+    <Compile Include="Service\CashMovementService.cs" />
     <Compile Include="Service\ClientService.cs" />
     <Compile Include="Service\EmployeeService.cs" />
     <Compile Include="Service\ItemBudgetService.cs" />
@@ -226,6 +232,12 @@
     </Compile>
     <Compile Include="View\frmBudget.Designer.cs">
       <DependentUpon>frmBudget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmCashSession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmCashSession.Designer.cs">
+      <DependentUpon>frmCashSession.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmClient.cs">
       <SubType>Form</SubType>
@@ -303,6 +315,9 @@
     </Compile>
     <EmbeddedResource Include="View\frmBudget.resx">
       <DependentUpon>frmBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmCashSession.resx">
+      <DependentUpon>frmCashSession.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmClient.resx">
       <DependentUpon>frmClient.cs</DependentUpon>
