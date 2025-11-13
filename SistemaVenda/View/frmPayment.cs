@@ -185,123 +185,148 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                decimal cash = decimal.Parse(mtbCash.Text);
-                decimal card = decimal.Parse(mtbCard.Text);
-                decimal total = decimal.Parse(txtTotal.Text);
-                decimal pay = 0;
-                decimal troco = 0;
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                pay = cash + card;
-
-                if (pay < total)
+                if (screen.user != null)
                 {
-                    MessageBox.Show("O total pago é menor do que o total da compra");
-                }
-                else if (!_update)
-                {
-                    troco = pay - total;
+                    decimal cash = decimal.Parse(mtbCash.Text);
+                    decimal card = decimal.Parse(mtbCard.Text);
+                    decimal total = decimal.Parse(txtTotal.Text);
+                    decimal pay = 0;
+                    decimal troco = 0;
 
-                    _sale.PaymentMethod = _paymentoMethod
-                        ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
-                    _sale.Observation = txtObs.Text;
+                    pay = cash + card;
 
-                    bool value = await SaleService.Post(_sale);
-                    if (value)
+                    if (pay < total)
                     {
-                        Sale sale = await SaleService.LastSale() ??
-                            throw new ArgumentNullException("Venda não foi identificada");
-
-                        List<ItemSale> itens = new List<ItemSale>();
-                        foreach(var i in _proShoCar)
-                        {
-                            ItemSale item = new ItemSale();
-                            List<Product> products = await ProductService.Get(i.ShortDescription);
-                            Product product = products.FirstOrDefault() ??
-                                throw new ArgumentNullException("");
-
-                            item.SaleId = sale.Id;
-                            item.ProductId = product.Id;
-                            item.Amount = i.Amount;
-                            item.Subtotal = i.TotalPrice;
-
-                            itens.Add(item);
-                        }
-
-                        bool result = false;
-                        if (await ItemSaleService.Post(itens))
-                        {
-                            foreach(var i in itens)
-                            {
-                                Product product = await ProductService.Get(i.ProductId);
-                                decimal withdrawal = Convert.ToDecimal(product.Amount - i.Amount);
-
-                                result = await ProductService.StockManager(productId: product.Id, withdrawal: withdrawal);
-
-                                if (result == false)
-                                {
-                                    throw new Exception("Algo deu errado!");
-                                }
-                            }
-
-                            if(result)
-                            {
-                                MessageBox.Show($"Venda realizada com sucesso!");
-                            }
-                        }
-
-                        //ImprimirPDF();
-
-                        this.Dispose();
+                        MessageBox.Show("O total pago é menor do que o total da compra");
                     }
-                }
-                else if (_update)
-                {
-                    List<ItemSale> itens = new List<ItemSale>();
-                    troco = pay - total;
-
-                    _sale.PaymentMethod = _paymentoMethod
-                        ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
-                    _sale.Observation = txtObs.Text;
-
-                    bool value = await SaleService.Put(_sale);
-                    if (value)
+                    else if (!_update)
                     {
-                        foreach(var i in _proShoCar)
+                        troco = pay - total;
+
+                        CashMovement moviment = new CashMovement()
                         {
-                            ItemSale item = new ItemSale();
-                            List<Product> products = await ProductService.Get(i.ShortDescription);
-                            Product product = products.FirstOrDefault() ??
-                                throw new ArgumentNullException("");
+                            CashSessionId = CashDesck.Id,
+                            UserId = screen.user.User.Id,
+                            Amount = _sale.Total,
+                            Type = Model.Type.Entry,
+                            Date = _sale.Date,
+                            Description = "Venda"
+                        };
 
-                            item.SaleId = _sale.Id;
-                            item.ProductId = product.Id;
-                            item.Amount = i.Amount;
-                            item.Subtotal = i.TotalPrice;
+                        CashMovementService.Post(moviment);
 
-                            itens.Add(item);
-                        }
+                        CashDesck.Total += moviment.Amount;
 
-                        if(await ItemSaleService.Put(itens))
+                        CashSession session = await CashSessionService.Get(CashDesck.Id);
+                        session.Total = CashDesck.Total;
+                        CashSessionService.Put(session);
+
+                        _sale.PaymentMethod = _paymentoMethod
+                            ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
+                        _sale.Observation = txtObs.Text;
+
+                        bool value = await SaleService.Post(_sale);
+                        if (value)
                         {
+                            Sale sale = await SaleService.LastSale() ??
+                                throw new ArgumentNullException("Venda não foi identificada");
+
+                            List<ItemSale> itens = new List<ItemSale>();
+                            foreach (var i in _proShoCar)
+                            {
+                                ItemSale item = new ItemSale();
+                                List<Product> products = await ProductService.Get(i.ShortDescription);
+                                Product product = products.FirstOrDefault() ??
+                                    throw new ArgumentNullException("Produto não encontrado");
+
+                                item.SaleId = sale.Id;
+                                item.ProductId = product.Id;
+                                item.Amount = i.Amount;
+                                item.Subtotal = i.TotalPrice;
+
+                                itens.Add(item);
+                            }
+
                             bool result = false;
-                            foreach(var i in itens)
+                            if (await ItemSaleService.Post(itens))
                             {
-                                Product product = await ProductService.Get(i.ProductId);
-                                decimal withdrawall = Convert.ToDecimal(product.Amount - i.Amount);
-                                result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
-
-                                if (!result)
+                                foreach (var i in itens)
                                 {
-                                    throw new Exception("Algo deu errado");
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawal = Convert.ToDecimal(product.Amount - i.Amount);
+
+                                    result = await ProductService.StockManager(productId: product.Id, withdrawal: withdrawal);
+
+                                    if (result == false)
+                                    {
+                                        throw new Exception("Algo deu errado!");
+                                    }
+                                }
+
+                                if (result)
+                                {
+                                    MessageBox.Show($"Venda realizada com sucesso!");
                                 }
                             }
 
-                            MessageBox.Show("Venda foi atualizada com sucesso!");
-                        }
+                            //ImprimirPDF();
 
-                        this.Dispose();
+                            this.Dispose();
+                        }
+                    }
+                    else if (_update)
+                    {
+                        List<ItemSale> itens = new List<ItemSale>();
+                        troco = pay - total;
+
+                        _sale.PaymentMethod = _paymentoMethod
+                            ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
+                        _sale.Observation = txtObs.Text;
+
+                        bool value = await SaleService.Put(_sale);
+                        if (value)
+                        {
+                            foreach (var i in _proShoCar)
+                            {
+                                ItemSale item = new ItemSale();
+                                List<Product> products = await ProductService.Get(i.ShortDescription);
+                                Product product = products.FirstOrDefault() ??
+                                    throw new ArgumentNullException("");
+
+                                item.SaleId = _sale.Id;
+                                item.ProductId = product.Id;
+                                item.Amount = i.Amount;
+                                item.Subtotal = i.TotalPrice;
+
+                                itens.Add(item);
+                            }
+
+                            if (await ItemSaleService.Put(itens))
+                            {
+                                bool result = false;
+                                foreach (var i in itens)
+                                {
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawall = Convert.ToDecimal(product.Amount - i.Amount);
+                                    result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
+
+                                    if (!result)
+                                    {
+                                        throw new Exception("Algo deu errado");
+                                    }
+                                }
+
+                                MessageBox.Show("Venda foi atualizada com sucesso!");
+                            }
+
+                            this.Dispose();
+                        }
                     }
                 }
+                
 
                 new frmSale().ShowDialog();
             }
