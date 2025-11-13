@@ -258,100 +258,106 @@ namespace SistemaVenda.View
         {
             try
             {
-                Return @return = new Return()
-                {
-                    SaleId = Guid.Parse(txtId.Text),
-                    ClientId = Guid.Parse(txtClientId.Text),
-                    EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
-                    Date = DateTime.Parse(mtbDate.Text).ToUniversalTime(),
-                    Total = Decimal.Parse(txtTotal.Text)
-                };
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                if (_update)
+                if (screen.user.User != null)
                 {
-                    @return.Id = Guid.Parse(txtId.Text);
-
-                    if(await ReturnService.Put(@return))
+                    Return @return = new Return()
                     {
-                        BindingList<ItemReturn> returns = new BindingList<ItemReturn>();
+                        SaleId = Guid.Parse(txtId.Text),
+                        ClientId = Guid.Parse(txtClientId.Text),
+                        EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
+                        Date = DateTime.Parse(mtbDate.Text).ToUniversalTime(),
+                        Total = Decimal.Parse(txtTotal.Text)
+                    };
 
-                        foreach (var item in _proCarSh) 
-                        { 
-                            List<Product> products = await ProductService.Get(item.ShortDescription);
-                            Product product = products.FirstOrDefault();
+                    if (_update)
+                    {
+                        @return.Id = Guid.Parse(txtId.Text);
 
-                            ItemReturn itemReturn = new ItemReturn()
-                            {
-                                Id = await ItemReturnService.GetIdReturn(@return.Id),
-                                ReturnId = @return.Id,
-                                ProductId = product.Id,
-                                Amount = item.Amount,
-                                Subtotal = item.TotalPrice,
-                            };
-
-                            returns.Add(itemReturn);
-                        }
-
-                        if (await ItemReturnService.Put(returns))
+                        if (await ReturnService.Put(@return))
                         {
-                            bool result = false;
-                            foreach (var i in returns)
-                            {
-                                Product product = await ProductService.Get(i.ProductId);
-                                decimal withdrawall = Convert.ToDecimal(product.Amount + i.Amount);
-                                result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
+                            BindingList<ItemReturn> returns = new BindingList<ItemReturn>();
 
-                                if (!result)
+                            foreach (var item in _proCarSh)
+                            {
+                                List<Product> products = await ProductService.Get(item.ShortDescription);
+                                Product product = products.FirstOrDefault();
+
+                                ItemReturn itemReturn = new ItemReturn()
                                 {
-                                    throw new Exception("Algo deu errado");
-                                }
+                                    Id = await ItemReturnService.GetIdReturn(@return.Id),
+                                    ReturnId = @return.Id,
+                                    ProductId = product.Id,
+                                    Amount = item.Amount,
+                                    Subtotal = item.TotalPrice,
+                                };
+
+                                returns.Add(itemReturn);
                             }
 
-                            MessageBox.Show("Devolução foi atualizada com sucesso!");
+                            if (await ItemReturnService.Put(returns))
+                            {
+                                bool result = false;
+                                foreach (var i in returns)
+                                {
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawall = Convert.ToDecimal(product.Amount + i.Amount);
+                                    result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
+
+                                    if (!result)
+                                    {
+                                        throw new Exception("Algo deu errado");
+                                    }
+                                }
+
+                                MessageBox.Show("Devolução foi atualizada com sucesso!");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (await ReturnService.Post(@return))
+                    else
                     {
-                        BindingList<ItemReturn> returns = new BindingList<ItemReturn>();
-
-                        foreach (var item in _proCarSh)
+                        if (await ReturnService.Post(@return))
                         {
-                            List<Product> products = await ProductService.Get(item.ShortDescription);
-                            Product product = products.FirstOrDefault();
+                            BindingList<ItemReturn> returns = new BindingList<ItemReturn>();
 
-                            BindingList<Return> returns1 = await ReturnService.Get();
-                            Return @return1 = returns1.LastOrDefault();
-
-                            ItemReturn itemReturn = new ItemReturn()
+                            foreach (var item in _proCarSh)
                             {
-                                ReturnId = @return1.Id,
-                                ProductId = product.Id,
-                                Amount = item.Amount,
-                                Subtotal = item.TotalPrice,
-                            };
+                                List<Product> products = await ProductService.Get(item.ShortDescription);
+                                Product product = products.FirstOrDefault();
 
-                            returns.Add(itemReturn);
-                        }
+                                BindingList<Return> returns1 = await ReturnService.Get();
+                                Return @return1 = returns1.LastOrDefault();
 
-                        if (await ItemReturnService.Post(returns))
-                        {
-                            bool result = false;
-                            foreach (var i in returns)
-                            {
-                                Product product = await ProductService.Get(i.ProductId);
-                                decimal withdrawall = Convert.ToDecimal(product.Amount + i.Amount);
-                                result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
-
-                                if (!result)
+                                ItemReturn itemReturn = new ItemReturn()
                                 {
-                                    throw new Exception("Algo deu errado");
-                                }
+                                    ReturnId = @return1.Id,
+                                    ProductId = product.Id,
+                                    Amount = item.Amount,
+                                    Subtotal = item.TotalPrice,
+                                };
+
+                                returns.Add(itemReturn);
                             }
 
-                            MessageBox.Show("Devolução foi atualizada com sucesso!");
+                            if (await ItemReturnService.Post(returns))
+                            {
+                                bool result = false;
+                                foreach (var i in returns)
+                                {
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawall = Convert.ToDecimal(product.Amount + i.Amount);
+                                    result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
+
+                                    if (!result)
+                                    {
+                                        throw new Exception("Algo deu errado");
+                                    }
+                                }
+
+                                MessageBox.Show("Devolução foi atualizada com sucesso!");
+                            }
                         }
                     }
                 }
@@ -366,17 +372,23 @@ namespace SistemaVenda.View
         #region btnDelete_Click
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgItemReturn.SelectedRows.Count > 0)
-            {
-                Return @return = dgItemReturn.SelectedRows[0].DataBoundItem as Return;
+            frmPassword screen = new frmPassword();
+            screen.ShowDialog();
 
-                ReturnService.Delete(@return.Id);
-                await Task.Delay(200);
-                UpdateDataReturn();
-            }
-            else
+            if(screen.user.User != null)
             {
-                MessageBox.Show("Selecione um item não tabela");
+                if (dgItemReturn.SelectedRows.Count > 0)
+                {
+                    Return @return = dgItemReturn.SelectedRows[0].DataBoundItem as Return;
+
+                    ReturnService.Delete(@return.Id);
+                    await Task.Delay(200);
+                    UpdateDataReturn();
+                }
+                else
+                {
+                    MessageBox.Show("Selecione um item não tabela");
+                }
             }
         }
         #endregion
