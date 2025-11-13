@@ -80,6 +80,8 @@ namespace SistemaVenda.View
                 DataPropertyName = "Authorizations",
                 HeaderText = "Autorizações"
             });
+
+            UpdateData();
         }
         #endregion
 
@@ -112,18 +114,24 @@ namespace SistemaVenda.View
         {
             try
             {
-                if (dgUser.SelectedRows.Count > 0)
-                {
-                    User user = (User)dgUser.SelectedRows[0].DataBoundItem;
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                    UserService.Delete(user.Id);
-                    await Task.Delay(1000);
-                    UpdateData();
-                    tabUser.SelectedTab = tpConsult;
-                }
-                else
+                if(screen.user.User != null)
                 {
-                    throw new NullReferenceException("Usuário não existe para ser deletedo!");
+                    if (dgUser.SelectedRows.Count > 0)
+                    {
+                        User user = (User)dgUser.SelectedRows[0].DataBoundItem;
+
+                        UserService.Delete(user.Id);
+                        await Task.Delay(1000);
+                        UpdateData();
+                        tabUser.SelectedTab = tpConsult;
+                    }
+                    else
+                    {
+                        throw new NullReferenceException("Usuário não existe para ser deletedo!");
+                    }
                 }
             }
             catch(NullReferenceException nre)
@@ -142,37 +150,43 @@ namespace SistemaVenda.View
         {
             try
             {
-                User user = new User()
-                {
-                    Name = txtNome.Text ?? throw new ArgumentNullException("Nome precisa ser preenchido"),
-                    Login = txtApelido.Text ?? throw new ArgumentNullException("Login precisa ser preenchido"),
-                    EmployeeId = Guid.Parse(cbEmployees.SelectedValue.ToString() ?? throw new ArgumentNullException("Usuário precisa de um funcionário")),
-                    Password = txtPassword.Text ?? throw new ArgumentNullException("Usuário precisa de uma senha"),
-                    Authorizations = frmScreenAuthorization.checkBoxes.Select(x => x.Text).ToList() ?? throw new ArgumentNullException("Selecione a Autorização")
-                };
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-                if (user is null)
+                if(screen.user.User != null)
                 {
-                    throw new ArgumentException("Usuário não pode ser nulo");
-                }
-                else
-                {
-                    user.Password = PasswordGenerator.Generator(user.Password);
-
-                    if (_update)
+                    User user = new User()
                     {
-                        user.Id = Guid.Parse(txtCodigo.Text);
-                        UserService.Put(user);
-                        await Task.Delay(800);
-                        UpdateData();
-                        tabUser.SelectedTab = tpConsult;
+                        Name = txtNome.Text ?? throw new ArgumentNullException("Nome precisa ser preenchido"),
+                        Login = txtApelido.Text ?? throw new ArgumentNullException("Login precisa ser preenchido"),
+                        EmployeeId = Guid.Parse(cbEmployees.SelectedValue.ToString() ?? throw new ArgumentNullException("Usuário precisa de um funcionário")),
+                        Password = txtPassword.Text ?? throw new ArgumentNullException("Usuário precisa de uma senha"),
+                        Authorizations = frmScreenAuthorization.checkBoxes.Select(x => x.Text).ToList() ?? throw new ArgumentNullException("Selecione a Autorização")
+                    };
+
+                    if (user is null)
+                    {
+                        throw new ArgumentException("Usuário não pode ser nulo");
                     }
                     else
                     {
-                        UserService.Post(user);
-                        await Task.Delay(800);
-                        UpdateData();
-                        tabUser.SelectedTab = tpConsult;
+                        user.Password = PasswordGenerator.Generator(user.Password);
+
+                        if (_update)
+                        {
+                            user.Id = Guid.Parse(txtCodigo.Text);
+                            UserService.Put(user);
+                            await Task.Delay(800);
+                            UpdateData();
+                            tabUser.SelectedTab = tpConsult;
+                        }
+                        else
+                        {
+                            UserService.Post(user);
+                            await Task.Delay(800);
+                            UpdateData();
+                            tabUser.SelectedTab = tpConsult;
+                        }
                     }
                 }
             }
