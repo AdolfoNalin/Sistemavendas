@@ -380,7 +380,6 @@
             // 
             // btnSearchProduct
             // 
-            this.btnSearchProduct.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
             this.btnSearchProduct.Location = new System.Drawing.Point(292, 40);
             this.btnSearchProduct.Name = "btnSearchProduct";
             this.btnSearchProduct.Size = new System.Drawing.Size(26, 26);
@@ -494,7 +493,6 @@
             // 
             // btnPesquisarCliente
             // 
-            this.btnPesquisarCliente.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
             this.btnPesquisarCliente.Location = new System.Drawing.Point(170, 41);
             this.btnPesquisarCliente.Name = "btnPesquisarCliente";
             this.btnPesquisarCliente.Size = new System.Drawing.Size(26, 26);
@@ -503,7 +501,6 @@
             // 
             // btnSearchName
             // 
-            this.btnSearchName.Image = global::SistemaVenda.Properties.Resources._2093656_seach_look_search_see_icon__1_;
             this.btnSearchName.Location = new System.Drawing.Point(341, 67);
             this.btnSearchName.Name = "btnSearchName";
             this.btnSearchName.Size = new System.Drawing.Size(26, 26);
