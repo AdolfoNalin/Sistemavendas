@@ -591,7 +591,6 @@
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.Location = new System.Drawing.Point(20, 24);
             this.btnNew.Name = "btnNew";
