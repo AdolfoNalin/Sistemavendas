@@ -383,9 +383,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Configuração1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\cliente.png" />
   </ItemGroup>
   <ItemGroup>
@@ -404,15 +401,6 @@
     <None Include="Resources\Venda.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Lupa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\2093656_seach_look_search_see_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\2093656_seach_look_search_see_icon %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Ultilitários\Financeiro\" />
   </ItemGroup>
   <ItemGroup>
@@ -429,25 +417,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Cancelar32X32.png" />
-    <Content Include="Resources\Cidade32X32.png" />
     <Content Include="Resources\Confirmar32X32.png" />
     <Content Include="Resources\Conta32X32.png" />
-    <Content Include="Resources\Editar32X32.png" />
+    <Content Include="Resources\documento.png" />
+    <Content Include="Resources\editar-arquivo.png" />
     <Content Include="Resources\Estado32X32.png" />
     <Content Include="Resources\Excluir32X32.png" />
     <Content Include="Resources\Financeiro.png" />
+    <Content Include="Resources\lixo.png" />
     <Content Include="Resources\Lupa32X32.png" />
-    <Content Include="Resources\Novo32X32.png" />
-    <Content Include="Resources\Pessoa32X32.png" />
-    <Content Include="Resources\Sair32X32.png" />
-    <Content Include="Resources\Sair32X321.png" />
-    <Content Include="Resources\Salvar32X32.png" />
-    <Content Include="Resources\SetaAnterior32X32.png" />
-    <Content Include="Resources\SetaPrimeira32X32.png" />
-    <Content Include="Resources\SetaProxima.png" />
-    <Content Include="Resources\SetaProxima1.png" />
-    <Content Include="Resources\Setaproxima32X32.png" />
-    <Content Include="Resources\SetaUltima32X32.png" />
+    <Content Include="Resources\New.png" />
+    <Content Include="Resources\sair.png" />
+    <Content Include="Resources\salve.png" />
     <Content Include="Resources\UserAvatar.png" />
     <Content Include="Resources\Usuario.png" />
     <Content Include="Resources\Usuario32X32.png" />
