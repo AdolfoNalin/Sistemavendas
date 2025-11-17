@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,11 @@ namespace SistemaVenda.View
         private async void UpdateData()
         {
             List<User> users = await UserService.Get() ?? throw new ArgumentNullException("Nenhum Usuário encontrado!");
-            dgUser.DataSource = users;
+            dgUser.DataSource = users.Select(u => new
+            {
+                Name = u.Name,
+                Login = u.Login,
+            }).ToList();
         }
         #endregion
 
