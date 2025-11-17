@@ -88,7 +88,7 @@
             // 
             this.clientesToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clientesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.clientesToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.cliente;
+            this.clientesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clientesToolStripMenuItem.Image")));
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(104, 44);
             this.clientesToolStripMenuItem.Text = "Clientes";
@@ -98,7 +98,7 @@
             // 
             this.funcionáriosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.funcionáriosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.funcionáriosToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Funcionario;
+            this.funcionáriosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("funcionáriosToolStripMenuItem.Image")));
             this.funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
             this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(131, 44);
             this.funcionáriosToolStripMenuItem.Text = "Funcionários";
@@ -108,7 +108,7 @@
             // 
             this.fornecedoresToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fornecedoresToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.fornecedoresToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Forncedores;
+            this.fornecedoresToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fornecedoresToolStripMenuItem.Image")));
             this.fornecedoresToolStripMenuItem.Name = "fornecedoresToolStripMenuItem";
             this.fornecedoresToolStripMenuItem.Size = new System.Drawing.Size(136, 44);
             this.fornecedoresToolStripMenuItem.Text = "Fornecedores";
@@ -118,7 +118,7 @@
             // 
             this.produtosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.produtosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.produtosToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Produtos;
+            this.produtosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("produtosToolStripMenuItem.Image")));
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
             this.produtosToolStripMenuItem.Size = new System.Drawing.Size(109, 44);
             this.produtosToolStripMenuItem.Text = "Produtos";
@@ -128,7 +128,7 @@
             // 
             this.vendasToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vendasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.vendasToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Venda;
+            this.vendasToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("vendasToolStripMenuItem.Image")));
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
             this.vendasToolStripMenuItem.Size = new System.Drawing.Size(95, 44);
             this.vendasToolStripMenuItem.Text = "Venda";
@@ -176,7 +176,7 @@
             this.sairToolStripMenuItem});
             this.configuraçõesToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.configuraçõesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.configuraçõesToolStripMenuItem.Image = global::SistemaVenda.Properties.Resources.Configuração1;
+            this.configuraçõesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("configuraçõesToolStripMenuItem.Image")));
             this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
             this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(140, 44);
             this.configuraçõesToolStripMenuItem.Text = "Configurações";
