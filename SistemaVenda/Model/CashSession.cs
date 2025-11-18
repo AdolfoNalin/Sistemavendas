@@ -9,13 +9,17 @@ namespace SistemaVenda.Model
     public enum Enable
     {
         Enable,
-        Disabel
+        Disabel,
+        Habilidatado,
+        Desabilitado
     }
 
     public enum IsCashSession
     {
         Close,
-        Open
+        Open,
+        Fechado,
+        Aberto
     }
     public class CashSession
     {
