@@ -165,14 +165,14 @@
             this.txtProduct.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtProduct.Location = new System.Drawing.Point(163, 107);
             this.txtProduct.Name = "txtProduct";
-            this.txtProduct.Size = new System.Drawing.Size(124, 20);
+            this.txtProduct.Size = new System.Drawing.Size(163, 20);
             this.txtProduct.TabIndex = 75;
             // 
             // btnConsultProduct
             // 
             this.btnConsultProduct.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnConsultProduct.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultProduct.Image")));
-            this.btnConsultProduct.Location = new System.Drawing.Point(301, 100);
+            this.btnConsultProduct.Location = new System.Drawing.Point(355, 100);
             this.btnConsultProduct.Name = "btnConsultProduct";
             this.btnConsultProduct.Size = new System.Drawing.Size(36, 32);
             this.btnConsultProduct.TabIndex = 74;
