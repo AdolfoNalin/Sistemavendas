@@ -29,10 +29,18 @@ namespace SistemaVenda.View
         private async void UpdateData()
         {
             List<User> users = await UserService.Get() ?? throw new ArgumentNullException("Nenhum Usuário encontrado!");
+
+            users.ToList().ForEach(async u =>
+            {
+                u.Employee = await EmployeeService.Get(u.EmployeeId);
+            });
+
             dgUser.DataSource = users.Select(u => new
             {
+                Id = u.Id,
                 Name = u.Name,
                 Login = u.Login,
+                Authorizations = u.Authorizations,
             }).ToList();
         }
         #endregion
@@ -70,14 +78,8 @@ namespace SistemaVenda.View
 
             dgUser.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "EmployeeId",
-                HeaderText = "Funcionário"
-            });
-
-            dgUser.Columns.Add(new DataGridViewTextBoxColumn()
-            {
                 DataPropertyName = "Name",
-                HeaderText = "Nome"
+                HeaderText = "Funcionário"
             });
 
             dgUser.Columns.Add(new DataGridViewTextBoxColumn()

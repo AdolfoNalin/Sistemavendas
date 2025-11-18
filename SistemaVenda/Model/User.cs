@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaVenda.br.pro.com.model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace SistemaVenda.Model
         public Guid EmployeeId { get; set; }
         public string Name { get; set; }
         public List<string> Authorizations { get; set; }
+
+        public Employee Employee{ get; set; }
         #endregion
     }
 }
