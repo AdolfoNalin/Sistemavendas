@@ -63,7 +63,7 @@
             this.mtbPercentageDiscount = new System.Windows.Forms.MaskedTextBox();
             this.lblDesconto = new System.Windows.Forms.Label();
             this.mtbCashDiscount = new System.Windows.Forms.MaskedTextBox();
-            this.dgShCar = new System.Windows.Forms.DataGridView();
+            this.dgShoppingCar = new System.Windows.Forms.DataGridView();
             this.txtObs = new System.Windows.Forms.TextBox();
             this.lblObs = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -85,7 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).BeginInit();
             this.tpDetails.SuspendLayout();
             this.gbDetalhesPagamento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgShCar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgShoppingCar)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -148,7 +148,7 @@
             this.tpDetails.Controls.Add(this.lblData);
             this.tpDetails.Controls.Add(this.mtbDate);
             this.tpDetails.Controls.Add(this.gbDetalhesPagamento);
-            this.tpDetails.Controls.Add(this.dgShCar);
+            this.tpDetails.Controls.Add(this.dgShoppingCar);
             this.tpDetails.Controls.Add(this.txtObs);
             this.tpDetails.Controls.Add(this.lblObs);
             this.tpDetails.Controls.Add(this.lblCliente);
@@ -458,17 +458,17 @@
             this.mtbCashDiscount.TabIndex = 0;
             this.mtbCashDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbDD_KeyDown);
             // 
-            // dgShCar
+            // dgShoppingCar
             // 
-            this.dgShCar.AllowUserToAddRows = false;
-            this.dgShCar.AllowUserToDeleteRows = false;
-            this.dgShCar.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgShCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgShCar.Location = new System.Drawing.Point(371, 106);
-            this.dgShCar.Name = "dgShCar";
-            this.dgShCar.ReadOnly = true;
-            this.dgShCar.Size = new System.Drawing.Size(609, 195);
-            this.dgShCar.TabIndex = 49;
+            this.dgShoppingCar.AllowUserToAddRows = false;
+            this.dgShoppingCar.AllowUserToDeleteRows = false;
+            this.dgShoppingCar.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgShoppingCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgShoppingCar.Location = new System.Drawing.Point(429, 107);
+            this.dgShoppingCar.Name = "dgShoppingCar";
+            this.dgShoppingCar.ReadOnly = true;
+            this.dgShoppingCar.Size = new System.Drawing.Size(551, 195);
+            this.dgShoppingCar.TabIndex = 49;
             // 
             // txtObs
             // 
@@ -591,6 +591,7 @@
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.Location = new System.Drawing.Point(20, 24);
             this.btnNew.Name = "btnNew";
@@ -679,7 +680,7 @@
             this.tpDetails.PerformLayout();
             this.gbDetalhesPagamento.ResumeLayout(false);
             this.gbDetalhesPagamento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgShCar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgShoppingCar)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -733,7 +734,7 @@
         public System.Windows.Forms.MaskedTextBox mtbPercentageDiscount;
         private System.Windows.Forms.Label lblDesconto;
         public System.Windows.Forms.MaskedTextBox mtbCashDiscount;
-        public System.Windows.Forms.DataGridView dgShCar;
+        public System.Windows.Forms.DataGridView dgShoppingCar;
         public System.Windows.Forms.TextBox txtObs;
         private System.Windows.Forms.Label lblObs;
         private System.Windows.Forms.Label lblCliente;

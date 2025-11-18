@@ -49,7 +49,7 @@ namespace SistemaVenda.br.pro.com.view
 
                 _car.Add(productCar);
                 txtTotal.Text = _car.Sum(x => x.TotalPrice).ToString();
-                dgShCar.DataSource = _car;
+                dgShoppingCar.DataSource = _car;
 
                 txtProduct.Clear();
                 txtAmount.Clear();
@@ -84,7 +84,7 @@ namespace SistemaVenda.br.pro.com.view
 
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
                     
-                    dgShCar.DataSource = _car;
+                    dgShoppingCar.DataSource = _car;
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace SistemaVenda.br.pro.com.view
 
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
 
-                    dgShCar.DataSource = _car;
+                    dgShoppingCar.DataSource = _car;
                 }
             }
             catch (Exception ex)
@@ -120,6 +120,108 @@ namespace SistemaVenda.br.pro.com.view
             mtbCashDiscount.Text = "0.00";
             mtbAdditionPorcentage.Text = "0.00";
             txtTotal.Text = "0.00";
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "id",
+                HeaderText = "Código"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ClientId",
+                HeaderText = "Cliente"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "EmployeeId",
+                HeaderText = "Funcionário"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "PaymentMethod",
+                HeaderText = "Forma de pagamento"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "DescountPercentage",
+                HeaderText = "Desconto Porcentagem"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "CashDescount",
+                HeaderText = "Desconto Dinheiro"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionPorcentage",
+                HeaderText = "Adicionar Procetagen"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AdditionCash",
+                HeaderText = "Adicionar Dinheiro"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Total",
+                HeaderText = "Total"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Date",
+                HeaderText = "Data"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "AmountItens",
+                HeaderText = "Quantidade de Itens"
+            });
+
+            dgBudget.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Obs",
+                HeaderText = "Observação"
+            });
+
+            dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ShortDescription",
+                HeaderText = "Descrição Resumida"
+            });
+
+            dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Amount",
+                HeaderText = "Quantidade"
+            });
+
+            dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "CashPrice",
+                HeaderText = "Preço á Vista"
+            });
+
+            dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TermPrice",
+                HeaderText = "Preço á Prazo"
+            });
+
+            dgShoppingCar.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TotalPrice",
+                HeaderText = "Subtotal"
+            });
         }
         #endregion
 
@@ -159,7 +261,7 @@ namespace SistemaVenda.br.pro.com.view
 
                 _ = _budget.PaymentMethod == "A vista" ? rbCash.Checked = true : rbTerm.Checked = true; 
 
-                dgShCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
+                dgShoppingCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
             }
         }
         #endregion
@@ -420,15 +522,15 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                if (dgShCar.SelectedRows.Count > 0)
+                if (dgShoppingCar.SelectedRows.Count > 0)
                 {
-                    ProductShoppingCar proSh = dgShCar.SelectedRows[0].DataBoundItem as ProductShoppingCar;
+                    ProductShoppingCar proSh = dgShoppingCar.SelectedRows[0].DataBoundItem as ProductShoppingCar;
                     _car.Remove(proSh);
                     decimal total = Decimal.Parse(txtTotal.Text);
                     total -= proSh.TotalPrice;
                     txtTotal.Text = total.ToString();
 
-                    dgShCar.DataSource = _car;
+                    dgShoppingCar.DataSource = _car;
                 }
                 else
                 {
