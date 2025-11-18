@@ -74,6 +74,14 @@ namespace SistemaVenda.View
             try
             {
                 BindingList<CashSession> cashDescks = await CashSessionService.Get();
+
+                cashDescks.ToList().ForEach(c =>
+                {
+                    c.Enable = c.Enable == Enable.Enable ? Enable.Habilidatado : Enable.Desabilitado;
+
+                    c.Status = c.Status == IsCashSession.Open ? IsCashSession.Aberto : IsCashSession.Fechado;
+                });
+
                 dgCashSession.DataSource = cashDescks;
             }
             catch (Exception ex)
