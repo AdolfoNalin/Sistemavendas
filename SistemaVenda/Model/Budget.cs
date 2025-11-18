@@ -18,11 +18,8 @@ namespace SistemaVenda.br.pro.com.model
         public decimal CashDescount { get; set; }
         public decimal AdditionPorcentage{ get; set; }
         public decimal AdditionCash { get; set; }
-        public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
-        public decimal Changes{ get; set; }
         public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
         public int AmountItens { get; set; }
         public string Obs { get; set; }
     }
