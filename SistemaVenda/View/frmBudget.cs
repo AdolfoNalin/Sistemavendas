@@ -73,8 +73,6 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                dgShoppingCar.Rows.Clear();
-
                 if(rbCash.Checked)
                 {
                     _budget.PaymentMethod = "A Vista";
@@ -87,6 +85,7 @@ namespace SistemaVenda.br.pro.com.view
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
                     
                     dgShoppingCar.DataSource = _car;
+                    dgShoppingCar.Refresh();
                 }
                 else
                 {
@@ -100,6 +99,7 @@ namespace SistemaVenda.br.pro.com.view
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
 
                     dgShoppingCar.DataSource = _car;
+                    dgShoppingCar.Refresh();
                 }
             }
             catch (Exception ex)

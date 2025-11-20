@@ -260,6 +260,11 @@ namespace SistemaVenda.View
             try
             {
                 frmClient screen = new frmClient();
+                screen.btnNew.Enabled = false;
+                screen.btnCancel.Enabled = false;
+                screen.btnSave.Enabled = false;
+                screen.btnUpdate.Enabled = false;
+                screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
                 Client client = screen.dgClient.SelectedRows[0].DataBoundItem as Client;
 
@@ -742,6 +747,11 @@ namespace SistemaVenda.View
             try
             {
                 frmProduct screen = new frmProduct();
+                screen.btnNew.Enabled = false;
+                screen.btnCancel.Enabled = false;
+                screen.btnSave.Enabled = false;
+                screen.btnUpdate.Enabled = false;
+                screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
 
                 Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
