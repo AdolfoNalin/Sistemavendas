@@ -723,5 +723,19 @@ namespace SistemaVenda.br.pro.com.view
             }
         }
         #endregion
+
+        #region rbCash_CheckedChanged
+        private void rbCash_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCashOrTerm();
+        }
+        #endregion
+
+        #region rbTerm_CheckedChanged
+        private void rbTerm_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCashOrTerm();
+        }
+        #endregion
     }
 }

@@ -227,6 +227,7 @@
             this.rbTerm.TabStop = true;
             this.rbTerm.Text = "Á prazo";
             this.rbTerm.UseVisualStyleBackColor = true;
+            this.rbTerm.CheckedChanged += new System.EventHandler(this.rbTerm_CheckedChanged);
             // 
             // rbCash
             // 
@@ -238,6 +239,7 @@
             this.rbCash.TabStop = true;
             this.rbCash.Text = "Á vista";
             this.rbCash.UseVisualStyleBackColor = true;
+            this.rbCash.CheckedChanged += new System.EventHandler(this.rbCash_CheckedChanged);
             // 
             // label9
             // 
