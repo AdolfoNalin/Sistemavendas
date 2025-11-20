@@ -587,12 +587,7 @@
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panel3;
@@ -606,5 +601,10 @@
         private System.Windows.Forms.ComboBox cbSuppliers;
         private System.Windows.Forms.Label lblUniMeasure;
         private System.Windows.Forms.ComboBox cbUniMeasure;
+        public System.Windows.Forms.Button btnCancel;
+        public System.Windows.Forms.Button btnSave;
+        public System.Windows.Forms.Button btnUpdate;
+        public System.Windows.Forms.Button btnDelete;
+        public System.Windows.Forms.Button btnNew;
     }
 }

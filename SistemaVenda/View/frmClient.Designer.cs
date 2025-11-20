@@ -751,12 +751,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.TabControl tabClient;
         private System.Windows.Forms.TabPage tpConsult;
         private System.Windows.Forms.TabPage tpDetails;
@@ -795,5 +790,10 @@
         public System.Windows.Forms.DataGridView dgClient;
         public System.Windows.Forms.MaskedTextBox mtbDueDate;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Button btnCancel;
+        public System.Windows.Forms.Button btnSave;
+        public System.Windows.Forms.Button btnUpdate;
+        public System.Windows.Forms.Button btnDelete;
+        public System.Windows.Forms.Button btnNew;
     }
 }

@@ -73,6 +73,8 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
+                dgShoppingCar.Rows.Clear();
+
                 if(rbCash.Checked)
                 {
                     _budget.PaymentMethod = "A Vista";
@@ -272,6 +274,11 @@ namespace SistemaVenda.br.pro.com.view
             try
             {
                 frmClient screen = new frmClient();
+                screen.btnNew.Enabled = false;
+                screen.btnCancel.Enabled = false;
+                screen.btnSave.Enabled = false;
+                screen.btnUpdate.Enabled = false;
+                screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
                 Client client = (Client)screen.dgClient.SelectedRows[0].DataBoundItem;
                 txtName.Text = client.Name;
@@ -567,6 +574,11 @@ namespace SistemaVenda.br.pro.com.view
             try
             {
                 frmProduct screen = new frmProduct();
+                screen.btnNew.Enabled = false;
+                screen.btnCancel.Enabled = false;
+                screen.btnSave.Enabled = false;
+                screen.btnUpdate.Enabled = false;
+                screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
 
                 Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
