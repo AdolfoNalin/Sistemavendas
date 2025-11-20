@@ -52,10 +52,9 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                Client client = null;
                 if (dgClient.SelectedRows.Count > 0)
                 {
-                    client = (Client)dgClient.SelectedRows[0].DataBoundItem ?? 
+                    Client client = (Client)dgClient.SelectedRows[0].DataBoundItem ?? 
                         throw new ArgumentNullException("Cliente não foi selecionado");
 
                     txtId.Text = client.Id.ToString() ?? throw new ArgumentNullException("ID não pode ser nulo");
@@ -245,6 +244,7 @@ namespace SistemaVenda.br.pro.com.view
         #region btnUpdate_Click
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+
             _update = true;
             mtbCPF.Enabled = false;
             mtbRG.Enabled = false;
