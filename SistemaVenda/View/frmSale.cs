@@ -257,20 +257,26 @@ namespace SistemaVenda.View
         #region btnSearchName_click
         private async void btnSearchName_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
-
             try
             {
-                List<Client> list = await ClientService.Get(name);
+                frmClient screen = new frmClient();
+                screen.ShowDialog();
+                Client client = screen.dgClient.SelectedRows[0].DataBoundItem as Client;
 
-                Client client = list.FirstOrDefault() ??
-                    throw new ArgumentNullException("Cliente não encontrado!");
+                if (client != null)
+                {
+                    txtClientId.Text = client.Id.ToString();
+                    mtbCPF.Text = client.CPF;
+                    txtName.Text = client.Name;
+                    mtbPhone.Text = client.PhoneNumber;
+                    txtAddress.Text = Helpers.Address(client);
+                }
+                else
+                {
+                    MessageBox.Show("Nenhum cliente selecionado");
+                }
 
-                txtClientId.Text = client.Id.ToString();
-                mtbCPF.Text = client.CPF;
-                txtName.Text = client.Name;
-                mtbPhone.Text = client.PhoneNumber;
-                txtAddress.Text = Helpers.Address(client);
+                screen.Hide();
             }
             catch (ArgumentNullException ane)
             {
@@ -722,6 +728,40 @@ namespace SistemaVenda.View
                     MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
                 }
                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region btnSearchProduct_Click
+        private void btnSearchProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmProduct screen = new frmProduct();
+                screen.ShowDialog();
+
+                Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
+
+                if(product != null)
+                {
+                    txtShortDescription.Text = product.ShortDescription;
+                    txtTermPrice.Text = product.TermPrice.ToString();
+                    txtSpotPrice.Text = product.CashPrice.ToString();
+                    txtStock.Text = product.Amount.ToString();
+                    txtProductId.Text = product.Id.ToString();
+
+                    txtAmount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Nenhum produto foi selecionado");
+                }
+
+                screen.Hide();
             }
             catch (Exception ex)
             {
