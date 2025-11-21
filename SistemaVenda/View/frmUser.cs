@@ -50,7 +50,9 @@ namespace SistemaVenda.View
         {
             if(dgUser.SelectedRows.Count > 0)
             {
-                User user = (User)dgUser.SelectedRows[0].DataBoundItem;
+                Guid.TryParse(dgUser.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+
+                User user = await UserService.Get(id);
 
                 txtCodigo.Text = user.Id.ToString();
                 txtNome.Text = user.Name;
