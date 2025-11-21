@@ -78,23 +78,23 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetId
-		public static async Task<BindingList<User>> Get(Guid id)
+		public static async Task<User> Get(Guid id)
 		{
 			try
 			{
-				BindingList<User> list = null;
+				User user = new User();
 				HttpClient client = ConnectionFactory.ConnectionLocalhost();
-				HttpResponseMessage response = await client.GetAsync($"User/{id}");
+				HttpResponseMessage response = await client.GetAsync($"User/Search/{id}");
 
 				if (response.IsSuccessStatusCode)
 				{
-					list = JsonConvert.DeserializeObject<BindingList<User>>(await response.Content?.ReadAsStringAsync());
+					user = JsonConvert.DeserializeObject<User>(await response.Content?.ReadAsStringAsync());
 				}
 				else
 				{
 					MessageBox.Show(await response.Content.ReadAsStringAsync());
 				}
-				return list;
+				return user;
 			}
 			catch (Exception ex)
 			{
