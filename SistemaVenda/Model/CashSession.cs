@@ -16,8 +16,8 @@ namespace SistemaVenda.Model
 
     public enum IsCashSession
     {
-        Close,
         Open,
+        Close,
         Fechado,
         Aberto
     }
