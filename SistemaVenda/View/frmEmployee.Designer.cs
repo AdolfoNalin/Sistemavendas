@@ -127,7 +127,7 @@
             this.dgEmployee.ReadOnly = true;
             this.dgEmployee.Size = new System.Drawing.Size(1088, 328);
             this.dgEmployee.TabIndex = 0;
-            this.dgEmployee.SelectionChanged += new System.EventHandler(this.dgEmployee_SelectionChanged);
+            this.dgEmployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgEmployee_KeyDown);
             // 
             // tpDetails
             // 
@@ -724,7 +724,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "frmEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Forncedor";
+            this.Text = "Funcionário";
             this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.tabEmployee.ResumeLayout(false);
             this.tpConsult.ResumeLayout(false);

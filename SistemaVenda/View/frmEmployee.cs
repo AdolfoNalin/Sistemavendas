@@ -28,8 +28,13 @@ namespace SistemaVenda.br.pro.com.view
         private async void UpdateData()
         {
             List<Employee> emps =  await EmployeeService.Get();
-          
+
             dgEmployee.DataSource = emps;
+
+            if(dgEmployee.Rows.Count > 0)
+            {
+                dgEmployee.Rows[0].Selected = true;
+            }
         }
         #endregion
 
@@ -71,13 +76,6 @@ namespace SistemaVenda.br.pro.com.view
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
-        }
-        #endregion
-
-        #region dgEmployee_SelectionChanged
-        private void dgEmployee_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
         }
         #endregion
 
@@ -414,7 +412,36 @@ namespace SistemaVenda.br.pro.com.view
                 DataPropertyName = "Complement",
                 HeaderText = "Complemento"
             });
+
+            dgEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgEmployee.MultiSelect = false;
         }
         #endregion
+
+        private void dgEmployee_KeyDown(object sender, KeyEventArgs e)
+        {
+            int index = 0;
+            if (e.KeyCode == Keys.Up)
+            {
+                index = dgEmployee.CurrentCell.RowIndex;
+                if (index > 0 && dgEmployee.Rows.Count <= index)
+                {
+                    dgEmployee.CurrentCell = dgEmployee.Rows[index - 1].Cells[0];
+                }
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                index = dgEmployee.CurrentCell.RowIndex;
+                if (index > 0 && dgEmployee.Rows.Count <= index)
+                {
+                    dgEmployee.CurrentCell = dgEmployee.Rows[index + 1].Cells[0];
+                }
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+                btnUpdate_Click(sender, e);
+            }
+        }
     }
 }
