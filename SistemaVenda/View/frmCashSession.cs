@@ -456,8 +456,8 @@ namespace SistemaVenda.View
                 txtId.Text = _cash.Id.ToString();
                 cbUser.SelectedValue = _cash.UserId;
                 txtEntryValue.Text = _cash.OpeningAmount.ToString();
-                cbEnabel.SelectedIndex = (int) _cash.Enable;
-                cbStatus.SelectedIndex = (int) _cash.Status;
+                cbEnabel.SelectedIndex =  _cash.Enable == Enable.Habilidatado ? (int) Enable.Enable : (int) Enable.Disabel;
+                cbStatus.SelectedIndex = _cash.Status == IsCashSession.Aberto ? (int) IsCashSession.Open : (int) IsCashSession.Close ;
                 txtTotal.Text = _cash.Total.ToString();
 
                 UpdateDataSale();
@@ -529,6 +529,7 @@ namespace SistemaVenda.View
         }
         #endregion
 
+        #region btnCashout_Click
         private void btnCashout_Click(object sender, EventArgs e)
         {
             frmPassword screen = new frmPassword();
@@ -537,9 +538,12 @@ namespace SistemaVenda.View
             if(screen.user.User != null)
             {
 
+        
             }
         }
+        #endregion
 
+        #region btnAddCash_Click
         private void btnAddCash_Click(object sender, EventArgs e)
         {
             frmPassword screen = new frmPassword();
@@ -550,5 +554,6 @@ namespace SistemaVenda.View
 
             }
         }
+        #endregion
     }
 }
