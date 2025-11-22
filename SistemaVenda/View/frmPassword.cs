@@ -42,5 +42,15 @@ namespace SistemaVenda.View
             }
         }
         #endregion
+
+        #region txtPassword_KeyDown
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnNext_Click(sender, e); 
+            }
+        }
+        #endregion
     }
 }
