@@ -418,24 +418,12 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
+        #region dgEmployee_KeyDown
         private void dgEmployee_KeyDown(object sender, KeyEventArgs e)
         {
-            int index = 0;
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
             {
-                index = dgEmployee.CurrentCell.RowIndex;
-                if (index > 0 && dgEmployee.Rows.Count <= index)
-                {
-                    dgEmployee.CurrentCell = dgEmployee.Rows[index - 1].Cells[0];
-                }
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                index = dgEmployee.CurrentCell.RowIndex;
-                if (index > 0 && dgEmployee.Rows.Count <= index)
-                {
-                    dgEmployee.CurrentCell = dgEmployee.Rows[index + 1].Cells[0];
-                }
+               Helpers.UpOrDown(e, dgEmployee);
             }
             else if (e.KeyCode == Keys.Enter)
             {
@@ -443,5 +431,6 @@ namespace SistemaVenda.br.pro.com.view
                 btnUpdate_Click(sender, e);
             }
         }
+        #endregion
     }
 }

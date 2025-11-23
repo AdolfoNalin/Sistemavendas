@@ -122,7 +122,7 @@
             this.dgCashSession.ReadOnly = true;
             this.dgCashSession.Size = new System.Drawing.Size(1158, 398);
             this.dgCashSession.TabIndex = 0;
-            this.dgCashSession.SelectionChanged += new System.EventHandler(this.dgCashDesck_SelectionChanged);
+            this.dgCashSession.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgCashSession_KeyDown);
             // 
             // tpDetails
             // 

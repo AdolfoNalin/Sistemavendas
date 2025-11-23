@@ -116,13 +116,6 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region dgCashDesck_SelectionChanged
-        private void dgCashDesck_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
-        }
-        #endregion
-
         #region btnOpenCashSession_Click
         private void btnOpenCashSession_Click(object sender, EventArgs e)
         {
@@ -258,6 +251,9 @@ namespace SistemaVenda.View
                     DataPropertyName = "Observation",
                     HeaderText = "Observação"
                 });
+
+                dgCashSession.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgCashSession.MultiSelect = false;
             }
             catch (Exception ex)
             {
@@ -552,6 +548,21 @@ namespace SistemaVenda.View
             if (screen.user.User != null)
             {
 
+            }
+        }
+        #endregion
+
+        #region dgCashSession_KeyDown
+        private void dgCashSession_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgCashSession = Helpers.UpOrDown(e, dgCashSession);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+                btnDetails_Click(sender, e);
             }
         }
         #endregion
