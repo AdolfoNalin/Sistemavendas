@@ -123,7 +123,7 @@
             this.dgSupplier.ReadOnly = true;
             this.dgSupplier.Size = new System.Drawing.Size(1136, 339);
             this.dgSupplier.TabIndex = 0;
-            this.dgSupplier.SelectionChanged += new System.EventHandler(this.dgSupplier_SelectionChanged);
+            this.dgSupplier.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgSupplier_KeyDown);
             // 
             // tpDetails
             // 

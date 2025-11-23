@@ -35,7 +35,7 @@ namespace SistemaVenda.br.pro.com.view
 
             if (dgSupplier.SelectedRows.Count > 0)
             {
-                supplier = (Supplier) dgSupplier.SelectedRows[0].DataBoundItem;
+                supplier = (Supplier)dgSupplier.SelectedRows[0].DataBoundItem;
 
                 txtCodigo.Text = supplier.Id.ToString();
                 txtNome.Text = supplier.Name.ToString();
@@ -156,13 +156,9 @@ namespace SistemaVenda.br.pro.com.view
             });
 
             UpdateData();
-        }
-        #endregion
 
-        #region dgSupplier_SelectionChange
-        private void dgSupplier_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
+            dgSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSupplier.MultiSelect = false;
         }
         #endregion
 
@@ -176,7 +172,7 @@ namespace SistemaVenda.br.pro.com.view
             Helpers.ClearScreen(this);
             _update = false;
 
-            if(!_update)
+            if (!_update)
             {
                 mtbCNPJ.Enabled = true;
                 mtbIE.Enabled = true;
@@ -203,7 +199,7 @@ namespace SistemaVenda.br.pro.com.view
             frmPassword screen = new frmPassword();
             screen.ShowDialog();
 
-            if(screen.user.User != null)
+            if (screen.user.User != null)
             {
                 Supplier supplier = new Supplier()
                 {
@@ -260,7 +256,7 @@ namespace SistemaVenda.br.pro.com.view
             UpdateData();
         }
         #endregion
-        
+
         #region btnDelete_click
         private async void btnDelete_Click(object sender, EventArgs e)
         {
@@ -269,7 +265,7 @@ namespace SistemaVenda.br.pro.com.view
             frmPassword screen = new frmPassword();
             screen.ShowDialog();
 
-            if(screen.user.User != null)
+            if (screen.user.User != null)
             {
                 if (dgSupplier.SelectedRows.Count > 0)
                 {
@@ -312,7 +308,7 @@ namespace SistemaVenda.br.pro.com.view
         {
             await Task.Delay(800);
 
-            if(String.IsNullOrEmpty(txtSearch.Text))
+            if (String.IsNullOrEmpty(txtSearch.Text))
             {
                 await Task.Delay(1500);
                 UpdateData();
@@ -341,6 +337,21 @@ namespace SistemaVenda.br.pro.com.view
                 await Task.Delay(800);
                 List<Supplier> suppliers = await SupplierService.Get(txtSearch.Text);
                 dgSupplier.DataSource = suppliers;
+            }
+        }
+        #endregion
+
+        #region dgSupplier_KeyDown
+        private void dgSupplier_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down) 
+            {
+                dgSupplier = Helpers.UpOrDown(e, dgSupplier);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+                btnUpdate_Click(sender, e);
             }
         }
         #endregion
