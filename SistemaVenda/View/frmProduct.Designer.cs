@@ -219,17 +219,18 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(117, 160);
+            this.txtAmount.Location = new System.Drawing.Point(763, 118);
             this.txtAmount.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(50, 20);
             this.txtAmount.TabIndex = 106;
+            this.txtAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyDown);
             // 
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
             this.lblAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmount.Location = new System.Drawing.Point(41, 163);
+            this.lblAmount.Location = new System.Drawing.Point(687, 121);
             this.lblAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(76, 13);
@@ -278,7 +279,7 @@
             // mtbTotalPrice
             // 
             this.mtbTotalPrice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mtbTotalPrice.Location = new System.Drawing.Point(751, 116);
+            this.mtbTotalPrice.Location = new System.Drawing.Point(117, 156);
             this.mtbTotalPrice.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mtbTotalPrice.Name = "mtbTotalPrice";
             this.mtbTotalPrice.Size = new System.Drawing.Size(98, 20);
@@ -288,7 +289,7 @@
             // 
             this.lblTotalPrice.AutoSize = true;
             this.lblTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPrice.Location = new System.Drawing.Point(673, 119);
+            this.lblTotalPrice.Location = new System.Drawing.Point(39, 159);
             this.lblTotalPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(77, 13);

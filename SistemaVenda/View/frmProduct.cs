@@ -300,5 +300,26 @@ namespace SistemaVenda.View
             }
         }
         #endregion
+
+        private void txtAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if(e.KeyCode == Keys.Enter)
+                {
+                    Decimal.TryParse(mtbCashPrice.Text, out decimal cashPrice);
+                    Decimal.TryParse(mtbEntryPrice.Text, out decimal entryPrice);
+
+                    decimal value = cashPrice - entryPrice;
+                    decimal result = value * Decimal.Parse(txtAmount.Text);
+
+                    mtbTotalPrice.Text = result.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
     }
 }
