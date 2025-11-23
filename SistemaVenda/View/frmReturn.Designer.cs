@@ -143,7 +143,7 @@
             this.dgItemReturn.ReadOnly = true;
             this.dgItemReturn.Size = new System.Drawing.Size(1160, 475);
             this.dgItemReturn.TabIndex = 0;
-            this.dgItemReturn.SelectionChanged += new System.EventHandler(this.dgItemReturn_SelectionChanged);
+            this.dgItemReturn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgItemReturn_KeyDown);
             // 
             // tpDetails
             // 
@@ -597,6 +597,7 @@
             this.dgShoppingCar.ReadOnly = true;
             this.dgShoppingCar.Size = new System.Drawing.Size(526, 305);
             this.dgShoppingCar.TabIndex = 35;
+            this.dgShoppingCar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgShoppingCar_KeyDown);
             // 
             // tpSale
             // 
@@ -624,7 +625,7 @@
             this.dgSale.ReadOnly = true;
             this.dgSale.Size = new System.Drawing.Size(1160, 475);
             this.dgSale.TabIndex = 0;
-            this.dgSale.SelectionChanged += new System.EventHandler(this.dgSale_SelectionChanged);
+            this.dgSale.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgSale_KeyDown);
             // 
             // panel2
             // 

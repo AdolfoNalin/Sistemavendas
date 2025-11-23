@@ -94,25 +94,9 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region dgSale_SelectionChanged
-        private void dgSale_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetailsSale();
-        }
-        #endregion
-
-        #region dgItemReturn_SelectionChanged
-        private void dgItemReturn_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetailsReturn();
-        }
-        #endregion
-
         #region Load
         private async void frmItemReturn_Load(object sender, EventArgs e)
         {
-            
-
             mtbDate.Text = DateTime.Now.ToString();
 
             cbUsers.DataSource = await UserService.Get();
@@ -211,6 +195,15 @@ namespace SistemaVenda.View
 
             UpdateDataReturn();
             UpdateDataSale();
+
+            dgSale.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSale.MultiSelect = false;
+
+            dgItemReturn.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgItemReturn.MultiSelect = false;
+
+            dgShoppingCar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgShoppingCar.MultiSelect = false;
         }
         #endregion
 
@@ -490,6 +483,46 @@ namespace SistemaVenda.View
         {
             tapReturn.SelectedTab = tpConsult;
             Helpers.ClearScreen(this);
+        }
+        #endregion
+
+        #region dgItemReturn_KeyDown
+        private void dgItemReturn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgItemReturn = Helpers.UpOrDown(e, dgItemReturn);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetailsReturn();
+                btnUpdate_Click(sender, e); 
+            }
+        }
+        #endregion
+
+        #region dgShoppingCar_KeyDown
+        private void dgShoppingCar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgShoppingCar = Helpers.UpOrDown(e, dgShoppingCar);
+            }
+        }
+        #endregion
+
+        #region dgSale_KeyDown
+        private void dgSale_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgShoppingCar = Helpers.UpOrDown(e, dgShoppingCar);
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                UpdateDetailsSale();
+                btnUpdate_Click(sender, e);
+            }
         }
         #endregion
     }
