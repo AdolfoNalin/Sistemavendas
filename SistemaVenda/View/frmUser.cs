@@ -54,7 +54,7 @@ namespace SistemaVenda.View
 
                 User user = await UserService.Get(id);
 
-                txtCodigo.Text = user.Id.ToString();
+                txtId.Text = user.Id.ToString();
                 txtNome.Text = user.Name;
                 txtApelido.Text = user.Login;
                 txtPassword.Text = user.Password;
@@ -101,6 +101,7 @@ namespace SistemaVenda.View
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             _update = true;
+            txtId.Enabled = false;
             tabUser.SelectedTab = tpDetails;
         }
         #endregion
@@ -179,7 +180,7 @@ namespace SistemaVenda.View
 
                         if (_update)
                         {
-                            user.Id = Guid.Parse(txtCodigo.Text);
+                            user.Id = Guid.Parse(txtId.Text);
                             UserService.Put(user);
                             await Task.Delay(800);
                             UpdateData();

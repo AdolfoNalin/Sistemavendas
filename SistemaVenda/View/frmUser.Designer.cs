@@ -38,7 +38,7 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtApelido = new System.Windows.Forms.TextBox();
             this.lblApelido = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblEmployees = new System.Windows.Forms.Label();
             this.cbEmployees = new System.Windows.Forms.ComboBox();
@@ -114,7 +114,7 @@
             this.tpDetails.Controls.Add(this.lblPassword);
             this.tpDetails.Controls.Add(this.txtApelido);
             this.tpDetails.Controls.Add(this.lblApelido);
-            this.tpDetails.Controls.Add(this.txtCodigo);
+            this.tpDetails.Controls.Add(this.txtId);
             this.tpDetails.Controls.Add(this.lblCodigo);
             this.tpDetails.Controls.Add(this.lblEmployees);
             this.tpDetails.Controls.Add(this.cbEmployees);
@@ -149,6 +149,7 @@
             this.txtPassword.Location = new System.Drawing.Point(113, 109);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(141, 20);
             this.txtPassword.TabIndex = 70;
             // 
@@ -182,13 +183,13 @@
             this.lblApelido.TabIndex = 67;
             this.lblApelido.Text = "Login:";
             // 
-            // txtCodigo
+            // txtId
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(113, 28);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(63, 20);
-            this.txtCodigo.TabIndex = 66;
+            this.txtId.Location = new System.Drawing.Point(113, 28);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(63, 20);
+            this.txtId.TabIndex = 66;
             // 
             // lblCodigo
             // 
@@ -460,7 +461,7 @@
         private System.Windows.Forms.TabPage tpDetails;
         public System.Windows.Forms.TextBox txtApelido;
         private System.Windows.Forms.Label lblApelido;
-        public System.Windows.Forms.TextBox txtCodigo;
+        public System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.Label lblEmployees;
         public System.Windows.Forms.ComboBox cbEmployees;
