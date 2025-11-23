@@ -105,7 +105,7 @@
             this.dgUser.ReadOnly = true;
             this.dgUser.Size = new System.Drawing.Size(968, 333);
             this.dgUser.TabIndex = 0;
-            this.dgUser.SelectionChanged += new System.EventHandler(this.dgUser_SelectionChanged);
+            this.dgUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgUser_KeyDown);
             // 
             // tpDetails
             // 

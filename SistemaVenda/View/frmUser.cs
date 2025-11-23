@@ -91,13 +91,9 @@ namespace SistemaVenda.View
             });
 
             UpdateData();
-        }
-        #endregion
 
-        #region dgUser_SelectionChanged
-        private void dgUser_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
+            dgUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgUser.AllowUserToAddRows = false;
         }
         #endregion
 
@@ -246,6 +242,21 @@ namespace SistemaVenda.View
         {
             await Task.Delay(800);
             dgUser.DataSource = UserService.Get(txtSearch.Text);
+        }
+        #endregion
+
+        #region dgUser_KeyDown
+        private void dgUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Up && e.KeyCode == Keys.Down)
+            {
+                dgUser = Helpers.UpOrDown(e, dgUser);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+                btnUpdate_Click(sender, e);
+            }
         }
         #endregion
     }
