@@ -1,4 +1,5 @@
-﻿using SistemaVenda.br.pro.com.model;
+﻿using Microsoft.Extensions.Logging;
+using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.Service;
 using System;
@@ -136,13 +137,9 @@ namespace SistemaVenda.View
             });
 
             UpdateData();
-        }
-        #endregion
 
-        #region dgProduct_SelectionChanged
-        private void dgProduct_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
+            dgProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgProduct.MultiSelect = false;
         }
         #endregion
 
@@ -286,6 +283,20 @@ namespace SistemaVenda.View
         {
             await Task.Delay(800);
             txtFullDescription.Text = txtShortDescription.Text;
+        }
+        #endregion
+
+        #region dgProduct_KeyDown
+        private void dgProduct_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                Helpers.UpOrDown(e, dgProduct);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+            }
         }
         #endregion
     }
