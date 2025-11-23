@@ -70,7 +70,7 @@ namespace SistemaVenda.View
         #region Load
         private async void frmProduct_Load(object sender, EventArgs e)
         {
-            mtbDate.Text = DateTime.Now.ToString();
+            mtbDate.Text = DateTime.Today.ToString("dd/M/yyyy");
 
             cbSuppliers.DataSource = await SupplierService.Get();
             cbSuppliers.ValueMember = "id";
@@ -255,6 +255,7 @@ namespace SistemaVenda.View
         private void btnNew_Click(object sender, EventArgs e)
         {
             Helpers.ClearScreen(this);
+            mtbDate.Text = DateTime.Today.ToString("dd/M/yyyy");
             tabProduct.SelectedTab = tpDetails;
         }
         #endregion
