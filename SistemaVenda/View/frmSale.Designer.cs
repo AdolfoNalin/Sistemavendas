@@ -146,7 +146,7 @@
             this.dgSale.ReadOnly = true;
             this.dgSale.Size = new System.Drawing.Size(1110, 476);
             this.dgSale.TabIndex = 0;
-            this.dgSale.SelectionChanged += new System.EventHandler(this.dgSale_SelectionChanged);
+            this.dgSale.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgSale_KeyDown);
             // 
             // tpDetails
             // 
@@ -710,6 +710,7 @@
             this.dgShoppingCar.ReadOnly = true;
             this.dgShoppingCar.Size = new System.Drawing.Size(526, 305);
             this.dgShoppingCar.TabIndex = 35;
+            this.dgShoppingCar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgShoppingCar_KeyDown);
             // 
             // panel2
             // 

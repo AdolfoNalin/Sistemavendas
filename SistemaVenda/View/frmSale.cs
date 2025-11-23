@@ -27,8 +27,8 @@ namespace SistemaVenda.View
         private Client _client;
         private int _countUpdate = 0;
 
-        #region DataDetails
-        private async void DataDetails()
+        #region UpdateDetails
+        private async void UpdateDetails()
         {
             try
             {
@@ -226,14 +226,11 @@ namespace SistemaVenda.View
 
             rbtnSport.Checked = true;
 
-            //btnNew_Click(sender, e);
-        }
-        #endregion
+            dgShoppingCar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgShoppingCar.MultiSelect = false;
 
-        #region dgSale_SelectionChanged
-        private void dgSale_SelectionChanged(object sender, EventArgs e)
-        {
-            DataDetails();
+            dgSale.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSale.MultiSelect = false;
         }
         #endregion
 
@@ -405,7 +402,7 @@ namespace SistemaVenda.View
                     throw new ArgumentNullException("Nenhum item foi selecionado.");
                 }
             }
-            catch(ArgumentNullException ane)
+            catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.ParamName);
             }
@@ -422,7 +419,7 @@ namespace SistemaVenda.View
             frmPassword screen = new frmPassword();
             screen.ShowDialog();
 
-            if(screen.user.User != null)
+            if (screen.user.User != null)
             {
                 if (dgSale.SelectedRows.Count > 0)
                 {
@@ -452,7 +449,7 @@ namespace SistemaVenda.View
                     _proCarSh.Clear();
 
                     _update = true;
-                    DataDetails();
+                    UpdateDetails();
                     tabSale.SelectedTab = tpDetails;
                 }
             }
@@ -541,7 +538,7 @@ namespace SistemaVenda.View
 
                     if (mtbPercentageDiscount.Text.Equals("0") || mtbPercentageDiscount.Text == String.Empty)
                     {
-                        _total =_proCarSh.Sum(c => c.TotalPrice);
+                        _total = _proCarSh.Sum(c => c.TotalPrice);
                         txtTotal.Clear();
                         txtTotal.Text = _total.ToString();
                         mtbCashDiscount.Text = "0.00";
@@ -697,7 +694,7 @@ namespace SistemaVenda.View
         {
             try
             {
-                if(CashDesck.Status == IsCashSession.Open)
+                if (CashDesck.Status == IsCashSession.Open)
                 {
                     Sale sale = new Sale()
                     {
@@ -732,7 +729,7 @@ namespace SistemaVenda.View
                 {
                     MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -756,7 +753,7 @@ namespace SistemaVenda.View
 
                 Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
 
-                if(product != null)
+                if (product != null)
                 {
                     txtShortDescription.Text = product.ShortDescription;
                     txtTermPrice.Text = product.TermPrice.ToString();
@@ -776,6 +773,31 @@ namespace SistemaVenda.View
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region dgSale_KeyDown
+        private void dgSale_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgSale = Helpers.UpOrDown(e, dgSale);
+            }
+            else
+            {
+                UpdateDetails();
+                btnUpdate_Click(sender, e);
+            }
+        }
+        #endregion
+
+        #region dgShoppingCar_KeyDown
+        private void dgShoppingCar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgShoppingCar = Helpers.UpOrDown(e, dgShoppingCar);
             }
         }
         #endregion
