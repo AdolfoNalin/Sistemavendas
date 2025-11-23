@@ -260,5 +260,14 @@ namespace SistemaVenda.View
             }
         }
         #endregion
+
+        #region btnCancel_Click
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Helpers.ClearScreen(this);
+            UpdateData();
+            tabUser.SelectedTab = tpConsult;
+        }
+        #endregion
     }
 }
