@@ -471,6 +471,7 @@
             this.dgShoppingCar.ReadOnly = true;
             this.dgShoppingCar.Size = new System.Drawing.Size(551, 195);
             this.dgShoppingCar.TabIndex = 49;
+            this.dgShoppingCar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgShoppingCar_KeyDown);
             // 
             // txtObs
             // 

@@ -227,6 +227,9 @@ namespace SistemaVenda.br.pro.com.view
 
             dgBudget.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgBudget.MultiSelect = false;
+
+            dgShoppingCar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgShoppingCar.MultiSelect = false;
         }
         #endregion
 
@@ -746,29 +749,32 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
+        #region dgBudget_KeyDown
         private void dgBudget_KeyDown(object sender, KeyEventArgs e)
         {
-            int index = 0;
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
             {
-                if (dgBudget.Rows.Count > 0 && dgBudget.Rows.Count <= index)
-                {
-                    index = dgBudget.CurrentCell.RowIndex;
-                    dgBudget.CurrentCell = dgBudget.Rows[index - 1].Cells[0];
-                }
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                if(dgBudget.Rows.Count > 0 && dgBudget.Rows.Count <= index)
-                {
-                    index = dgBudget.CurrentCell.RowIndex;
-                    dgBudget.CurrentCell = dgBudget.Rows[index + 1].Cells[0];
-                }
+                dgBudget = Helpers.UpOrDown(e, dgBudget);
             }
             else if(e.KeyCode == Keys.Enter)
             {
                 UpdateDetails();
             }
         }
+        #endregion
+
+        #region dgShoppingCar_KeyDown
+        private void dgShoppingCar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                dgShoppingCar = Helpers.UpOrDown(e, dgShoppingCar);
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+            }
+        }
+        #endregion
     }
 }
