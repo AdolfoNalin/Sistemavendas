@@ -363,11 +363,7 @@ namespace SistemaVenda.br.pro.com.view
                 {
                     City city = SearchCEP.SearchCity(mtbCEP.Text);
 
-                    if (city is null)
-                    {
-                        throw new ArgumentNullException("Cidade não encontrada!!");
-                    }
-                    else
+                    if (city != null)
                     {
                         txtCidade.Text = city.Name;
                         txtLogradouro.Text = city.Street;

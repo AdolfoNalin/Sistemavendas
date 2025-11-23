@@ -24,25 +24,27 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                 DataSet dado = new DataSet();
                 dado.ReadXml(xmlUrl);
 
-				if(dado is null)
+				if(dado.Container is null)
 				{
-					throw new NullReferenceException("Pesquisa por CEP não teve sucesso");
+					throw new NullReferenceException("Nenhum resultado encontrado");
 				}
-
-				City city = new City()
+				else
 				{
-					Name = dado.Tables[0].Rows[0]["localidade"].ToString() ?? throw new ArgumentNullException("Cidade não existe"),
-					Street = dado.Tables[0].Rows[0]["logradouro"].ToString() ?? throw new ArgumentNullException("Rua não existe"),
-					Neighborhood = dado.Tables[0].Rows[0]["bairro"].ToString() ?? throw new ArgumentNullException("Baiiro não existe"),
-					Complement = dado.Tables[0].Rows[0]["complemento"].ToString(),
-					UF = dado.Tables[0].Rows[0]["uf"].ToString() ?? throw new ArgumentNullException("Estado não existe"),
-				};
-               
-                return city;
+                    City city = new City()
+                    {
+                        Name = dado.Tables[0].Rows[0]["localidade"].ToString() ?? throw new ArgumentNullException("Cidade não existe"),
+                        Street = dado.Tables[0].Rows[0]["logradouro"].ToString() ?? throw new ArgumentNullException("Rua não existe"),
+                        Neighborhood = dado.Tables[0].Rows[0]["bairro"].ToString() ?? throw new ArgumentNullException("Baiiro não existe"),
+                        Complement = dado.Tables[0].Rows[0]["complemento"].ToString(),
+                        UF = dado.Tables[0].Rows[0]["uf"].ToString() ?? throw new ArgumentNullException("Estado não existe"),
+                    };
+
+					return city;
+                }
 			}
 			catch (ArgumentNullException ae)
 			{
-				MessageBox.Show(ae.Message);
+				MessageBox.Show($"{ae.ParamName} \n {ae.Message}");
 				return null;
 			}
 			catch(NullReferenceException ne)

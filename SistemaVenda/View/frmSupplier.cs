@@ -295,10 +295,6 @@ namespace SistemaVenda.br.pro.com.view
                     txtBairro.Text = city.Neighborhood;
                     txtLogradouro.Text = city.Street;
                 }
-                else
-                {
-                    MessageBox.Show("CEP não encontrado");
-                }
             }
         }
         #endregion

@@ -126,7 +126,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                         dg.CurrentCell = dg.Rows[index - 1].Cells[0];
                     }
                 }
-
+                
                 return dg;
             }
             catch (Exception ex)

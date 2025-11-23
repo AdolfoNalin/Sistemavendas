@@ -226,11 +226,7 @@ namespace SistemaVenda.br.pro.com.view
 
                     City city = SearchCEP.SearchCity(mtbCEP.Text);
 
-                    if (city is null)
-                    {
-                        throw new ArgumentNullException("Cidade não encontrada!!");
-                    }
-                    else
+                    if (city != null)
                     {
                         cbUF.Text = city.UF;
                         txtCity.Text = city.Name;
