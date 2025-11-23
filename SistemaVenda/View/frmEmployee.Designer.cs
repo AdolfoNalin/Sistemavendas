@@ -33,6 +33,8 @@
             this.tpConsult = new System.Windows.Forms.TabPage();
             this.dgEmployee = new System.Windows.Forms.DataGridView();
             this.tpDetails = new System.Windows.Forms.TabPage();
+            this.mtbDate = new System.Windows.Forms.MaskedTextBox();
+            this.lblDate = new System.Windows.Forms.Label();
             this.txtFunction = new System.Windows.Forms.TextBox();
             this.lblCargo = new System.Windows.Forms.Label();
             this.txtComplement = new System.Windows.Forms.TextBox();
@@ -131,6 +133,8 @@
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.mtbDate);
+            this.tpDetails.Controls.Add(this.lblDate);
             this.tpDetails.Controls.Add(this.txtFunction);
             this.tpDetails.Controls.Add(this.lblCargo);
             this.tpDetails.Controls.Add(this.txtComplement);
@@ -172,6 +176,26 @@
             this.tpDetails.TabIndex = 1;
             this.tpDetails.Text = "Detalhes";
             this.tpDetails.UseVisualStyleBackColor = true;
+            // 
+            // mtbDate
+            // 
+            this.mtbDate.Location = new System.Drawing.Point(478, 104);
+            this.mtbDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mtbDate.Mask = "99/99/9999";
+            this.mtbDate.Name = "mtbDate";
+            this.mtbDate.Size = new System.Drawing.Size(67, 20);
+            this.mtbDate.TabIndex = 112;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(440, 107);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(38, 13);
+            this.lblDate.TabIndex = 111;
+            this.lblDate.Text = "Data:";
             // 
             // txtFunction
             // 
@@ -494,7 +518,7 @@
             // 
             this.mtbRG.Location = new System.Drawing.Point(277, 63);
             this.mtbRG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.mtbRG.Mask = "99.999.999-9";
+            this.mtbRG.Mask = "99,999,999-9";
             this.mtbRG.Name = "mtbRG";
             this.mtbRG.Size = new System.Drawing.Size(87, 20);
             this.mtbRG.TabIndex = 80;
@@ -794,5 +818,7 @@
         private System.Windows.Forms.Label lblNome;
         public System.Windows.Forms.DataGridView dgEmployee;
         public System.Windows.Forms.TextBox txtFunction;
+        public System.Windows.Forms.MaskedTextBox mtbDate;
+        private System.Windows.Forms.Label lblDate;
     }
 }

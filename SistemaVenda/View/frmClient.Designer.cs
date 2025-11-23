@@ -659,7 +659,7 @@
             // 
             this.mtbRG.Location = new System.Drawing.Point(271, 66);
             this.mtbRG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.mtbRG.Mask = "99.999.999-a";
+            this.mtbRG.Mask = "99,999,999-a";
             this.mtbRG.Name = "mtbRG";
             this.mtbRG.Size = new System.Drawing.Size(87, 20);
             this.mtbRG.TabIndex = 44;
@@ -680,7 +680,7 @@
             this.mtbCPF.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mtbCPF.Location = new System.Drawing.Point(113, 66);
             this.mtbCPF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.mtbCPF.Mask = "999.999.999-99";
+            this.mtbCPF.Mask = "999,999,999-99";
             this.mtbCPF.Name = "mtbCPF";
             this.mtbCPF.Size = new System.Drawing.Size(98, 20);
             this.mtbCPF.TabIndex = 42;

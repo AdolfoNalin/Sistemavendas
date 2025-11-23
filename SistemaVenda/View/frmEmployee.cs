@@ -1,4 +1,5 @@
-﻿using MySqlX.XDevAPI;
+﻿using Microsoft.Extensions.Logging;
+using MySqlX.XDevAPI;
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.Service;
@@ -121,6 +122,7 @@ namespace SistemaVenda.br.pro.com.view
                         ShortName = txtShortName.Text,
                         CPF = mtbCPF.Text ?? throw new ArgumentNullException("CPF não pode ser vázio", "Atenção"),
                         RG = mtbRG.Text.Count() == 10 ? null : mtbRG.Text,
+                        DueDate = DateTime.Parse(mtbDate.Text),
                         TelephoneNumber = mtbTelephoneNumber.Text.Count() == 11 ? null : mtbTelephoneNumber.Text,
                         MaritalStatus = cbMaritalStatus.Text ?? throw new ArgumentNullException("Estado Civil não pode ser vazio", "Atenção"),
                         PhoneNumber = mtbPhoneNumber.Text ?? throw new ArgumentNullException("Número de celular não pode ser vázio"),
@@ -292,8 +294,8 @@ namespace SistemaVenda.br.pro.com.view
 
             if(screen.user.User != null)
             {
-                Guid.TryParse(txtId.Text, out Guid id);
-                EmployeeService.Delete(id);
+                Employee emp = dgEmployee.SelectedRows[0].DataBoundItem as Employee;
+                EmployeeService.Delete(emp.Id);
 
                 await Task.Delay(1500);
                 UpdateData();
