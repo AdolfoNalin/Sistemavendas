@@ -224,6 +224,9 @@ namespace SistemaVenda.br.pro.com.view
                 DataPropertyName = "TotalPrice",
                 HeaderText = "Subtotal"
             });
+
+            dgBudget.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgBudget.MultiSelect = false;
         }
         #endregion
 
@@ -289,13 +292,6 @@ namespace SistemaVenda.br.pro.com.view
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
-        }
-        #endregion
-
-        #region dgBudget_SelectionChanged
-        private void dgBudget_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
         }
         #endregion
 
@@ -749,5 +745,30 @@ namespace SistemaVenda.br.pro.com.view
             UpdateCashOrTerm();
         }
         #endregion
+
+        private void dgBudget_KeyDown(object sender, KeyEventArgs e)
+        {
+            int index = 0;
+            if (e.KeyCode == Keys.Up)
+            {
+                if (dgBudget.Rows.Count > 0 && dgBudget.Rows.Count <= index)
+                {
+                    index = dgBudget.CurrentCell.RowIndex;
+                    dgBudget.CurrentCell = dgBudget.Rows[index - 1].Cells[0];
+                }
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                if(dgBudget.Rows.Count > 0 && dgBudget.Rows.Count <= index)
+                {
+                    index = dgBudget.CurrentCell.RowIndex;
+                    dgBudget.CurrentCell = dgBudget.Rows[index + 1].Cells[0];
+                }
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                UpdateDetails();
+            }
+        }
     }
 }

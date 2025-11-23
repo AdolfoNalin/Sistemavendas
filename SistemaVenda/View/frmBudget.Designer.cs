@@ -126,7 +126,7 @@
             this.dgBudget.Name = "dgBudget";
             this.dgBudget.Size = new System.Drawing.Size(1137, 466);
             this.dgBudget.TabIndex = 0;
-            this.dgBudget.SelectionChanged += new System.EventHandler(this.dgBudget_SelectionChanged);
+            this.dgBudget.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgBudget_KeyDown);
             // 
             // tpDetails
             // 
