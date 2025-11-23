@@ -290,6 +290,7 @@
             this.dgClient.ReadOnly = true;
             this.dgClient.Size = new System.Drawing.Size(1088, 328);
             this.dgClient.TabIndex = 0;
+            this.dgClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgClient_KeyDown);
             // 
             // tpDetails
             // 

@@ -190,6 +190,9 @@ namespace SistemaVenda.br.pro.com.view
                 DataPropertyName = "Complement",
                 HeaderText = "Complemento"
             });
+
+            dgClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgClient.MultiSelect = false;
         }
         #endregion
 
@@ -351,13 +354,6 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
-        #region dgClient_SelectionChanged
-        private void dgClient_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDetails();
-        }
-        #endregion
-
         #region mtbCEP_KeyPress
         private void mtbCEP_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -388,6 +384,20 @@ namespace SistemaVenda.br.pro.com.view
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region dgClient_KeyDown
+        private void dgClient_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                Helpers.UpOrDown(e, dgClient);
+            }
+            else if(e.KeyCode == Keys.Enter) 
+            {
+                UpdateDetails();
             }
         }
         #endregion
