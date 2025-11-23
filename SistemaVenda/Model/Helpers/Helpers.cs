@@ -103,5 +103,38 @@ namespace SistemaVenda.br.pro.com.model.Helpers
             return result ;
         }
         #endregion
+
+        #region UpOrDown
+        public static DataGridView UpOrDown(KeyEventArgs e, DataGridView dg)
+        {
+            try
+            {
+                int index = 0;
+                if (e.KeyCode == Keys.Up)
+                {
+                    if (index > 0 && dg.Rows.Count <= index)
+                    {
+                        index = dg.CurrentCell.RowIndex;
+                        dg.CurrentCell = dg.Rows[index - 1].Cells[0];
+                    }
+                }
+                else if (e.KeyCode == Keys.Down)
+                {
+                    if (index > 0 && dg.Rows.Count <= index)
+                    {
+                        index = dg.CurrentCell.RowIndex;
+                        dg.CurrentCell = dg.Rows[index - 1].Cells[0];
+                    }
+                }
+
+                return dg;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
     }
 }
