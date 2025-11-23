@@ -70,6 +70,8 @@ namespace SistemaVenda.View
         #region Load
         private async void frmProduct_Load(object sender, EventArgs e)
         {
+            cbUniMeasure.SelectedIndex = 3;
+    
             mtbDate.Text = DateTime.Today.ToString("dd/M/yyyy");
 
             cbSuppliers.DataSource = await SupplierService.Get();
