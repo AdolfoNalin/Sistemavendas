@@ -303,6 +303,7 @@ namespace SistemaVenda.View
         }
         #endregion
 
+        #region txtAmount_KeyDown
         private void txtAmount_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -323,5 +324,6 @@ namespace SistemaVenda.View
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
+        #endregion
     }
 }
