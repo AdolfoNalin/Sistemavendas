@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
+using SistemaVenda.Model;
 using SistemaVenda.Service;
 using System;
 using System.CodeDom;
@@ -32,9 +33,25 @@ namespace SistemaVenda.View
             try
             {
                 BindingList<Product> products = await ProductService.Get();
-                dgProduct.DataSource = products;
+                foreach(var p in products)
+                {
+                    List<Supplier> suppliers = await SupplierService.Get(p.SupplierId);
+                    p.Supplier = suppliers.FirstOrDefault();
+                }
+
+                dgProduct.DataSource = products.Select(p => new ProductDTO()
+                {
+                    Id = p.Id,
+                    SupplierName = p.Supplier.CompanyName,
+                    ShortDescription = p.ShortDescription,
+                    Amount = p.Amount,
+                    EntryPrice = p.EntryPrice,
+                    UniMeasure = p.UniMeasure,
+                    TotalPrice = p.TotalPrice,
+                    Date = p.Date,
+                }).ToList();
             }
-            catch(ArgumentNullException ane)
+            catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message);
             }
@@ -47,11 +64,13 @@ namespace SistemaVenda.View
         #endregion
 
         #region UpdateDetails
-        private void UpdateDetails()
+        private async void UpdateDetails()
         {
             if (dgProduct.SelectedRows.Count > 0)
             {
-                Product product = (Product)dgProduct.SelectedRows[0].DataBoundItem;
+                Guid.TryParse(dgProduct.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+
+                Product product = await ProductService.Get(id);
 
                 mtbDate.Text = product.Date.ToString("dd/MM/yyyy");
                 txtId.Text = product.Id.ToString();
@@ -86,7 +105,7 @@ namespace SistemaVenda.View
 
             dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "SupplierId",
+                DataPropertyName = "SupplierName",
                 HeaderText = "Fornecedor"
             });
 
@@ -94,12 +113,6 @@ namespace SistemaVenda.View
             {
                 DataPropertyName = "ShortDescription",
                 HeaderText = "Descrição Resumida"
-            });
-
-            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "FullDescription",
-                HeaderText = "Descrição Completa"
             });
 
             dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
@@ -116,20 +129,14 @@ namespace SistemaVenda.View
 
             dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
             {
+                DataPropertyName = "EntryPrice",
+                HeaderText = "Preço de entrada"
+            });
+
+            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
+            {
                 DataPropertyName = "Amount",
                 HeaderText = "Quantidade"
-            });
-
-            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "CashPrice",
-                HeaderText = "Preço á Vista"
-            });
-
-            dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "TermPrice",
-                HeaderText = "Preço á Prazo"
             });
 
             dgProduct.Columns.Add(new DataGridViewTextBoxColumn()
@@ -299,6 +306,7 @@ namespace SistemaVenda.View
             else if(e.KeyCode == Keys.Enter)
             {
                 UpdateDetails();
+                btnUpdate_Click(sender, e);
             }
         }
         #endregion

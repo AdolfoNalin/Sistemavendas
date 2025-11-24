@@ -57,14 +57,14 @@ namespace SistemaVenda.Service
         {
             try
             {
-                List<Supplier> list = null;
+               List<Supplier> suppliers = new List<Supplier>();
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.GetAsync($"Supplier/Search/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    list = JsonConvert.DeserializeObject<List<Supplier>>(await response.Content.ReadAsStringAsync())
+                    suppliers = JsonConvert.DeserializeObject<List<Supplier>>(await response.Content.ReadAsStringAsync())
                         ?? throw new ArgumentNullException("Nenhum resultado encontrado");
                 }
                 else
@@ -72,7 +72,7 @@ namespace SistemaVenda.Service
                     MessageBox.Show(await response.Content.ReadAsStringAsync());
                 }
 
-                return list;
+                return suppliers;
             }
             catch (ArgumentNullException ane)
             {

@@ -197,6 +197,7 @@
     <Compile Include="Model\Helpers\VerificationPassword.cs" />
     <Compile Include="Model\ItemReturn.cs" />
     <Compile Include="Model\Persona.cs" />
+    <Compile Include="Model\ProductDTO.cs" />
     <Compile Include="Model\ProductShoppingCar.cs" />
     <Compile Include="Model\Return.cs" />
     <Compile Include="Model\Supplier.cs" />

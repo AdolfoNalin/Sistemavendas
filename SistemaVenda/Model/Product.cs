@@ -19,6 +19,8 @@ namespace SistemaVenda.br.pro.com.model
         public decimal EntryPrice { get;  set; }
         public string UniMeasure { get; set; }
         public DateTime Date { get; set; }
+
+        public Supplier Supplier{ get; set; }
         #endregion
     }
 }

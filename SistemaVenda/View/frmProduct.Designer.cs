@@ -219,6 +219,7 @@
             // 
             // txtAmount
             // 
+            this.txtAmount.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtAmount.Location = new System.Drawing.Point(748, 118);
             this.txtAmount.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtAmount.Name = "txtAmount";
