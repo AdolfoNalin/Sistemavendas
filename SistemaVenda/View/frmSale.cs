@@ -34,27 +34,31 @@ namespace SistemaVenda.View
             {
                 if (dgSale.SelectedRows.Count > 0)
                 {
-                    Sale sale = dgSale.SelectedRows[0].DataBoundItem as Sale;
+                    Guid.TryParse(dgSale.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
 
-                    Client client = await ClientService.Get(sale.ClientId);
+                    BindingList<Sale> sales = await SaleService.Get(id);
 
-                    User user = await UserService.GetEmployee(sale.EmployeeId);
+                    Sale sale = sales.FirstOrDefault();
+                    sale.Client = await ClientService.Get(sale.ClientId);
+                    sale.Employee = await EmployeeService.Get(sale.EmployeeId);
 
                     BindingList<ItemSale> itens = await ItemSaleService.Get(sale.Id);
 
-                    string address = Helpers.Address(client);
+                    string address = Helpers.Address(sale.Client);
 
                     txtId.Text = sale.Id.ToString();
-                    txtClientId.Text = client.Id.ToString();
-                    txtName.Text = client.Name;
-                    mtbCPF.Text = client.CPF;
-                    txtAddress.Text = Helpers.Address(client);
-                    mtbPhone.Text = client.PhoneNumber;
+                    txtClientId.Text = sale.Client.Id.ToString();
+                    txtName.Text = sale.Client.Name;
+                    mtbCPF.Text = sale.Client.CPF;
+                    txtAddress.Text = address;
+                    mtbPhone.Text = sale.Client.PhoneNumber;
                     mtbAdditionCash.Text = sale.AdditionCash.ToString();
                     mtbAdditionPorcentage.Text = sale.AdditionPorcentage.ToString();
                     mtbCashDiscount.Text = Convert.ToString(sale.CashDiscount);
                     mtbPercentageDiscount.Text = sale.PercentageDiscount.ToString();
                     txtTotal.Text = sale.Total.ToString();
+
+                    User user = await UserService.GetEmployee(sale.Employee.Id);
 
                     cbUsers.Text = user.Login;
 
@@ -84,10 +88,27 @@ namespace SistemaVenda.View
         #endregion
 
         #region DataUpdate
-        private async void DataUpdate()
+        private async void UpdateData()
         {
+
             BindingList<Sale> sales = await SaleService.Get();
-            dgSale.DataSource = sales;
+            foreach(var s in sales)
+            {
+                s.Employee = await EmployeeService.Get(s.EmployeeId);
+                s.Client = await ClientService.Get(s.ClientId);
+            }
+
+            dgSale.DataSource = sales.Select(s => new SaleDTO
+            { 
+                Id = s.Id,
+                ClientName = s.Client.Name,
+                EmployeeName = s.Employee.Name,
+                PaymentMethod = s.PaymentMethod,
+                Date = s.Date,
+                Total = s.Total,
+                Observation = s.Observation
+            }).ToList();
+
         }
         #endregion
 
@@ -164,7 +185,7 @@ namespace SistemaVenda.View
 
             dgSale.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "ClientId",
+                DataPropertyName = "ClientName",
                 HeaderText = "Cliente"
             });
 
@@ -176,7 +197,7 @@ namespace SistemaVenda.View
 
             dgSale.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "EmployeeId",
+                DataPropertyName = "EmployeeName",
                 HeaderText = "Funcionário"
             });
 
@@ -184,30 +205,6 @@ namespace SistemaVenda.View
             {
                 DataPropertyName = "PaymentMethod",
                 HeaderText = "Forma de Pagamento"
-            });
-
-            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "PercentageDiscount",
-                HeaderText = "Desconto Porcentagem"
-            });
-
-            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "CashDiscount",
-                HeaderText = "Desconto Dinheiro"
-            });
-
-            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "AdditionPorcentage",
-                HeaderText = "Adicionar Porcentagem"
-            });
-
-            dgSale.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "AdditionCash",
-                HeaderText = "Adicionar Dinheiro"
             });
 
             dgSale.Columns.Add(new DataGridViewTextBoxColumn()
@@ -222,7 +219,7 @@ namespace SistemaVenda.View
                 HeaderText = "Observação"
             });
 
-            DataUpdate();
+            UpdateData();
 
             rbtnSport.Checked = true;
 
@@ -426,7 +423,7 @@ namespace SistemaVenda.View
                     Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
                     SaleService.Delete(sale.Id);
                     await Task.Delay(800);
-                    DataUpdate();
+                    UpdateData();
                 }
                 else
                 {

@@ -88,7 +88,7 @@ namespace SistemaVenda.Service
                 BindingList<Sale> list = null;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
-                HttpResponseMessage response = await client.GetAsync($"Sale/{id}");
+                HttpResponseMessage response = await client.GetAsync($"Sale/Search/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {

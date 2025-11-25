@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaVenda.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace SistemaVenda.br.pro.com.model
         public decimal AdditionCash{ get; set; }
         public decimal Total{ get; set; }
         public string Observation { get; set; }
+
+        public Client Client { get; set; }
+        public Employee Employee { get; set; }
         #endregion
     }
 }

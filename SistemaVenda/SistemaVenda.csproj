@@ -200,6 +200,7 @@
     <Compile Include="Model\ProductDTO.cs" />
     <Compile Include="Model\ProductShoppingCar.cs" />
     <Compile Include="Model\Return.cs" />
+    <Compile Include="Model\SaleDTO.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Helpers\Endpoint.cs" />
