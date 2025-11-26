@@ -595,6 +595,7 @@
             this.btnPesquisarCliente.Size = new System.Drawing.Size(26, 26);
             this.btnPesquisarCliente.TabIndex = 21;
             this.btnPesquisarCliente.UseVisualStyleBackColor = true;
+            this.btnPesquisarCliente.Click += new System.EventHandler(this.btnPesquisarCliente_Click);
             // 
             // btnSearchName
             // 
@@ -663,7 +664,7 @@
             this.mtbCPF.Name = "mtbCPF";
             this.mtbCPF.Size = new System.Drawing.Size(97, 20);
             this.mtbCPF.TabIndex = 13;
-            this.mtbCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbCPF_KeyPress);
+            this.mtbCPF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCPF_KeyDown);
             // 
             // lblCPF
             // 

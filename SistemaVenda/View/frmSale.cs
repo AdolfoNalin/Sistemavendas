@@ -119,7 +119,8 @@ namespace SistemaVenda.View
             {
                 List<Client> list = await ClientService.Get(mtbCPF.Text);
 
-                _client = list.FirstOrDefault();
+                _client = list.FirstOrDefault() ?? 
+                    throw new ArgumentNullException("Cliente não foi encontrado", "ATENÇÃO");
 
                 txtClientId.Text = _client.Id.ToString();
                 txtName.Text = _client.Name;
@@ -128,7 +129,7 @@ namespace SistemaVenda.View
             }
             catch (ArgumentNullException ane)
             {
-                MessageBox.Show(ane.Message);
+                MessageBox.Show(ane.ParamName);
             }
             catch (Exception ex)
             {
@@ -140,7 +141,6 @@ namespace SistemaVenda.View
         #region Laod
         private async void frmSale_Load(object sender, EventArgs e)
         {
-            mtbDate.Text = DateTime.Now.ToString();
             txtClientId.Enabled = false;
             txtProductId.Enabled = false;
             cbUsers.DataSource = await UserService.Get();
@@ -244,6 +244,7 @@ namespace SistemaVenda.View
             mtbCashDiscount.Text = "0.00";
             mtbPercentageDiscount.Text = "0.00";
             tabSale.SelectedTab = tpDetails;
+            mtbDate.Text = DateTime.Now.ToString();
             txtAddress.Clear();
         }
         #endregion
@@ -492,16 +493,6 @@ namespace SistemaVenda.View
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        #endregion
-
-        #region mtbCPF_KeyPress
-        private void mtbCPF_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                SearchCPF();
-            }
         }
         #endregion
 
@@ -795,6 +786,30 @@ namespace SistemaVenda.View
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
             {
                 dgShoppingCar = Helpers.UpOrDown(e, dgShoppingCar);
+            }
+        }
+        #endregion
+
+        #region btnPesquisarCliente_Click
+        private void btnPesquisarCliente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SearchCPF();   
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region mtbCPF_KeyDown
+        private void mtbCPF_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchCPF();
             }
         }
         #endregion
