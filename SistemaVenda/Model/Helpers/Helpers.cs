@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaVenda.Model;
+using System.ComponentModel;
 
 namespace SistemaVenda.br.pro.com.model.Helpers
 {
@@ -128,6 +129,28 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                 }
                 
                 return dg;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Switch
+        public static BindingList<CashSession> SwitchEnabel(BindingList<CashSession> cashSessions)
+        {
+            try
+            {
+                cashSessions.ToList().ForEach(c =>
+                {
+                    c.Enable = c.Enable == Enable.Enable ? Enable.Habilitado : Enable.Desabilitado;
+
+                    c.Status = c.Status == IsCashSession.Open ? IsCashSession.Aberto : IsCashSession.Fechado;
+                });
+
+                return cashSessions;
             }
             catch (Exception ex)
             {
