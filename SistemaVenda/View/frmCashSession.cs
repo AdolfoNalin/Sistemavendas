@@ -52,12 +52,14 @@ namespace SistemaVenda.View
                 }
                 else if (rbEnable.Checked)
                 {
-                    cashs = await CashSessionService.GetEnable(Enable.Enable);
+                    cashs = await CashSessionService.GetEnable(Enable.Habilitado);
                 }
                 else if (rbDisabel.Checked)
                 {
-                    cashs = await CashSessionService.GetEnable(Enable.Disabel);
+                    cashs = await CashSessionService.GetEnable(Enable.Desabilitado);
                 }
+
+                cashs = Helpers.SwitchEnabel(cashs);
 
                 dgCashSession.DataSource = cashs;
             }
@@ -75,14 +77,9 @@ namespace SistemaVenda.View
             {
                 BindingList<CashSession> cashDescks = await CashSessionService.Get();
 
-                cashDescks.ToList().ForEach(c =>
-                {
-                    c.Enable = c.Enable == Enable.Enable ? Enable.Habilidatado : Enable.Desabilitado;
+                BindingList<CashSession> cashs = Helpers.SwitchEnabel(cashDescks);
 
-                    c.Status = c.Status == IsCashSession.Open ? IsCashSession.Aberto : IsCashSession.Fechado;
-                });
-
-                dgCashSession.DataSource = cashDescks;
+                dgCashSession.DataSource = cashs;
             }
             catch (Exception ex)
             {
@@ -452,7 +449,7 @@ namespace SistemaVenda.View
                 txtId.Text = _cash.Id.ToString();
                 cbUser.SelectedValue = _cash.UserId;
                 txtEntryValue.Text = _cash.OpeningAmount.ToString();
-                cbEnabel.SelectedIndex =  _cash.Enable == Enable.Habilidatado ? (int) Enable.Enable : (int) Enable.Disabel;
+                cbEnabel.SelectedIndex =  _cash.Enable == Enable.Habilitado ? (int) Enable.Enable : (int) Enable.Disabel;
                 cbStatus.SelectedIndex = _cash.Status == IsCashSession.Aberto ? (int) IsCashSession.Open : (int) IsCashSession.Close ;
                 txtTotal.Text = _cash.Total.ToString();
 

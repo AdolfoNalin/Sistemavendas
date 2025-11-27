@@ -10,7 +10,7 @@ namespace SistemaVenda.Model
     {
         Enable,
         Disabel,
-        Habilidatado,
+        Habilitado,
         Desabilitado
     }
 
