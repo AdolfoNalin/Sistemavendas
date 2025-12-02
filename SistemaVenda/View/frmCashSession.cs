@@ -67,7 +67,7 @@ namespace SistemaVenda.View
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
-        }
+        } 
         #endregion
 
         #region UpdateDataCashSession

@@ -250,7 +250,7 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnSearchName_click
-        private async void btnSearchName_Click(object sender, EventArgs e)
+        private void btnSearchName_Click(object sender, EventArgs e)
         {
             try
             {
@@ -337,7 +337,7 @@ namespace SistemaVenda.View
                     ProductShoppingCar product = new ProductShoppingCar()
                     {
                         ShortDescription = txtShortDescription.Text,
-                        Amount = Double.Parse(txtAmount.Text ?? throw new ArgumentException("Quantidade não pode ser vázia")),
+                        Amount = Double.Parse(txtAmount.Text ?? throw new ArgumentNullException("Quantidade não pode ser vázia")),
                         CashPrice = Decimal.Parse(txtSpotPrice.Text),
                         TermPrice = Decimal.Parse(txtTermPrice.Text),
                     };
@@ -367,6 +367,10 @@ namespace SistemaVenda.View
                 {
                     MessageBox.Show("Selecione a forma de pagamento");
                 }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Quantidade não pode ser vazia");
             }
             catch (ArgumentNullException ane)
             {
@@ -727,7 +731,7 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnSearchProduct_Click
-        private void btnSearchProduct_Click(object sender, EventArgs e)
+        private async void btnSearchProduct_Click(object sender, EventArgs e)
         {
             try
             {
@@ -739,7 +743,9 @@ namespace SistemaVenda.View
                 screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
 
-                Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
+                Guid productId = Guid.Parse(screen.dgProduct.SelectedRows[0].Cells[0].Value.ToString());
+                
+                Product product = await ProductService.Get(productId); 
 
                 if (product != null)
                 {

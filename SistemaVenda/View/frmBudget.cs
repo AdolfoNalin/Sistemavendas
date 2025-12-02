@@ -56,6 +56,10 @@ namespace SistemaVenda.br.pro.com.view
                 
                 txtProduct.Focus();
             }
+            catch(FormatException)
+            {
+                MessageBox.Show("Quantidade não pode ser vazia");
+            }
             catch (ArgumentException ae)
             {
                 MessageBox.Show(ae.Message);
@@ -568,7 +572,7 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region btnConsultProduct_Click
-        private void btnConsultProduct_Click(object sender, EventArgs e)
+        private async void btnConsultProduct_Click(object sender, EventArgs e)
         {
             try
             {
@@ -580,7 +584,8 @@ namespace SistemaVenda.br.pro.com.view
                 screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
 
-                Product product = screen.dgProduct.SelectedRows[0].DataBoundItem as Product;
+                Guid productId = Guid.Parse(screen.dgProduct.SelectedRows[0].Cells[0].Value.ToString());
+                Product product = await ProductService.Get(productId);
                 txtProduct.Text = product.ShortDescription;
             }
             catch (Exception ex)
