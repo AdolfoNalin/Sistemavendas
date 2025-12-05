@@ -235,6 +235,12 @@
     <Compile Include="View\frmBudget.Designer.cs">
       <DependentUpon>frmBudget.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmCashOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmCashOut.Designer.cs">
+      <DependentUpon>frmCashOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmCashSession.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     </Compile>
     <EmbeddedResource Include="View\frmBudget.resx">
       <DependentUpon>frmBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmCashOut.resx">
+      <DependentUpon>frmCashOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmCashSession.resx">
       <DependentUpon>frmCashSession.cs</DependentUpon>
@@ -402,9 +411,7 @@
   <ItemGroup>
     <None Include="Resources\Venda.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ultilitários\Financeiro\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
