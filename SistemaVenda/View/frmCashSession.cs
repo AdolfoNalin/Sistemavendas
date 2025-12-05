@@ -523,28 +523,92 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnCashout_Click
-        private void btnCashout_Click(object sender, EventArgs e)
+        private async void btnCashout_Click(object sender, EventArgs e)
         {
-            frmPassword screen = new frmPassword();
-            screen.ShowDialog();
-
-            if(screen.user.User != null)
+            if(CashDesck.Id != Guid.Empty)
             {
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
-        
+                if (screen.user.User != null)
+                {
+                    frmCashOut cashOut = new frmCashOut();
+                    cashOut.txtType.Text = "Saida";
+                    cashOut.txtType.Enabled = false;
+                    cashOut.ShowDialog();
+                    cashOut.Hide();
+
+                    Decimal.TryParse(cashOut.txtAmount.Text, out decimal amount);
+
+                    CashMovement moviment = new CashMovement()
+                    {
+                        CashSessionId = CashDesck.Id,
+                        UserId = screen.user.User.Id,
+                        Amount = amount,
+                        Description = cashOut.txtDescription.Text,
+                        Date = DateTime.Now,
+                        Type = Model.Type.Exit,
+                    };
+
+                    CashMovementService.Post(moviment);
+
+                    CashSession session = await CashSessionService.Get(moviment.CashSessionId);
+                    CashDesck.Total -= amount;
+                    session.Total -= amount;
+                    CashSessionService.Put(session);
+                    await Task.Delay(1000);
+                    UpdateDataCashSession();
+                }
+            }
+            else
+            {
+                MessageBox.Show("É necessário abrir o caixa");
             }
         }
         #endregion
 
         #region btnAddCash_Click
-        private void btnAddCash_Click(object sender, EventArgs e)
+        private async void btnAddCash_Click(object sender, EventArgs e)
         {
-            frmPassword screen = new frmPassword();
-            screen.ShowDialog();
 
-            if (screen.user.User != null)
+            if (CashDesck.Id != Guid.Empty)
             {
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
 
+                if (screen.user.User != null)
+                {
+                    frmCashOut cashOut = new frmCashOut();
+                    cashOut.txtType.Text = "Entrada";
+                    cashOut.txtType.Enabled = false;
+                    cashOut.ShowDialog();
+                    cashOut.Hide();
+
+                    Decimal.TryParse(cashOut.txtAmount.Text, out decimal amount);
+
+                    CashMovement moviment = new CashMovement()
+                    {
+                        CashSessionId = CashDesck.Id,
+                        UserId = screen.user.User.Id,
+                        Amount = amount,
+                        Description = cashOut.txtDescription.Text,
+                        Date = DateTime.Now,
+                        Type = Model.Type.Exit,
+                    };
+
+                    CashMovementService.Post(moviment);
+
+                    CashSession session = await CashSessionService.Get(moviment.CashSessionId);
+                    CashDesck.Total += amount;
+                    session.Total += amount;
+                    CashSessionService.Put(session);
+                    await Task.Delay(1000);
+                    UpdateDataCashSession();
+                }
+            }
+            else
+            {
+                MessageBox.Show("É necessário abrir o caixa");
             }
         }
         #endregion
