@@ -90,7 +90,6 @@ namespace SistemaVenda.View
         #region DataUpdate
         private async void UpdateData()
         {
-
             BindingList<Sale> sales = await SaleService.Get();
             foreach(var s in sales)
             {
@@ -470,16 +469,52 @@ namespace SistemaVenda.View
         #endregion
 
         #region txtSearch_KeyPress
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        private async void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            dgSale.DataSource = SaleService.Get(txtSearch.Text);
+            BindingList<Sale> sales = await SaleService.Get();
+            foreach (var s in sales)
+            {
+                s.Employee = await EmployeeService.Get(s.EmployeeId);
+                s.Client = await ClientService.Get(s.ClientId);
+            }
+
+            dgSale.DataSource = sales.Select(s => new SaleDTO
+            {
+                Id = s.Id,
+                ClientName = s.Client.Name,
+                EmployeeName = s.Employee.Name,
+                PaymentMethod = s.PaymentMethod,
+                Date = s.Date,
+                Total = s.Total,
+                Observation = s.Observation
+            }).Where(s => s.ClientName.ToUpper().Contains(txtSearch.Text.ToUpper()) || 
+            s.EmployeeName.ToUpper().Contains(txtSearch.Text.ToUpper())
+            ).ToList();
         }
         #endregion
 
         #region btnSearch_Click
-        private void btnSearch_Click(object sender, EventArgs e)
+        private async void btnSearch_Click(object sender, EventArgs e)
         {
-            dgSale.DataSource = SaleService.Get(txtSearch.Text);
+            BindingList<Sale> sales = await SaleService.Get();
+            foreach (var s in sales)
+            {
+                s.Employee = await EmployeeService.Get(s.EmployeeId);
+                s.Client = await ClientService.Get(s.ClientId);
+            }
+
+            dgSale.DataSource = sales.Select(s => new SaleDTO
+            {
+                Id = s.Id,
+                ClientName = s.Client.Name,
+                EmployeeName = s.Employee.Name,
+                PaymentMethod = s.PaymentMethod,
+                Date = s.Date,
+                Total = s.Total,
+                Observation = s.Observation
+            }).Where(s => s.ClientName.ToUpper().Contains(txtSearch.Text.ToUpper()) ||
+            s.EmployeeName.ToUpper().Contains(txtSearch.Text.ToUpper())
+            ).ToList();
         }
         #endregion
 
