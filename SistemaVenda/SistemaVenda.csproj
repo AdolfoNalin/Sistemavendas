@@ -194,6 +194,7 @@
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Helpers\Calculator.cs" />
+    <Compile Include="Model\Helpers\ParceVerification.cs" />
     <Compile Include="Model\Helpers\VerificationPassword.cs" />
     <Compile Include="Model\ItemReturn.cs" />
     <Compile Include="Model\Persona.cs" />

@@ -61,6 +61,7 @@ namespace SistemaVenda.View
 
                 cashs = Helpers.SwitchEnabel(cashs);
 
+                await Task.Delay(1000);
                 dgCashSession.DataSource = cashs;
             }
             catch (Exception ex)
@@ -79,6 +80,7 @@ namespace SistemaVenda.View
 
                 BindingList<CashSession> cashs = Helpers.SwitchEnabel(cashDescks);
 
+                await Task.Delay(1000);
                 dgCashSession.DataSource = cashs;
             }
             catch (Exception ex)

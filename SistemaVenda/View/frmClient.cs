@@ -394,6 +394,7 @@ namespace SistemaVenda.br.pro.com.view
             else if(e.KeyCode == Keys.Enter) 
             {
                 UpdateDetails();
+                tabClient.SelectedTab = tpDetails;
             }
         }
         #endregion
