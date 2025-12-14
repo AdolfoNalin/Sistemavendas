@@ -7,6 +7,8 @@ using SistemaVenda.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Fabric;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -14,6 +16,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace SistemaVenda.Service
 {
@@ -104,37 +107,40 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public static async void Post(CashMovement moviment)
+        public static async Task<bool> Post(CashMovement moviment)
         {
             try
             {
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PostAsJsonAsync("CashMoviment", moviment);
 
-                MessageBox.Show(await response.Content.ReadAsStringAsync());
+                bool result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+                return result;
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
 
         #region Put
-        public static async void Put(CashMovement moviment)
+        public static async Task<bool> Put(CashMovement moviment)
         {
             try
             {
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PutAsJsonAsync("CashMoviment", moviment);
 
-                MessageBox.Show(await response.Content.ReadAsStringAsync());
-
+                bool result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+                return result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
