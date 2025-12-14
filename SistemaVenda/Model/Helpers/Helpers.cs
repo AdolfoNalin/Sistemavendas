@@ -139,7 +139,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
         #endregion
 
         #region Switch
-        public static BindingList<CashSession> SwitchEnabel(BindingList<CashSession> cashSessions)
+        public static async Task<BindingList<CashSession>> SwitchEnabel(BindingList<CashSession> cashSessions)
         {
             try
             {
@@ -149,6 +149,11 @@ namespace SistemaVenda.br.pro.com.model.Helpers
 
                     c.Status = c.Status == IsCashSession.Open ? IsCashSession.Aberto : IsCashSession.Fechado;
                 });
+
+                foreach (var c in cashSessions)
+                {
+                    c.User = await UserService.Get(c.UserId);
+                }
 
                 return cashSessions;
             }
