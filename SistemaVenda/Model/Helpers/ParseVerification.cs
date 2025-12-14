@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SistemaVenda.Model.Helpers
 {
-    public class ParceVerification
+    public class ParseVerification
     {
         #region ParseString
         public static String ParseString(string value, string message)
@@ -74,7 +74,7 @@ namespace SistemaVenda.Model.Helpers
         }
         #endregion
 
-        #region ParseDouble
+        #region ParseDecimal
         public static Decimal ParseDecimal(string value, string message)
         {
             try
@@ -111,7 +111,7 @@ namespace SistemaVenda.Model.Helpers
         }
         #endregion
 
-        #region ParseDouble
+        #region ParseGuid
         public static Guid ParseGuid(string value, string message)
         {
             try
@@ -144,6 +144,41 @@ namespace SistemaVenda.Model.Helpers
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace},{ex.HelpLink}");
                 return Guid.Empty;
+            }
+        }
+        #endregion
+
+        #region ParseDaTeTime
+        public static DateTime ParseDateTime(string value, string message)
+        {
+            try
+            {
+                if(String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Verifique se a data não está vazia!");
+                }
+                else if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Argumento Nullo", "Verifique se o valor data está correto");
+                }
+
+                DateTime.TryParse(value, out DateTime result);
+                return result;
+            }
+            catch(ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message);
+                return new DateTime();
+            }
+            catch(FormatException ae)
+            {
+                MessageBox.Show(message);
+                return new DateTime();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return new DateTime();
             }
         }
         #endregion
