@@ -48,7 +48,7 @@ namespace SistemaVenda.Service
         #endregion
 
         #region GetDate
-        public static async Task<BindingList<CashSession>> Get(DateTime startDate, DateTime endDate)
+        public static async Task<BindingList<CashSession>> Get(string startDate, string endDate)
         {
             try
             {
