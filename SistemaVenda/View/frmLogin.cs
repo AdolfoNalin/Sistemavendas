@@ -48,6 +48,9 @@ namespace SistemaVenda.br.pro.com.view
                     UserSession.Login = userResponse.User.Login;
                     UserSession.EmployeeId = userResponse.User.EmployeeId;
                     UserSession.Token = userResponse.Token;
+
+                    CashDesck.Status = IsCashSession.Close;
+
                     this.Hide();
 
                     new frmMenu().ShowDialog();
