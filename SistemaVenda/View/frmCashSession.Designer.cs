@@ -1,4 +1,6 @@
-﻿namespace SistemaVenda.View
+﻿using System.Threading.Tasks;
+
+namespace SistemaVenda.View
 {
     partial class frmCashSession
     {
@@ -26,7 +28,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private async Task InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCashSession));
             this.tabCashDesck = new System.Windows.Forms.TabControl();
@@ -122,6 +124,7 @@
             this.dgCashSession.ReadOnly = true;
             this.dgCashSession.Size = new System.Drawing.Size(1158, 398);
             this.dgCashSession.TabIndex = 0;
+            this.dgCashSession.DoubleClick += new System.EventHandler(this.dgCashSession_DoubleClick);
             this.dgCashSession.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgCashSession_KeyDown);
             // 
             // tpDetails

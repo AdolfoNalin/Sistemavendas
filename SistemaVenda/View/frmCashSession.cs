@@ -691,5 +691,48 @@ namespace SistemaVenda.View
             }
         }
         #endregion
+
+        #region dgCashSession_DoubleClick
+        private async void dgCashSession_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                frmPassword screen = new frmPassword();
+                screen.ShowDialog();
+                screen.Hide();
+
+                if(screen.user.User != null)
+                {
+                    await UpdateDetails();
+
+                    if(_cash.Status != IsCashSession.Open)
+                    {
+                        MessageBox.Show("Impossivél utilizar caixa fechado");
+                    }
+                    else
+                    {
+                        DialogResult result = MessageBox.Show("Deseja utilizar esse caixa?", "ATENÇÃO",MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            CashDesck.Id = _cash.Id;
+                            CashDesck.UserId = _cash.UserId;
+                            CashDesck.Date = _cash.Date;
+                            CashDesck.OpeningAmount = _cash.OpeningAmount;
+                            CashDesck.Enable = _cash.Enable;
+                            CashDesck.Status = _cash.Status;
+                            CashDesck.Total = _cash.Total;
+
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
     }
 }
