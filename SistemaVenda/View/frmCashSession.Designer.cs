@@ -518,7 +518,8 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEndDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndDate.Location = new System.Drawing.Point(807, 54);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(97, 20);
@@ -526,7 +527,8 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStartDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(807, 24);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(97, 20);

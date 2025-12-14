@@ -1,14 +1,16 @@
 ﻿using Org.BouncyCastle.Tls;
-using SistemaVenda.br.pro.com.model;
-using SistemaVenda.br.pro.com.model.Helpers;
+using SistemaVenda.Model.Helpers;
 using SistemaVenda.Model;
 using SistemaVenda.Service;
 using System;
 using System.ComponentModel;
 using System.Fabric.Management.ServiceModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaVenda.br.pro.com.model.Helpers;
+using SistemaVenda.br.pro.com.model;
 
 namespace SistemaVenda.View
 {
@@ -53,16 +55,26 @@ namespace SistemaVenda.View
                 else if (rbEnable.Checked)
                 {
                     cashs = await CashSessionService.GetEnable(Enable.Habilitado);
+                    await Task.Delay(800);
                 }
                 else if (rbDisabel.Checked)
                 {
                     cashs = await CashSessionService.GetEnable(Enable.Desabilitado);
+                    await Task.Delay(800);
                 }
 
-                cashs = Helpers.SwitchEnabel(cashs);
+                BindingList<CashSession> list = await Helpers.SwitchEnabel(cashs);
 
-                await Task.Delay(1000);
-                dgCashSession.DataSource = cashs;
+                dgCashSession.DataSource = list.Select(c => new CashSessionDTO()
+                {
+                    Id = c.Id,
+                    UserName = c.User.Name,
+                    Date = c.Date,
+                    Enable = c.Enable,
+                    Status = c.Status,
+                    OpeningAmount = c.OpeningAmount,
+                    Total = c.Total
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -78,10 +90,20 @@ namespace SistemaVenda.View
             {
                 BindingList<CashSession> cashDescks = await CashSessionService.Get();
 
-                BindingList<CashSession> cashs = Helpers.SwitchEnabel(cashDescks);
+                BindingList<CashSession> cashs = await Helpers.SwitchEnabel(cashDescks);
 
-                await Task.Delay(1000);
-                dgCashSession.DataSource = cashs;
+                dgCashSession.DataSource = cashs.Select(c =>
+                new CashSessionDTO()
+                {
+                    Id = c.Id,
+                    UserName = c.User.Name,
+                    Date = c.Date,
+                    Enable = c.Enable,
+                    Status = c.Status,
+                    OpeningAmount = c.OpeningAmount,
+                    Total = c.Total
+                }).ToList();
+
             }
             catch (Exception ex)
             {
@@ -91,11 +113,13 @@ namespace SistemaVenda.View
         #endregion
 
         #region UpdateDetails
-        private void UpdateDetails()
+        private async Task UpdateDetails()
         {
             if (dgCashSession.SelectedRows.Count > 0)
             {
-                _cash = dgCashSession.SelectedRows[0].DataBoundItem as CashSession;
+                Guid.TryParse(dgCashSession.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+
+                _cash = await CashSessionService.Get(id); 
             }
         }
         #endregion
@@ -151,7 +175,7 @@ namespace SistemaVenda.View
 
                 dgCashSession.Columns.Add(new DataGridViewTextBoxColumn()
                 {
-                    DataPropertyName = "UserId",
+                    DataPropertyName = "UserName",
                     HeaderText = "Usuário",
                 });
 
@@ -273,8 +297,8 @@ namespace SistemaVenda.View
                 {
                     _isOpen = false;
 
-                    UpdateDetails();
-                    if (_cash.Status == IsCashSession.Close)
+                    await UpdateDetails();
+                    if (_cash.Status == IsCashSession.Close || _cash.Status == IsCashSession.Fechado)
                     {
                         MessageBox.Show("Caixa selecionado, já está fechado!");
                     }
@@ -421,7 +445,7 @@ namespace SistemaVenda.View
 
                 if(screen.user.User != null)
                 {
-                    UpdateDetails();
+                    await UpdateDetails();
 
                     _cash.Enable = Enable.Disabel;
 
@@ -487,7 +511,29 @@ namespace SistemaVenda.View
         #region btnSearchDate_Click
         private async void btnSearchDate_Click(object sender, EventArgs e)
         {
-            dgCashSession.DataSource = await CashSessionService.Get(startDate: DateTime.Parse(dtpStartDate.Text), endDate: DateTime.Parse(dtpEndDate.Text));
+            try
+            { 
+                BindingList<CashSession> list = await CashSessionService.Get(startDate: dtpStartDate.Text, 
+                    endDate: dtpEndDate.Text); ;
+
+                BindingList<CashSession> cashs = await Helpers.SwitchEnabel(list);
+
+                dgCashSession.DataSource = cashs.Select(c => 
+                new CashSessionDTO()
+                {
+                    Id = c.Id,
+                    UserName = c.User.Name,
+                    Date = c.Date,
+                    Enable = c.Enable,
+                    Status = c.Status,
+                    OpeningAmount = c.OpeningAmount,
+                    Total = c.Total
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
         }
         #endregion
 
@@ -504,7 +550,23 @@ namespace SistemaVenda.View
                 }
                 else
                 {
-                    dgCashSession.DataSource = await CashSessionService.GetEmployee(value);
+                    BindingList<CashSession> list = new BindingList<CashSession>();
+                    list = await CashSessionService.Get();
+
+                    BindingList<CashSession> cashs = await Helpers.SwitchEnabel(list);
+
+                    await Task.Delay(1000);
+                    dgSale.DataSource = cashs.Select(c => new CashSessionDTO()
+                    {
+                        Id = c.Id,
+                        UserName = c.User.Name,
+                        Date = c.Date,
+                        Enable = c.Enable,
+                        Status = c.Status,
+                        OpeningAmount = c.OpeningAmount,
+                        Total = c.Total
+                    }).Where(c => c.UserName.ToUpper().Contains(txtSearch.Text.ToUpper()))
+                    .ToList();
                 }
             }
             catch (Exception ex)
