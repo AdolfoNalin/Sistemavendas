@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -851,6 +852,41 @@ namespace SistemaVenda.View
             if (e.KeyCode == Keys.Enter)
             {
                 SearchCPF();
+            }
+        }
+        #endregion
+
+        #region btnSearchDate_Click
+        private async void btnSearchDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BindingList<Sale> sales = await SaleService.Get(startDate: dtpStartDate.Text, endDate: dtpEndDate.Text);
+
+                foreach (var s in sales)
+                {
+                    s.Employee = await EmployeeService.Get(s.EmployeeId);
+                    s.Client = await ClientService.Get(s.ClientId);
+                }
+
+                dgSale.DataSource = sales.Select(s => new SaleDTO
+                {
+                    Id = s.Id,
+                    ClientName = s.Client.Name,
+                    EmployeeName = s.Employee.Name,
+                    PaymentMethod = s.PaymentMethod,
+                    Date = s.Date,
+                    Total = s.Total,
+                    Observation = s.Observation
+                }).ToList();
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion

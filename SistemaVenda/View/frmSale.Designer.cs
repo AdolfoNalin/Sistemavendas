@@ -1,4 +1,6 @@
-﻿namespace SistemaVenda.View
+﻿using System.Threading.Tasks;
+
+namespace SistemaVenda.View
 {
     partial class frmSale
     {
@@ -26,7 +28,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private async Task InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSale));
             this.tabSale = new System.Windows.Forms.TabControl();
@@ -96,6 +98,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lbEndDate = new System.Windows.Forms.Label();
+            this.lblStartDate = new System.Windows.Forms.Label();
+            this.btnSearchDate = new System.Windows.Forms.Button();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.tabSale.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSale)).BeginInit();
@@ -829,6 +836,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lbEndDate);
+            this.panel3.Controls.Add(this.lblStartDate);
+            this.panel3.Controls.Add(this.btnSearchDate);
+            this.panel3.Controls.Add(this.dtpEndDate);
+            this.panel3.Controls.Add(this.dtpStartDate);
             this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.txtSearch);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
@@ -861,6 +873,55 @@
             this.txtSearch.TabIndex = 0;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
+            // 
+            // lbEndDate
+            // 
+            this.lbEndDate.AutoSize = true;
+            this.lbEndDate.Location = new System.Drawing.Point(773, 62);
+            this.lbEndDate.Name = "lbEndDate";
+            this.lbEndDate.Size = new System.Drawing.Size(26, 13);
+            this.lbEndDate.TabIndex = 17;
+            this.lbEndDate.Text = "Fim:";
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Location = new System.Drawing.Point(764, 32);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(35, 13);
+            this.lblStartDate.TabIndex = 16;
+            this.lblStartDate.Text = "Inicio:";
+            // 
+            // btnSearchDate
+            // 
+            this.btnSearchDate.Font = new System.Drawing.Font("Lucida Fax", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchDate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSearchDate.Location = new System.Drawing.Point(917, 34);
+            this.btnSearchDate.Name = "btnSearchDate";
+            this.btnSearchDate.Size = new System.Drawing.Size(71, 40);
+            this.btnSearchDate.TabIndex = 15;
+            this.btnSearchDate.Text = "Pesquisar";
+            this.btnSearchDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchDate.UseVisualStyleBackColor = true;
+            this.btnSearchDate.Click += new System.EventHandler(this.btnSearchDate_Click);
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEndDate.Location = new System.Drawing.Point(802, 58);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(97, 20);
+            this.dtpEndDate.TabIndex = 14;
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(802, 28);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(97, 20);
+            this.dtpStartDate.TabIndex = 13;
             // 
             // frmSale
             // 
@@ -963,5 +1024,10 @@
         public System.Windows.Forms.DataGridView dgShoppingCar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Label lbEndDate;
+        private System.Windows.Forms.Label lblStartDate;
+        private System.Windows.Forms.Button btnSearchDate;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
     }
 }

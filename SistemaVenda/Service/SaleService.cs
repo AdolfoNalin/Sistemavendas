@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Org.BouncyCastle.Pqc.Crypto.Saber;
 using SistemaVenda.br.pro.com.connection;
 using SistemaVenda.br.pro.com.model;
 using System;
@@ -159,6 +160,37 @@ namespace SistemaVenda.Service
                 }
 
                 return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region GetDate
+        public static async Task<BindingList<Sale>> Get(string startDate, string endDate)
+        {
+            try
+            {
+                BindingList<Sale> sales = null;
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync($"Sale/Date?startDate={startDate}&endDate={endDate}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    sales = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync())
+                        ?? throw new ArgumentNullException("Nenhuma venda encontrada nesta data");
+                }
+                else
+                {
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message, "ATENÇÃO");
+                }
+
+                return sales;
             }
             catch (Exception ex)
             {
