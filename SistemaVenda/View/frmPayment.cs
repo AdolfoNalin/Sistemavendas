@@ -460,7 +460,24 @@ namespace SistemaVenda.br.pro.com.view
         #region mtbCredit_KeyDown
         private void mtbCredit_KeyDown(object sender, KeyEventArgs e)
         {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    Decimal.TryParse(txtTotal.Text, out decimal total);
+                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
 
+                    if (result != -404)
+                    {
+                        txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
         }
         #endregion
     }
