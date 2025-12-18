@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaVenda.Model;
 using System.ComponentModel;
+using SistemaVenda.Model.Helpers;
+using System.Fabric.Management.ServiceModel;
+using MySqlX.XDevAPI.Common;
 
 namespace SistemaVenda.br.pro.com.model.Helpers
 {
     public class Helpers
     {
-        
-
         #region Limpar
         /// <summary>
         /// Calsse deticata a realziar a limpeza de tela, podendo ser usada com qualquer tela form
@@ -161,6 +162,37 @@ namespace SistemaVenda.br.pro.com.model.Helpers
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
                 return null;
+            }
+        }
+        #endregion
+
+        #region CalculateChange
+        public static decimal CalculateChange(decimal entryValue, decimal total)
+        {
+            decimal result = 0;
+            try
+            {
+                decimal entryPrice = ParseVerification.ParseDecimal(entryValue.ToString(), "Somente números são aceitos");
+                decimal totalPrice = ParseVerification.ParseDecimal(total.ToString(), "Somente números são aceitos");
+
+                result = totalPrice - entryPrice;
+
+                if(totalPrice > entryValue)
+                {
+                    throw new ArgumentException($"Está faltando R${result}");
+                }
+
+                return result;
+            }
+            catch(ArgumentException ae)
+            {
+                MessageBox.Show(ae.ParamName);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message} {ex.StackTrace}, {ex.HelpLink}");
+                return -404;
             }
         }
         #endregion

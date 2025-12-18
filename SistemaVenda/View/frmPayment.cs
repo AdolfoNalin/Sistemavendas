@@ -20,6 +20,7 @@ using System.Management;
 using MySqlX.XDevAPI.Common;
 using Microsoft.Extensions.Logging;
 using iTextSharp.text.pdf.parser;
+using SistemaVenda.br.pro.com.model.Helpers;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -364,57 +365,6 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
-        #region Dinheiro
-        private void mtbDinheiro_KeyPress(object sender, KeyPressEventArgs e)
-      {
-            if(e.KeyChar == 13)
-            {
-                _paymentoMethod = "Dinheiro";
-                decimal cash = decimal.Parse(mtbCash.Text);
-                decimal total = decimal.Parse(txtTotal.Text);
-                decimal change = 0;
-
-                change = cash - total;
-                txtChange.Text = change.ToString();
-            }
-        }
-        #endregion
-
-        #region Cartao
-        private void mtbCartao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 13)
-            {
-                _paymentoMethod = "Cartão";
-                decimal card = decimal.Parse(mtbCard.Text);
-                decimal total = decimal.Parse(txtTotal.Text);
-                
-                if (card < total)
-                {
-                    MessageBox.Show("Não é possivel o valor do pix ser maior do que o total da compra");
-                }
-            }
-        }
-        #endregion
-
-        #region Pix
-        private void mtbPix_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 13)
-            {
-                _paymentoMethod = "Pix";
-                decimal pix = decimal.Parse(mtbPix.Text);
-                decimal total = decimal.Parse(txtTotal.Text);
-                
-                if(pix < total)
-                {
-                    MessageBox.Show("Não é possivel o valor do pix ser maior do que o total da compra");
-                }
-            }
-
-        }
-        #endregion
-
         #region Load
         private void frmPagamento_Load(object sender, EventArgs e)
         {
@@ -433,6 +383,84 @@ namespace SistemaVenda.br.pro.com.view
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+        #endregion
+
+        #region mtbCard_KeyDown
+        private void mtbCard_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    Decimal.TryParse(txtTotal.Text, out decimal total);
+                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
+
+                    if(result != -404)
+                    {
+                        txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region mtbPix_KeyDown
+        private void mtbPix_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    Decimal.TryParse(txtTotal.Text, out decimal total);
+                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
+
+                    if (result != -404)
+                    {
+                        txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region mtbCash_KeyDown
+        private void mtbCash_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    Decimal.TryParse(txtTotal.Text, out decimal total);
+                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
+
+                    if (result != -404)
+                    {
+                        txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region mtbCredit_KeyDown
+        private void mtbCredit_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
         #endregion
     }

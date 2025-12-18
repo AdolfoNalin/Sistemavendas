@@ -107,7 +107,7 @@
             this.mtbCash.Name = "mtbCash";
             this.mtbCash.Size = new System.Drawing.Size(100, 20);
             this.mtbCash.TabIndex = 7;
-            this.mtbCash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbDinheiro_KeyPress);
+            this.mtbCash.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCash_KeyDown);
             // 
             // mtbPix
             // 
@@ -115,7 +115,7 @@
             this.mtbPix.Name = "mtbPix";
             this.mtbPix.Size = new System.Drawing.Size(100, 20);
             this.mtbPix.TabIndex = 8;
-            this.mtbPix.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbPix_KeyPress);
+            this.mtbPix.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbPix_KeyDown);
             // 
             // mtbCredit
             // 
@@ -123,6 +123,7 @@
             this.mtbCredit.Name = "mtbCredit";
             this.mtbCredit.Size = new System.Drawing.Size(100, 20);
             this.mtbCredit.TabIndex = 9;
+            this.mtbCredit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCredit_KeyDown);
             // 
             // txtTotal
             // 
@@ -198,6 +199,7 @@
             this.mtbCard.Name = "mtbCard";
             this.mtbCard.Size = new System.Drawing.Size(100, 20);
             this.mtbCard.TabIndex = 18;
+            this.mtbCard.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCard_KeyDown);
             // 
             // frmPayment
             // 
