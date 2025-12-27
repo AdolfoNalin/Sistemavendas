@@ -12,5 +12,6 @@ namespace SistemaVenda.Model
         public string CPF { get; set; }
         public string RG { get; set; }
         public string MaritalStatus { get; set; }
+        public decimal Credit { get; set; }
     }
 }
