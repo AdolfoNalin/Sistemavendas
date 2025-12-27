@@ -302,37 +302,25 @@ namespace SistemaVenda.br.pro.com.view
         #region txtSearch_KeyPress
         private async void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            await Task.Delay(800);
-
-            if (String.IsNullOrEmpty(txtSearch.Text))
-            {
-                await Task.Delay(1500);
-                UpdateData();
-            }
-            else
+            try
             {
                 await Task.Delay(800);
-                List<Supplier> suppliers = await SupplierService.Get(txtSearch.Text);
-                dgSupplier.DataSource = suppliers;
-            }
-        }
-        #endregion
 
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            await Task.Delay(800);
-
-            if (String.IsNullOrEmpty(txtSearch.Text))
-            {
-                await Task.Delay(1500);
-                UpdateData();
+                if (String.IsNullOrEmpty(txtSearch.Text))
+                {
+                    await Task.Delay(1500);
+                    UpdateData();
+                }
+                else
+                {
+                    await Task.Delay(800);
+                    List<Supplier> suppliers = await SupplierService.Get(txtSearch.Text);
+                    dgSupplier.DataSource = suppliers;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Task.Delay(800);
-                List<Supplier> suppliers = await SupplierService.Get(txtSearch.Text);
-                dgSupplier.DataSource = suppliers;
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion

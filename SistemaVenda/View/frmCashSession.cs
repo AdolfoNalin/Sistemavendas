@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.br.pro.com.model;
+using System.Security.Cryptography;
 
 namespace SistemaVenda.View
 {
@@ -537,14 +538,14 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
+        #region txtSearch_KeyDown
+        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
                 string value = txtSearch.Text;
 
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("Digite no campo ao lado para ter um resultado");
                 }
@@ -572,16 +573,6 @@ namespace SistemaVenda.View
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-            }
-        }
-        #endregion
-
-        #region txtSearch_KeyDown
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSearch_Click(sender, e);
             }
         }
         #endregion

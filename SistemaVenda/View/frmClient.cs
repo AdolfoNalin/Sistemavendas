@@ -14,6 +14,7 @@ using SistemaVenda.Service;
 using SistemaVenda.Model;
 using MySql.Data.MySqlClient;
 using System.Threading;
+using SistemaVenda.Model.Helpers;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -199,29 +200,18 @@ namespace SistemaVenda.br.pro.com.view
         #region txtSearch_KeyPress
         private async void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            await Task.Delay(500);
+            try
+            {
+                string value = ParseVerification.ParseString(txtSearch.Text, "Pesquisa não pode ser vazio");
 
-            if(String.IsNullOrEmpty(txtSearch.Text))
-            {
-                UpdateData();
-            }
-            else
-            {
-                string value = txtSearch.Text;
                 List<Client> clients = await ClientService.Get(value);
-                await Task.Delay(300);
+                await Task.Delay(1000);
                 dgClient.DataSource = clients;
             }
-        }
-        #endregion
-
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            string value = txtSearch.Text;
-            List<Client> clients = await ClientService.Get(value);
-            await Task.Delay(1000);
-            dgClient.DataSource = clients;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
         }
         #endregion
 

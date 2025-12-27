@@ -1,25 +1,13 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
+﻿
 using SistemaVenda.Service;
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Google.Protobuf.WellKnownTypes;
 using SistemaVenda.Model;
-using ZstdSharp.Unsafe;
-using System.Management;
-using MySqlX.XDevAPI.Common;
-using Microsoft.Extensions.Logging;
-using iTextSharp.text.pdf.parser;
 using SistemaVenda.br.pro.com.model.Helpers;
 
 namespace SistemaVenda.br.pro.com.view
@@ -45,139 +33,6 @@ namespace SistemaVenda.br.pro.com.view
             _update = update;
            
             InitializeComponent();
-        }
-        #endregion
-
-        #region ImprimirPDF
-        public void ImprimirPDF()
-        {
-            try
-            {
-                frmSale saleScreen = new frmSale();
-                frmMenu menu = new frmMenu();
-
-                string nomeArquivo = "";
-
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Text files (*.pdf)|*.pdf|All files (*.*)|*.*";
-                saveFileDialog.DefaultExt = "pdf";
-                saveFileDialog.AddExtension = false;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string filePath = saveFileDialog.FileName;
-                    nomeArquivo = $"{filePath}_Venda.pdf";
-                }
-
-                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"C:\Program Files (x86)\Sistema de Vendas\Logo.jpeg");
-                logo.ScaleToFit(150, 300);
-                logo.SetAbsolutePosition(430f, 650f);
-
-                FileStream filePDF = new FileStream(nomeArquivo, FileMode.Create);
-                Document doc = new Document(PageSize.A4);
-                PdfWriter escrito = PdfWriter.GetInstance(doc, filePDF);
-
-                string data = " ";
-
-                Paragraph vendaCabecario = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
-                vendaCabecario.Alignment = Element.ALIGN_CENTER;
-                vendaCabecario.Add("Venda");
-
-                Paragraph cabecario = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
-
-                //Dados da empresa
-                cabecario.Alignment = Element.ALIGN_LEFT;
-                cabecario.Add($"Master Blocos e Lajes\nLuciane Pela Feijão: 46.594.384/0001-19\nEndereço: Rod SP 261 - Km 46,5\r\nBairro Jacutinga - zona rural \r\nÁguas de Santa Barbara\nContato: 14 99147 7975\nEmail: Luciani.pela@gmail.com");
-
-                //Data e Hora
-                Paragraph dateTime = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 18, (int)System.Drawing.FontStyle.Bold));
-                dateTime.Font = new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular);
-                dateTime.Alignment = Element.ALIGN_RIGHT;
-                dateTime.Add($"\nData: {DateTime.Now.ToShortDateString()} Hora: {DateTime.Now.ToShortTimeString()}\n\n");
-
-                Paragraph dataClient= new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)FontStyle.Bold));
-                dataClient.Alignment = Element.ALIGN_LEFT;
-                dataClient.Add($"Cliente: {_client.Name},\nCidade: {_client.City}, \nBairro: {_client.Neighborhoods}, \nRua: {_client.ShortName}, \nNº: {_client.Number}");
-
-                //Dados do Orçamento
-                Paragraph dadosOrcamento = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
-                dadosOrcamento.Alignment = Element.ALIGN_LEFT;
-                dadosOrcamento.Add($"Vendedor: {_emp.Name}\n");
-
-                //Produtos
-                Paragraph produtos = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
-                produtos.Alignment = Element.ALIGN_RIGHT;
-
-                PdfPTable tabela = new PdfPTable(5);
-
-                tabela.AddCell("Código");
-                tabela.AddCell("Produto");
-                tabela.AddCell("Quantidade");
-                tabela.AddCell("Preço");
-                tabela.AddCell("SubTotal");
-
-                double quantidade = 0;
-
-                //foreach (var linha in _proShoCar)
-                //{
-                //    Product obj = new Product();
-
-                //    obj.Id = Guid.Parse(linha.Cells[0].Value.ToString());
-                //    obj.ShortDescription = linha.Cells[1].Value.ToString();
-                //    obj.Amount = int.Parse(linha.Cells[2].Value.ToString());
-                //    obj.CashPrice = Decimal.Parse(linha.Cells[3].Value.ToString());
-                //    obj.TermPrice = Decimal.Parse(linha.Cells[4].Value.ToString());
-
-                //    tabela.AddCell(obj.Id.ToString());
-                //    tabela.AddCell(obj.ShortDescription);
-                //    tabela.AddCell(obj.Amount.ToString());
-                //    tabela.AddCell(obj.CashPrice.ToString());
-
-                //    quantidade += obj.Amount;
-                //}
-
-                tabela.HorizontalAlignment = Element.ALIGN_LEFT;
-
-                produtos.Add("");
-                produtos.Alignment = Element.ALIGN_LEFT;
-                produtos.Add(tabela);
-
-                //Dados finais do orçamento
-                Paragraph dadosFinais = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Bold));
-                dadosFinais.Alignment = Element.ALIGN_LEFT;
-                dadosFinais.Add($"SubTotal: {saleScreen.txtTotal.Text}    Desconto: {saleScreen.mtbCashDiscount.Text}     Agréscimo: {saleScreen.mtbAdditionCash.Text}      Total: {txtTotal.Text}");
-
-                //Obs
-                Paragraph obs = new Paragraph(data, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12, (int)System.Drawing.FontStyle.Regular));
-                obs.Alignment = Element.ALIGN_LEFT;
-                obs.Add($"Obeservação: \n{txtObs.Text}");
-
-                doc.Open();
-                doc.Add(vendaCabecario);
-                doc.Add(logo);
-                doc.Add(cabecario);
-                doc.Add(dateTime);
-                doc.Add(dataClient);
-                doc.Add(dadosOrcamento);
-                doc.Add(produtos);
-                doc.Add(dadosFinais);
-                doc.Add(obs);
-                doc.Close();
-
-                DialogResult result = MessageBox.Show("Deseja realizar outrar venda? ", "", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                {
-                    saleScreen.Hide();       
-                    Hide();
-                    saleScreen.ShowDialog();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Aconteceu um erro do tipo {ex.Message} Como o caminho para {ex.StackTrace}");
-            }
         }
         #endregion
 

@@ -303,24 +303,7 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region txtSearch_KeyDown
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btnSearch_Click(sender, e);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-            }
-        }
-        #endregion
-
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
+        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -333,7 +316,7 @@ namespace SistemaVenda.br.pro.com.view
                     dgBudget.DataSource = await BudgetService.Get(txtSearch.Text);
                 }
             }
-            catch(ArgumentException ae)
+            catch (ArgumentException ae)
             {
                 MessageBox.Show(ae.Message);
             }

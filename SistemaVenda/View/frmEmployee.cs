@@ -173,33 +173,6 @@ namespace SistemaVenda.br.pro.com.view
         }
         #endregion
 
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            await Task.Delay(800);
-
-            try
-            {
-                if (String.IsNullOrEmpty(txtSearch.Text))
-                {
-                    List<Employee> employees = await EmployeeService.Get();
-                    await Task.Delay(800);
-                    dgEmployee.DataSource = employees;
-                }
-                else
-                {
-                    List<Employee> employees = await EmployeeService.Get(txtSearch.Text);
-                    await Task.Delay(1500);
-                    dgEmployee.DataSource = employees;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-            }
-        }
-        #endregion
-
         #region btnExit_click
         private void btnExit_Click(object sender, EventArgs e)
         {

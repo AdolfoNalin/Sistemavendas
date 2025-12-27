@@ -469,62 +469,34 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region txtSearch_KeyPress
-        private async void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            BindingList<Sale> sales = await SaleService.Get();
-            foreach (var s in sales)
-            {
-                s.Employee = await EmployeeService.Get(s.EmployeeId);
-                s.Client = await ClientService.Get(s.ClientId);
-            }
-
-            dgSale.DataSource = sales.Select(s => new SaleDTO
-            {
-                Id = s.Id,
-                ClientName = s.Client.Name,
-                EmployeeName = s.Employee.Name,
-                PaymentMethod = s.PaymentMethod,
-                Date = s.Date,
-                Total = s.Total,
-                Observation = s.Observation
-            }).Where(s => s.ClientName.ToUpper().Contains(txtSearch.Text.ToUpper()) || 
-            s.EmployeeName.ToUpper().Contains(txtSearch.Text.ToUpper())
-            ).ToList();
-        }
-        #endregion
-
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            BindingList<Sale> sales = await SaleService.Get();
-            foreach (var s in sales)
-            {
-                s.Employee = await EmployeeService.Get(s.EmployeeId);
-                s.Client = await ClientService.Get(s.ClientId);
-            }
-
-            dgSale.DataSource = sales.Select(s => new SaleDTO
-            {
-                Id = s.Id,
-                ClientName = s.Client.Name,
-                EmployeeName = s.Employee.Name,
-                PaymentMethod = s.PaymentMethod,
-                Date = s.Date,
-                Total = s.Total,
-                Observation = s.Observation
-            }).Where(s => s.ClientName.ToUpper().Contains(txtSearch.Text.ToUpper()) ||
-            s.EmployeeName.ToUpper().Contains(txtSearch.Text.ToUpper())
-            ).ToList();
-        }
-        #endregion
-
         #region txtSearch_KeyDown
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                btnSearch_Click(sender, e);
+                BindingList<Sale> sales = await SaleService.Get();
+                foreach (var s in sales)
+                {
+                    s.Employee = await EmployeeService.Get(s.EmployeeId);
+                    s.Client = await ClientService.Get(s.ClientId);
+                }
+
+                dgSale.DataSource = sales.Select(s => new SaleDTO
+                {
+                    Id = s.Id,
+                    ClientName = s.Client.Name,
+                    EmployeeName = s.Employee.Name,
+                    PaymentMethod = s.PaymentMethod,
+                    Date = s.Date,
+                    Total = s.Total,
+                    Observation = s.Observation
+                }).Where(s => s.ClientName.ToUpper().Contains(txtSearch.Text.ToUpper()) ||
+                s.EmployeeName.ToUpper().Contains(txtSearch.Text.ToUpper())
+                ).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion

@@ -207,26 +207,23 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            if(tapReturn.Name.Equals(tpConsult.Name))
-            {
-                dgItemReturn.DataSource = await ItemReturnService.Get(txtSearch.Text);
-            }
-            else
-            {
-                dgSale.DataSource = await SaleService.Get(txtSearch.Text);
-            }
-        }
-        #endregion
-
         #region txtSearch_KeyDown
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            try
             {
-                btnSearch_Click(sender, e);
+                if (tapReturn.Name.Equals(tpConsult.Name))
+                {
+                    dgItemReturn.DataSource = await ItemReturnService.Get(txtSearch.Text);
+                }
+                else
+                {
+                    dgSale.DataSource = await SaleService.Get(txtSearch.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion

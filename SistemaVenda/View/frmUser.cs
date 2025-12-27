@@ -238,25 +238,24 @@ namespace SistemaVenda.View
         }
         #endregion
 
-        #region btnSearch_Click
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            await Task.Delay(800);
-            dgUser.DataSource = UserService.Get(txtSearch.Text);
-        }
-        #endregion
-
         #region dgUser_KeyDown
         private void dgUser_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Up && e.KeyCode == Keys.Down)
+            try
             {
-                dgUser = Helpers.UpOrDown(e, dgUser);
+                if (e.KeyCode == Keys.Up && e.KeyCode == Keys.Down)
+                {
+                    dgUser = Helpers.UpOrDown(e, dgUser);
+                }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    UpdateDetails();
+                    btnUpdate_Click(sender, e);
+                }
             }
-            else if(e.KeyCode == Keys.Enter)
+            catch (Exception ex)
             {
-                UpdateDetails();
-                btnUpdate_Click(sender, e);
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion
