@@ -1,4 +1,5 @@
-﻿using SistemaVenda.br.pro.com.model;
+﻿using Microsoft.Extensions.Logging;
+using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.br.pro.com.view;
 using SistemaVenda.Model;
@@ -696,40 +697,46 @@ namespace SistemaVenda.View
             {
                 if (CashDesck.Status == IsCashSession.Open)
                 {
-                    Sale sale = new Sale()
+                    Client client = await ClientService.Get(ParseVerification.ParseGuid(txtClientId.Text, "Selecione o cliente"));
+                    if (_total < client.Credit)
                     {
-                        CashId = CashDesck.Id,
-                        ClientId = Guid.Parse(txtClientId.Text),
-                        EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
-                        Date = DateTime.UtcNow,
-                        PercentageDiscount = Convert.ToDecimal(mtbPercentageDiscount.Text),
-                        CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
-                        AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
-                        AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
-                        Total = Convert.ToDecimal(txtTotal.Text)
-                    };
+                        Sale sale = new Sale()
+                        {
+                            CashId = CashDesck.Id,
+                            ClientId = client.Id,
+                            EmployeeId = Guid.Parse(cbUsers.SelectedValue.ToString()),
+                            Date = DateTime.UtcNow,
+                            PercentageDiscount = Convert.ToDecimal(mtbPercentageDiscount.Text),
+                            CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
+                            AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
+                            AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
+                            Total = Convert.ToDecimal(txtTotal.Text)
+                        }
 
-                    if (_update)
-                    {
-                        sale.Id = Guid.Parse(txtId.Text);
+                        if (_update)
+                        {
+                            sale.Id = Guid.Parse(txtId.Text);
+                        }
+
+                        Guid.TryParse(cbUsers.SelectedValue.ToString(), out Guid employeeId);
+                        Guid.TryParse(txtClientId.Text, out Guid clientId);
+                        Employee emp = await EmployeeService.Get(employeeId)
+                            ?? throw new ArgumentNullException("Verifique se há um usuário selecionado para realizar a venda");
+
+                        frmPayment screen = new frmPayment(client, _proCarSh, emp, sale, _update);
+                        this.Hide();
+                        screen.ShowDialog();
+                        btnCancelar_Click(sender, e);
                     }
-
-                    Guid.TryParse(cbUsers.SelectedValue.ToString(), out Guid employeeId);
-                    Guid.TryParse(txtClientId.Text, out Guid clientId);
-                    Client client = await ClientService.Get(clientId);
-                    Employee emp = await EmployeeService.Get(employeeId)
-                        ?? throw new ArgumentNullException("Verifique se há um usuário selecionado para realizar a venda");
-
-                    frmPayment screen = new frmPayment(client, _proCarSh, emp, sale, _update);
-                    this.Hide();
-                    screen.ShowDialog();
-                    btnCancelar_Click(sender, e);
+                    else
+                    {
+                        MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
+                    MessageBox.Show("Limite do cliente estourou");
                 }
-
             }
             catch (Exception ex)
             {

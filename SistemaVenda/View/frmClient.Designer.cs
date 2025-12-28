@@ -32,6 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -79,7 +80,8 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblCPF = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtCredit = new System.Windows.Forms.TextBox();
+            this.lblCredit = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -125,6 +127,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1121, 100);
             this.panel3.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label6.Location = new System.Drawing.Point(303, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 16);
+            this.label6.TabIndex = 78;
+            this.label6.Text = "Pesquisa:";
             // 
             // txtSearch
             // 
@@ -280,6 +293,8 @@
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.txtCredit);
+            this.tpDetails.Controls.Add(this.lblCredit);
             this.tpDetails.Controls.Add(this.mtbDueDate);
             this.tpDetails.Controls.Add(this.label1);
             this.tpDetails.Controls.Add(this.txtComplemento);
@@ -702,16 +717,25 @@
             this.lblNome.TabIndex = 39;
             this.lblNome.Text = "Nome:";
             // 
-            // label6
+            // txtCredit
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(303, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 16);
-            this.label6.TabIndex = 78;
-            this.label6.Text = "Pesquisa:";
+            this.txtCredit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtCredit.Location = new System.Drawing.Point(684, 107);
+            this.txtCredit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtCredit.Name = "txtCredit";
+            this.txtCredit.Size = new System.Drawing.Size(75, 20);
+            this.txtCredit.TabIndex = 74;
+            // 
+            // lblCredit
+            // 
+            this.lblCredit.AutoSize = true;
+            this.lblCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCredit.Location = new System.Drawing.Point(626, 110);
+            this.lblCredit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCredit.Name = "lblCredit";
+            this.lblCredit.Size = new System.Drawing.Size(61, 13);
+            this.lblCredit.TabIndex = 73;
+            this.lblCredit.Text = "Crediário:";
             // 
             // frmClient
             // 
@@ -793,5 +817,7 @@
         public System.Windows.Forms.Button btnDelete;
         public System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox txtCredit;
+        private System.Windows.Forms.Label lblCredit;
     }
 }

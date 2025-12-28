@@ -17,12 +17,10 @@ namespace SistemaVenda.Model.Helpers
             {
                 if (!String.IsNullOrEmpty(value))
                 {
-                    return value;
-                }
-                else 
-                {
                     throw new ArgumentNullException(message);
                 }
+                
+                return value;
             }
             catch (ArgumentNullException ane)
             {

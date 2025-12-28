@@ -294,6 +294,7 @@ namespace SistemaVenda.br.pro.com.view
                     obj.CPF = mtbCPF.Text ?? throw new ArgumentNullException("Verifique se o CPF não é nulo");
                     obj.RG = mtbRG?.Text.Count() == 11 ? null : mtbRG.Text;
                     obj.DueDate = dt.ToUniversalTime();
+                    obj.Credit = ParseVerification.ParseDecimal(txtCredit.Text, "Limite de crediário não pode ser nulo");
                     obj.Email = txtEmail?.Text;
                     obj.MaritalStatus = cbEstadoCivil.Text ?? throw new ArgumentNullException("Verifique se o Estado civil é nulo");
                     obj.PhoneNumber = mtbCelular.Text ?? throw new ArgumentNullException("Verifique se o Número não é nulo");
