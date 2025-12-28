@@ -77,9 +77,14 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbEndDate = new System.Windows.Forms.Label();
+            this.lblStartDate = new System.Windows.Forms.Label();
+            this.btnSearchDate = new System.Windows.Forms.Button();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.tabBudget.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudget)).BeginInit();
@@ -119,11 +124,14 @@
             // 
             // dgBudget
             // 
+            this.dgBudget.AllowUserToAddRows = false;
+            this.dgBudget.AllowUserToDeleteRows = false;
             this.dgBudget.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgBudget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBudget.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgBudget.Location = new System.Drawing.Point(3, 3);
             this.dgBudget.Name = "dgBudget";
+            this.dgBudget.ReadOnly = true;
             this.dgBudget.Size = new System.Drawing.Size(1137, 466);
             this.dgBudget.TabIndex = 0;
             this.dgBudget.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgBudget_KeyDown);
@@ -617,6 +625,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lbEndDate);
+            this.panel3.Controls.Add(this.lblStartDate);
+            this.panel3.Controls.Add(this.btnSearchDate);
+            this.panel3.Controls.Add(this.dtpEndDate);
+            this.panel3.Controls.Add(this.dtpStartDate);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.btnExit);
             this.panel3.Controls.Add(this.txtSearch);
@@ -625,6 +638,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1121, 100);
             this.panel3.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label6.Location = new System.Drawing.Point(281, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 16);
+            this.label6.TabIndex = 76;
+            this.label6.Text = "Pesquisa:";
             // 
             // btnExit
             // 
@@ -650,16 +674,54 @@
             this.txtSearch.TabIndex = 0;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
-            // label6
+            // lbEndDate
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(281, 40);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 16);
-            this.label6.TabIndex = 76;
-            this.label6.Text = "Pesquisa:";
+            this.lbEndDate.AutoSize = true;
+            this.lbEndDate.Location = new System.Drawing.Point(737, 60);
+            this.lbEndDate.Name = "lbEndDate";
+            this.lbEndDate.Size = new System.Drawing.Size(26, 13);
+            this.lbEndDate.TabIndex = 81;
+            this.lbEndDate.Text = "Fim:";
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Location = new System.Drawing.Point(728, 30);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(35, 13);
+            this.lblStartDate.TabIndex = 80;
+            this.lblStartDate.Text = "Inicio:";
+            // 
+            // btnSearchDate
+            // 
+            this.btnSearchDate.Font = new System.Drawing.Font("Lucida Fax", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchDate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSearchDate.Location = new System.Drawing.Point(881, 32);
+            this.btnSearchDate.Name = "btnSearchDate";
+            this.btnSearchDate.Size = new System.Drawing.Size(71, 40);
+            this.btnSearchDate.TabIndex = 79;
+            this.btnSearchDate.Text = "Pesquisar";
+            this.btnSearchDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchDate.UseVisualStyleBackColor = true;
+            this.btnSearchDate.Click += new System.EventHandler(this.btnSearchDate_Click);
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEndDate.Location = new System.Drawing.Point(766, 56);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(97, 20);
+            this.dtpEndDate.TabIndex = 78;
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.CustomFormat = "yyyy/MM/dd";
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(766, 26);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(97, 20);
+            this.dtpStartDate.TabIndex = 77;
             // 
             // frmBudget
             // 
@@ -744,5 +806,10 @@
         public System.Windows.Forms.TextBox txtProduct;
         private System.Windows.Forms.Button btnConsultProduct;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbEndDate;
+        private System.Windows.Forms.Label lblStartDate;
+        private System.Windows.Forms.Button btnSearchDate;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
     }
 }

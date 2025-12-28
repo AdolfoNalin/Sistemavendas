@@ -13,6 +13,7 @@ using SistemaVenda.Model;
 using SistemaVenda.br.pro.com.model.Helpers;
 using SistemaVenda.View;
 using SistemaVenda.Model.Helpers;
+using System.Runtime.CompilerServices;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -761,6 +762,27 @@ namespace SistemaVenda.br.pro.com.view
             else if (e.KeyCode == Keys.Enter)
             {
                 UpdateDetails();
+            }
+        }
+        #endregion
+
+        #region btnSearchDate_Click
+        private async void btnSearchDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BindingList<Budget> list = await BudgetService.Get(startDate: dtpStartDate.Text, endDate: dtpEndDate.Text);
+                dgBudget.DataSource = list;
+
+                UpdateDetails();
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion
