@@ -24,7 +24,7 @@ namespace SistemaVenda.br.pro.com.model.Helpers
                 DataSet dado = new DataSet();
                 dado.ReadXml(xmlUrl);
 
-				if(dado.Container is null)
+				if (dado.Tables[0].Columns.Contains("erro"))
 				{
 					throw new NullReferenceException("Nenhum resultado encontrado");
 				}
