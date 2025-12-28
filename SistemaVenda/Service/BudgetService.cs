@@ -3,6 +3,8 @@ using SistemaVenda.br.pro.com.connection;
 using SistemaVenda.br.pro.com.model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Fabric.Query;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -87,6 +89,36 @@ namespace SistemaVenda.Service
                 else
                 {
                     MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region GetDate
+        public static async Task<BindingList<Budget>> Get(string startDate, string endDate)
+        {
+            try
+            {
+                BindingList<Budget> list = null;
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync($"Budget/Date?startDate={startDate}&endDate={endDate}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    list = JsonConvert.DeserializeObject<BindingList<Budget>>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
                 }
 
                 return list;
