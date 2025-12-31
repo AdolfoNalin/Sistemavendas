@@ -29,6 +29,7 @@ namespace SistemaVenda.Model
         public decimal OpeningAmount{ get; set; }
         public Enable Enable { get; set; }
         public IsCashSession Status { get; set; }
+        public string Description { get; set; }
         public decimal Total { get; set; }
 
         public User User { get; set; }
