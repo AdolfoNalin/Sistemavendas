@@ -730,12 +730,12 @@ namespace SistemaVenda.View
                     }
                     else
                     {
-                        MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
+                        MessageBox.Show("Limite do cliente estourou");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Limite do cliente estourou");
+                    MessageBox.Show("Abra o caixa, para conseguir realizar a venda");
                 }
             }
             catch (Exception ex)

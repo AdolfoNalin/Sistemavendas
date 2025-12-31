@@ -220,7 +220,7 @@
     <Compile Include="Model\UserSession.cs" />
     <Compile Include="Service\BudgetService.cs" />
     <Compile Include="Service\CashSessionService.cs" />
-    <Compile Include="Service\CashMovementService.cs" />
+    <Compile Include="Service\CashMovimentService.cs" />
     <Compile Include="Service\ClientService.cs" />
     <Compile Include="Service\EmployeeService.cs" />
     <Compile Include="Service\ItemBudgetService.cs" />
