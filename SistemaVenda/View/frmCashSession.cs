@@ -605,7 +605,7 @@ namespace SistemaVenda.View
                         Type = Model.Type.Exit,
                     };
 
-                    CashMovementService.Post(moviment);
+                    CashMovimentService.Post(moviment);
 
                     CashSession session = await CashSessionService.Get(moviment.CashSessionId);
                     CashDesck.Total -= amount;
@@ -651,7 +651,7 @@ namespace SistemaVenda.View
                         Type = Model.Type.Exit,
                     };
 
-                    CashMovementService.Post(moviment);
+                    CashMovimentService.Post(moviment);
 
                     CashSession session = await CashSessionService.Get(moviment.CashSessionId);
                     CashDesck.Total += amount;
@@ -713,8 +713,6 @@ namespace SistemaVenda.View
                             CashDesck.Enable = _cash.Enable;
                             CashDesck.Status = _cash.Status;
                             CashDesck.Total = _cash.Total;
-
-                            
                         }
                     }
                 }

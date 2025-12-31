@@ -64,6 +64,7 @@ namespace SistemaVenda.View
             this.btnOpenCashSession = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.lbEndDate = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.btnSearchDate = new System.Windows.Forms.Button();
@@ -74,7 +75,6 @@ namespace SistemaVenda.View
             this.rbDisabel = new System.Windows.Forms.RadioButton();
             this.rbEnable = new System.Windows.Forms.RadioButton();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabCashDesck.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCashSession)).BeginInit();
@@ -474,6 +474,17 @@ namespace SistemaVenda.View
             this.panel3.Size = new System.Drawing.Size(1121, 100);
             this.panel3.TabIndex = 4;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label6.Location = new System.Drawing.Point(239, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 16);
+            this.label6.TabIndex = 77;
+            this.label6.Text = "Pesquisa:";
+            // 
             // lbEndDate
             // 
             this.lbEndDate.AutoSize = true;
@@ -582,17 +593,6 @@ namespace SistemaVenda.View
             this.txtSearch.Size = new System.Drawing.Size(366, 21);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(239, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 16);
-            this.label6.TabIndex = 77;
-            this.label6.Text = "Pesquisa:";
             // 
             // frmCashSession
             // 
