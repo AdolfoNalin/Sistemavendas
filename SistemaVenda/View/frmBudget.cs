@@ -121,8 +121,6 @@ namespace SistemaVenda.br.pro.com.view
 
             rbCash.Checked = true;  
 
-            mtbDate.Text = DateTime.Now.ToString("dd/M/yyyy");
-
             mtbAdditionCash.Text = "0.00";
             mtbCashDiscount.Text = "0.00";
             mtbAdditionPorcentage.Text = "0.00";
@@ -342,6 +340,8 @@ namespace SistemaVenda.br.pro.com.view
             {
                 _update = false;
                 Helpers.ClearScreen(this);
+
+                mtbDate.Text = DateTime.Now.Date.ToString("dd/M/yyyy");
 
                 tabBudget.SelectedTab = tpDetails;
             }
