@@ -13,6 +13,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.XPath;
 
 namespace SistemaVenda.Service
 {
@@ -215,6 +216,34 @@ namespace SistemaVenda.Service
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region Put
+        public static async Task<bool> PutCashMoviment(CashSession cash)
+        {
+            try
+            {
+                bool result = false;
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.PutAsJsonAsync("CashSession/CashMoviment", cash);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
