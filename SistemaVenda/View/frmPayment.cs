@@ -1,14 +1,15 @@
 ﻿
-using SistemaVenda.Service;
 using SistemaVenda.br.pro.com.model;
+using SistemaVenda.br.pro.com.model.Helpers;
+using SistemaVenda.Model;
+using SistemaVenda.Model.Helpers;
+using SistemaVenda.Service;
 using SistemaVenda.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using SistemaVenda.Model;
-using SistemaVenda.br.pro.com.model.Helpers;
 
 namespace SistemaVenda.br.pro.com.view
 {
@@ -24,14 +25,14 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region Construtor
-        public frmPayment(Client client, BindingList<ProductShoppingCar> proShoCar,Employee employee, Sale sale, bool update)
+        public frmPayment(Client client, BindingList<ProductShoppingCar> proShoCar, Employee employee, Sale sale, bool update)
         {
             _client = client;
             _proShoCar = proShoCar;
             _emp = employee;
             _sale = sale;
             _update = update;
-           
+
             InitializeComponent();
         }
         #endregion
@@ -46,13 +47,23 @@ namespace SistemaVenda.br.pro.com.view
 
                 if (screen.user != null)
                 {
-                    decimal cash = decimal.Parse(mtbCash.Text);
-                    decimal card = decimal.Parse(mtbCard.Text);
-                    decimal total = decimal.Parse(txtTotal.Text);
+                    decimal cash = ParseVerification.ParseDecimal(mtbCash.Text, "É necessário tem um valor de Dinheiro");
+                    decimal card = ParseVerification.ParseDecimal(mtbCard.Text, "É necessário ter uma valor de Cartão");
+                    decimal credit = ParseVerification.ParseDecimal(mtbCredit.Text, "É necessário o valor do crediário");
+                    decimal pix = ParseVerification.ParseDecimal(mtbPix.Text, "É necessário o valor do pix");
+                    decimal total = ParseVerification.ParseDecimal(txtTotal.Text, "É necessário ter uma valor do Total");
                     decimal pay = 0;
                     decimal troco = 0;
 
-                    pay = cash + card;
+                    _paymentoMethod = cash < card ? "Cartão" : "Dinheiro";
+
+                    if (cash == 0 && credit == 0)
+                    {
+
+                        _paymentoMethod = "Crediário";
+                    }
+
+                    pay = cash + card + credit;
 
                     if (pay < total)
                     {
@@ -72,20 +83,21 @@ namespace SistemaVenda.br.pro.com.view
                             Description = "Venda"
                         };
 
-                        if(await CashMovementService.Post(moviment))
+                        if (await CashMovimentService.Post(moviment))
                         {
                             CashDesck.Total += moviment.Amount;
 
                             CashSession session = await CashSessionService.Get(CashDesck.Id);
                             session.Total = CashDesck.Total;
-                            CashSessionService.Put(session);
+                            session.Description = moviment.Description;
+                            bool valueMoviment = await CashSessionService.PutCashMoviment(session);
 
                             _sale.PaymentMethod = _paymentoMethod
                                 ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
                             _sale.Observation = txtObs.Text;
 
                             bool value = await SaleService.Post(_sale);
-                            if (value)
+                            if (value && valueMoviment)
                             {
                                 Sale sale = await SaleService.LastSale() ??
                                     throw new ArgumentNullException("Venda não foi identificada");
@@ -128,10 +140,6 @@ namespace SistemaVenda.br.pro.com.view
                                     }
                                 }
                             }
-
-                            //ImprimirPDF();
-
-                            this.Dispose();
                         }
                         else
                         {
@@ -157,7 +165,7 @@ namespace SistemaVenda.br.pro.com.view
                             Description = "Venda"
                         };
 
-                        if (await CashMovementService.Put(moviment))
+                        if (await CashMovimentService.Put(moviment))
                         {
                             bool value = await SaleService.Put(_sale);
                             if (value)
@@ -197,7 +205,7 @@ namespace SistemaVenda.br.pro.com.view
                             }
 
 
-                            this.Dispose();
+                            this.Close();
                         }
                         else
                         {
@@ -205,11 +213,11 @@ namespace SistemaVenda.br.pro.com.view
                         }
                     }
                 }
-                
+
 
                 new frmSale().ShowDialog();
             }
-            catch(ArgumentNullException ane)
+            catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message);
             }
@@ -224,7 +232,7 @@ namespace SistemaVenda.br.pro.com.view
         private void frmPagamento_Load(object sender, EventArgs e)
         {
             decimal num = 0;
-   
+
             mtbCash.Text = String.Format("{0:0.00}", num);
             mtbCard.Text = String.Format("{0:0.00}", num);
             mtbPix.Text = String.Format("{0:0.00}", num);
@@ -251,7 +259,7 @@ namespace SistemaVenda.br.pro.com.view
                     Decimal.TryParse(txtTotal.Text, out decimal total);
                     decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
 
-                    if(result != -404)
+                    if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
                     }
@@ -320,7 +328,7 @@ namespace SistemaVenda.br.pro.com.view
                 if (e.KeyCode == Keys.Enter)
                 {
                     Decimal.TryParse(txtTotal.Text, out decimal total);
-                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCard.Text), total);
+                    decimal result = Helpers.CalculateChange(Decimal.Parse(mtbCredit.Text), total);
 
                     if (result != -404)
                     {
