@@ -118,11 +118,11 @@ namespace SistemaVenda.br.pro.com.view
         private async void frmBudget_Load(object sender, EventArgs e)
         {
             UpdateData();
-
             rbCash.Checked = true;  
 
             mtbAdditionCash.Text = "0.00";
             mtbCashDiscount.Text = "0.00";
+            mtbPercentageDiscount.Text = "0.00";
             mtbAdditionPorcentage.Text = "0.00";
             txtTotal.Text = "0.00";
 
@@ -265,14 +265,14 @@ namespace SistemaVenda.br.pro.com.view
                 txtName.Text = client.Name;
                 mtbDate.Text = _budget.Date.ToString("dd/mm/yyyy");
                 mtbAdditionCash.Text = _budget.AdditionCash.ToString();
-                mtbAdditionPorcentage.Text = _budget.AdditionPorcentage.ToString();
+                mtbAdditionPorcentage.Text = _budget.AdditionPercentage.ToString();
                 mtbCashDiscount.Text = _budget.CashDescount.ToString();
                 mtbPercentageDiscount.Text = _budget.DescountPercentage.ToString();
                 txtTotal.Text = _budget.Total.ToString();
 
                 _ = _budget.PaymentMethod == "A vista" ? rbCash.Checked = true : rbTerm.Checked = true; 
 
-                dgShoppingCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
+                //dgShoppingCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
             }
         }
         #endregion
@@ -341,7 +341,7 @@ namespace SistemaVenda.br.pro.com.view
                 _update = false;
                 Helpers.ClearScreen(this);
 
-                mtbDate.Text = DateTime.Now.Date.ToString("dd/M/yyyy");
+                mtbDate.Text = DateTime.Now.Date.ToString("dd/MM/yyyy");
 
                 tabBudget.SelectedTab = tpDetails;
             }
@@ -413,17 +413,18 @@ namespace SistemaVenda.br.pro.com.view
 
                 if(screen.user != null)
                 {
-                    BindingList<ProductShoppingCar> car = dgBudget.DataSource as BindingList<ProductShoppingCar>;
+                    BindingList<ProductShoppingCar> car = dgShoppingCar.DataSource as BindingList<ProductShoppingCar>;
 
                     _budget = new Budget()
                     {
                         ClientId = Guid.Parse(txtClientId.Text),
                         EmployeeId = UserSession.EmployeeId,
+                        PaymentMethod = rbCash.Checked ? "Á vista" : "Á Prazo",
                         Date = DateTime.UtcNow,
                         DescountPercentage = Convert.ToDecimal(mtbPercentageDiscount.Text),
                         CashDescount = Convert.ToDecimal(mtbCashDiscount.Text),
                         AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
-                        AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
+                        AdditionPercentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
                         Total = Convert.ToDecimal(txtTotal.Text)
                     };
 
@@ -459,12 +460,11 @@ namespace SistemaVenda.br.pro.com.view
                     }
                     else
                     {
-                        Guid budgetId = await BudgetService.GetLastBudget();
-
                         bool value = await BudgetService.Post(_budget);
 
                         if (value)
                         {
+                            Guid budgetId = await BudgetService.GetLastBudget();
                             foreach (var i in car)
                             {
                                 ItemBudget item = new ItemBudget();
@@ -472,7 +472,7 @@ namespace SistemaVenda.br.pro.com.view
                                 Product product = products.FirstOrDefault() ??
                                     throw new ArgumentNullException("Produto não encontrado");
 
-                                item.BudgetId = _budget.Id;
+                                item.BudgetId = budgetId;
                                 item.ProductId = product.Id;
                                 item.Amount = i.Amount;
                                 item.Subtotal = i.TotalPrice;
@@ -481,6 +481,7 @@ namespace SistemaVenda.br.pro.com.view
                             }
 
                             MessageBox.Show("Orçamento cadastrado com sucesso");
+                            btnCancel_Click(sender, e);
                         }
                         else
                         {
