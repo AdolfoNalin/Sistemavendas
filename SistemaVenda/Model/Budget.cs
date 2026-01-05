@@ -16,7 +16,7 @@ namespace SistemaVenda.br.pro.com.model
         public string PaymentMethod { get; set; }
         public decimal DescountPercentage { get; set; }
         public decimal CashDescount { get; set; }
-        public decimal AdditionPorcentage{ get; set; }
+        public decimal AdditionPercentage{ get; set; }
         public decimal AdditionCash { get; set; }
         public decimal Total { get; set; }
         public DateTime Date { get; set; }
