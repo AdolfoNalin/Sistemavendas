@@ -136,7 +136,6 @@ namespace SistemaVenda.Service
         {
             try
             {
-                string message = "";
                 bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
@@ -144,12 +143,12 @@ namespace SistemaVenda.Service
 
                 if (response.IsSuccessStatusCode) 
                 {
-                    message = await response.Content.ReadAsStringAsync();
-                    result = true; 
+                    result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync()); 
                 }
                 else
                 {
-                    message = await response.Content.ReadAsStringAsync();
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
                 }
 
                 return result;
