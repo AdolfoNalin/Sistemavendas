@@ -90,7 +90,6 @@ namespace SistemaVenda.br.pro.com.view
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
                     
                     dgShoppingCar.DataSource = _car;
-                    dgShoppingCar.Refresh();
                 }
                 else
                 {
@@ -104,8 +103,9 @@ namespace SistemaVenda.br.pro.com.view
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
 
                     dgShoppingCar.DataSource = _car;
-                    dgShoppingCar.Refresh();
                 }
+                txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
+                dgShoppingCar.Refresh();
             }
             catch (Exception ex)
             {
@@ -261,6 +261,7 @@ namespace SistemaVenda.br.pro.com.view
                 
                 Client client = await ClientService.Get(_budget.ClientId);
 
+                txtId.Text = _budget.Id.ToString();
                 txtClientId.Text = _budget.ClientId.ToString();
                 txtName.Text = client.Name;
                 mtbDate.Text = _budget.Date.ToString("dd/mm/yyyy");
@@ -272,7 +273,7 @@ namespace SistemaVenda.br.pro.com.view
 
                 _ = _budget.PaymentMethod == "A vista" ? rbCash.Checked = true : rbTerm.Checked = true; 
 
-                //dgShoppingCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
+                dgShoppingCar.DataSource = await ItemBudgetService.Get(_budget.Id);  
             }
         }
         #endregion
@@ -360,6 +361,7 @@ namespace SistemaVenda.br.pro.com.view
                 if (dgBudget.SelectedRows.Count > 0)
                 {
                     _update = true;
+                    UpdateDetails();
                     tabBudget.SelectedTab = tpDetails;
                 }
                 else
@@ -388,7 +390,10 @@ namespace SistemaVenda.br.pro.com.view
                 {
                     if (dgBudget.SelectedRows.Count > 0)
                     {
-                        await BudgetService.Delete(_budget.Id);
+                        UpdateDetails();
+                        BudgetService.Delete(_budget.Id);
+                        await Task.Delay(800);
+                        UpdateData();
                     }
                     else
                     {
@@ -452,6 +457,7 @@ namespace SistemaVenda.br.pro.com.view
                             }
 
                             MessageBox.Show("Orçamento atudalizado com sucesso");
+                            btnCancel_Click(sender, e);
                         }
                         else
                         {
@@ -477,7 +483,10 @@ namespace SistemaVenda.br.pro.com.view
                                 item.Amount = i.Amount;
                                 item.Subtotal = i.TotalPrice;
 
-                                ItemBudgetService.Post(item);
+                                if (!await ItemBudgetService.Post(item))
+                                {
+                                    break;
+                                }
                             }
 
                             MessageBox.Show("Orçamento cadastrado com sucesso");
@@ -749,6 +758,7 @@ namespace SistemaVenda.br.pro.com.view
             else if(e.KeyCode == Keys.Enter)
             {
                 UpdateDetails();
+                tabBudget.SelectedTab = tpDetails;
             }
         }
         #endregion
