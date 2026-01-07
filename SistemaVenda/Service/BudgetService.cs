@@ -193,12 +193,11 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Delete
-        public static async Task<bool> Delete(Guid id)
+        public static async void Delete(Guid id)
         {
             try
             {
                 string message = "";
-                bool result = false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.DeleteAsync($"Budget/{id}");
@@ -206,19 +205,17 @@ namespace SistemaVenda.Service
                 if (response.IsSuccessStatusCode)
                 {
                     message = await response.Content.ReadAsStringAsync();
-                    result = true;
                 }
                 else
                 {
                     message = await response.Content.ReadAsStringAsync();
                 }
 
-                return result;
+                MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
-                return false;
             }
         }
         #endregion
