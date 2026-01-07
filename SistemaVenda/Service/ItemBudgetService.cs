@@ -44,29 +44,31 @@ namespace SistemaVenda.Service
         #endregion
 
         #region Post
-        public static async void Post(ItemBudget item)
+        public static async Task<bool> Post(ItemBudget item)
         {
             try
             {
-                string message = "";
+                bool result= false;
 
                 HttpClient client = ConnectionFactory.ConnectionLocalhost();
                 HttpResponseMessage response = await client.PostAsJsonAsync("ItemBudget", item);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    message = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
-                    message = await response.Content.ReadAsStringAsync();
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
                 }
 
-                MessageBox.Show(message);
+                return result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return false;
             }
         }
         #endregion
