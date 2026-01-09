@@ -74,7 +74,7 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region UpdateCashOrTerm
-        private void UpdateCashOrTerm()
+        private async Task UpdateCashOrTerm()
         {
             try
             {
@@ -88,8 +88,6 @@ namespace SistemaVenda.br.pro.com.view
                     );
 
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
-                    
-                    dgShoppingCar.DataSource = _car;
                 }
                 else
                 {
@@ -97,13 +95,14 @@ namespace SistemaVenda.br.pro.com.view
 
                     _car.ToList().ForEach(c => c.TotalPrice = 0);
                     _car.ToList().ForEach(c =>
-                    c.TotalPrice = Decimal.Parse(c.Amount.ToString()) * c.CashPrice
+                    c.TotalPrice = Decimal.Parse(c.Amount.ToString()) * c.TermPrice
                     );
 
                     txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
-
-                    dgShoppingCar.DataSource = _car;
                 }
+
+                await Task.Delay(800);
+                dgShoppingCar.DataSource = _car;
                 txtTotal.Text = _car.Sum(c => c.TotalPrice).ToString();
                 dgShoppingCar.Refresh();
             }
