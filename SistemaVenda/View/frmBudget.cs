@@ -117,9 +117,6 @@ namespace SistemaVenda.br.pro.com.view
         #region Load
         private async void frmBudget_Load(object sender, EventArgs e)
         {
-            UpdateData();
-            rbCash.Checked = true;  
-
             mtbAdditionCash.Text = "0.00";
             mtbCashDiscount.Text = "0.00";
             mtbPercentageDiscount.Text = "0.00";
@@ -233,6 +230,9 @@ namespace SistemaVenda.br.pro.com.view
 
             dgShoppingCar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgShoppingCar.MultiSelect = false;
+
+            UpdateData();
+            rbCash.Checked = true;  
         }
         #endregion
 
