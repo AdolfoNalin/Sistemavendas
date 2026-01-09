@@ -35,7 +35,7 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                List<Product> products = await ProductService.Get(txtProduct.Text);
+                List<Product> products = await ProductService.Get(txtShortDescription.Text);
                 Product product = products.FirstOrDefault() ??
                     throw new ArgumentException("Descrilção inválida", "Nenhum produto encontrado");
 
@@ -52,10 +52,10 @@ namespace SistemaVenda.br.pro.com.view
                 txtTotal.Text = _car.Sum(x => x.TotalPrice).ToString();
                 dgShoppingCar.DataSource = _car;
 
-                txtProduct.Clear();
+                txtShortDescription.Clear();
                 txtAmount.Clear();
-                
-                txtProduct.Focus();
+
+                txtShortDescription.Focus();
             }
             catch(FormatException)
             {
@@ -579,7 +579,7 @@ namespace SistemaVenda.br.pro.com.view
 
                 Guid productId = Guid.Parse(screen.dgProduct.SelectedRows[0].Cells[0].Value.ToString());
                 Product product = await ProductService.Get(productId);
-                txtProduct.Text = product.ShortDescription;
+                txtShortDescription.Text = product.ShortDescription;
             }
             catch (Exception ex)
             {

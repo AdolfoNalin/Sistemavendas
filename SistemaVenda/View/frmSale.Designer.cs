@@ -39,20 +39,10 @@ namespace SistemaVenda.View
             this.label1 = new System.Windows.Forms.Label();
             this.rbtnTerm = new System.Windows.Forms.RadioButton();
             this.rbtnSport = new System.Windows.Forms.RadioButton();
-            this.mtbAdditionCash = new System.Windows.Forms.MaskedTextBox();
-            this.lblAteracaoReal = new System.Windows.Forms.Label();
-            this.mtbAdditionPorcentage = new System.Windows.Forms.MaskedTextBox();
-            this.lblAteracoes = new System.Windows.Forms.Label();
             this.lblVendedor = new System.Windows.Forms.Label();
             this.cbUsers = new System.Windows.Forms.ComboBox();
             this.lblQuantidadePrutudoQ = new System.Windows.Forms.Label();
             this.lbTotalPodutos = new System.Windows.Forms.Label();
-            this.mtbCashDiscount = new System.Windows.Forms.MaskedTextBox();
-            this.lblDescontoReal = new System.Windows.Forms.Label();
-            this.mtbPercentageDiscount = new System.Windows.Forms.MaskedTextBox();
-            this.lblDescontoPor100 = new System.Windows.Forms.Label();
-            this.txtTotal = new System.Windows.Forms.MaskedTextBox();
-            this.lblTotal = new System.Windows.Forms.Label();
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.lblData = new System.Windows.Forms.Label();
             this.gbProduto = new System.Windows.Forms.GroupBox();
@@ -103,6 +93,19 @@ namespace SistemaVenda.View
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.gbDetalhesPagamento = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtTotal = new System.Windows.Forms.MaskedTextBox();
+            this.mtbAdditionPorcentage = new System.Windows.Forms.MaskedTextBox();
+            this.lblAgressimo = new System.Windows.Forms.Label();
+            this.mtbAdditionCash = new System.Windows.Forms.MaskedTextBox();
+            this.mtbPercentageDiscount = new System.Windows.Forms.MaskedTextBox();
+            this.lblDesconto = new System.Windows.Forms.Label();
+            this.mtbCashDiscount = new System.Windows.Forms.MaskedTextBox();
             this.tabSale.SuspendLayout();
             this.tpConsult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSale)).BeginInit();
@@ -115,6 +118,7 @@ namespace SistemaVenda.View
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.gbDetalhesPagamento.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSale
@@ -157,24 +161,15 @@ namespace SistemaVenda.View
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.gbDetalhesPagamento);
             this.tpDetails.Controls.Add(this.txtId);
             this.tpDetails.Controls.Add(this.label1);
             this.tpDetails.Controls.Add(this.rbtnTerm);
             this.tpDetails.Controls.Add(this.rbtnSport);
-            this.tpDetails.Controls.Add(this.mtbAdditionCash);
-            this.tpDetails.Controls.Add(this.lblAteracaoReal);
-            this.tpDetails.Controls.Add(this.mtbAdditionPorcentage);
-            this.tpDetails.Controls.Add(this.lblAteracoes);
             this.tpDetails.Controls.Add(this.lblVendedor);
             this.tpDetails.Controls.Add(this.cbUsers);
             this.tpDetails.Controls.Add(this.lblQuantidadePrutudoQ);
             this.tpDetails.Controls.Add(this.lbTotalPodutos);
-            this.tpDetails.Controls.Add(this.mtbCashDiscount);
-            this.tpDetails.Controls.Add(this.lblDescontoReal);
-            this.tpDetails.Controls.Add(this.mtbPercentageDiscount);
-            this.tpDetails.Controls.Add(this.lblDescontoPor100);
-            this.tpDetails.Controls.Add(this.txtTotal);
-            this.tpDetails.Controls.Add(this.lblTotal);
             this.tpDetails.Controls.Add(this.mtbDate);
             this.tpDetails.Controls.Add(this.lblData);
             this.tpDetails.Controls.Add(this.gbProduto);
@@ -230,46 +225,6 @@ namespace SistemaVenda.View
             this.rbtnSport.UseVisualStyleBackColor = true;
             this.rbtnSport.CheckedChanged += new System.EventHandler(this.rbtnSport_CheckedChanged);
             // 
-            // mtbAdditionCash
-            // 
-            this.mtbAdditionCash.Location = new System.Drawing.Point(754, 401);
-            this.mtbAdditionCash.Name = "mtbAdditionCash";
-            this.mtbAdditionCash.Size = new System.Drawing.Size(67, 20);
-            this.mtbAdditionCash.TabIndex = 57;
-            this.mtbAdditionCash.ValidatingType = typeof(System.DateTime);
-            this.mtbAdditionCash.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbAdditionCash_KeyDown);
-            // 
-            // lblAteracaoReal
-            // 
-            this.lblAteracaoReal.AutoSize = true;
-            this.lblAteracaoReal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAteracaoReal.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblAteracaoReal.Location = new System.Drawing.Point(667, 404);
-            this.lblAteracaoReal.Name = "lblAteracaoReal";
-            this.lblAteracaoReal.Size = new System.Drawing.Size(89, 13);
-            this.lblAteracaoReal.TabIndex = 56;
-            this.lblAteracaoReal.Text = "Agrescimo R$:";
-            // 
-            // mtbAdditionPorcentage
-            // 
-            this.mtbAdditionPorcentage.Location = new System.Drawing.Point(754, 375);
-            this.mtbAdditionPorcentage.Name = "mtbAdditionPorcentage";
-            this.mtbAdditionPorcentage.Size = new System.Drawing.Size(67, 20);
-            this.mtbAdditionPorcentage.TabIndex = 55;
-            this.mtbAdditionPorcentage.ValidatingType = typeof(System.DateTime);
-            this.mtbAdditionPorcentage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbAdditionPorcentage_KeyDown);
-            // 
-            // lblAteracoes
-            // 
-            this.lblAteracoes.AutoSize = true;
-            this.lblAteracoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAteracoes.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblAteracoes.Location = new System.Drawing.Point(668, 378);
-            this.lblAteracoes.Name = "lblAteracoes";
-            this.lblAteracoes.Size = new System.Drawing.Size(82, 13);
-            this.lblAteracoes.TabIndex = 54;
-            this.lblAteracoes.Text = "Agrescimo %:";
-            // 
             // lblVendedor
             // 
             this.lblVendedor.AutoSize = true;
@@ -309,65 +264,6 @@ namespace SistemaVenda.View
             this.lbTotalPodutos.Size = new System.Drawing.Size(94, 13);
             this.lbTotalPodutos.TabIndex = 50;
             this.lbTotalPodutos.Text = "Total Produtos:";
-            // 
-            // mtbCashDiscount
-            // 
-            this.mtbCashDiscount.Location = new System.Drawing.Point(588, 400);
-            this.mtbCashDiscount.Name = "mtbCashDiscount";
-            this.mtbCashDiscount.Size = new System.Drawing.Size(67, 20);
-            this.mtbCashDiscount.TabIndex = 49;
-            this.mtbCashDiscount.ValidatingType = typeof(System.DateTime);
-            this.mtbCashDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCashDiscount_KeyDown);
-            // 
-            // lblDescontoReal
-            // 
-            this.lblDescontoReal.AutoSize = true;
-            this.lblDescontoReal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescontoReal.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblDescontoReal.Location = new System.Drawing.Point(507, 403);
-            this.lblDescontoReal.Name = "lblDescontoReal";
-            this.lblDescontoReal.Size = new System.Drawing.Size(85, 13);
-            this.lblDescontoReal.TabIndex = 48;
-            this.lblDescontoReal.Text = "Desconto R$:";
-            // 
-            // mtbPercentageDiscount
-            // 
-            this.mtbPercentageDiscount.Location = new System.Drawing.Point(588, 374);
-            this.mtbPercentageDiscount.Name = "mtbPercentageDiscount";
-            this.mtbPercentageDiscount.Size = new System.Drawing.Size(67, 20);
-            this.mtbPercentageDiscount.TabIndex = 47;
-            this.mtbPercentageDiscount.ValidatingType = typeof(System.DateTime);
-            this.mtbPercentageDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbPorcentageDiscount_KeyDown);
-            // 
-            // lblDescontoPor100
-            // 
-            this.lblDescontoPor100.AutoSize = true;
-            this.lblDescontoPor100.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescontoPor100.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblDescontoPor100.Location = new System.Drawing.Point(507, 377);
-            this.lblDescontoPor100.Name = "lblDescontoPor100";
-            this.lblDescontoPor100.Size = new System.Drawing.Size(78, 13);
-            this.lblDescontoPor100.TabIndex = 46;
-            this.lblDescontoPor100.Text = "Desconto %:";
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Location = new System.Drawing.Point(588, 426);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(67, 20);
-            this.txtTotal.TabIndex = 45;
-            this.txtTotal.ValidatingType = typeof(System.DateTime);
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblTotal.Location = new System.Drawing.Point(551, 430);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(40, 13);
-            this.lblTotal.TabIndex = 44;
-            this.lblTotal.Text = "Total:";
             // 
             // mtbDate
             // 
@@ -716,7 +612,7 @@ namespace SistemaVenda.View
             this.dgShoppingCar.Location = new System.Drawing.Point(509, 67);
             this.dgShoppingCar.Name = "dgShoppingCar";
             this.dgShoppingCar.ReadOnly = true;
-            this.dgShoppingCar.Size = new System.Drawing.Size(526, 305);
+            this.dgShoppingCar.Size = new System.Drawing.Size(526, 266);
             this.dgShoppingCar.TabIndex = 35;
             this.dgShoppingCar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgShoppingCar_KeyDown);
             // 
@@ -919,6 +815,134 @@ namespace SistemaVenda.View
             this.txtSearch.TabIndex = 0;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
+            // gbDetalhesPagamento
+            // 
+            this.gbDetalhesPagamento.Controls.Add(this.label4);
+            this.gbDetalhesPagamento.Controls.Add(this.label3);
+            this.gbDetalhesPagamento.Controls.Add(this.label2);
+            this.gbDetalhesPagamento.Controls.Add(this.label5);
+            this.gbDetalhesPagamento.Controls.Add(this.lblTotal);
+            this.gbDetalhesPagamento.Controls.Add(this.txtTotal);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbAdditionPorcentage);
+            this.gbDetalhesPagamento.Controls.Add(this.lblAgressimo);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbAdditionCash);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbPercentageDiscount);
+            this.gbDetalhesPagamento.Controls.Add(this.lblDesconto);
+            this.gbDetalhesPagamento.Controls.Add(this.mtbCashDiscount);
+            this.gbDetalhesPagamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbDetalhesPagamento.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.gbDetalhesPagamento.Location = new System.Drawing.Point(509, 339);
+            this.gbDetalhesPagamento.Name = "gbDetalhesPagamento";
+            this.gbDetalhesPagamento.Size = new System.Drawing.Size(208, 124);
+            this.gbDetalhesPagamento.TabIndex = 62;
+            this.gbDetalhesPagamento.TabStop = false;
+            this.gbDetalhesPagamento.Text = "Detalhes Pagamento";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(133, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 13);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "%";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(132, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 13);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "%";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(63, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 13);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "R$";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(62, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "R$";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(92, 89);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(40, 13);
+            this.lblTotal.TabIndex = 21;
+            this.lblTotal.Text = "Total:";
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Location = new System.Drawing.Point(133, 86);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(57, 20);
+            this.txtTotal.TabIndex = 20;
+            // 
+            // mtbAdditionPorcentage
+            // 
+            this.mtbAdditionPorcentage.Location = new System.Drawing.Point(150, 49);
+            this.mtbAdditionPorcentage.Name = "mtbAdditionPorcentage";
+            this.mtbAdditionPorcentage.Size = new System.Drawing.Size(40, 20);
+            this.mtbAdditionPorcentage.TabIndex = 15;
+            // 
+            // lblAgressimo
+            // 
+            this.lblAgressimo.AutoSize = true;
+            this.lblAgressimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgressimo.Location = new System.Drawing.Point(18, 52);
+            this.lblAgressimo.Name = "lblAgressimo";
+            this.lblAgressimo.Size = new System.Drawing.Size(40, 13);
+            this.lblAgressimo.TabIndex = 14;
+            this.lblAgressimo.Text = "Frete:";
+            // 
+            // mtbAdditionCash
+            // 
+            this.mtbAdditionCash.Location = new System.Drawing.Point(86, 49);
+            this.mtbAdditionCash.Name = "mtbAdditionCash";
+            this.mtbAdditionCash.Size = new System.Drawing.Size(40, 20);
+            this.mtbAdditionCash.TabIndex = 13;
+            // 
+            // mtbPercentageDiscount
+            // 
+            this.mtbPercentageDiscount.Location = new System.Drawing.Point(150, 20);
+            this.mtbPercentageDiscount.Name = "mtbPercentageDiscount";
+            this.mtbPercentageDiscount.Size = new System.Drawing.Size(40, 20);
+            this.mtbPercentageDiscount.TabIndex = 12;
+            // 
+            // lblDesconto
+            // 
+            this.lblDesconto.AutoSize = true;
+            this.lblDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDesconto.Location = new System.Drawing.Point(6, 23);
+            this.lblDesconto.Name = "lblDesconto";
+            this.lblDesconto.Size = new System.Drawing.Size(65, 13);
+            this.lblDesconto.TabIndex = 11;
+            this.lblDesconto.Text = "Desconto:";
+            // 
+            // mtbCashDiscount
+            // 
+            this.mtbCashDiscount.Location = new System.Drawing.Point(86, 19);
+            this.mtbCashDiscount.Name = "mtbCashDiscount";
+            this.mtbCashDiscount.Size = new System.Drawing.Size(40, 20);
+            this.mtbCashDiscount.TabIndex = 0;
+            // 
             // frmSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -947,6 +971,8 @@ namespace SistemaVenda.View
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.gbDetalhesPagamento.ResumeLayout(false);
+            this.gbDetalhesPagamento.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -970,20 +996,10 @@ namespace SistemaVenda.View
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.RadioButton rbtnTerm;
         private System.Windows.Forms.RadioButton rbtnSport;
-        public System.Windows.Forms.MaskedTextBox mtbAdditionCash;
-        public System.Windows.Forms.Label lblAteracaoReal;
-        public System.Windows.Forms.MaskedTextBox mtbAdditionPorcentage;
-        public System.Windows.Forms.Label lblAteracoes;
         private System.Windows.Forms.Label lblVendedor;
         public System.Windows.Forms.ComboBox cbUsers;
         private System.Windows.Forms.Label lblQuantidadePrutudoQ;
         private System.Windows.Forms.Label lbTotalPodutos;
-        public System.Windows.Forms.MaskedTextBox mtbCashDiscount;
-        private System.Windows.Forms.Label lblDescontoReal;
-        public System.Windows.Forms.MaskedTextBox mtbPercentageDiscount;
-        private System.Windows.Forms.Label lblDescontoPor100;
-        public System.Windows.Forms.MaskedTextBox txtTotal;
-        private System.Windows.Forms.Label lblTotal;
         public System.Windows.Forms.MaskedTextBox mtbDate;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.GroupBox gbProduto;
@@ -1025,5 +1041,18 @@ namespace SistemaVenda.View
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.GroupBox gbDetalhesPagamento;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTotal;
+        public System.Windows.Forms.MaskedTextBox txtTotal;
+        public System.Windows.Forms.MaskedTextBox mtbAdditionPorcentage;
+        private System.Windows.Forms.Label lblAgressimo;
+        public System.Windows.Forms.MaskedTextBox mtbAdditionCash;
+        public System.Windows.Forms.MaskedTextBox mtbPercentageDiscount;
+        private System.Windows.Forms.Label lblDesconto;
+        public System.Windows.Forms.MaskedTextBox mtbCashDiscount;
     }
 }

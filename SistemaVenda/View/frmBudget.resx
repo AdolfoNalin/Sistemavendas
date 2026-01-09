@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnConsultProduct.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnSearchProduct.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
         qAAAAKgBefSzxgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGdSURBVEhLY6A5
@@ -271,7 +271,7 @@
   <data name="btnNew.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        5QAAAOUBj+WbPAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOSSURBVFhH3ZZr
+        5AAAAOQBXaJ52AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOSSURBVFhH3ZZr
         SJNRGMfn2OY7fafuoqWpNbykX6KbFKUZXQwtJbTwEiyIEsRM0tDKMizL9cUu0EWt6TTNjNKsD0VgSVcr
         iChRs1Iqy5GXLl5Kp0/nvFtD7czX7bWg/vD7sPPuPP//OXvO2cuboGY5OTm9dnV11XX19alXhYY+osTi
         fhI2NjaAvg+2ttR3mVTxTCgUbkGfBUwVayWVyRovVl2Brt4+Vlo/toOmuARcXKYMR0XGDi0JWvZNInF4
@@ -293,7 +293,7 @@
   <data name="btnExit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        qQAAAKkBq7NRIgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAASMSURBVFhHzZZr
+        qAAAAKgBefSzxgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAASMSURBVFhHzZZr
         TFtlGMcPo+0pJaU3KIONNiDMQCn3O2XlNoRxBxlQB0HNFjViCEPKXIAwdAxMYEZD50aAKdkc4ly2YRai
         KTMONfpBjUY/7tNIZJnQAgOG/fseoHiYh0sJI77JL+l5Ts/7/N437+WhSKshwI7UlT+tcKMtjuIm4s8S
         RgBQjsC0muroAPTkRUOv9bDKxYL50oOq6cHGNDy8ZsDCsAH3rxSj0aBdlyZDMG426+ApFd7hSrIRSwLN
