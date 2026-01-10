@@ -52,6 +52,7 @@ namespace SistemaVenda.View
                     txtClientId.Text = sale.Client.Id.ToString();
                     txtName.Text = sale.Client.Name;
                     mtbCPF.Text = sale.Client.CPF;
+                    mtbDate.Text = sale.Date.Date.ToString("dd/MM/yyyy");
                     txtAddress.Text = address;
                     mtbPhone.Text = sale.Client.PhoneNumber;
                     mtbAdditionCash.Text = sale.AdditionCash.ToString();
@@ -251,7 +252,7 @@ namespace SistemaVenda.View
         #endregion
 
         #region btnSearchName_click
-        private void btnSearchName_Click(object sender, EventArgs e)
+        private async void btnSearchName_Click(object sender, EventArgs e)
         {
             try
             {
@@ -262,9 +263,16 @@ namespace SistemaVenda.View
                 screen.btnUpdate.Enabled = false;
                 screen.btnDelete.Enabled = false;
                 screen.ShowDialog();
-                Client client = screen.dgClient.SelectedRows[0].DataBoundItem as Client;
 
-                if (client != null)
+                Guid.TryParse(screen.dgClient.SelectedRows[0].Cells[0].Value.ToString(), out Guid Id);
+
+                Client client = await ClientService.Get(Id);
+
+                if (client is null)
+                {
+                    throw new ArgumentNullException("Cliente não foi selecionado");
+                }
+                else
                 {
                     txtClientId.Text = client.Id.ToString();
                     mtbCPF.Text = client.CPF;
@@ -272,12 +280,8 @@ namespace SistemaVenda.View
                     mtbPhone.Text = client.PhoneNumber;
                     txtAddress.Text = Helpers.Address(client);
                 }
-                else
-                {
-                    MessageBox.Show("Nenhum cliente selecionado");
-                }
 
-                screen.Hide();
+                    screen.Hide();
             }
             catch (ArgumentNullException ane)
             {
@@ -426,8 +430,8 @@ namespace SistemaVenda.View
             {
                 if (dgSale.SelectedRows.Count > 0)
                 {
-                    Sale sale = (Sale)dgSale.SelectedRows[0].DataBoundItem;
-                    SaleService.Delete(sale.Id);
+                    Guid.TryParse(dgSale.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+                    SaleService.Delete(id);
                     await Task.Delay(800);
                     UpdateData();
                 }
