@@ -88,7 +88,12 @@ namespace SistemaVenda.Service
             }
             else
             {
-                MessageBox.Show(await response.Content.ReadAsStringAsync());
+                string message = await response.Content.ReadAsStringAsync();
+                
+                if(!String.IsNullOrEmpty(message))
+                {
+                    MessageBox.Show(message);
+                }
             }
 
             return products;
