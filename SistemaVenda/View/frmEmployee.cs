@@ -28,26 +28,56 @@ namespace SistemaVenda.br.pro.com.view
         #region UpdateData
         private async void UpdateData()
         {
-            List<Employee> emps =  await EmployeeService.Get();
-
-            dgEmployee.DataSource = emps;
-
-            if(dgEmployee.Rows.Count > 0)
+            try
             {
-                dgEmployee.Rows[0].Selected = true;
+                List<Employee> emps = await EmployeeService.Get() ?? 
+                    throw new ArgumentNullException("Nenhum Funcionário encontrado");
+
+                dgEmployee.DataSource = emps.Select(e =>
+                new EmployeeDTO()
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    CPF = e.CPF,
+                    Function = e.Function,
+                    Email = e.Email,
+                    Credit = e.Credit,
+                    CEP = e.CEP,
+                    State = e.State,
+                    City = e.City,
+                    Neighborhoods = e.Neighborhoods,
+                    Street = e.Street,
+                    Number = e.Number,
+                    Complement = e.Complement
+                }).ToList();
+
+                if (dgEmployee.Rows.Count > 0)
+                {
+                    dgEmployee.Rows[0].Selected = true;
+                }
+            }
+            catch (ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion
 
         #region UpdateDetalis
-        private void UpdateDetails()
+        private async Task UpdateDetails()
         {
             try
             {
                 Employee emp = null;
                 if (dgEmployee.SelectedRows.Count > 0)
                 {
-                    emp = (Employee)dgEmployee.SelectedRows[0].DataBoundItem ??
+                    Guid.TryParse(dgEmployee.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+
+                    emp = await EmployeeService.Get(id) ??
                         throw new ArgumentNullException("Funcionário não foi selecionado");
 
                     txtId.Text = emp.Id.ToString() ?? throw new ArgumentNullException("ID não pode ser nulo");
@@ -290,50 +320,15 @@ namespace SistemaVenda.br.pro.com.view
 
             dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "ShortName",
-                HeaderText = "Apelido"
-            });
-
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
                 DataPropertyName = "CPF",
                 HeaderText = "CPF"
             });
 
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "RG",
-                HeaderText = "RG"
-            });
-
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "MaritalStatus",
-                HeaderText = "Estado Civil"
-            });
 
             dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Function",
                 HeaderText = "Função"
-            });
-
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "DueDate",
-                HeaderText = "Data de Nascimento"
-            });
-
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "PhoneNumber",
-                HeaderText = "Celular"
-            });
-
-            dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "TelephoneNumber",
-                HeaderText = "Telefone"
             });
 
             dgEmployee.Columns.Add(new DataGridViewTextBoxColumn()

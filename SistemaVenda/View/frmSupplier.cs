@@ -1,10 +1,12 @@
 ﻿using MySqlX.XDevAPI;
 using SistemaVenda.br.pro.com.model;
 using SistemaVenda.br.pro.com.model.Helpers;
+using SistemaVenda.Model;
 using SistemaVenda.Service;
 using SistemaVenda.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,21 +23,53 @@ namespace SistemaVenda.br.pro.com.view
         #region UpdateData
         private async void UpdateData()
         {
-            List<Supplier> suppliers = null;
-            suppliers = await SupplierService.Get();
-            dgSupplier.DataSource = suppliers;
+            try
+            {
+                List<Supplier> suppliers = null;
+                suppliers = await SupplierService.Get() ?? 
+                    throw new ArgumentNullException("Nenhum Fornecedor foi encontrado");
+                dgSupplier.DataSource = suppliers.Select(s =>
+                new SupplierDTO()
+                {
+                    Id = s.Id,
+                    CompanyName = s.CompanyName,
+                    CNPJ = s.CNPJ,
+                    PhoneNumber = s.PhoneNumber,
+                    CEP = s.CEP,
+                    State = s.State,
+                    City = s.City,
+                    Neighborhoods = s.Neighborhoods,
+                    Street = s.Street,
+                    Number = s.Number,
+                    Complement = s.Complement
+                }).ToList();
+
+            }
+            catch (ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
         }
 
         #endregion
 
         #region UpdateDetails
-        private void UpdateDetails()
+        private async Task UpdateDetails()
         {
             Supplier supplier = null;
 
             if (dgSupplier.SelectedRows.Count > 0)
             {
-                supplier = (Supplier)dgSupplier.SelectedRows[0].DataBoundItem;
+                Guid.TryParse(dgSupplier.SelectedRows[0].Cells[0].Value.ToString(), out Guid id);
+
+                List<Supplier> suppliers = await SupplierService.Get(id) ??
+                    throw new ArgumentNullException("Nenhum Fornecedor não foi encontrado");
+
+                supplier = suppliers.FirstOrDefault();
 
                 txtCodigo.Text = supplier.Id.ToString();
                 txtNome.Text = supplier.Name.ToString();
@@ -67,32 +101,8 @@ namespace SistemaVenda.br.pro.com.view
 
             dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "Name",
-                HeaderText = "Nome"
-            });
-
-            dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
-            {
                 DataPropertyName = "CompanyName",
                 HeaderText = "Empresa"
-            });
-
-            dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "IE",
-                HeaderText = "IE"
-            });
-
-            dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "RG",
-                HeaderText = "RG"
-            });
-
-            dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "DueDate",
-                HeaderText = "Data de Nascimento"
             });
 
             dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
@@ -103,14 +113,8 @@ namespace SistemaVenda.br.pro.com.view
 
             dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "TelephoneNumber",
-                HeaderText = "Telefone"
-            });
-
-            dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "Email",
-                HeaderText = "Email"
+                DataPropertyName = "CNPJ",
+                HeaderText = "CNPJ"
             });
 
             dgSupplier.Columns.Add(new DataGridViewTextBoxColumn()

@@ -194,6 +194,7 @@
     <Compile Include="Model\CashSessionDTO.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\ClientDTO.cs" />
     <Compile Include="Model\Helpers\Calculator.cs" />
     <Compile Include="Model\Helpers\ParseVerification.cs" />
     <Compile Include="Model\Helpers\VerificationPassword.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Model\ItemSale.cs" />
     <Compile Include="Model\Budget.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\SupplierDTO.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserResponse.cs" />
     <Compile Include="Model\Sale.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="Service\SaleService.cs" />
     <Compile Include="Service\SupplierService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Model\EmployeeDTO.cs" />
     <Compile Include="View\frmBudget.cs">
       <SubType>Form</SubType>
     </Compile>

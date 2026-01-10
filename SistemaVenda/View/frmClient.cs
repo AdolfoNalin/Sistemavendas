@@ -34,12 +34,28 @@ namespace SistemaVenda.br.pro.com.view
             try
             {
                 List<Client> clients = null;
-                clients = await ClientService.Get();
-                dgClient.DataSource = clients;
+                clients = await ClientService.Get() ??
+                    throw new ArgumentNullException("Nenhum cliente cadastrado");
+                dgClient.DataSource = clients.Select(c =>
+                new ClientDTO()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    CPF = c.CPF,
+                    Email = c.Email,
+                    Credit = c.Credit,
+                    CEP = c.CEP,
+                    State = c.State,
+                    City = c.City,
+                    Neighborhoods = c.Neighborhoods,
+                    Street = c.Street,
+                    Number = c.Number,
+                    Complement = c.Complement
+                }).ToList();
             }
             catch (ArgumentNullException ane)
             {
-                MessageBox.Show(ane.Message);
+                MessageBox.Show(ane.ParamName);
             }
             catch (Exception ex)
             {
@@ -49,13 +65,15 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region UpdateDetails
-        private void UpdateDetails()
+        private async Task UpdateDetails()
         {
             try
             {
                 if (dgClient.SelectedRows.Count > 0)
                 {
-                    Client client = (Client)dgClient.SelectedRows[0].DataBoundItem ?? 
+                    Guid.TryParse(dgClient.SelectedRows[0].Cells[0].Value.ToString(), out Guid Id);
+
+                    Client client = await ClientService.Get(Id) ?? 
                         throw new ArgumentNullException("Cliente não foi selecionado");
 
                     txtId.Text = client.Id.ToString() ?? throw new ArgumentNullException("ID não pode ser nulo");
@@ -104,45 +122,16 @@ namespace SistemaVenda.br.pro.com.view
 
             dgClient.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "ShortName",
-                HeaderText = "Apelido"
-            });
-
-            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
-            {
                 DataPropertyName = "CPF",
                 HeaderText = "CPF"
             });
 
             dgClient.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "RG",
-                HeaderText = "RG"
+                DataPropertyName = "Credit",
+                HeaderText = "Crediário"
             });
 
-            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "MaritalStatus",
-                HeaderText = "Estado Civil"
-            });
-
-            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "DueDate",
-                HeaderText = "Data de Nascimento"
-            });
-
-            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "PhoneNumber",
-                HeaderText = "Celular"
-            });
-
-            dgClient.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "TelephoneNumber",
-                HeaderText = "Telefone"
-            });
 
             dgClient.Columns.Add(new DataGridViewTextBoxColumn()
             {
