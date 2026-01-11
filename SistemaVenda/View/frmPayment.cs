@@ -137,6 +137,9 @@ namespace SistemaVenda.br.pro.com.view
                                     if (result)
                                     {
                                         MessageBox.Show($"Venda realizada com sucesso!");
+                                        this.Hide();
+                                        frmSale screen1 = new frmSale();
+                                        screen1.ShowDialog();
                                     }
                                 }
                             }
@@ -201,11 +204,11 @@ namespace SistemaVenda.br.pro.com.view
                                     }
 
                                     MessageBox.Show("Venda foi atualizada com sucesso!");
+                                    this.Hide();
+                                    frmSale screen1 = new frmSale();
+                                    screen1.ShowDialog();
                                 }
                             }
-
-
-                            this.Close();
                         }
                         else
                         {
@@ -213,9 +216,6 @@ namespace SistemaVenda.br.pro.com.view
                         }
                     }
                 }
-
-
-                new frmSale().ShowDialog();
             }
             catch (ArgumentNullException ane)
             {
