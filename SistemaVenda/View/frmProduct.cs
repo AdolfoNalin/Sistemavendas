@@ -272,18 +272,55 @@ namespace SistemaVenda.View
         #region txtSearch_KeyPress
         private async void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            await Task.Delay(800);
+            try
+            {
+                await Task.Delay(800);
 
-            if(String.IsNullOrEmpty(txtSearch.Text))
-            {
-                await Task.Delay(800);
-                UpdateData();
+                if (String.IsNullOrEmpty(txtSearch.Text))
+                {
+                    await Task.Delay(800);
+                    UpdateData();
+                }
+                else
+                {
+                    await Task.Delay(800);
+                    List<Product> products = await ProductService.Get(txtSearch.Text);
+
+                    if(products is null || products.Count == 0)
+                    {
+                        UpdateData();
+                    }
+                    else
+                    {
+                        foreach (Product product in products)
+                        {
+                            List<Supplier> suppliers = await SupplierService.Get(product.SupplierId)
+                                ?? throw new ArgumentNullException("Fornecedor não foi encontrado");
+                            product.Supplier = suppliers.FirstOrDefault();
+                        }
+
+                        dgProduct.DataSource = products.Select(p =>
+                        new ProductDTO()
+                        {
+                            Id = p.Id,
+                            ShortDescription = p.ShortDescription,
+                            SupplierName = p.Supplier.CompanyName,
+                            Amount = p.Amount,
+                            Date = p.Date.Date,
+                            UniMeasure = p.UniMeasure,
+                            EntryPrice = p.EntryPrice,
+                            TotalPrice = p.TotalPrice
+                        }).ToList();
+                    }
+                }
             }
-            else
+            catch(ArgumentNullException ane)
             {
-                await Task.Delay(800);
-                List<Product> products = await ProductService.Get(txtSearch.Text);
-                dgProduct.DataSource = products;
+                MessageBox.Show(ane.ParamName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
             }
         }
         #endregion
