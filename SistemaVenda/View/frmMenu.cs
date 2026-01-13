@@ -110,5 +110,11 @@ namespace SistemaVenda.br.pro.com.view
             frmBudget screen = new frmBudget();
             screen.ShowDialog();
         }
+
+        private void movimentaçToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAccountWriteOff screen = new frmAccountWriteOff();
+            screen.ShowDialog();
+        }
     }
 }

@@ -43,13 +43,9 @@
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trocaDeUsuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblNome = new System.Windows.Forms.Label();
             this.btnBudget = new System.Windows.Forms.Button();
             this.mcCalentarioMenu = new System.Windows.Forms.MonthCalendar();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -149,15 +145,16 @@
             // caixaToolStripMenuItem1
             // 
             this.caixaToolStripMenuItem1.Name = "caixaToolStripMenuItem1";
-            this.caixaToolStripMenuItem1.Size = new System.Drawing.Size(214, 22);
+            this.caixaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.caixaToolStripMenuItem1.Text = "Caixa";
             this.caixaToolStripMenuItem1.Click += new System.EventHandler(this.caixaToolStripMenuItem1_Click);
             // 
             // movimentaçToolStripMenuItem
             // 
             this.movimentaçToolStripMenuItem.Name = "movimentaçToolStripMenuItem";
-            this.movimentaçToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.movimentaçToolStripMenuItem.Text = "Movimentações do caixa";
+            this.movimentaçToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.movimentaçToolStripMenuItem.Text = "Baixa em Conta";
+            this.movimentaçToolStripMenuItem.Click += new System.EventHandler(this.movimentaçToolStripMenuItem_Click);
             // 
             // devoluçãoDeItensToolStripMenuItem1
             // 
@@ -195,28 +192,6 @@
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 76);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Usuário:";
-            // 
-            // lblNome
-            // 
-            this.lblNome.AutoSize = true;
-            this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNome.Location = new System.Drawing.Point(66, 76);
-            this.lblNome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(39, 13);
-            this.lblNome.TabIndex = 2;
-            this.lblNome.Text = "Nome";
-            // 
             // btnBudget
             // 
             this.btnBudget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -241,22 +216,12 @@
             this.mcCalentarioMenu.TabIndex = 7;
             this.mcCalentarioMenu.TrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblNome);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 352);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1215, 100);
-            this.panel1.TabIndex = 8;
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1215, 450);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.mcCalentarioMenu);
             this.Controls.Add(this.btnBudget);
             this.Controls.Add(this.menuStrip1);
@@ -272,8 +237,6 @@
             this.Load += new System.EventHandler(this.frmMenu_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,8 +253,6 @@
         private System.Windows.Forms.ToolStripMenuItem configuraçõesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trocaDeUsuárioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Button btnBudget;
         private System.Windows.Forms.MonthCalendar mcCalentarioMenu;
         private System.Windows.Forms.ToolStripMenuItem devoluçãoDeItensToolStripMenuItem1;
@@ -299,6 +260,5 @@
         private System.Windows.Forms.ToolStripMenuItem usuárioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem caixaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem movimentaçToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
     }
 }
