@@ -234,6 +234,12 @@
     <Compile Include="Service\SupplierService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Model\EmployeeDTO.cs" />
+    <Compile Include="View\frmAccountWriteOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmAccountWriteOff.Designer.cs">
+      <DependentUpon>frmAccountWriteOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmBudget.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +332,9 @@
     <Compile Include="View\frmUser.Designer.cs">
       <DependentUpon>frmUser.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\frmAccountWriteOff.resx">
+      <DependentUpon>frmAccountWriteOff.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmBudget.resx">
       <DependentUpon>frmBudget.cs</DependentUpon>
     </EmbeddedResource>
