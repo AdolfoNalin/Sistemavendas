@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace SistemaVenda.br.pro.com.model
 {
+    public enum OpenOrClose
+    {
+        Open,
+        Close
+    }
     public class Sale
     {
         #region Campos da classe
@@ -25,6 +30,7 @@ namespace SistemaVenda.br.pro.com.model
         public decimal AdditionCash{ get; set; }
         public decimal Total{ get; set; }
         public string Observation { get; set; }
+        public OpenOrClose Open { get; set; }
 
         public Client Client { get; set; }
         public Employee Employee { get; set; }
