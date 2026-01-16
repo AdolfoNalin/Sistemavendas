@@ -23,6 +23,7 @@ namespace SistemaVenda.br.pro.com.model
         public Guid ClientId { get; set; }
         public Guid EmployeeId { get; set; }
         public DateTime Date { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public string PaymentMethod{ get; set; }
         public decimal PercentageDiscount{ get; set; }
         public decimal CashDiscount{ get; set; }
