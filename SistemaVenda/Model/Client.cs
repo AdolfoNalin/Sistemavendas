@@ -13,5 +13,6 @@ namespace SistemaVenda.Model
         public string RG { get; set; }
         public string MaritalStatus { get; set; }
         public decimal Credit { get; set; }
+        public decimal CreditLimit { get; set; }
     }
 }
