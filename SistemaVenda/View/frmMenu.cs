@@ -24,7 +24,7 @@ namespace SistemaVenda.br.pro.com.view
         #region Load
         private void frmMenu_Load(object sender, EventArgs e)
         {
-            lblNome.Text = UserSession.Name;
+            // lblNome.Text = UserSession.Name;
         }
         #endregion
 
