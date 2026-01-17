@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Org.BouncyCastle.Pqc.Crypto.Saber;
 using SistemaVenda.br.pro.com.connection;
 using SistemaVenda.br.pro.com.model;
 using System;
@@ -37,6 +36,41 @@ namespace SistemaVenda.Service
                 }
 
                 return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region GetOrdenOpen
+        public async static Task<BindingList<Sale>> GetOrderOpen(Guid clientId)
+        {
+            try
+            {
+                BindingList<Sale> sales = new BindingList<Sale>();
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.GetAsync($"Sale/OrderOpen/{clientId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    sales = JsonConvert.DeserializeObject<BindingList<Sale>>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
+                }
+
+                return sales;
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message);
+                return null;
             }
             catch (Exception ex)
             {
