@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaVenda.br.pro.com.view
@@ -262,6 +263,8 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                        _sale.PaymentMethod = "Cartão";
+                        _sale.Open = OpenOrClose.Close;
                     }
 
                 }
@@ -286,6 +289,8 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                        _sale.PaymentMethod = "Pix";
+                        _sale.Open = OpenOrClose.Close;
                     }
 
                 }
@@ -310,6 +315,8 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                        _sale.Open = OpenOrClose.Close;
+                        _sale.PaymentMethod = "Dinhiro";
                     }
                 }
             }
@@ -321,7 +328,7 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region mtbCredit_KeyDown
-        private void mtbCredit_KeyDown(object sender, KeyEventArgs e)
+        private async void mtbCredit_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -333,6 +340,10 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
+                        _sale.Open = OpenOrClose.Open;
+                        _sale.PaymentMethod = "Crediário";
+                        _client.CreditLimit += Decimal.Parse(mtbCredit.Text);
+                        ClientService.Put(_client);
                     }
 
                 }
