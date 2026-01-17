@@ -702,7 +702,7 @@ namespace SistemaVenda.View
                 if (CashDesck.Status == IsCashSession.Open) 
                 {
                     Client client = await ClientService.Get(ParseVerification.ParseGuid(txtClientId.Text, "Selecione o cliente"));
-                    if (_total < client.Credit)
+                    if (_total < client.CreditLimit)
                     {
                         Sale sale = new Sale()
                         {
@@ -714,7 +714,7 @@ namespace SistemaVenda.View
                             CashDiscount = Convert.ToDecimal(mtbCashDiscount.Text),
                             AdditionCash = Convert.ToDecimal(mtbAdditionCash.Text),
                             AdditionPorcentage = Convert.ToDecimal(mtbAdditionPorcentage.Text),
-                            Total = ParseVerification.ParseDecimal(txtTotal.Text, "")
+                            Total = ParseVerification.ParseDecimal(txtTotal.Text, ""),
                         };
 
                         if (_update)
