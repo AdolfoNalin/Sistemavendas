@@ -224,14 +224,15 @@ namespace SistemaVenda.br.pro.com.view
         #endregion
 
         #region btnUpdate_Click
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
 
             _update = true;
             mtbCPF.Enabled = false;
             mtbRG.Enabled = false;
             txtId.Enabled = false;
-            UpdateDetails();
+            txtCreditLimit.Enabled = false;
+            await UpdateDetails();
             tabClient.SelectedTab = tpDetails;
         }
         #endregion

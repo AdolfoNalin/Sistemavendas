@@ -46,6 +46,8 @@
             this.tpConsult = new System.Windows.Forms.TabPage();
             this.dgClient = new System.Windows.Forms.DataGridView();
             this.tpDetails = new System.Windows.Forms.TabPage();
+            this.txtCredit = new System.Windows.Forms.TextBox();
+            this.lblCredit = new System.Windows.Forms.Label();
             this.mtbDueDate = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtComplemento = new System.Windows.Forms.TextBox();
@@ -80,8 +82,8 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.lblCPF = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
-            this.txtCredit = new System.Windows.Forms.TextBox();
-            this.lblCredit = new System.Windows.Forms.Label();
+            this.txtCreditLimit = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -293,6 +295,8 @@
             // 
             // tpDetails
             // 
+            this.tpDetails.Controls.Add(this.txtCreditLimit);
+            this.tpDetails.Controls.Add(this.label2);
             this.tpDetails.Controls.Add(this.txtCredit);
             this.tpDetails.Controls.Add(this.lblCredit);
             this.tpDetails.Controls.Add(this.mtbDueDate);
@@ -336,6 +340,26 @@
             this.tpDetails.TabIndex = 1;
             this.tpDetails.Text = "Detalhes";
             this.tpDetails.UseVisualStyleBackColor = true;
+            // 
+            // txtCredit
+            // 
+            this.txtCredit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtCredit.Location = new System.Drawing.Point(721, 107);
+            this.txtCredit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtCredit.Name = "txtCredit";
+            this.txtCredit.Size = new System.Drawing.Size(75, 20);
+            this.txtCredit.TabIndex = 74;
+            // 
+            // lblCredit
+            // 
+            this.lblCredit.AutoSize = true;
+            this.lblCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCredit.Location = new System.Drawing.Point(626, 110);
+            this.lblCredit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCredit.Name = "lblCredit";
+            this.lblCredit.Size = new System.Drawing.Size(98, 13);
+            this.lblCredit.TabIndex = 73;
+            this.lblCredit.Text = "Crediário Limite:";
             // 
             // mtbDueDate
             // 
@@ -717,25 +741,25 @@
             this.lblNome.TabIndex = 39;
             this.lblNome.Text = "Nome:";
             // 
-            // txtCredit
+            // txtCreditLimit
             // 
-            this.txtCredit.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.txtCredit.Location = new System.Drawing.Point(684, 107);
-            this.txtCredit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtCredit.Name = "txtCredit";
-            this.txtCredit.Size = new System.Drawing.Size(75, 20);
-            this.txtCredit.TabIndex = 74;
+            this.txtCreditLimit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtCreditLimit.Location = new System.Drawing.Point(910, 107);
+            this.txtCreditLimit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtCreditLimit.Name = "txtCreditLimit";
+            this.txtCreditLimit.Size = new System.Drawing.Size(75, 20);
+            this.txtCreditLimit.TabIndex = 76;
             // 
-            // lblCredit
+            // label2
             // 
-            this.lblCredit.AutoSize = true;
-            this.lblCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCredit.Location = new System.Drawing.Point(626, 110);
-            this.lblCredit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCredit.Name = "lblCredit";
-            this.lblCredit.Size = new System.Drawing.Size(61, 13);
-            this.lblCredit.TabIndex = 73;
-            this.lblCredit.Text = "Crediário:";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(813, 110);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Crediário usado:";
             // 
             // frmClient
             // 
@@ -819,5 +843,7 @@
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.TextBox txtCredit;
         private System.Windows.Forms.Label lblCredit;
+        public System.Windows.Forms.TextBox txtCreditLimit;
+        private System.Windows.Forms.Label label2;
     }
 }
