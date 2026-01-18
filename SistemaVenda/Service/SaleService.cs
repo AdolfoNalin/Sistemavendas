@@ -292,6 +292,36 @@ namespace SistemaVenda.Service
         }
         #endregion
 
+        #region PutPayOff
+        public static async Task<bool> PutPayOff(Sale sale)
+        {
+            try
+            {
+                bool result = false;
+
+                HttpClient client = ConnectionFactory.ConnectionLocalhost();
+                HttpResponseMessage response = await client.PutAsJsonAsync("Sale/Payoff", sale);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result = JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());    
+                }
+                else
+                {
+                    string message = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(message);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace},{ex.HelpLink}");
+                return false;
+            }
+        }
+        #endregion
+
         #region Delete
         public static async void Delete(Guid id)
         {
