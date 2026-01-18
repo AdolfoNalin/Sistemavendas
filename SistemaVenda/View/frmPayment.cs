@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,9 +24,11 @@ namespace SistemaVenda.br.pro.com.view
         private Sale _sale;
         private string _paymentoMethod = "";
         private bool _update;
+        private BindingList<Sale> _sales = new BindingList<Sale>();
+        private bool _isPayOff;
         #endregion
 
-        #region Construtor
+        #region PaymentSale
         public frmPayment(Client client, BindingList<ProductShoppingCar> proShoCar, Employee employee, Sale sale, bool update)
         {
             _client = client;
@@ -33,8 +36,253 @@ namespace SistemaVenda.br.pro.com.view
             _emp = employee;
             _sale = sale;
             _update = update;
-
+            _isPayOff = false;
             InitializeComponent();
+        }
+        #endregion
+
+        #region PaymentClient
+        public frmPayment(Client client, BindingList<Sale> sales, Employee employee)
+        {
+            _client = client;
+            _sales = sales;
+            _emp = employee;
+            _isPayOff = true;
+            InitializeComponent();
+        }
+        #endregion
+
+        #region FinalizeSale
+        private async void FinalizeSale()
+        {
+            try
+            {
+                decimal cash = ParseVerification.ParseDecimal(mtbCash.Text, "É necessário tem um valor de Dinheiro");
+                decimal card = ParseVerification.ParseDecimal(mtbCard.Text, "É necessário ter uma valor de Cartão");
+                decimal credit = ParseVerification.ParseDecimal(mtbCredit.Text, "É necessário o valor do crediário");
+                decimal pix = ParseVerification.ParseDecimal(mtbPix.Text, "É necessário o valor do pix");
+                decimal total = ParseVerification.ParseDecimal(txtTotal.Text, "É necessário ter uma valor do Total");
+                decimal pay = 0;
+                decimal troco = 0;
+
+                _paymentoMethod = cash < card ? "Cartão" : "Dinheiro";
+
+                if (cash == 0 && credit == 0)
+                {
+
+                    _paymentoMethod = "Crediário";
+                }
+
+                pay = cash + card + credit;
+
+                if (pay < total)
+                {
+                    MessageBox.Show("O total pago é menor do que o total da compra");
+                }
+                else if (!_update)
+                {
+                    troco = pay - total;
+
+                    CashMovement moviment = new CashMovement()
+                    {
+                        CashSessionId = CashDesck.Id,
+                        UserId = UserSession.Id,
+                        Amount = _sale.Total,
+                        Type = Model.Type.Entry,
+                        Date = _sale.Date,
+                        Description = "Venda"
+                    };
+
+                    if (await CashMovimentService.Post(moviment))
+                    {
+                        CashDesck.Total += moviment.Amount;
+
+                        CashSession session = await CashSessionService.Get(CashDesck.Id);
+                        session.Total = CashDesck.Total;
+                        session.Description = moviment.Description;
+                        bool valueMoviment = await CashSessionService.PutCashMoviment(session);
+
+                        _sale.PaymentMethod = _paymentoMethod
+                            ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
+                        _sale.Observation = txtObs.Text;
+
+                        bool value = await SaleService.Post(_sale);
+                        if (value && valueMoviment)
+                        {
+                            Sale sale = await SaleService.LastSale() ??
+                                throw new ArgumentNullException("Venda não foi identificada");
+
+                            List<ItemSale> itens = new List<ItemSale>();
+                            foreach (var i in _proShoCar)
+                            {
+                                ItemSale item = new ItemSale();
+                                List<Product> products = await ProductService.Get(i.ShortDescription);
+                                Product product = products.FirstOrDefault() ??
+                                    throw new ArgumentNullException("Produto não encontrado");
+
+                                item.SaleId = sale.Id;
+                                item.ProductId = product.Id;
+                                item.Amount = i.Amount;
+                                item.Subtotal = i.TotalPrice;
+
+                                itens.Add(item);
+                            }
+
+                            bool result = false;
+                            if (await ItemSaleService.Post(itens))
+                            {
+                                foreach (var i in itens)
+                                {
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawal = Convert.ToDecimal(product.Amount - i.Amount);
+
+                                    result = await ProductService.StockManager(productId: product.Id, withdrawal: withdrawal);
+
+                                    if (result == false)
+                                    {
+                                        throw new Exception("Algo deu errado!");
+                                    }
+                                }
+
+                                if (result)
+                                {
+                                    MessageBox.Show($"Venda realizada com sucesso!");
+                                    this.Hide();
+                                    frmSale screen1 = new frmSale();
+                                    screen1.ShowDialog();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Verifique os dados da movimentação de caixa");
+                    }
+                }
+                else if (_update)
+                {
+                    List<ItemSale> itens = new List<ItemSale>();
+                    troco = pay - total;
+
+                    _sale.PaymentMethod = _paymentoMethod
+                        ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
+                    _sale.Observation = txtObs.Text;
+
+                    CashMovement moviment = new CashMovement()
+                    {
+                        CashSessionId = CashDesck.Id,
+                        UserId = UserSession.Id,
+                        Amount = _sale.Total,
+                        Type = Model.Type.Entry,
+                        Date = _sale.Date,
+                        Description = "Venda"
+                    };
+
+                    if (await CashMovimentService.Put(moviment))
+                    {
+                        bool value = await SaleService.Put(_sale);
+                        if (value)
+                        {
+                            foreach (var i in _proShoCar)
+                            {
+                                ItemSale item = new ItemSale();
+                                List<Product> products = await ProductService.Get(i.ShortDescription);
+                                Product product = products.FirstOrDefault() ??
+                                    throw new ArgumentNullException("");
+
+                                item.SaleId = _sale.Id;
+                                item.ProductId = product.Id;
+                                item.Amount = i.Amount;
+                                item.Subtotal = i.TotalPrice;
+
+                                itens.Add(item);
+                            }
+
+                            if (await ItemSaleService.Put(itens))
+                            {
+                                bool result = false;
+                                foreach (var i in itens)
+                                {
+                                    Product product = await ProductService.Get(i.ProductId);
+                                    decimal withdrawall = Convert.ToDecimal(product.Amount - i.Amount);
+                                    result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
+
+                                    if (!result)
+                                    {
+                                        throw new Exception("Algo deu errado");
+                                    }
+                                }
+
+                                MessageBox.Show("Venda foi atualizada com sucesso!");
+                                this.Hide();
+                                frmSale screen1 = new frmSale();
+                                screen1.ShowDialog();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Verifique se todos os dados de movimentação de caixa estão todos preenchidos");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region FinalizepayOff
+        private async void FinalizePayOff()
+        {
+            try
+            {
+                foreach (var i in _sales)
+                {
+                    if (!await SaleService.PutPayOff(i))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        CashMovement moviment = new CashMovement()
+                        {
+                            CashSessionId = CashDesck.Id,
+                            UserId = UserSession.Id,
+                            Date = DateTime.Now,
+                            Amount = i.Total,
+                            Description = "Pagamento de Debito",
+                            Type = Model.Type.Entry,
+                        };
+
+                        if(!await CashMovimentService.Post(moviment))
+                        {
+                            MessageBox.Show("Aconteceu um erro ao tentar da entrada no caixa");
+                            break;
+                        }
+                        else
+                        {
+                            CashSession session = await CashSessionService.Get(CashDesck.Id);
+                            session.Total = CashDesck.Total;
+                            session.Description = moviment.Description;
+                            bool valueMoviment = await CashSessionService.PutCashMoviment(session);
+                            if(!valueMoviment)
+                            {
+                                MessageBox.Show("Aconteceu um erro no caixa");
+                                break;
+                            }
+                        }
+
+                        MessageBox.Show("Pagamento realizado com sucesso");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
         }
         #endregion
 
@@ -43,179 +291,23 @@ namespace SistemaVenda.br.pro.com.view
         {
             try
             {
-                frmPassword screen = new frmPassword();
-                screen.ShowDialog();
-
-                if (screen.user != null)
+                frmPassword screenPassword = new frmPassword();
+                screenPassword.ShowDialog();
+                
+                if(screenPassword.user.User != null)
                 {
-                    decimal cash = ParseVerification.ParseDecimal(mtbCash.Text, "É necessário tem um valor de Dinheiro");
-                    decimal card = ParseVerification.ParseDecimal(mtbCard.Text, "É necessário ter uma valor de Cartão");
-                    decimal credit = ParseVerification.ParseDecimal(mtbCredit.Text, "É necessário o valor do crediário");
-                    decimal pix = ParseVerification.ParseDecimal(mtbPix.Text, "É necessário o valor do pix");
-                    decimal total = ParseVerification.ParseDecimal(txtTotal.Text, "É necessário ter uma valor do Total");
-                    decimal pay = 0;
-                    decimal troco = 0;
-
-                    _paymentoMethod = cash < card ? "Cartão" : "Dinheiro";
-
-                    if (cash == 0 && credit == 0)
+                    if (_isPayOff is false)
                     {
-
-                        _paymentoMethod = "Crediário";
+                        FinalizeSale();
                     }
-
-                    pay = cash + card + credit;
-
-                    if (pay < total)
+                    else
                     {
-                        MessageBox.Show("O total pago é menor do que o total da compra");
+                        FinalizePayOff();
                     }
-                    else if (!_update)
-                    {
-                        troco = pay - total;
-
-                        CashMovement moviment = new CashMovement()
-                        {
-                            CashSessionId = CashDesck.Id,
-                            UserId = screen.user.User.Id,
-                            Amount = _sale.Total,
-                            Type = Model.Type.Entry,
-                            Date = _sale.Date,
-                            Description = "Venda"
-                        };
-
-                        if (await CashMovimentService.Post(moviment))
-                        {
-                            CashDesck.Total += moviment.Amount;
-
-                            CashSession session = await CashSessionService.Get(CashDesck.Id);
-                            session.Total = CashDesck.Total;
-                            session.Description = moviment.Description;
-                            bool valueMoviment = await CashSessionService.PutCashMoviment(session);
-
-                            _sale.PaymentMethod = _paymentoMethod
-                                ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
-                            _sale.Observation = txtObs.Text;
-
-                            bool value = await SaleService.Post(_sale);
-                            if (value && valueMoviment)
-                            {
-                                Sale sale = await SaleService.LastSale() ??
-                                    throw new ArgumentNullException("Venda não foi identificada");
-
-                                List<ItemSale> itens = new List<ItemSale>();
-                                foreach (var i in _proShoCar)
-                                {
-                                    ItemSale item = new ItemSale();
-                                    List<Product> products = await ProductService.Get(i.ShortDescription);
-                                    Product product = products.FirstOrDefault() ??
-                                        throw new ArgumentNullException("Produto não encontrado");
-
-                                    item.SaleId = sale.Id;
-                                    item.ProductId = product.Id;
-                                    item.Amount = i.Amount;
-                                    item.Subtotal = i.TotalPrice;
-
-                                    itens.Add(item);
-                                }
-
-                                bool result = false;
-                                if (await ItemSaleService.Post(itens))
-                                {
-                                    foreach (var i in itens)
-                                    {
-                                        Product product = await ProductService.Get(i.ProductId);
-                                        decimal withdrawal = Convert.ToDecimal(product.Amount - i.Amount);
-
-                                        result = await ProductService.StockManager(productId: product.Id, withdrawal: withdrawal);
-
-                                        if (result == false)
-                                        {
-                                            throw new Exception("Algo deu errado!");
-                                        }
-                                    }
-
-                                    if (result)
-                                    {
-                                        MessageBox.Show($"Venda realizada com sucesso!");
-                                        this.Hide();
-                                        frmSale screen1 = new frmSale();
-                                        screen1.ShowDialog();
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Verifique os dados da movimentação de caixa");
-                        }
-                    }
-                    else if (_update)
-                    {
-                        List<ItemSale> itens = new List<ItemSale>();
-                        troco = pay - total;
-
-                        _sale.PaymentMethod = _paymentoMethod
-                            ?? throw new ArgumentNullException("Para finalizar é necessário ralizar o pagamento!");
-                        _sale.Observation = txtObs.Text;
-
-                        CashMovement moviment = new CashMovement()
-                        {
-                            CashSessionId = CashDesck.Id,
-                            UserId = screen.user.User.Id,
-                            Amount = _sale.Total,
-                            Type = Model.Type.Entry,
-                            Date = _sale.Date,
-                            Description = "Venda"
-                        };
-
-                        if (await CashMovimentService.Put(moviment))
-                        {
-                            bool value = await SaleService.Put(_sale);
-                            if (value)
-                            {
-                                foreach (var i in _proShoCar)
-                                {
-                                    ItemSale item = new ItemSale();
-                                    List<Product> products = await ProductService.Get(i.ShortDescription);
-                                    Product product = products.FirstOrDefault() ??
-                                        throw new ArgumentNullException("");
-
-                                    item.SaleId = _sale.Id;
-                                    item.ProductId = product.Id;
-                                    item.Amount = i.Amount;
-                                    item.Subtotal = i.TotalPrice;
-
-                                    itens.Add(item);
-                                }
-
-                                if (await ItemSaleService.Put(itens))
-                                {
-                                    bool result = false;
-                                    foreach (var i in itens)
-                                    {
-                                        Product product = await ProductService.Get(i.ProductId);
-                                        decimal withdrawall = Convert.ToDecimal(product.Amount - i.Amount);
-                                        result = await ProductService.StockManager(productId: i.ProductId, withdrawal: withdrawall);
-
-                                        if (!result)
-                                        {
-                                            throw new Exception("Algo deu errado");
-                                        }
-                                    }
-
-                                    MessageBox.Show("Venda foi atualizada com sucesso!");
-                                    this.Hide();
-                                    frmSale screen1 = new frmSale();
-                                    screen1.ShowDialog();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Verifique se todos os dados de movimentação de caixa estão todos preenchidos");
-                        }
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("Usuário não encontrado!");
                 }
             }
             catch (ArgumentNullException ane)
@@ -239,7 +331,14 @@ namespace SistemaVenda.br.pro.com.view
             mtbPix.Text = String.Format("{0:0.00}", num);
             mtbCredit.Text = String.Format("{0:0.00}", num);
 
-            txtTotal.Text = _sale.Total.ToString();
+            if(_isPayOff)
+            {
+                txtTotal.Text = $"R${_sales.Sum(s => s.Total)}";
+            }
+            else
+            {
+                txtTotal.Text = _sale.Total.ToString();
+            }
         }
         #endregion
 
@@ -263,10 +362,13 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
-                        _sale.PaymentMethod = "Cartão";
-                        _sale.Open = OpenOrClose.Close;
-                    }
 
+                        if(!_isPayOff)
+                        {
+                            _sale.PaymentMethod = "Cartão";
+                            _sale.Open = OpenOrClose.Close;
+                        }  
+                    }
                 }
             }
             catch (Exception ex)
@@ -289,10 +391,13 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
-                        _sale.PaymentMethod = "Pix";
-                        _sale.Open = OpenOrClose.Close;
-                    }
 
+                        if (!_isPayOff)
+                        {
+                            _sale.PaymentMethod = "Pix";
+                            _sale.Open = OpenOrClose.Close;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -315,8 +420,12 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
-                        _sale.Open = OpenOrClose.Close;
-                        _sale.PaymentMethod = "Dinhiro";
+
+                        if( !_isPayOff)
+                        {
+                            _sale.Open = OpenOrClose.Close;
+                            _sale.PaymentMethod = "Dinhiro";
+                        }
                     }
                 }
             }
@@ -340,10 +449,17 @@ namespace SistemaVenda.br.pro.com.view
                     if (result != -404)
                     {
                         txtChange.Text = $"R${result.ToString().Replace(".", ",")}";
-                        _sale.Open = OpenOrClose.Open;
-                        _sale.PaymentMethod = "Crediário";
-                        _client.CreditLimit += Decimal.Parse(mtbCredit.Text);
-                        ClientService.Put(_client);
+                        if( !_isPayOff)
+                        {
+                            _sale.Open = OpenOrClose.Open;
+                            _sale.PaymentMethod = "Crediário";
+                            _client.CreditLimit += Decimal.Parse(mtbCredit.Text);
+                            ClientService.Put(_client);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Infelizmente não é possivel marcar o valor no crediário");
+                        }
                     }
 
                 }
