@@ -97,6 +97,7 @@
             this.btnPayOff.TabIndex = 4;
             this.btnPayOff.Text = "Quitar";
             this.btnPayOff.UseVisualStyleBackColor = true;
+            this.btnPayOff.Click += new System.EventHandler(this.btnPayOff_Click);
             // 
             // txtSelect
             // 

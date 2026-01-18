@@ -27,6 +27,46 @@ namespace SistemaVenda.View
         private Client _client = null;
         private BindingList<Sale> _selectSales = new BindingList<Sale>();
 
+        #region UpdateData
+        private async void UpdateData()
+        {
+            try
+            {
+
+                BindingList<Sale> sales = await SaleService.GetOrderOpen(_client.Id) ?? 
+                    throw new ArgumentNullException("Nenhuma venda encontrada!");
+
+                txtOpen.Text = $"R${sales.Sum(s => s.Total)}";
+
+                foreach (var s in sales)
+                {
+                    s.Client = await ClientService.Get(s.ClientId);
+                    s.Employee = await EmployeeService.Get(s.EmployeeId);
+                }
+
+                dgAccountOff.DataSource = sales.Select(s =>
+                new SaleDTO()
+                {
+                    Id = s.Id,
+                    ClientName = s.Client.Name,
+                    EmployeeName = s.Employee.Name,
+                    Date = s.Date.Date,
+                    PaymentMethod = s.PaymentMethod,
+                    Total = s.Total,
+                    Observation = s.Observation
+                }).ToList();
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
         #region txtClient_KeyDown
         private async void txtClient_KeyDown(object sender, KeyEventArgs e)
         {
@@ -90,27 +130,7 @@ namespace SistemaVenda.View
         {
             try
             {
-                BindingList<Sale> sales = await SaleService.GetOrderOpen(_client.Id);
-
-                txtOpen.Text = $"R${sales.Sum(s => s.Total)}";
-
-                foreach(var s in sales)
-                {
-                    s.Client = await ClientService.Get(s.ClientId);
-                    s.Employee = await EmployeeService.Get(s.EmployeeId);
-                }
-
-                dgAccountOff.DataSource = sales.Select(s =>
-                new SaleDTO()
-                {
-                    Id = s.Id,
-                    ClientName = s.Client.Name,
-                    EmployeeName = s.Employee.Name,
-                    Date = s.Date.Date,
-                    PaymentMethod = s.PaymentMethod,
-                    Total = s.Total,
-                    Observation = s.Observation
-                }).ToList();
+                UpdateData();
             }
             catch (Exception ex)
             {
@@ -209,6 +229,47 @@ namespace SistemaVenda.View
                 {
                     Helpers.UpOrDown(dg: dgAccountOff, e: e);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}");
+            }
+        }
+        #endregion
+
+        #region btnPayOff_Click
+        private async void btnPayOff_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(CashDesck.Status == IsCashSession.Open)
+                {
+                    frmPassword screenPassowrd = new frmPassword();
+                    screenPassowrd.ShowDialog();
+
+                    if (screenPassowrd.user.User != null)
+                    {
+                        Employee emp = await EmployeeService.Get(screenPassowrd.user.User.EmployeeId);
+
+                        frmPayment screenPayment = new frmPayment(_client, _selectSales, emp);
+                        screenPayment.ShowDialog();
+
+                        UpdateData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuário não foi encontrado!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Abra o caixa para receber a conta");
+                }
+               
+            }
+            catch(ArgumentNullException ane)
+            {
+                MessageBox.Show(ane.ParamName);
             }
             catch (Exception ex)
             {
